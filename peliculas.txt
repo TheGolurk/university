@@ -1,0 +1,41 @@
+Algoritmo MostrarPeliculas
+
+Inicio
+
+Var
+	entero Numero;
+
+	Escribir "Eliga el numero de la pelicula que quiere ver"
+	
+	Escribir "1) Terminator 1"
+	Escribir "2) Terminator 2"
+	Escribir "3) Terminator 3"
+	Escribir "4) Terminator 4"
+	Escribir "5) Terminator 5"
+
+	Segun (Numero) Hacer
+		1:
+			Escribir Numero
+			Escribir "Escogiste la primera pelicula de terminator" 
+
+		2:
+			Escribir Numero
+			Escribir "La mejor de todas"
+
+		3:
+			Escribir Numero
+			Escribir "Aqui la cosa ya empieza ir mal"
+
+		4:
+			Escribir Numero
+			Escribir "En esta pelicula ya no tenia sentido"
+
+		5:
+			Escribir Numero
+			Escribir "Pelicula por dinero, mala pelicula" 
+
+		otro:
+			Escribir "No escogiste una pelicula correcta" 
+	Fin Segun
+
+Fin

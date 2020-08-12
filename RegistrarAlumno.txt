@@ -1,0 +1,19 @@
+Algoritmo RegistrarAlumno
+Inicio
+
+Var
+	string Nombre, Apellidos, Correo, PaseIngreso
+
+	Escribir "Introduce Tu nombre"
+	Leer Nombre, Apellidos
+
+	Escribir "Introduce tu cedula upemor"
+	Leer PaseIngreso
+
+	Escribir "Ingresa tu correo donde te llegara el registro ceneval"
+	Leer Correo
+
+	Escribir "Se envio un correo a", Correo, "Con destinatario", Nombre
+
+
+Fin

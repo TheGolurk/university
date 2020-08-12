@@ -1,0 +1,30 @@
+Algoritmo CicloFormacion
+
+Inicio
+
+Var
+	int cuatrimestre 
+
+	Escribir "En que cuatrimestre te encuentras?" 
+	leer cuatrimestre
+
+	Segun (cuatrimestre) Hacer
+
+		1,2,3:
+			Escribir "Estas en el primer ciclo"
+			Escribir "Te faltan: ", 10 - cuatrimestre , "cuatrimestres"
+
+		4,5,6:
+			Escribir "Estas en el segundo ciclo"
+			Escribir "Te faltan: ", 10 - cuatrimestre , "cuatrimestres"
+
+		7,8,9:
+			Escribir "Estas en el tercer ciclo" 
+			Escribir "Te faltan: ", 10 - cuatrimestre , "cuatrimestres"
+
+		otro:
+			Escribir "Cuatrimestre invalido"
+
+	Fin Segun
+
+Fin

@@ -1,0 +1,11 @@
+Algoritmo CalculaExpresion
+Inicio
+
+Var 
+	Entero Num1, Num2, Resultado
+
+	Escribir "Introduce 2 numeros"
+	Leer Num1, Num2
+	Resultado <- (Num1 + Num2)^2 / 3
+	Escribir "El resultado es: ", Resultado
+Fin

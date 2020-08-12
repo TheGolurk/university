@@ -1,0 +1,51 @@
+Algoritmo Empresa || Hernandez Najer Christian || Mena Corboba Vanessa ||	Gonzales Ahedo Diego
+																				Emiliano
+
+Inicio
+	float Capital, Prestamo, equipo_c, m, incentivos_p, insumos
+
+	Escribir "Ingrese su Capital"
+	Leer Capital
+
+	Si (Capital <= 0) entonces
+		Prestamo = 10000.00 - Capital
+		Capital += Prestamo
+		Escribir "Se pedira un prestamo de ",  Prestamo	
+	Sino
+		si (Capital < 20000.00) entonces
+			Prestamo = 20000.00 - Capital
+			Capital += Prestamo
+			Escribir "Se pedira un prestamo de ",  Prestamo
+		Sino
+			si (Capital > 20000.00) entonces 
+				Escribir "Saldo suficiente, ningun prestamo por pedir"
+			fin_si
+		fin_si
+	fin_si
+	
+	Capital -= 5000
+	equipo_c = 5000
+
+	Capital -= 2000
+	m = 2000 
+
+	Capital /= 2
+	incentivos_p = Capital
+	insumos = Capital
+
+	Escribir "Presupuesto Equipo Computo: ", equipo_c
+	Escribir "Presupuesto mobiliario: ", m
+	Escribir "Prespuesto Incentivos Personal: ", incentivos_p
+	Escribir "Presupuesto Insumos: ", insumos
+
+	Si (Capital > 20000.00) entonces
+		Escribir "Saldo suficiente, ningun prestamo por pedir"
+	Sino
+		Si (Capital < 20000.00) entonces 
+			Prestamo = 20000.00 - Capital
+			Capital += Prestamo
+			Escribir "Se pedira un prestamo de ",  Prestamo
+		fin_si
+	fin_si
+
+Fin
