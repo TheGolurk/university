@@ -1,0 +1,25 @@
+Algoritmo SumaEnteros
+
+Inicio
+
+VAR
+    int inicio, final, suma = 0
+    float promedio
+
+    Escribir "Ingresa el inicio"
+    Leer inicio
+
+    Escribir "Ingresa el final"
+    Leer final
+    
+    Mientras (inicio > 0 && final > inicio || inicio <= final) Hacer
+        suma += inicio
+        
+        si (inicio <= final) 
+            promedio = suma / (final - inicio)
+            Escribir "El promedio es: ", promedio
+        fin_si
+        
+        inicio++
+    Fin_Mientas 
+Fin
