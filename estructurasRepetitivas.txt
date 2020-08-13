@@ -1,0 +1,25 @@
+Algoritmo PersonasMayores
+
+Inicio
+
+VAR
+	entero edad;
+	caracter resp;
+
+	Escribir "Deseas registrar a una persona?"
+	Leer resp
+
+	Mientras (resp == "si") hacer
+		Escribir "Edad"
+		Leer edad
+		si edad >= 18 hacer
+			Escribir "Eres mayor de edad"
+		sino
+			Escribir "No eres mayor de edad
+		fin_si
+		
+		Escribir "Desea registrar una persona s/n?"
+		Leer resp
+	fin_mientras
+
+Fin
