@@ -1,0 +1,33 @@
+Algoritmo GrupoPersonas
+
+Inicio
+
+VAR
+    int totalHombres = 0, totalMujeres = 0, totalPersonas
+    string nombrePersona, siguiente, sexo
+
+    Hacer
+        
+        Escribir "Ingresa tu nombre"
+        Leer nombrePersona
+            
+        Escribir "Ingresa tu sexo H/M"
+        Leer sexo
+        
+        si (sexo == "M") 
+            totalMujeres += 1
+        sino 
+            totalHombres += 1
+        fin_si
+        
+        Escribir nombrePersona
+           
+        Escribir "Agregamos a otra persona? si/no"  
+        Leer siguiente
+    Mientras (siguiente == "si")
+    
+    totalPersonas = totalMujeres + totalHombres
+    Escribir "El total de mujeres es de: ", totalMujeres
+    Escribir "El total de hombres es de: ", totalHombres
+    Escribir "En total hay: ", totalPersonas
+Fin
