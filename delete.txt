@@ -1,0 +1,6 @@
+Conclusiones
+
+El trabajo consistio en desarrollar más las técnicas de iteración para la resolución de problemas.
+El problema consistia en registrar a N personas junto con el número de mascotas con el que contaban,
+se tuvo que analizar el problema con detenimiento para poder llegar a la conclusión de lo que se
+tenía que hacer. No encontramos problemas en el mismo, y pusimos en practica diversas estructuras.

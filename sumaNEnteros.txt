@@ -3,7 +3,7 @@ Algoritmo SumaEnteros
 Inicio
 
 VAR
-    int inicio, final, suma = 0
+    int inicio, final, suma = 0, iterador = 0
     float promedio
 
     Escribir "Ingresa el inicio"
@@ -11,15 +11,16 @@ VAR
 
     Escribir "Ingresa el final"
     Leer final
-    
+	
+	iterador = inicio
     Mientras (inicio > 0 && final > inicio || inicio <= final) Hacer
-        suma += inicio
-        
-        si (inicio <= final) 
-            promedio = suma / (final - inicio)
-            Escribir "El promedio es: ", promedio
-        fin_si
-        
+
+        suma += iterador           
         inicio++
+
     Fin_Mientas 
+
+	promedio = suma / (final - inicio)
+	Escribir "El promedio es: ", promedio
+
 Fin
