@@ -1,0 +1,37 @@
+Algoritmo Cambiar cadena
+
+Inicio
+
+	1. Revisar y buscar un mecanico en gral
+	2. Revisar y buscar un taller de bicis en gral
+	3. Revisar y buscar alguna tienda en gral
+
+	4. Si se encuentra algun lugar de los anteriores definidos ir a el mismo
+	5. Sino se encuentra, buscar algun lugar rocoso o con basura en gral
+		5.1. Buscar 2 piedras, una picuda y otra normal
+
+	6. Con el mecanico pedir martillo y sincel
+	7. Con la tienda pedir un martillo y sincel
+		7.1 si no encuentra, cualquier herramienta parecida funciona
+
+	8. Con un taller pedir un troncha cadena
+
+	9. Colocar la bicicleta de pie o bien, en el suelo
+	10. Con las piedras colocamos la punta en la abertura de cualquier parte de la cadena y luego
+		golpear repetidas veces
+
+	11. Con el martillo y sincel colocamos el pico en la cadena y golpeamos repetidas veces
+	12. Con el troncha cadena colocamos en medio de la herramienta y apretamos
+
+	13. Una vez golpeado en el mismo lugar la cadena saldra sola
+	14. Colocamos la cadena
+
+	15. Colocamos encima la nueva cadena
+		15.1 con las mismas herramientas golpeamos invertidamente para que se ajuste y luego
+		pedalear para que se ajuste sola
+
+	16. Regresa la herramienta
+
+	17. Irse
+
+Fin
