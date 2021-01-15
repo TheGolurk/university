@@ -1,0 +1,62 @@
+
+Hoja 2
+	- Finito
+	- Finito
+	- Infinito
+	- Vacio
+	- Finito
+	- Finito
+	- Finito
+	- Finito
+	- Finito
+	- Unitario
+
+Hoja 3
+	- Incorrecta: No hay ningun conjunto a que pertenezca a M
+	- Correcta
+	- Incorrecta: R es un subconjunto no un conjunto
+	- Correcta
+
+Hoja 4
+	- Incorrecta: El elemento 0 es un subconjunto no un conjunto
+	- Incorrecta: Un conjunto vacio no pertenece a E
+	- Correcta
+	- Incorrecta: 0 Es un subconjunto no un conjunto
+	- Correcta
+
+Hoja 5
+	- X = {r,s,t,u,v,w,u,v,w,x,y,z}
+	- X = {s}
+	- X = {}
+	- X = {v,w,x,s}
+
+Hoja 6
+	- No
+	- No
+	- Si
+	- No
+	- No
+	- No
+	- Si
+	- No
+
+Hoja 7
+	- Diego, Edgar
+	- Pedro, Andrea, Cristina, Jose Rolando, Hugo, Carlos, Rolando, Roberto
+	- Pedro, Hugo, Carlos, Roberto, Rolando
+	- Andrea, Cristina, Jose Rolando
+	- Pedro, Andrea, Cristina, Jose Rolando, Hugo, Carlos, Rolando, Roberto
+
+Hoja 8
+	- X = {Juan, Josue, Ernesto, Pedro, Luis, Jose, Pedro, Luis, Jose, Guadalupe, Ana, Julia}
+	- X = {Carmen, Pedro,Luis, Jose, Guadalupe, Ana, Julia}
+	- X = {Juan,Maria,Ernesto, Idalia}
+	- X = {Josue, Carmen, Josue, Carmen, Juan, Josue, Ernesto, Pedro, Luis, Jose}
+	- X = {Ernesto, Idalia}
+	- X = {Josue, Carmen, Maria, Carmen, Idalia, Guadalupe, Ana, Julia}
+	- X = {Juan, Josue, Ernesto, Pedro, Luis, Jose, Pedro, Luis, Jose, Guadalupe, Ana, Julia}
+	- X = {Carmen, Pedro,Luis, Jose, Guadalupe, Ana, Julia}
+	- X = {Juan,Maria,Ernesto, Idalia}
+	- X = {Josue, Carmen, Josue, Carmen, Juan, Josue, Ernesto, Pedro, Luis, Jose}
+	- X = {Ernesto, Idalia}
+	- X = {}
