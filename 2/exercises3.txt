@@ -11,7 +11,7 @@ Determine el conjunto resultante y la representación gráfica para las siguient
 	R = {b,d}
 
 • A Δ B
-	R = {b,d}
+	R = {f,h,j,a,c,e}
 
 • B – U
 	R = {}
