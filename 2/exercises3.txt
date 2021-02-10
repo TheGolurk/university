@@ -19,3 +19,6 @@ Determine el conjunto resultante y la representación gráfica para las siguient
 
 • U – B
 	R = {f, g, h, i, j}
+
+
+at: https://raw.githubusercontent.com/TheGolurk/university/master/2/exercises3.txt 
