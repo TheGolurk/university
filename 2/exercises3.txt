@@ -1,0 +1,12 @@
+U = {a, b, c, d, e, f, g, h, i, j}
+A = {b, d, f, h, j}
+B = {a, b, c, d, e}
+C = {a, c, e, g, i}
+
+Determine el conjunto resultante y la representación gráfica para las siguientes operaciones:
+• A ∪ B
+	R = {b,d,f,h,ja,b,c,d,e}
+• B A ∩
+• A Δ B
+• B – U
+• U – B
