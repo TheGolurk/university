@@ -15,6 +15,7 @@ Determine el conjunto resultante y la representación gráfica para las siguient
 
 • B – U
 	R = {}
+	Explicacion: Los elementos que tiene B estan en U y por eso el resultado es vacio
 
 • U – B
-	R = {}
+	R = {f, g, h, i, j}
