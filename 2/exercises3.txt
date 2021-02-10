@@ -8,7 +8,7 @@ Determine el conjunto resultante y la representación gráfica para las siguient
 	R = {b,d,f,h,ja,b,c,d,e}
 
 • B ∩ A
-	R = {a,c,e}
+	R = {b,d}
 
 • A Δ B
 	R = {b,d}
