@@ -6,7 +6,15 @@ C = {a, c, e, g, i}
 Determine el conjunto resultante y la representación gráfica para las siguientes operaciones:
 • A ∪ B
 	R = {b,d,f,h,ja,b,c,d,e}
-• B A ∩
+
+• B ∩ A
+	R = {a,c,e}
+
 • A Δ B
+	R = {}
+
 • B – U
+	R = {}
+
 • U – B
+	R = {}
