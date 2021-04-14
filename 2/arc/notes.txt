@@ -4,3 +4,6 @@ porque son 8 operaciones, 8 entradas y con los 3 inputs del mux elegimos cual ha
 info mux: https://www.electronics-tutorial.net/combinational-logic-circuits/multiplexer/
 
 sumador restador: https://compilandoconocimiento.com/2017/06/13/sumador-y-restador/
+
+data: https://html.alldatasheet.com/html-pdf/27999/TI/74LS181/125/5/74LS181.html
+data2: https://html.alldatasheet.com/html-pdf/51046/FAIRCHILD/74LS181/1228/3/74LS181.ht
