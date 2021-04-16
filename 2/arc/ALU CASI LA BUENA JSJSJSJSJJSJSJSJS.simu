@@ -62,7 +62,7 @@ Circuit Id: Buffer-13
 
 Unique  Id: Fixed Voltage-97: 
 Circuit Id: Fixed Voltage-102
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-828" circRot="4.0742319202343329e-312" Out="true" mainComp="false" objectName="Fixed Voltage-97" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-716" valLabRot="0" id="Fixed Voltage-102" labelx="-64" valLabelx="-16" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-828" circRot="4.0742319202343329e-312" Out="false" mainComp="false" objectName="Fixed Voltage-97" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-716" valLabRot="0" id="Fixed Voltage-102" labelx="-64" valLabelx="-16" Unit=" V"/>
 
 Unique  Id: Xor Gate-96: 
 Circuit Id: Xor Gate-92
@@ -114,7 +114,7 @@ Circuit Id: And Gate-8
 
 Unique  Id: Fixed Voltage-84: 
 Circuit Id: Fixed Voltage-99
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-636" circRot="9.50654114510543e-312" Out="true" mainComp="false" objectName="Fixed Voltage-84" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-752" valLabRot="0" id="Fixed Voltage-99" labelx="-64" valLabelx="-16" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-636" circRot="9.50654114510543e-312" Out="false" mainComp="false" objectName="Fixed Voltage-84" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-720" valLabRot="0" id="Fixed Voltage-99" labelx="-64" valLabelx="-16" Unit=" V"/>
 
 Unique  Id: And Gate-83: 
 Circuit Id: And Gate-7
@@ -126,11 +126,11 @@ Circuit Id: Node-164
 
 Unique  Id: Fixed Voltage-81: 
 Circuit Id: Fixed Voltage-100
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-684" circRot="5.3898693106328017e-312" Out="true" mainComp="false" objectName="Fixed Voltage-81" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-752" valLabRot="0" id="Fixed Voltage-100" labelx="-64" valLabelx="-16" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-684" circRot="5.3898693106328017e-312" Out="false" mainComp="false" objectName="Fixed Voltage-81" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-720" valLabRot="0" id="Fixed Voltage-100" labelx="-64" valLabelx="-16" Unit=" V"/>
 
 Unique  Id: Fixed Voltage-80: 
 Circuit Id: Fixed Voltage-99
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-784" circRot="9.50654114510543e-312" Out="true" mainComp="false" objectName="Fixed Voltage-80" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-716" valLabRot="0" id="Fixed Voltage-99" labelx="-64" valLabelx="-16" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-784" circRot="9.50654114510543e-312" Out="false" mainComp="false" objectName="Fixed Voltage-80" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-716" valLabRot="0" id="Fixed Voltage-99" labelx="-64" valLabelx="-16" Unit=" V"/>
 
 Unique  Id: Or Gate-79: 
 Circuit Id: Or Gate-12
@@ -154,7 +154,7 @@ Circuit Id: 74HC153-18
 
 Unique  Id: Fixed Voltage-74: 
 Circuit Id: Fixed Voltage-101
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-724" circRot="4.0742319202343329e-312" Out="true" mainComp="false" objectName="Fixed Voltage-74" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-748" valLabRot="0" id="Fixed Voltage-101" labelx="-64" valLabelx="-23" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-724" circRot="4.0742319202343329e-312" Out="false" mainComp="false" objectName="Fixed Voltage-74" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-716" valLabRot="0" id="Fixed Voltage-101" labelx="-64" valLabelx="-23" Unit=" V"/>
 
 Unique  Id: Or Gate-73: 
 Circuit Id: Or Gate-9
@@ -174,7 +174,7 @@ Circuit Id: And Gate-2
 
 Unique  Id: Fixed Voltage-69: 
 Circuit Id: Fixed Voltage-102
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-592" circRot="4.0742319202343329e-312" Out="true" mainComp="false" objectName="Fixed Voltage-69" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-748" valLabRot="0" id="Fixed Voltage-102" labelx="-64" valLabelx="-16" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-592" circRot="4.0742319202343329e-312" Out="false" mainComp="false" objectName="Fixed Voltage-69" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-716" valLabRot="0" id="Fixed Voltage-102" labelx="-64" valLabelx="-16" Unit=" V"/>
 
 Unique  Id: Ground-68: 
 Circuit Id: Ground-169
@@ -274,7 +274,7 @@ Circuit Id: Fixed Voltage-102
 
 Unique  Id: Fixed Voltage-44: 
 Circuit Id: Fixed Voltage-101
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-232" circRot="4.0742319202343329e-312" Out="false" mainComp="false" objectName="Fixed Voltage-44" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-644" valLabRot="0" id="Fixed Voltage-101" labelx="-64" valLabelx="-23" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-232" circRot="4.0742319202343329e-312" Out="true" mainComp="false" objectName="Fixed Voltage-44" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-644" valLabRot="0" id="Fixed Voltage-101" labelx="-64" valLabelx="-23" Unit=" V"/>
 
 Unique  Id: Fixed Voltage-43: 
 Circuit Id: Fixed Voltage-99
@@ -286,11 +286,11 @@ Circuit Id: Node-310
 
 Unique  Id: Fixed Voltage-41: 
 Circuit Id: Fixed Voltage-102
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-936" circRot="4.0742319202343329e-312" Out="true" mainComp="false" objectName="Fixed Voltage-41" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-708" valLabRot="0" id="Fixed Voltage-102" labelx="-64" valLabelx="-16" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-936" circRot="4.0742319202343329e-312" Out="false" mainComp="false" objectName="Fixed Voltage-41" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-708" valLabRot="0" id="Fixed Voltage-102" labelx="-64" valLabelx="-16" Unit=" V"/>
 
 Unique  Id: Fixed Voltage-40: 
 Circuit Id: Fixed Voltage-99
-<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-888" circRot="9.50654114510543e-312" Out="true" mainComp="false" objectName="Fixed Voltage-40" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-712" valLabRot="0" id="Fixed Voltage-99" labelx="-64" valLabelx="-16" Unit=" V"/>
+<item valLabely="8" labely="-24" labelrot="0" rotation="90" Show_id="false" Show_Volt="true" circPos="0,0" Voltage="5" x="-888" circRot="9.50654114510543e-312" Out="false" mainComp="false" objectName="Fixed Voltage-40" hflip="1" boardRot="-1000000" vflip="1" itemtype="Fixed Voltage" boardPos="-1e+06,-1e+06" y="-712" valLabRot="0" id="Fixed Voltage-99" labelx="-64" valLabelx="-16" Unit=" V"/>
 
 Unique  Id: Ground-39: 
 Circuit Id: Ground-272
@@ -814,11 +814,11 @@ Circuit Id: Connector-253
 
 Unique  Id: Connector-251: 
 Circuit Id: Connector-251
-<item valLabely="0" labely="-24" labelrot="0" rotation="0" Show_id="false" circPos="0,0" endpinid="Node-300-0" pointList="-592,-732,-592,-444" x="-592" circRot="0" enodeid="enode-299" mainComp="false" objectName="Connector-251" hflip="1" boardRot="-1000000" vflip="1" itemtype="Connector" startpinid="Fixed Voltage-69-outnod" boardPos="-1e+06,-1e+06" y="-732" valLabRot="0" id="Connector-251" labelx="-16" valLabelx="0"/>
+<item valLabely="0" labely="-24" labelrot="0" rotation="0" Show_id="false" circPos="0,0" endpinid="Node-300-0" pointList="-592,-700,-592,-444" x="-592" circRot="0" enodeid="enode-299" mainComp="false" objectName="Connector-251" hflip="1" boardRot="-1000000" vflip="1" itemtype="Connector" startpinid="Fixed Voltage-69-outnod" boardPos="-1e+06,-1e+06" y="-700" valLabRot="0" id="Connector-251" labelx="-16" valLabelx="0"/>
 
 Unique  Id: Connector-249: 
 Circuit Id: Connector-249
-<item valLabely="0" labely="-24" labelrot="0" rotation="0" Show_id="false" circPos="0,0" endpinid="Node-303-0" pointList="-636,-736,-636,-432" x="-636" circRot="0" enodeid="enode-302" mainComp="false" objectName="Connector-249" hflip="1" boardRot="-1000000" vflip="1" itemtype="Connector" startpinid="Fixed Voltage-84-outnod" boardPos="-1e+06,-1e+06" y="-736" valLabRot="0" id="Connector-249" labelx="-16" valLabelx="0"/>
+<item valLabely="0" labely="-24" labelrot="0" rotation="0" Show_id="false" circPos="0,0" endpinid="Node-303-0" pointList="-636,-704,-636,-432" x="-636" circRot="0" enodeid="enode-302" mainComp="false" objectName="Connector-249" hflip="1" boardRot="-1000000" vflip="1" itemtype="Connector" startpinid="Fixed Voltage-84-outnod" boardPos="-1e+06,-1e+06" y="-704" valLabRot="0" id="Connector-249" labelx="-16" valLabelx="0"/>
 
 Unique  Id: Connector-299: 
 Circuit Id: Connector-299
@@ -842,7 +842,7 @@ Circuit Id: Connector-305
 
 Unique  Id: Connector-307: 
 Circuit Id: Connector-307
-<item valLabely="0" labely="-24" labelrot="0" rotation="0" Show_id="false" circPos="0,0" endpinid="Fixed Voltage-81-outnod" pointList="-684,-424,-684,-736" x="-684" circRot="0" enodeid="enode-305" mainComp="false" objectName="Connector-307" hflip="1" boardRot="-1000000" vflip="1" itemtype="Connector" startpinid="Node-306-2" boardPos="-1e+06,-1e+06" y="-424" valLabRot="0" id="Connector-307" labelx="-16" valLabelx="0"/>
+<item valLabely="0" labely="-24" labelrot="0" rotation="0" Show_id="false" circPos="0,0" endpinid="Fixed Voltage-81-outnod" pointList="-684,-424,-684,-704" x="-684" circRot="0" enodeid="enode-305" mainComp="false" objectName="Connector-307" hflip="1" boardRot="-1000000" vflip="1" itemtype="Connector" startpinid="Node-306-2" boardPos="-1e+06,-1e+06" y="-424" valLabRot="0" id="Connector-307" labelx="-16" valLabelx="0"/>
 
 Unique  Id: Connector-308: 
 Circuit Id: Connector-308
@@ -850,7 +850,7 @@ Circuit Id: Connector-308
 
 Unique  Id: Connector-310: 
 Circuit Id: Connector-310
-<item valLabely="0" labely="-24" labelrot="0" rotation="0" Show_id="false" circPos="0,0" endpinid="Fixed Voltage-74-outnod" pointList="-724,-420,-724,-732" x="-724" circRot="0" enodeid="enode-308" mainComp="false" objectName="Connector-310" hflip="1" boardRot="-1000000" vflip="1" itemtype="Connector" startpinid="Node-309-2" boardPos="-1e+06,-1e+06" y="-420" valLabRot="0" id="Connector-310" labelx="-16" valLabelx="0"/>
+<item valLabely="0" labely="-24" labelrot="0" rotation="0" Show_id="false" circPos="0,0" endpinid="Fixed Voltage-74-outnod" pointList="-724,-420,-724,-700" x="-724" circRot="0" enodeid="enode-308" mainComp="false" objectName="Connector-310" hflip="1" boardRot="-1000000" vflip="1" itemtype="Connector" startpinid="Node-309-2" boardPos="-1e+06,-1e+06" y="-420" valLabRot="0" id="Connector-310" labelx="-16" valLabelx="0"/>
 
 Unique  Id: Connector-239: 
 Circuit Id: Connector-239
