@@ -7,3 +7,6 @@ sumador restador: https://compilandoconocimiento.com/2017/06/13/sumador-y-restad
 
 data: https://html.alldatasheet.com/html-pdf/27999/TI/74LS181/125/5/74LS181.html
 data2: https://html.alldatasheet.com/html-pdf/51046/FAIRCHILD/74LS181/1228/3/74LS181.ht
+
+https://www2.uned.es/ca-bergara/ppropias/Morillo/web_etc_II/4_alu/transp_alu.pdf
+https://rua.ua.es/dspace/bitstream/10045/15468/16/tema3.pdf
