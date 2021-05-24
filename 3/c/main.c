@@ -1,8 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 char firsResult(int number);
 char secondResult(int number);
 char thirdResult(int number);
+
+void handlerErr(int number) {
+    fprintf(stderr, "note have not a letter assigned, problem with the entered number: %d \n", number);
+    exit(EXIT_FAILURE);
+}
 
 int main(int argc, char const *argv[])
 {
@@ -32,7 +38,7 @@ int main(int argc, char const *argv[])
 // firsResult using if
 char firsResult(int number) 
 {
-    char note;
+    char note = ' ';
     if (number >= 1 && number <= 9)
     {
         note = 'E';
@@ -58,7 +64,10 @@ char firsResult(int number)
         note = 'A';
     }
     
-    
+    if (note == ' ') {
+        handlerErr(number);
+    }
+
     return note;
 }
 
@@ -82,6 +91,10 @@ char secondResult(int number)
     } else if (number == 19 || number == 20)
     {
         note = 'A';
+    }
+
+    if (note == ' ') {
+        handlerErr(number);
     }
 
     return note;
@@ -131,6 +144,10 @@ char thirdResult(int number)
     
     default:
         break;
+    }
+
+    if (note == ' ') {
+        handlerErr(number);
     }
 
     return note;
