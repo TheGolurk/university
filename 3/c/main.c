@@ -27,7 +27,6 @@ int main(int argc, char const *argv[])
     note = secondResult(aciertos);
     printf("Resultado de la nota metodo 2 %c \n", note);
 
-
     /* switch */
     note = thirdResult(aciertos);
     printf("Resultado de la nota metodo 3 %c \n", note);
