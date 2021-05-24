@@ -1,8 +1,8 @@
 {
   "required_api_version": "^2.0.0",
-  "name": "Demo",
-  "description": "Demo extension",
-  "developer_name": "Aleksandr Gornostal",
+  "name": "TRANSLATE OF WORDS",
+  "description": "This is a project about translating words",
+  "developer_name": "Christian Hernández & Lorena Valle",
   "icon": "images/icon.png",
   "options": {
     "query_debounce": 0.05
@@ -25,7 +25,7 @@
       "id": "memo",
       "type": "text",
       "name": "Memo",
-      "description": "Write something here",
+      "description": "This",
       "default_value": ""
     }
   ]
