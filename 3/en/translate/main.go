@@ -30,8 +30,8 @@ type GoogleTranslateData struct {
 	} `json:"ld_result"`
 }
 
-const (
-  urlBase = "https://translate.google.com/translate_a/single?client=at&dt=t&dt=ld&dt=qca&dt=rm&dt=bd&dj=1&hl=es-ES&ie=UTF-8&oe=UTF-8&inputm=2&otf=2&iid=1dd3b944-fa62-4b55-b330-74909a99969e&"
+var (
+	urlBase = os.Getenv("host_en")
 )
 
 func main() {
@@ -41,14 +41,14 @@ func main() {
 		log.Fatal("cannot run without args")
 	}
 
-  // input language ej: ES
-  inLang := args[1]
-  // output language ej: 
-  ouLang := args[2]
-  // text to translate
-  textToTranslate := args[3]
+	// input language ej: ES
+	inLang := args[1]
+	// output language ej:
+	ouLang := args[2]
+	// text to translate
+	textToTranslate := args[3]
 
-	url, err := url.Parse(fmt.Sprintf(`%ssl=%s&tl=%s&q=%s`, urlBase, inLang, ouLang,textToTranslate))
+	url, err := url.Parse(fmt.Sprintf(`%ssl=%s&tl=%s&q=%s`, urlBase, inLang, ouLang, textToTranslate))
 	if err != nil {
 		log.Fatal("cannot parse url", err)
 	}
@@ -81,5 +81,5 @@ func main() {
 		log.Fatal("cannot decode as json", err)
 	}
 
-	fmt.Printf("translated from %s to %s: %s",inLang, ouLang, data.Sentences[0].Trans)
+	fmt.Printf("translated from %s to %s: %s \n", inLang, ouLang, data.Sentences[0].Trans)
 }
