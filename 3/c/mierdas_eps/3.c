@@ -4,6 +4,7 @@ int main() {
 
   int nums = 1;
   int space = 10;
+  int count = 0;
 
   for (size_t t = 10; t > 1; t--)
   { 
@@ -25,9 +26,12 @@ int main() {
 
     nums++;
     space--;
+    count++;
     printf("\n");
 
   }
+
+  printf("final count", count);
 
   return 0;
 }
