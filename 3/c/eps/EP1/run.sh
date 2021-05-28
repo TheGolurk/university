@@ -20,7 +20,7 @@ if [ "$2" == "full" ]; then
 	printf "\nIt took $(($END_TIME - $START_TIME)) Seconds \n"
 	echo "Deleting $1 binary file [out]" 
 
-elif [ "$2" == "less" ]; then
+elif [ "$2" == "less" || "$2" == "" ]; then
 	
 	compile $1
 
