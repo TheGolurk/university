@@ -1,37 +1,58 @@
 #include <stdio.h>
 
-int main() {
+int main(int argc, char const *argv[]) {
 
   int nums = 1;
   int space = 10;
-  int count = 0;
+  
+  int base = 9;
+  int baseleft = base;
+  int baseright = base;
 
-  for (size_t t = 10; t > 1; t--)
+  for (size_t t = 10; t > 0; t--)
   { 
 
     for (size_t i = 0; i < space; i++)
-    {
+    { 
       printf(" ");
     }
 
+    // restar
     for (size_t i = 0; i < nums; i++)
     {
-      printf("*");
+      printf("%d", baseleft);
+      baseleft--;
+
+      if (baseleft < 0) {
+        baseleft = 9;
+      }
+
     }
 
+    baseright = baseleft+2;
+
+    // sumar
     for (size_t i = 1; i < nums; i++)
     {
-      printf("*");
+      printf("%d", baseright);
+      baseright++;
+      
+      if (baseright == 9) {
+        baseright = 0;
+      }
+
     }
 
     nums++;
     space--;
-    count++;
+  
+    base--;
+    baseleft = base;
+    baseright = base;
+
     printf("\n");
 
   }
-
-  printf("final count", count);
 
   return 0;
 }
