@@ -30,17 +30,19 @@ int main(int argc, char const *argv[]) {
     }
 
     baseright = baseleft+2;
+    
 
     // sumar
     for (size_t i = 1; i < nums; i++)
     {
-      printf("%d", baseright);
-      baseright++;
-      
-      if (baseright == 9) {
+
+      if (baseright > 9) {
         baseright = 0;
       }
 
+      printf("%d", baseright);
+      baseright++;
+  
     }
 
     nums++;
