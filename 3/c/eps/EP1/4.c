@@ -20,21 +20,20 @@ void handlerErr(int number) {
 int main(int argc, char const *argv[]) {
 
   const char* z = Draw(10,10);
-  printf("DATA %s", z);
+  printf("%s", z);
 
   return 0;
 }
 
 const char * Draw(int lenght, int size) {
 
-  static char array[] = "my string";
+  static char array[] = "";
 
-  for (size_t i = 0; i < 10; i++)
-  {
-    strncat(array, "hola", sizeof("hola"));
-  }
+
+  // strncat(array, "hola", sizeof("hola"));
+  snprintf("hola", sizeof(array), "%d", 10);
+  
   
 
   return array;
-
 }
