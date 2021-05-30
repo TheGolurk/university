@@ -40,18 +40,43 @@ const char * Draw(int size, int lenght) {
 
   printf("Calculate: %d %d %d \n", general, firstTriangle, secondTriangle);
 
-  for (size_t i = 1; i <= firstTriangle; i++)
-  {
+  int spaces = firstTriangle + 3;
+  int limit = 1;
 
+  for (size_t i = i; i <= secondTriangle; i++)
+  {
+    if (i < 3)
+    {
+      for (size_t j = 0; j < spaces; j++)
+      {
+        printf(" ");
+      }
+    } else {
+      for (size_t j = 0; j < spaces-(firstTriangle+1); j++)
+      {
+        printf(" ");
+      }
+    }
+
+    for (size_t t = 1; t <= limit; t++)
+    {
+      printf("*");
+    }
+    
+    limit += 1;
+    
+    
+
+    /*
     for (size_t j = 0 ; j < firstTriangle-i; j++)
     {
-      printf("");
+      printf(" ");
     }
 
     for (size_t k = 1; k <= i; k++)
     {
       printf("*");
-    }
+    } */
     
     
     printf("\n");
