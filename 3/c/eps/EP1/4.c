@@ -10,28 +10,32 @@ Analisis:
 #include <stdlib.h>
 #include <string.h>
 
-const char * Draw(int lenght, int size);
+const char * Draw(int size, int lenght);
 
-void handlerErr(int number) {
-    fprintf(stderr, "you have entered a wrong number: %d \n", number);
+void handlerErr(const char *err) {
+    fprintf(stderr, "you have entered a wrong number. Error[ %s ] \n", err);
     exit(EXIT_FAILURE);
 }
 
 int main(int argc, char const *argv[]) {
 
-  const char* z = Draw(10,10);
-  printf("%s", z);
+  const char* out = Draw(10,10);
+  printf("%s", out);
 
   return 0;
 }
 
-const char * Draw(int lenght, int size) {
+const char * Draw(int size, int lenght) {
 
-  static char array[] = "";
+  if (size < 3 || lenght < 13)
+  {
+    handlerErr("Out of lenght values");
+  }
+  
+  static char array[] = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"; // Need to write string then
 
 
-  // strncat(array, "hola", sizeof("hola"));
-  snprintf("hola", sizeof(array), "%d", 10);
+  snprintf(array, sizeof(array), " test %d", 10);
   
   
 
