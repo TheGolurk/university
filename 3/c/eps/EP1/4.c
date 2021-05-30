@@ -57,22 +57,6 @@ const char * Draw(int size, int lenght) {
 
     } else {
       
-      /*
-      for (size_t j = 0 ; j < firstTriangle+1; j++)
-      {
-        printf(" ");
-      }
-
-      for (size_t k = firstTriangle; k <= 3; k++)
-      {
-        printf("*");
-      }
-
-      firstTriangle--;
-
-      printf(" ");
-      */
-
      printf("  ");
 
       for (size_t q = 1; q <= firstTriangleTMP-1; q++)
