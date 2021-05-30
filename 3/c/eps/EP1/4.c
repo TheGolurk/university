@@ -42,7 +42,7 @@ const char * Draw(int size, int lenght) {
   int limit = 1;
   int spacesFirst = 3;
 
-  for (size_t i = i; i <= secondTriangle; i++)
+  for (size_t i = 1; i <= secondTriangle; i++)
   {
 
     if (i < 3)
@@ -73,7 +73,10 @@ const char * Draw(int size, int lenght) {
 
     for (size_t t = 1; t <= limit; t++)
     {
-      printf("*");
+      if (t == 1 || i == secondTriangle)
+      {
+        printf("*");  
+      }
     }
     
     limit += 1;
@@ -81,6 +84,7 @@ const char * Draw(int size, int lenght) {
     printf("\n");
   }
   
+  // Base
   for (size_t i = 0; i < lenght; i++)
   {
     printf("*");
