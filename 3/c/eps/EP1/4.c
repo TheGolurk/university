@@ -38,8 +38,6 @@ const char * Draw(int size, int lenght) {
   int secondTriangle = (general / 2) + 1;
   int firstTriangle = general - secondTriangle;
 
-  printf("Calculate: %d %d %d \n", general, firstTriangle, secondTriangle);
-
   int spaces = firstTriangle + 3;
   int limit = 1;
   int spacesFirst = 3;
@@ -57,19 +55,11 @@ const char * Draw(int size, int lenght) {
 
     } else {
       
-      /*
-      for (size_t j = 0; j < spaces; j++)
-      {
-        printf(" ");
-      } */
-
-      
       for (size_t j = 0 ; j < firstTriangle+1; j++)
       {
         printf(" ");
       }
 
-      
       for (size_t k = firstTriangle; k <= 3; k++)
       {
         printf("*");
@@ -90,6 +80,37 @@ const char * Draw(int size, int lenght) {
     
     printf("\n");
   }
+  
+  for (size_t i = 0; i < lenght; i++)
+  {
+    printf("*");
+  }
+  
+  printf("\n");
+
+  for (size_t i = 0; i < lenght; i++)
+  {
+    printf(" ");
+    if (i == 0 || i == lenght-4)
+    {
+      printf("*");
+    }
+    
+  }
+
+  printf("\n");
+
+  for (size_t i = 0; i < 2; i++)
+  {
+    printf(" ");
+  }
+  for (size_t i = 0; i < lenght-4; i++)
+  {
+    printf("*");
+  }
+  
+  
+  
   
 
   // snprintf(array, sizeof(array), " test %d", 10);
