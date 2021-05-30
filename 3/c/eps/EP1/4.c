@@ -42,20 +42,43 @@ const char * Draw(int size, int lenght) {
 
   int spaces = firstTriangle + 3;
   int limit = 1;
+  int spacesFirst = 3;
 
   for (size_t i = i; i <= secondTriangle; i++)
   {
+
     if (i < 3)
     {
+
       for (size_t j = 0; j < spaces; j++)
       {
         printf(" ");
       }
+
     } else {
-      for (size_t j = 0; j < spaces-(firstTriangle+1); j++)
+      
+      /*
+      for (size_t j = 0; j < spaces; j++)
+      {
+        printf(" ");
+      } */
+
+      
+      for (size_t j = 0 ; j < firstTriangle+1; j++)
       {
         printf(" ");
       }
+
+      
+      for (size_t k = firstTriangle; k <= 3; k++)
+      {
+        printf("*");
+      }
+
+      firstTriangle--;
+
+      printf(" ");
+
     }
 
     for (size_t t = 1; t <= limit; t++)
@@ -64,20 +87,6 @@ const char * Draw(int size, int lenght) {
     }
     
     limit += 1;
-    
-    
-
-    /*
-    for (size_t j = 0 ; j < firstTriangle-i; j++)
-    {
-      printf(" ");
-    }
-
-    for (size_t k = 1; k <= i; k++)
-    {
-      printf("*");
-    } */
-    
     
     printf("\n");
   }
