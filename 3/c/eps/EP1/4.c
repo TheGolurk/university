@@ -8,6 +8,7 @@ Analisis:
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 const char * Draw(int lenght, int size);
 
@@ -18,13 +19,22 @@ void handlerErr(int number) {
 
 int main(int argc, char const *argv[]) {
 
+  const char* z = Draw(10,10);
+  printf("DATA %s", z);
 
   return 0;
 }
 
 const char * Draw(int lenght, int size) {
 
-  char * picture;
+  static char array[] = "my string";
 
-  return picture;
+  for (size_t i = 0; i < 10; i++)
+  {
+    strncat(array, "hola", sizeof("hola"));
+  }
+  
+
+  return array;
+
 }
