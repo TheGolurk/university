@@ -19,7 +19,7 @@ void handlerErr(const char *err) {
 
 int main(int argc, char const *argv[]) {
 
-  const char* out = Draw(3,13);
+  const char* out = Draw(3, 13);
   printf("%s", out);
 
   return 0;
@@ -34,8 +34,31 @@ const char * Draw(int size, int lenght) {
   
   static char array[] = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"; // Need to write string then
 
+  int general = lenght - 5;
+  int secondTriangle = (general / 2) + 1;
+  int firstTriangle = general - secondTriangle;
 
-  snprintf(array, sizeof(array), " test %d", 10);
+  printf("Calculate: %d %d %d \n", general, firstTriangle, secondTriangle);
+
+  for (size_t i = 1; i <= firstTriangle; i++)
+  {
+
+    for (size_t j = 0 ; j < firstTriangle-i; j++)
+    {
+      printf("");
+    }
+
+    for (size_t k = 1; k <= i; k++)
+    {
+      printf("*");
+    }
+    
+    
+    printf("\n");
+  }
+  
+
+  // snprintf(array, sizeof(array), " test %d", 10);
   
   
 
