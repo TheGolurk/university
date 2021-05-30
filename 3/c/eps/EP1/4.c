@@ -73,7 +73,7 @@ const char * Draw(int size, int lenght) {
 
     for (size_t t = 1; t <= limit; t++)
     {
-      if (t == 1 || i == secondTriangle)
+      if (t == 1 || i == secondTriangle || t == limit)
       {
         printf("*");  
       }
