@@ -19,7 +19,7 @@ void handlerErr(const char *err) {
 
 int main(int argc, char const *argv[]) {
 
-  const char* out = Draw(10,10);
+  const char* out = Draw(3,13);
   printf("%s", out);
 
   return 0;
