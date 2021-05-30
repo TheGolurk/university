@@ -19,7 +19,7 @@ void handlerErr(const char *err) {
 
 int main(int argc, char const *argv[]) {
 
-  const char* out = Draw(3, 13);
+  const char* out = Draw(3, 17);
   printf("%s", out);
 
   return 0;
@@ -42,6 +42,8 @@ const char * Draw(int size, int lenght) {
   int limit = 1;
   int spacesFirst = 3;
 
+  int firstTriangleTMP = firstTriangle;
+
   for (size_t i = 1; i <= secondTriangle; i++)
   {
 
@@ -55,6 +57,7 @@ const char * Draw(int size, int lenght) {
 
     } else {
       
+      /*
       for (size_t j = 0 ; j < firstTriangle+1; j++)
       {
         printf(" ");
@@ -66,6 +69,24 @@ const char * Draw(int size, int lenght) {
       }
 
       firstTriangle--;
+
+      printf(" ");
+      */
+
+     printf("  ");
+
+      for (size_t q = 1; q <= firstTriangleTMP-1; q++)
+      {
+        printf(" ");
+      }
+
+      for (size_t q = firstTriangleTMP; q <= firstTriangle; q++)
+      {
+        printf("*");
+      }
+
+      firstTriangleTMP--;
+      
 
       printf(" ");
 
@@ -80,8 +101,6 @@ const char * Draw(int size, int lenght) {
       } else if (t > 1) {
         printf(" ");
       }
-      
-      
     }
     
     limit += 1;
@@ -117,14 +136,7 @@ const char * Draw(int size, int lenght) {
   {
     printf("*");
   }
-  
-  
-  
-  
 
   // snprintf(array, sizeof(array), " test %d", 10);
-  
-  
-
   return array;
 }
