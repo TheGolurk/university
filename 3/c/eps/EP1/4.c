@@ -43,10 +43,12 @@ const char * Draw(int size, int lenght) {
   int spacesFirst = 3;
 
   int firstTriangleTMP = firstTriangle;
-
+  
+  // General size for the first and second triangle.
   for (size_t i = 1; i <= secondTriangle; i++)
   {
 
+    // there are 2 spaces of height from second triangle to first triangle
     if (i < 3)
     {
 
@@ -55,23 +57,21 @@ const char * Draw(int size, int lenght) {
         printf(" ");
       }
 
-    } else {
-      
+    } else {  // We can start to print the first triangle once the spaces of height was passed
+    
      printf("  ");
 
-      
       for (size_t q = 1; q <= firstTriangleTMP-1; q++)
       {
         printf(" ");
       }
 
+      // repeat across the lenght of first triangle and only print the character outline 
       for (size_t q = firstTriangleTMP; q <= firstTriangle; q++)
       {        
         if (q == firstTriangleTMP || i == secondTriangle || q == firstTriangle)
         {
-          /* code */
-        printf("*");
-
+          printf("*");
         }else {
           printf(" ");
         }
@@ -108,6 +108,7 @@ const char * Draw(int size, int lenght) {
   
   printf("\n");
 
+  // the middle of the base, have a character only in the spaces of (lenght variable)-1
   for (size_t i = 0; i < lenght; i++)
   {
     printf(" ");
