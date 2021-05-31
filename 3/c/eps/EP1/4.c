@@ -19,7 +19,7 @@ void handlerErr(const char *err) {
 
 int main(int argc, char const *argv[]) {
 
-  const char* out = Draw(3, 17);
+  const char* out = Draw(3, 20);
   printf("%s", out);
 
   return 0;
@@ -67,7 +67,7 @@ const char * Draw(int size, int lenght) {
 
       for (size_t q = firstTriangleTMP; q <= firstTriangle; q++)
       {        
-        if (q == firstTriangleTMP || i == secondTriangle)
+        if (q == firstTriangleTMP || i == secondTriangle || q == firstTriangle)
         {
           /* code */
         printf("*");
