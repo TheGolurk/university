@@ -230,47 +230,47 @@ int main(int argc, char const *argv[])
                 if (i < 3)
                 {
 
-                for (size_t j = 0; j < spaces; j++)
-                {
-                    printf(" ");
-                }
+                    for (size_t j = 0; j < spaces; j++)
+                    {
+                        printf(" ");
+                    }
 
                 } else {  // We can start to print the first triangle once the spaces of height was passed
                 
-                printf("  ");
+                    printf("  ");
 
-                for (size_t q = 1; q <= firstTriangleTMP-1; q++)
-                {
-                    printf(" ");
-                }
-
-                // repeat across the lenght of first triangle and only print the character outline 
-                for (size_t q = firstTriangleTMP; q <= firstTriangle; q++)
-                {        
-                    if (q == firstTriangleTMP || i == secondTriangle || q == firstTriangle)
+                    for (size_t q = 1; q <= firstTriangleTMP-1; q++)
                     {
-                    printf("*");
-                    }else {
-                    printf(" ");
+                        printf(" ");
                     }
-                    
-                }
 
-                firstTriangleTMP--;
+                    // repeat across the lenght of first triangle and only print the character outline 
+                    for (size_t q = firstTriangleTMP; q <= firstTriangle; q++)
+                    {        
+                        if (q == firstTriangleTMP || i == secondTriangle || q == firstTriangle)
+                        {
+                            printf("*");
+                        }else {
+                            printf(" ");
+                        }
+                        
+                    }
 
-                printf(" ");
+                    firstTriangleTMP--;
+
+                    printf(" ");
 
                 }
 
                 // second triangle
                 for (size_t t = 1; t <= limit; t++)
                 {
-                if (t == 1 || i == secondTriangle || t == limit)
-                {
-                    printf("*");  
-                } else if (t > 1) {
-                    printf(" ");
-                }
+                    if (t == 1 || i == secondTriangle || t == limit)
+                    {
+                        printf("*");  
+                    } else if (t > 1) {
+                        printf(" ");
+                    }
                 }
                 
                 limit += 1;
@@ -292,7 +292,7 @@ int main(int argc, char const *argv[])
                 printf(" ");
                 if (i == 0 || i == lenght-4)
                 {
-                printf("*");
+                    printf("*");
                 }
                 
             }
