@@ -13,19 +13,18 @@ Se mostrará en pantalla si la suma de los dígitos pares  es igual a la suma de
 int main()
 {
 
-int num, digito=0, impar=0;
+    int num, digito=0, impar=0;
 
     printf("Ingresa un numero entero (maximo 6 digitos): \n");
     scanf("%d", &num);
 
- while ( num !=0)
+    while ( num !=0)
     {
-
-
         if ((num %10) %2 == 0 )
         {
             digito += num % 10;
-        }else if ((num %10) %2 != 0 ){
+        }else if ((num %10) %2 != 0 )
+        {
             impar+= num % 10;
         }
 
@@ -37,9 +36,7 @@ int num, digito=0, impar=0;
     if(digito == impar)
     {
         printf(" La suma de los numeros pares e impares son iguales");
-
     }else{
-
         printf(" La suma de los numeros pares e impares no son iguales");
     }
 

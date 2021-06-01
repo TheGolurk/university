@@ -22,13 +22,11 @@ int main()
 {
    int dia, mes, a, feb=28;
 
-
    printf(" Introduzca el dia:\n ");
    scanf("%d",&dia);
 
    printf(" Introduzca el mes en numero: \n ");
    scanf("%d",&mes);
-
 
    printf(" Introduzca el año: \n");
    scanf("%d",&a);
@@ -59,26 +57,20 @@ int main()
                 break;
 
                 case 2: if (a %4 !=0 ||a %100 ==0 && a %400 !=0 )
-
                             feb=29;
                             if (dia >=1 && dia <=29)
                                 printf(" \nFECHA VALIDA\n");
-
                         else
                           printf( "\nFECHA INVALIDA\n");
-
                           if (dia >=1 && dia <=28)
                                 printf(" \nFECHA VALIDA\n");
                           else
                             printf( "\nFECHA INVALIDA\n");
-
             }
 
             int dias=0;
-
             if (mes ==1){
                     dias=dia;
-
             }else if (mes==2){
                     dias=enero+dia;
             }else if (mes==3){
@@ -102,16 +94,12 @@ int main()
             }else if (mes==12){
                     dias=enero+feb+marzo+abril+mayo+junio+julio+agosto+septiembre+octubre+noviembre+dia;
             }
-
-            printf(" El numero de dias es %d", dias);
-
+            printf(" El numero de dias es %d \n", dias);
         }
         else
             printf( "\nFECHA INVALIDA\n");
 
-
     return 0;
-
    }
 
 
