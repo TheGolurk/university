@@ -7,19 +7,15 @@ int * invert(int arr[], int size);
 int main(int argc, char const *argv[])
 {
     int values[] = {1,2,3,4,5};
-    int val = NELEMS(values)-1;
-    int *new = invert(values, val);
-
-    return 0;
-}
-
-int * invert(int arr[], int size) {
-    int tmp[size];
+    int size = NELEMS(values)-1;
+    int reversed[size];
+    
     for (size_t i = 0; i <= size; i++)
     {
-        tmp[size-i] = arr[i];
-        tmp[i] = arr[size-i];
-        printf("[%d]: %d \n", i, tmp[i]);
+        reversed[size-i] = values[i];
+        reversed[i] = values[size-i];
+        printf("[%d]: %d \n", i, reversed[i]);
     }
-    return tmp;
+    
+    return 0;
 }
