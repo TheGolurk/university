@@ -14,10 +14,12 @@ int main(int argc, char const *argv[])
 }
 
 int * invert(int arr[], int size) {
+    int tmp[size];
     for (size_t i = 0; i <= size; i++)
     {
-        arr[i] = arr[size-i];
-        printf("[%d]: %d", i, arr[i]);
+        tmp[size-i] = arr[i];
+        tmp[i] = arr[size-i];
+        printf("[%d]: %d \n", i, tmp[i]);
     }
-    return arr;
+    return tmp;
 }
