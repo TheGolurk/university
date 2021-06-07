@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-int * invert(int arr[], int size);
-
 #define NELEMS(x)  (sizeof(x) / sizeof((x)[0]))
 
 int main(int argc, char const *argv[])
