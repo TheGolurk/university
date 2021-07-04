@@ -7,8 +7,6 @@
 
 #define MAX_SIZE 3000
 
-#define GET_SIZE(x)  (sizeof(x) / sizeof((x)[0]))
-
 void pass_asistence(char* students[], int size) {
 
   for (size_t i = 0; i < size; i++) {
@@ -17,7 +15,7 @@ void pass_asistence(char* students[], int size) {
         return;
     }
 
-    printf("List: %s \n", students[i]);
+    printf("Alumno: %s \n", students[i]);
   
   }
 
@@ -39,7 +37,6 @@ int main(int argc, char const *argv[])
     dates[1] = 31122021;
     asistence[1] = "no";
 
-    
 
     while(opt != 4) {
 
