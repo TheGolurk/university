@@ -25,8 +25,6 @@ void pass_asistence(char* students[], int size) {
 void reg_asistence (char* students[], int* dates[]){
 
     for (int i=0; i<MAX_SIZE; i++){
-        
-        char buffer[1000];
         printf(" Introducir nombre completo (SIN ESPACIOS): \n");
         scanf("%s", &students[i]); 
 
@@ -51,16 +49,6 @@ int main(int argc, char const *argv[])
     char* students[MAX_SIZE];
     int* dates[MAX_SIZE];
     char* asistence[MAX_SIZE];
-
-    /*
-    students[0] = "Lorena Valle Gonzalez";
-    dates[0] = 01072021;
-    asistence[0] = "si";
-
-    students[1] = "Christian Hernandez Najera";
-    dates[1] = 02072021;
-    asistence[1] = "no";
-    */
 
     while(opt != 4) {
 
