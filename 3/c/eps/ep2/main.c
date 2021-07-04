@@ -17,8 +17,7 @@ void pass_asistence(char* students[], int size) {
         return;
     }
 
-    printf("Alumno: %s \n Fecha de asistencia \n  Confirmacion de Asistencia \n  ", &students[i]);
-
+    printf("\nAlumno: %s \n", &students[i]);
   }
 
 }
@@ -26,8 +25,10 @@ void pass_asistence(char* students[], int size) {
 void reg_asistence (char* students[], int* dates[]){
 
     for (int i=0; i<MAX_SIZE; i++){
-        printf(" Introducir nombre completo: \n");
-        scanf("%s", &students[i]);
+        
+        char buffer[1000];
+        printf(" Introducir nombre completo (SIN ESPACIOS): \n");
+        scanf("%s", &students[i]); 
 
         printf("Introducir fecha de asistencia:\n");
         scanf("%d",&dates[i]);
