@@ -17,7 +17,7 @@ void pass_asistence(char* students[], int size) {
         return;
     }
 
-    printf("Alumno: %s \n Fecha de asistencia \n  Confirmacion de Asistencia \n  ", students[i]);
+    printf("Alumno: %s \n Fecha de asistencia \n  Confirmacion de Asistencia \n  ", &students[i]);
 
   }
 
