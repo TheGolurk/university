@@ -9,15 +9,15 @@ By: Hernandez Najera Christian & Valle Gonzalez Lorena  */
 
 #define MAX_SIZE 3000
 
-void pass_asistence(char* students[], int size, int* dates[]) {
+void pass_asistence(char* students[], int* dates[], char* asistence[]) {
 
-  for (size_t i = 0; i < size; i++) {
+  for (size_t i = 0; i <MAX_SIZE; i++) {
 
     if (!students[i]) {
         return;
     }
 
-    printf("\nAlumno: %s. Fecha %d \n", &students[i], &dates[i]);
+    printf("\nAlumno: %s. Fecha %d   Asistio? %s \n", &students[i], &dates[i], &asistence[i]);
 
   }
 
@@ -27,7 +27,7 @@ void reg_asistence (char* students[], int* dates[]){
 
     for (int i=0; i<MAX_SIZE; i++){
         printf(" Introducir nombre completo (SIN ESPACIOS): \n");
-        scanf("%s", &students[i]); 
+        scanf("%s", &students[i]);
 
         printf("Introducir fecha de asistencia:\n");
         scanf("%d",&dates[i]);
@@ -42,6 +42,24 @@ void reg_asistence (char* students[], int* dates[]){
     }
 
 }
+void conf_asistence(char* asistence[], char* students[], int* dates[]){
+
+    for (size_t i = 0; i < MAX_SIZE; i++) {
+
+        if (!students[i]) {
+            return;
+        }
+
+        printf("\nAlumno: %s. Fecha: %d  Asistio?  \n", &students[i], &dates[i]);
+        scanf("%s",&asistence[i]);
+
+    }
+
+
+
+}
+
+
 
 int main(int argc, char const *argv[])
 {
@@ -67,12 +85,12 @@ int main(int argc, char const *argv[])
 
         case 2:
 
-
+            conf_asistence(asistence, students, dates);
 
             break;
 
         case 3:
-            pass_asistence(students, MAX_SIZE);
+            pass_asistence(students, dates, asistence);
 
 
             break;
