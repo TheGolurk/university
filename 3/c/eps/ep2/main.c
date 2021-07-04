@@ -9,7 +9,7 @@ By: Hernandez Najera Christian & Valle Gonzalez Lorena  */
 
 #define MAX_SIZE 3000
 
-void pass_asistence(char* students[], int size) {
+void pass_asistence(char* students[], int size, int* dates[]) {
 
   for (size_t i = 0; i < size; i++) {
 
@@ -17,7 +17,8 @@ void pass_asistence(char* students[], int size) {
         return;
     }
 
-    printf("\nAlumno: %s \n", &students[i]);
+    printf("\nAlumno: %s. Fecha %d \n", &students[i], &dates[i]);
+
   }
 
 }
