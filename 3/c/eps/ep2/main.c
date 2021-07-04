@@ -26,13 +26,11 @@ void pass_asistence(char* students[], int size) {
 void reg_asistence (char* students[], int* dates[]){
 
     for (int i=0; i<MAX_SIZE; i++){
-
         printf(" Introducir nombre completo: \n");
-        scanf("%s",*students[i]);
-
+        scanf("%s", &students[i]);
 
         printf("Introducir fecha de asistencia:\n");
-        scanf("%d",dates[i]);
+        scanf("%d",&dates[i]);
 
         char option;
         printf("Desea introducir otro morro S N \n  ");
@@ -40,7 +38,6 @@ void reg_asistence (char* students[], int* dates[]){
 
         if(option== 'N'){
             return;
-
         }
     }
 
