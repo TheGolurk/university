@@ -26,22 +26,25 @@ void pass_asistence(char* students[], int* dates[], char* asistence[]) {
 void reg_asistence (char* students[], int* dates[]){
 
     for (int i=0; i<MAX_SIZE; i++){
-        printf(" Introducir nombre completo (SIN ESPACIOS): \n");
+
+        printf("Introducir nombre completo (SIN ESPACIOS, SOLO 8 CARACTERES): \n");
         scanf("%s", &students[i]);
 
         printf("Introducir fecha de asistencia:\n");
         scanf("%d",&dates[i]);
 
         char option;
-        printf("Desea introducir otro morro S N \n  ");
+        printf("Desea introducir otro alumno S/N \n  ");
         scanf(" %c",&option);
 
-        if(option== 'N'){
+        if(option== 'N' || option=='n'){
             return;
         }
     }
 
 }
+
+
 void conf_asistence(char* asistence[], char* students[], int* dates[]){
 
     for (size_t i = 0; i < MAX_SIZE; i++) {
@@ -54,8 +57,6 @@ void conf_asistence(char* asistence[], char* students[], int* dates[]){
         scanf("%s",&asistence[i]);
 
     }
-
-
 
 }
 
@@ -74,37 +75,32 @@ int main(int argc, char const *argv[])
       printf(" 1.- Registrar Alumno \n 2.- Registrar asistencia \n 3.- Desplegar informacion \n 4.-Salir\n");
       scanf("%d", &opt);
 
-
       switch(opt){
 
         case 1:
 
             reg_asistence(students, dates);
-
             break;
 
         case 2:
 
             conf_asistence(asistence, students, dates);
-
             break;
 
         case 3:
+            
             pass_asistence(students, dates, asistence);
-
-
             break;
 
         case 4:
 
-
+            printf("Adios\n");
             break;
 
         default:
             printf("Incorrect option \n");
             return 0;
       }
-
 
     }
 
