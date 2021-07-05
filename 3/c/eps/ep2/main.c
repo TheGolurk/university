@@ -9,7 +9,7 @@ By: Hernandez Najera Christian & Valle Gonzalez Lorena  */
 
 #define MAX_SIZE 3000
 
-void pass_asistence(char* students[], int* dates[], char* asistence[]) {
+void pass_asistence(char* students[], int* dates[], char* asistence[], int* documents[]) {
 
   for (size_t i = 0; i <MAX_SIZE; i++) {
 
@@ -17,13 +17,20 @@ void pass_asistence(char* students[], int* dates[], char* asistence[]) {
         return;
     }
 
-    printf("\nAlumno: %s. Fecha %d   Asistio? %s \n", &students[i], dates[i], &asistence[i]);
+    char doc[20] = "no";
+    if (documents[i])
+    {
+        strcpy(doc, "si");
+    }
+    
+
+    printf("\nAlumno: %s. Fecha %d. Documento entregado? %s. Asistio? %s \n", &students[i], dates[i], &doc, &asistence[i]);
 
   }
 
 }
 
-void reg_asistence (char* students[], int* dates[]){
+void reg_asistence (char* students[], int* dates[], int* documents[]){
 
     for (int i=0; i<MAX_SIZE; i++){
 
@@ -45,7 +52,7 @@ void reg_asistence (char* students[], int* dates[]){
 }
 
 
-void conf_asistence(char* asistence[], char* students[], int* dates[]){
+void conf_asistence(char* asistence[], char* students[], int* dates[], int* documents[]){
 
     for (size_t i = 0; i < MAX_SIZE; i++) {
 
@@ -55,6 +62,9 @@ void conf_asistence(char* asistence[], char* students[], int* dates[]){
 
         printf("\nAlumno: %s. Fecha: %d  Asistio?  \n", &students[i], dates[i]);
         scanf("%s",&asistence[i]);
+
+        printf("Entrego documento? \n");
+        scanf("%d", &documents[i]);
 
     }
 
@@ -68,6 +78,7 @@ int main(int argc, char const *argv[])
 
     char* students[MAX_SIZE];
     int* dates[MAX_SIZE];
+    int* documents[MAX_SIZE];
     char* asistence[MAX_SIZE];
 
     while(opt != 4) {
@@ -79,17 +90,17 @@ int main(int argc, char const *argv[])
 
         case 1:
 
-            reg_asistence(students, dates);
+            reg_asistence(students, dates, documents);
             break;
 
         case 2:
 
-            conf_asistence(asistence, students, dates);
+            conf_asistence(asistence, students, dates, documents);
             break;
 
         case 3:
             
-            pass_asistence(students, dates, asistence);
+            pass_asistence(students, dates, asistence, documents);
             break;
 
         case 4:
