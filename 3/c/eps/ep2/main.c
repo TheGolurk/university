@@ -17,7 +17,7 @@ void pass_asistence(char* students[], int* dates[], char* asistence[]) {
         return;
     }
 
-    printf("\nAlumno: %s. Fecha %d   Asistio? %s \n", &students[i], &dates[i], &asistence[i]);
+    printf("\nAlumno: %s. Fecha %d   Asistio? %s \n", &students[i], dates[i], &asistence[i]);
 
   }
 
@@ -31,7 +31,7 @@ void reg_asistence (char* students[], int* dates[]){
         scanf("%s", &students[i]);
 
         printf("Introducir fecha de asistencia:\n");
-        scanf("%d",&dates[i]);
+        scanf("%d", &dates[i]);
 
         char option;
         printf("Desea introducir otro alumno S/N \n  ");
@@ -53,7 +53,7 @@ void conf_asistence(char* asistence[], char* students[], int* dates[]){
             return;
         }
 
-        printf("\nAlumno: %s. Fecha: %d  Asistio?  \n", &students[i], &dates[i]);
+        printf("\nAlumno: %s. Fecha: %d  Asistio?  \n", &students[i], dates[i]);
         scanf("%s",&asistence[i]);
 
     }
