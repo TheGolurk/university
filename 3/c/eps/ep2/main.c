@@ -7,30 +7,31 @@ By: Hernandez Najera Christian & Valle Gonzalez Lorena  */
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_SIZE 3000
 
-void pass_asistence(char* students[], int* dates[], char* asistence[], int* documents[]) {
+void pass_asistence(char* students[], int* dates[], char* asistence[], int* documents[]) {  
+    int MAX_SIZE = 3000;
 
-  for (size_t i = 0; i <MAX_SIZE; i++) {
+    for (size_t i = 0; i <MAX_SIZE; i++) {
 
-    if (!students[i]) {
-        return;
+        if (!students[i]) {
+            return;
+        }
+
+        char doc[20] = "no";
+        if (documents[i])
+        {
+            strcpy(doc, "si");
+        }
+        
+
+        printf("\nAlumno: %s. Fecha %d. Documento entregado? %s. Asistio? %s \n", &students[i], dates[i], &doc, &asistence[i]);
+
     }
-
-    char doc[20] = "no";
-    if (documents[i])
-    {
-        strcpy(doc, "si");
-    }
-    
-
-    printf("\nAlumno: %s. Fecha %d. Documento entregado? %s. Asistio? %s \n", &students[i], dates[i], &doc, &asistence[i]);
-
-  }
 
 }
 
 void reg_asistence (char* students[], int* dates[], int* documents[]){
+    int MAX_SIZE = 3000;
 
     for (int i=0; i<MAX_SIZE; i++){
 
@@ -53,6 +54,7 @@ void reg_asistence (char* students[], int* dates[], int* documents[]){
 
 
 void conf_asistence(char* asistence[], char* students[], int* dates[], int* documents[]){
+    int MAX_SIZE = 3000;
 
     for (size_t i = 0; i < MAX_SIZE; i++) {
 
@@ -71,10 +73,11 @@ void conf_asistence(char* asistence[], char* students[], int* dates[], int* docu
 }
 
 
-
 int main(int argc, char const *argv[])
 {
     int opt;
+    int MAX_SIZE = 3000;
+
 
     char* students[MAX_SIZE];
     int* dates[MAX_SIZE];
