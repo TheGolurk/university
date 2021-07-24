@@ -23,102 +23,136 @@ BORRADO FÍSICO->Modificar el nombre del producto ingresando la clave y cambiarl
 #include <string.h>
 #include <stdlib.h>
 
-
 struct products
 {
+    int id; // código opción 1 con números, opción 2 con letras
     char name_P[20];   // nombre del producto, ya sea cemento, varillas, tornillos, etc.
-    int code; // código opción 1 con números, opción 2 con letras
     char brand[20];    //marca
     char unit_mesure[20]; // unidad de medidad: kg, piezas, m^2, etc.
-    float quantity;   // cantidad existente, es decir, cuantas piezas o metros hay de tal prodcuto
+    int quantity;   // cantidad existente, es decir, cuantas piezas o metros hay de tal prodcuto
     float sale_price; // precio para el cliente
     float buying_price;   // precio a como lo compra el dueño
 };
 
 
-
-void  func_registers()
-
+void add()
 {
-    FILE *ptrArchivo=NULL;
-    struct products reg_product, other_product;
+    FILE *ptrArchivo;
+    struct products reg_product;
+
+    printf("Asignación de clave para el producto:\n");
+    scanf("%d", &reg_product.id);
+
+    printf("Introduce el nombre del producto a registar:\n");
+    scanf("%s", &reg_product.name_P);
     
-    printf( "Introduce el nombre del producto a registar:\n");
-    scanf("%[^\n]%*c",reg_product.name_P);
+    printf("Introduce la marca:\n");
+    scanf("%s", &reg_product.brand);
     
-    printf(" Asignación de clave para el producto:\n");
-    scanf("%d%*c", &reg_product.code);
-    
-    printf(" Introduce la marca:\n");
-    scanf("%[^\n]%*c", reg_product.brand);
-    
-    printf("Unidad de medida");
-    scanf("%[^\n]%*c", reg_product.unit_mesure);
+    printf("Unidad de medida: \n");
+    scanf("%s", &reg_product.unit_mesure);
     
     printf("Cantidad disponible del producto:\n");
-    scanf("%f%*c",reg_product.quantity);
+    scanf("%d", &reg_product.quantity);
     
     printf("Precio de compra: \n");
-    scanf("%f%*c",reg_product.buying_price);
+    scanf("%f", &reg_product.buying_price);
     
     printf("Precio de venta: \n");
-    scanf("%f%*c",reg_product.sale_price);
+    scanf("%f", &reg_product.sale_price);
+
+    ptrArchivo = fopen("products.dat", "a+");
+    if (ptrArchivo == NULL) {
+        return;
+    }
+
+    fwrite(&reg_product, sizeof(struct products), 1, ptrArchivo);
+    if (fwrite != 0) {
+        printf("Escrito correctamente! \n");
+    }
+    fclose(ptrArchivo);
+
+
+    /* Leer todos */
+    ptrArchivo = fopen("products.dat", "r");
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
     
-    ptrArchivo = fopen("reg_product", "ab");
-    
+    /* recorrer */
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+    {
+
+        
+      printf ("id = %d name = %s brand = %s mesure = %s quantity = %d buying price = %0.2f sale price = %0.2f\n", 
+      reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+      reg_product.buying_price, reg_product.sale_price);
+    }
+
+    fclose(ptrArchivo);
 }
 
+void getAll(){
+
+};
+
+void get(){
+
+};
+
+void modify(){
+
+};
+
+void getPerQuantity(){
+
+};
 
 //solo mandar a llamar las funciones y la opción de menú
-
-int main(int main(int argc, char const *argv[]);
+int main(int argc, char const *argv[])
 {
    
     int option;
-    
-    
-    while(opt !=6) 
+    while(option != 6) 
     {
-    
         printf(" 1.-Registar un producto  \n 2.- Consulta de Registro completo \n 3.-Consulta con clave\n");
-        printf("4.-Modificar producto\n 5.Consulta por cantidad existente\n 6.-Salir");
-        scanf("%d", &option); 
-        
+        printf(" 4.-Modificar producto\n 5.Consulta por cantidad existente\n 6.-Salir \n");
+        scanf("%d", &option);
+
+        switch(option)
+        {
+            case 1:
+                add();
+                break;
+            
+            case 2:
+                getAll();
+                break;
+            
+            case 3:
+                get();
+                break;
+            
+            case 4:
+                modify();
+                break;
+            
+            case 5:
+                getPerQuantity();
+                break;
+            
+            case 6:
+                printf("Adios\n");
+                break;
+            
+            default:
+                printf("Respuesta incorrecta");
+                return 0;
+        }
     }
- 
-    switch(option)
-    {
-        
-        case 1:
-        
-        break;
-        
-        case 2:
-        
-        break;
-        
-        case 3:
-        
-        break;
-        
-        case 4:
-        
-        break;
-        
-        case 5:
-        
-        break;
-        
-        case 6:
-        
-        break;
-        
-        default:
-        
-        
-    }
-    
- 
+
+    return 0;
 }
 
 
