@@ -176,7 +176,7 @@ int main(int argc, char const *argv[])
     int option;
     while(option != 6) 
     {
-        printf(" 1.-Registar un producto  \n 2.- Consulta de Registro completo \n 3.-Consulta con clave/nombre\n 4.-Consulta por cantidad existente \n 5.-Modificar producto\n  6.-Salir \n");
+        printf(" 1.-Registar un producto  \n 2.- Consulta de Registro completo \n 3.-Consulta con clave/nombre\n 4.-Consulta por cantidad existente \n 5.-Modificar producto\n 6.- Eliminar \n 7.-Salir \n");
         scanf("%d", &option);
 
         switch(option)
@@ -194,14 +194,18 @@ int main(int argc, char const *argv[])
                 break;
             
             case 4:
-                modify();
-                break;
-            
-            case 5:
                 getPerQuantity();
                 break;
             
+            case 5:
+                modify();
+                break;
+            
             case 6:
+                // delete();
+                break;
+            
+            case 7:
                 printf("Adios\n");
                 break;
             
