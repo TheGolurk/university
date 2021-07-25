@@ -28,11 +28,11 @@ struct products
     float buying_price;   // precio a como lo compra el dueño
 };
 
-// agregar un nuevoc campo
+// agregar un nuevo campo
 void add()
-{
+{   
     FILE *ptrArchivo;
-    struct products reg_product;
+    struct products reg_product,reg;
 
     printf("Asignación de clave para el producto:\n");
     scanf("%d", &reg_product.id);
@@ -55,13 +55,22 @@ void add()
     printf("Precio de venta: \n");
     scanf("%f", &reg_product.sale_price);
 
-    ptrArchivo = fopen("products.dat", "a+");
+    ptrArchivo = fopen("products.dat", "r+b");
     if (ptrArchivo == NULL) {
         return;
     }
 
-    //aca. si ya hay un producto igual (id o nombre) no debe permitir guardar y si no todo lo contrario
-
+     while(fread(&reg, sizeof(struct products), 1, ptrArchivo))
+     {
+        if(reg_product.id == reg.id  ||  strcmp(reg_product.name_P, reg.name_P) == 0)
+        {
+            printf("Clave ya registrado\n");
+            printf("Nombre de producto ya registrado\n");
+    
+            return;
+        }
+     }
+    
     fwrite(&reg_product, sizeof(struct products), 1, ptrArchivo);
     if (fwrite != 0) {
         printf("Escrito correctamente! \n");
