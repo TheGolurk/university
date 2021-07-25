@@ -95,19 +95,79 @@ void add()
 
 void getAll(){
 
-};
+}
 
-void get(){
+void getByID(){
 
-};
+    int opt;
+    int id;
+    char name[50];
+    int  res;
+
+    FILE *ptrArchivo;
+    struct products reg_product;
+
+    ptrArchivo = fopen("products.dat", "r");
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+
+    printf("Introduce la opción a buscar 1.- ID 2.- Nombre: \n");
+    scanf("%d", &opt);
+
+    switch(opt)
+    {
+        case 1:
+            printf("Introduce el id:\n");
+            scanf("%d", &id);
+
+            while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+            {
+                if(id != reg_product.id)
+                {
+                    continue;
+                }
+
+                printf("id = %d name = %s brand = %s mesure = %s quantity = %d buying price = %0.2f sale price = %0.2f\n", 
+                reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+                reg_product.buying_price, reg_product.sale_price);
+            }
+
+            break;
+
+        case 2:
+            printf("Introduce el nombre:\n");
+            scanf("%s", &name);
+
+            while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+            {
+                 res = strcmp(name, reg_product.name_P);
+
+                 if(res == 0)
+                 {   
+                    printf ("id = %d name = %s brand = %s mesure = %s quantity = %d buying price = %0.2f sale price = %0.2f\n", 
+                    reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+                    reg_product.buying_price, reg_product.sale_price);
+                 }
+            }
+        
+            break;
+    
+        default:
+            return;
+    }
+    
+    fclose(ptrArchivo);
+}
 
 void modify(){
 
-};
+}
 
 void getPerQuantity(){
 
-};
+}
 
 //solo mandar a llamar las funciones y la opción de menú
 int main(int argc, char const *argv[])
@@ -116,8 +176,7 @@ int main(int argc, char const *argv[])
     int option;
     while(option != 6) 
     {
-        printf(" 1.-Registar un producto  \n 2.- Consulta de Registro completo \n 3.-Consulta con clave\n");
-        printf(" 4.-Modificar producto\n 5.Consulta por cantidad existente\n 6.-Salir \n");
+        printf(" 1.-Registar un producto  \n 2.- Consulta de Registro completo \n 3.-Consulta con clave/nombre\n 4.-Consulta por cantidad existente \n 5.-Modificar producto\n  6.-Salir \n");
         scanf("%d", &option);
 
         switch(option)
@@ -131,7 +190,7 @@ int main(int argc, char const *argv[])
                 break;
             
             case 3:
-                get();
+                getByID();
                 break;
             
             case 4:
