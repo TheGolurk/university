@@ -87,7 +87,6 @@ void add()
     fclose(ptrArchivo);
 }
 
-
 //consultar todos los productos 
 void getAll(){
     FILE *ptrArchivo;
@@ -168,8 +167,7 @@ void getByID(){
             return;
     }
     fclose(ptrArchivo);
-}
-    
+} 
 
 //consultar por cantidad
 void getPerQuantity(){
@@ -203,7 +201,6 @@ void getPerQuantity(){
 
 //modificar 
 void modify(){
-    
     int iD;
     int option;
     
@@ -219,22 +216,23 @@ void modify(){
     scanf("%d",&iD);
     
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
-            {
-                if(iD != reg_product.id)
-                {
-                    continue;
-                }   
-                printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
-                reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
-                reg_product.buying_price, reg_product.sale_price);
-            }
-            
-            printf("Seleccione la opción a modificar:\n 1.-Nombre\n 2.-Marca\n 3.-Unidad de medida\n 4.-Cantidad disponible del producto\n 5.-Precio de venta\n 6.-Precio de compra\n");
-            scanf("%d", &option);
-            
+    {
+        if(iD != reg_product.id)
+        {
+            continue;
+        }
+
+        fwrite(&reg_product, sizeof(struct products), 1, ptrArchivo);
+        if (fwrite != 0) {
+            printf("Escrito correctamente! \n");
+        }
+
+        printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
+        reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+        reg_product.buying_price, reg_product.sale_price);
+    }         
          
     fclose(ptrArchivo);      
-
 }
 
 //borrar 
