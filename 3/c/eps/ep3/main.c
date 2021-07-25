@@ -122,7 +122,7 @@ void getByID(){
             
             if (id == 0)
             {
-                printf("No se puede buscar ID's eliminados");
+                printf("No se puede buscar ID's eliminados\n");
                 return;
             }
 
@@ -136,8 +136,11 @@ void getByID(){
                 printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
                 reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
                 reg_product.buying_price, reg_product.sale_price);
+                
+                fclose(ptrArchivo);
+                return;
             }
-
+             
             break;
 
         case 2:
@@ -161,13 +164,19 @@ void getByID(){
                     reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
                     reg_product.buying_price, reg_product.sale_price);
                  }
+
+                 fclose(ptrArchivo);
+                 return;
             }
         
             break;
     
         default:
+            printf("Opcion incorrecta \n");
             return;
     }
+
+    printf("No encontrado\n");
     fclose(ptrArchivo);
 } 
 
@@ -188,17 +197,21 @@ void getPerQuantity(){
     scanf("%d", &qty);
     
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
-            {
-                if(qty != reg_product.quantity || reg_product.id == 0)
-                {
-                    continue;
-                }   
-                printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
-                reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
-                reg_product.buying_price, reg_product.sale_price);
-            }
+    {
+        if(qty != reg_product.quantity || reg_product.id == 0)
+        {
+            continue;
+        }   
+        printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %2f\n\n", 
+        reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+        reg_product.buying_price, reg_product.sale_price);
+        
+        fclose(ptrArchivo);
+        return; 
+    }
             
-    fclose(ptrArchivo);      
+    fclose(ptrArchivo);
+    printf("No encontrado\n"); 
 }
 
 //modificar 
@@ -274,8 +287,19 @@ void delete(){
     FILE *ptrArchivo;
     struct products reg_product;
 
+    ptrArchivo = fopen("products.dat", "r+b");
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+
     printf("Introduce un ID a eliminar \n");
     scanf("%d", &ID);
+
+    if (ID == 0) {
+        printf("No se puede eliminar un ID 0\n");
+        return;
+    } 
 
     printf("Que tipo de eliminado quiere? 1.-Logico  2.- Fisico \n");
     scanf("%d", &opt);
