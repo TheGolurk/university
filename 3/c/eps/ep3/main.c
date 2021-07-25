@@ -28,6 +28,7 @@ struct products
     float buying_price;   // precio a como lo compra el dueño
 };
 
+// agregar un nuevoc campo
 void add()
 {
     FILE *ptrArchivo;
@@ -66,7 +67,6 @@ void add()
     fclose(ptrArchivo);
 
 
-    /* Leer todos */
     ptrArchivo = fopen("products.dat", "r");
     if(ptrArchivo == NULL)
     {
@@ -105,6 +105,7 @@ void getAll(){
     
     fclose(ptrArchivo);
 }
+
 //consultar por clave o  nombre
 void getByID(){
     int opt;
