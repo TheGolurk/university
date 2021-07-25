@@ -5,19 +5,13 @@ By: Hernandez Najera Christian & Valle Gonzalez Lorena
 
 
 Los productos del almacén requieren:
+ID(clave)
 nombre del producto
-clave única
 marca
 unidad de medida
 cantidad de existencia
 precio de compra
 precio de venta 
-
-
-TOMAR EN CEUNTA LAS CONSULTAS DE ACUERDO A LA CANTIDAD existente de x producto 
-BORRADO LÓGICO-> Asignar una marca (con un símbolo, etc) a ciertos prodcutos para desarrollar
-la función de habilitar y deshabilitar ( es decir, que no los pueda ver el usuario) 
-BORRADO FÍSICO->Modificar el nombre del producto ingresando la clave y cambiarle los datos pero dejando la clave
 *******************************************************************************/
 #include <stdio.h>
 #include <string.h>
@@ -25,8 +19,8 @@ BORRADO FÍSICO->Modificar el nombre del producto ingresando la clave y cambiarl
 
 struct products
 {
-    int id; // código opción 1 con números, opción 2 con letras
-    char name_P[20];   // nombre del producto, ya sea cemento, varillas, tornillos, etc.
+    int id; // código con números
+    char name_P[20];   // nombre del producto
     char brand[20];    //marca
     char unit_mesure[20]; // unidad de medidad: kg, piezas, m^2, etc.
     int quantity;   // cantidad existente, es decir, cuantas piezas o metros hay de tal prodcuto
@@ -85,7 +79,7 @@ void add()
     {
 
         
-      printf ("id = %d name = %s brand = %s mesure = %s quantity = %d buying price = %0.2f sale price = %0.2f\n", 
+      printf (" ID = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
       reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
       reg_product.buying_price, reg_product.sale_price);
     }
@@ -93,12 +87,28 @@ void add()
     fclose(ptrArchivo);
 }
 
+
+//consultar todos los productos 
 void getAll(){
+    FILE *ptrArchivo;
+    struct products reg_product;
 
+    ptrArchivo = fopen("products.dat", "r");
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+    {
+        printf(" id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
+        reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+        reg_product.buying_price, reg_product.sale_price);
+    }
+    
+    fclose(ptrArchivo);
 }
-
+//consultar por clave o  nombre
 void getByID(){
-
     int opt;
     int id;
     char name[50];
@@ -129,7 +139,7 @@ void getByID(){
                     continue;
                 }
 
-                printf("id = %d name = %s brand = %s mesure = %s quantity = %d buying price = %0.2f sale price = %0.2f\n", 
+                printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
                 reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
                 reg_product.buying_price, reg_product.sale_price);
             }
@@ -146,7 +156,7 @@ void getByID(){
 
                  if(res == 0)
                  {   
-                    printf ("id = %d name = %s brand = %s mesure = %s quantity = %d buying price = %0.2f sale price = %0.2f\n", 
+                    printf ("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
                     reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
                     reg_product.buying_price, reg_product.sale_price);
                  }
@@ -157,26 +167,92 @@ void getByID(){
         default:
             return;
     }
-    
     fclose(ptrArchivo);
 }
+    
 
-void modify(){
-
-}
-
+//consultar por cantidad
 void getPerQuantity(){
+    int qty;
+
+    FILE *ptrArchivo;
+    struct products reg_product;
+
+    ptrArchivo = fopen("products.dat", "r");
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+
+    printf("Introduce la cantidad a buscar: \n");
+    scanf("%d", &qty);
+    
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+            {
+                if(qty != reg_product.quantity)
+                {
+                    continue;
+                }   
+                printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
+                reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+                reg_product.buying_price, reg_product.sale_price);
+            }
+            
+    fclose(ptrArchivo);      
+}
+
+//modificar 
+void modify(){
+    
+    int iD;
+    int option;
+    
+    FILE *ptrArchivo;
+    struct products reg_product;
+
+    ptrArchivo = fopen("products.dat", "r+b");
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+    printf("Ingrese el ID del producto a modificar:\n");
+    scanf("%d",&iD);
+    
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+            {
+                if(iD != reg_product.id)
+                {
+                    continue;
+                }   
+                printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
+                reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+                reg_product.buying_price, reg_product.sale_price);
+            }
+            
+            printf("Seleccione la opción a modificar:\n 1.-Nombre\n 2.-Marca\n 3.-Unidad de medida\n 4.-Cantidad disponible del producto\n 5.-Precio de venta\n 6.-Precio de compra\n");
+            scanf("%d", &option);
+            
+         
+    fclose(ptrArchivo);      
 
 }
 
-//solo mandar a llamar las funciones y la opción de menú
+//borrar 
+void delete(){
+    
+    
+}
+
+
+
+//solo mandar a llamar las funciones y  sección de menú
 int main(int argc, char const *argv[])
 {
    
     int option;
     while(option != 6) 
     {
-        printf(" 1.-Registar un producto  \n 2.- Consulta de Registro completo \n 3.-Consulta con clave/nombre\n 4.-Consulta por cantidad existente \n 5.-Modificar producto\n 6.- Eliminar \n 7.-Salir \n");
+        printf(" 1.-Registar un producto \n 2.- Consulta de Registro completo \n 3.-Consulta con clave/nombre\n 4.-Consulta por cantidad existente \n 5.-Modificar producto\n 6.- Eliminar \n 7.-Salir \n");
         scanf("%d", &option);
 
         switch(option)
@@ -202,7 +278,7 @@ int main(int argc, char const *argv[])
                 break;
             
             case 6:
-                // delete();
+                delete();
                 break;
             
             case 7:
@@ -217,6 +293,8 @@ int main(int argc, char const *argv[])
 
     return 0;
 }
+
+
 
 
 
