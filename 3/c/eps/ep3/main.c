@@ -28,7 +28,6 @@ struct products
     float buying_price;   // precio a como lo compra el dueño
 };
 
-
 void add()
 {
     FILE *ptrArchivo;
@@ -203,6 +202,7 @@ void getPerQuantity(){
 void modify(){
     int iD;
     int option;
+    int index = 0;
     
     FILE *ptrArchivo;
     struct products reg_product;
@@ -219,20 +219,40 @@ void modify(){
     {
         if(iD != reg_product.id)
         {
+            index++;
             continue;
         }
 
-        fwrite(&reg_product, sizeof(struct products), 1, ptrArchivo);
+        fseek(ptrArchivo, (sizeof(reg_product))*index, SEEK_SET);
+        
+        printf("Introduce el nombre del producto a registar:\n");
+        scanf("%s", &reg_product.name_P);
+        
+        printf("Introduce la marca:\n");
+        scanf("%s", &reg_product.brand);
+        
+        printf("Unidad de medida: \n");
+        scanf("%s", &reg_product.unit_mesure);
+        
+        printf("Cantidad disponible del producto:\n");
+        scanf("%d", &reg_product.quantity);
+        
+        printf("Precio de compra: \n");
+        scanf("%f", &reg_product.buying_price);
+        
+        printf("Precio de venta: \n");
+        scanf("%f", &reg_product.sale_price);
+
+        fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
         if (fwrite != 0) {
             printf("Escrito correctamente! \n");
         }
 
-        printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
-        reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
-        reg_product.buying_price, reg_product.sale_price);
+        fclose(ptrArchivo);
+        break;
     }         
          
-    fclose(ptrArchivo);      
+    printf("ID %d no encontrado\n", iD);
 }
 
 //borrar 
@@ -241,14 +261,11 @@ void delete(){
     
 }
 
-
-
 //solo mandar a llamar las funciones y  sección de menú
 int main(int argc, char const *argv[])
 {
-   
     int option;
-    while(option != 6) 
+    while(option != 7) 
     {
         printf(" 1.-Registar un producto \n 2.- Consulta de Registro completo \n 3.-Consulta con clave/nombre\n 4.-Consulta por cantidad existente \n 5.-Modificar producto\n 6.- Eliminar \n 7.-Salir \n");
         scanf("%d", &option);
