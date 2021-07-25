@@ -17,6 +17,8 @@ precio de venta
 #include <string.h>
 #include <stdlib.h>
 
+void getByID(int opt);
+
 struct products
 {
     int id; // código con números
@@ -105,8 +107,7 @@ void getAll(){
 }
 
 //consultar por clave o  nombre
-void getByID(){
-    int opt;
+void getByID(int opt){
     int id;
     char name[50];
     int  res;
@@ -120,8 +121,6 @@ void getByID(){
         return;
     }
 
-    printf("Introduce la opción a buscar 1.- ID 2.- Nombre: \n");
-    scanf("%d", &opt);
 
     switch(opt)
     {
@@ -371,7 +370,12 @@ int main(int argc, char const *argv[])
                 break;
             
             case 3:
-                getByID();
+
+                int opt;
+                printf("Introduce la opción a buscar 1.- ID 2.- Nombre: \n");
+                scanf("%d", &opt);
+
+                getByID(opt);
                 break;
             
             case 4:
