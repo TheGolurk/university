@@ -38,7 +38,7 @@ void add()
     scanf("%d", &reg_product.id);
 
     printf("Introduce el nombre del producto a registar:\n");
-    scanf("%s", &reg_product.name_P);
+    scanf("%s", &reg_product.name_P);  
     
     printf("Introduce la marca:\n");
     scanf("%s", &reg_product.brand);
@@ -60,27 +60,11 @@ void add()
         return;
     }
 
+    //aca. si ya hay un producto igual (id o nombre) no debe permitir guardar y si no todo lo contrario
+
     fwrite(&reg_product, sizeof(struct products), 1, ptrArchivo);
     if (fwrite != 0) {
         printf("Escrito correctamente! \n");
-    }
-    fclose(ptrArchivo);
-
-
-    ptrArchivo = fopen("products.dat", "r");
-    if(ptrArchivo == NULL)
-    {
-        return;
-    }
-    
-    /* recorrer */
-    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
-    {
-
-        
-      printf (" ID = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
-      reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
-      reg_product.buying_price, reg_product.sale_price);
     }
 
     fclose(ptrArchivo);
