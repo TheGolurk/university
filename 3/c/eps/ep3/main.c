@@ -82,6 +82,11 @@ void getAll(){
     }
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
     {
+        if (reg_product.id == 0)
+        {
+            continue;
+        }   
+
         printf(" id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
         reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
         reg_product.buying_price, reg_product.sale_price);
@@ -114,6 +119,12 @@ void getByID(){
         case 1:
             printf("Introduce el id:\n");
             scanf("%d", &id);
+            
+            if (id == 0)
+            {
+                printf("No se puede buscar ID's eliminados");
+                return;
+            }
 
             while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
             {
@@ -132,6 +143,13 @@ void getByID(){
         case 2:
             printf("Introduce el nombre:\n");
             scanf("%s", &name);
+
+            if (strcmp(name, "")==0)
+            {
+                printf("No se puede consultar un nombre vacio\n");
+                return;
+            }
+            
 
             while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
             {
@@ -171,7 +189,7 @@ void getPerQuantity(){
     
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
             {
-                if(qty != reg_product.quantity)
+                if(qty != reg_product.quantity || reg_product.id == 0)
                 {
                     continue;
                 }   
@@ -185,7 +203,7 @@ void getPerQuantity(){
 
 //modificar 
 void modify(){
-    int iD;
+    int ID;
     int option;
     int index = 0;
     
@@ -198,11 +216,18 @@ void modify(){
         return;
     }
     printf("Ingrese el ID del producto a modificar:\n");
-    scanf("%d",&iD);
+    scanf("%d",&ID);
+
+    if (ID == 0)
+    {
+        printf("No se puede modificar un ID eliminado\n");
+        return; 
+    }
+    
     
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
     {
-        if(iD != reg_product.id)
+        if(ID != reg_product.id)
         {
             index++;
             continue;
@@ -237,13 +262,60 @@ void modify(){
         break;
     }         
          
-    printf("ID %d no encontrado\n", iD);
+    printf("ID %d no encontrado\n", ID);
 }
 
 //borrar 
 void delete(){
+    int ID;
+    int opt = 0;
+    int index = 0;
     
-    
+    FILE *ptrArchivo;
+    struct products reg_product;
+
+    printf("Introduce un ID a eliminar \n");
+    scanf("%d", &ID);
+
+    printf("Que tipo de eliminado quiere? 1.-Logico  2.- Fisico \n");
+    scanf("%d", &opt);
+
+    switch (opt)
+    {
+        case 1:
+            
+            while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+            {
+                if(ID != reg_product.id)
+                {
+                    index++;
+                    continue;
+                }
+
+                fseek(ptrArchivo, (sizeof(reg_product))*index, SEEK_SET);
+                reg_product.id = 0; // Inhabilitado    
+            
+                fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
+                if (fwrite != 0) {
+                    printf("Escrito correctamente! \n");
+                }
+
+                fclose(ptrArchivo);
+                break;
+            }
+            printf("Borrado correctamente");  
+
+            break;
+
+        case 2:
+            
+            break;
+        
+        default:
+            printf("Opcion incorrecta\n");
+            return;
+    }
+
 }
 
 //solo mandar a llamar las funciones y  sección de menú
