@@ -32,7 +32,7 @@ struct products
 void add()
 {   
     FILE *ptrArchivo;
-    ptrArchivo = fopen("products.dat", "r+b");
+    ptrArchivo = fopen("products.dat", "a+");
     if (ptrArchivo == NULL) {
         return;
     }
@@ -212,12 +212,11 @@ void getPerQuantity(int qty){
 
 //modificar 
 void modify(int opt, int ID){
-  
     int index = 0;
     FILE *ptrArchivo;
     struct products reg_product;
 
-    ptrArchivo = fopen("products.dat", "r+b");
+    ptrArchivo = fopen("products.dat", "a+");
     if(ptrArchivo == NULL)
     {
         return;
@@ -283,7 +282,8 @@ void logical_deletion(struct products reg_product, int ID, FILE *ptrArchivo, int
         reg_product.id = 0; // Inhabilitado    
             
         fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
-        if (fwrite != 0) {
+        if (fwrite == 0) {
+            printf("No se pudo borrar logicamente\n");
             return;
         }
 
@@ -293,17 +293,17 @@ void logical_deletion(struct products reg_product, int ID, FILE *ptrArchivo, int
     return;
 }
 
-void physical_deletion(struct products reg_product, FILE *ptrArchivo, FILE *tmp, int index) {
+void physical_deletion(struct products reg_product, FILE *ptrArchivo, FILE *tmp) {
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
     {
         if(reg_product.id == 0)
         {
-            index++;
             continue;
         }
                     
         fwrite(&reg_product, sizeof(reg_product), 1, tmp);
         if (fwrite == 0) {
+            printf("No se pudo borrar logicamente\n");
             return;
         }
     }
@@ -321,13 +321,13 @@ void delete(int opt, int ID){
 
     struct products reg_product;
 
-    ptrArchivo = fopen("products.dat", "r+b");
+    ptrArchivo = fopen("products.dat", "a+");
     if(ptrArchivo == NULL)
     {
         return;
     }
 
-    tmp = fopen("products.tmp.dat", "r+b");
+    tmp = fopen("products.tmp.dat", "a+");
     if(tmp == NULL)
     {
         return;
@@ -337,7 +337,6 @@ void delete(int opt, int ID){
         printf("No se puede eliminar un ID 0\n");
         return;
     } 
-
 
     switch (opt)
     {
@@ -355,24 +354,18 @@ void delete(int opt, int ID){
                 reg_product.id = 0; // Inhabilitado    
             
                 fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
-                if (fwrite != 0) {
-                    printf("Escrito correctamente! \n");
-                }
-
                 fclose(ptrArchivo);
                 break;
             }
-            printf("Borrado correctamente");  
-
+            
+            printf("Borrado correctamente\n");  
             break;
 
         case 2:
             
             logical_deletion(reg_product, ID, ptrArchivo, index);
-            printf("No se pudo borrar \n");
       
-            physical_deletion(reg_product, ptrArchivo, tmp, index);
-            printf("No se pudo borrar \n");
+            physical_deletion(reg_product, ptrArchivo, tmp);
 
             fclose(ptrArchivo);
             fclose(tmp);
