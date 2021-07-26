@@ -186,8 +186,8 @@ void getByID(int opt){
 } 
 
 //consultar por cantidad
-void getPerQuantity(){
-    int qty;
+void getPerQuantity(int qty){
+    
 
     FILE *ptrArchivo;
     struct products reg_product;
@@ -197,9 +197,6 @@ void getPerQuantity(){
     {
         return;
     }
-
-    printf("Introduce la cantidad a buscar: \n");
-    scanf("%d", &qty);
     
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
     {
@@ -220,11 +217,10 @@ void getPerQuantity(){
 }
 
 //modificar 
-void modify(){
-    int ID;
-    int option;
-    int index = 0;
+void modify(int ID){
     
+    int opt = 0;
+    int index = 0;
     FILE *ptrArchivo;
     struct products reg_product;
 
@@ -233,8 +229,6 @@ void modify(){
     {
         return;
     }
-    printf("Ingrese el ID del producto a modificar:\n");
-    scanf("%d",&ID);
 
     if (ID == 0)
     {
@@ -284,12 +278,12 @@ void modify(){
 }
 
 //borrar 
-void delete(){
-    int ID;
-    int opt = 0;
+void delete(int opt=0, int ID){
     int index = 0;
     
     FILE *ptrArchivo;
+    FILE *tmp;
+
     struct products reg_product;
 
     ptrArchivo = fopen("products.dat", "r+b");
@@ -298,16 +292,17 @@ void delete(){
         return;
     }
 
-    printf("Introduce un ID a eliminar \n");
-    scanf("%d", &ID);
+    tmp = fopen("products.tmp.dat", "r+b");
+    if(tmp == NULL)
+    {
+        return;
+    }
 
     if (ID == 0) {
         printf("No se puede eliminar un ID 0\n");
         return;
     } 
 
-    printf("Que tipo de eliminado quiere? 1.-Logico  2.- Fisico \n");
-    scanf("%d", &opt);
 
     switch (opt)
     {
@@ -338,6 +333,22 @@ void delete(){
 
         case 2:
             
+            int rlog = logical_deletion(reg_product, ID, ptrArchivo, index);
+            if (rlog != 1) {
+                printf("No se pudo borrar \n");
+            }
+            
+            int rphy = physical_deletion(reg_product, ptrArchivo, tmp, index);
+            if (rphy != 1) {
+                printf("No se pudo borrar \n");
+            }
+
+            fclose(ptrArchivo);
+            fclose(tmp);
+
+            remove("products.dat");
+		    rename("products.tmp.dat", "products.dat");
+            
             break;
         
         default:
@@ -347,11 +358,55 @@ void delete(){
 
 }
 
+int logical_deletion(reg_product struct products, int ID, ptrArchivo *FILE, int index) {
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+    {
+        if(ID != reg_product.id)
+        {
+            index++;
+            continue;
+        }
+
+        fseek(ptrArchivo, (sizeof(reg_product))*index, SEEK_SET);
+        reg_product.id = 0; // Inhabilitado    
+            
+        fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
+        if (fwrite != 0) {
+            return 1;
+        }
+
+        return 0;
+    }
+    
+    return 0;
+}
+
+int physical_deletion(reg_product struct products, ptrArchivo *FILE, tmp *FILE, int index) {
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+    {
+        if(reg_product.id == 0)
+        {
+            index++;
+            continue;
+        }
+                    
+        fwrite(&reg_product, sizeof(reg_product), 1, tmp);
+        if (fwrite == 0) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
 //solo mandar a llamar las funciones y  sección de menú
 int main(int argc, char const *argv[])
 {
     int option;
     int opt;
+    int qty;
+    int ID;
+    int opt = 0;
 
     while(option != 7) 
     {
@@ -377,15 +432,31 @@ int main(int argc, char const *argv[])
                 break;
             
             case 4:
-                getPerQuantity();
+
+                printf("Introduce la cantidad a buscar: \n");
+                scanf("%d", &qty);
+
+                getPerQuantity(qty);
                 break;
             
             case 5:
-                modify();
+
+                printf("Ingrese el ID del producto a modificar:\n");
+                scanf("%d",&ID);
+    
+                modify(ID);
                 break;
             
             case 6:
-                delete();
+
+                printf("Que tipo de eliminado quiere? 1.-Logico  2.- Fisico \n");
+                scanf("%d", &opt);
+
+                printf("Ingrese el ID del producto a eliminar:\n");
+                scanf("%d", &ID);
+                
+                delete(opt, ID);
+                
                 break;
             
             case 7:
