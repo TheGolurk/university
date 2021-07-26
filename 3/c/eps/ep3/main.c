@@ -32,6 +32,11 @@ struct products
 void add()
 {   
     FILE *ptrArchivo;
+    ptrArchivo = fopen("products.dat", "r+b");
+    if (ptrArchivo == NULL) {
+        return;
+    }
+
     struct products reg_product,reg;
 
     printf("Asignación de clave para el producto:\n");
@@ -54,11 +59,6 @@ void add()
     
     printf("Precio de venta: \n");
     scanf("%f", &reg_product.sale_price);
-
-    ptrArchivo = fopen("products.dat", "r+b");
-    if (ptrArchivo == NULL) {
-        return;
-    }
 
      while(fread(&reg, sizeof(struct products), 1, ptrArchivo))
      {
@@ -187,8 +187,6 @@ void getByID(int opt){
 
 //consultar por cantidad
 void getPerQuantity(int qty){
-    
-
     FILE *ptrArchivo;
     struct products reg_product;
 
@@ -207,13 +205,9 @@ void getPerQuantity(int qty){
         printf("id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %2f\n\n", 
         reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
         reg_product.buying_price, reg_product.sale_price);
-        
-        fclose(ptrArchivo);
-        return; 
     }
             
     fclose(ptrArchivo);
-    printf("No encontrado\n"); 
 }
 
 //modificar 
@@ -276,6 +270,48 @@ void modify(int opt, int ID){
     printf("ID %d no encontrado\n", ID);
 }
 
+void logical_deletion(struct products reg_product, int ID, FILE *ptrArchivo, int index) {
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+    {
+        if(ID != reg_product.id)
+        {
+            index++;
+            continue;
+        }
+
+        fseek(ptrArchivo, (sizeof(reg_product))*index, SEEK_SET);
+        reg_product.id = 0; // Inhabilitado    
+            
+        fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
+        if (fwrite != 0) {
+            return;
+        }
+
+        return;
+    }
+    
+    return;
+}
+
+void physical_deletion(struct products reg_product, FILE *ptrArchivo, FILE *tmp, int index) {
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+    {
+        if(reg_product.id == 0)
+        {
+            index++;
+            continue;
+        }
+                    
+        fwrite(&reg_product, sizeof(reg_product), 1, tmp);
+        if (fwrite == 0) {
+            return;
+        }
+    }
+
+    return;
+}
+
+
 //borrar 
 void delete(int opt, int ID){
     int index = 0;
@@ -332,15 +368,11 @@ void delete(int opt, int ID){
 
         case 2:
             
-            int rlog = logical_deletion(reg_product, ID, ptrArchivo, index);
-            if (rlog != 1) {
-                printf("No se pudo borrar \n");
-            }
-            
-            int rphy = physical_deletion(reg_product, ptrArchivo, tmp, index);
-            if (rphy != 1) {
-                printf("No se pudo borrar \n");
-            }
+            logical_deletion(reg_product, ID, ptrArchivo, index);
+            printf("No se pudo borrar \n");
+      
+            physical_deletion(reg_product, ptrArchivo, tmp, index);
+            printf("No se pudo borrar \n");
 
             fclose(ptrArchivo);
             fclose(tmp);
@@ -357,55 +389,15 @@ void delete(int opt, int ID){
 
 }
 
-int logical_deletion(struct products reg_product , int ID, FILE *ptrArchivo, int index) {
-    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
-    {
-        if(ID != reg_product.id)
-        {
-            index++;
-            continue;
-        }
-
-        fseek(ptrArchivo, (sizeof(reg_product))*index, SEEK_SET);
-        reg_product.id = 0; // Inhabilitado    
-            
-        fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
-        if (fwrite != 0) {
-            return 1;
-        }
-
-        return 0;
-    }
-    
-    return 0;
-}
-
-int physical_deletion(struct products reg_product, FILE *ptrArchivo, FILE *tmp, int index) {
-    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
-    {
-        if(reg_product.id == 0)
-        {
-            index++;
-            continue;
-        }
-                    
-        fwrite(&reg_product, sizeof(reg_product), 1, tmp);
-        if (fwrite == 0) {
-            return 0;
-        }
-    }
-
-    return 1;
-}
 
 //solo mandar a llamar las funciones y  sección de menú
 int main(int argc, char const *argv[])
 {
     int option;
-    int opt;
+    int opt = 0;
     int qty;
     int ID;
-    int opt = 0;
+
 
     while(option != 7) 
     {
@@ -441,7 +433,7 @@ int main(int argc, char const *argv[])
             case 5:
 
                 printf("Ingrese el ID del producto a modificar:\n");
-                scanf("%d",&ID);
+                scanf("%d", &ID);
     
                 modify(opt,ID);
                 break;
