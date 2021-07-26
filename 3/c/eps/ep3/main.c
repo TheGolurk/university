@@ -216,7 +216,7 @@ void modify(int opt, int ID){
     FILE *ptrArchivo;
     struct products reg_product;
 
-    ptrArchivo = fopen("products.dat", "a+");
+    ptrArchivo = fopen("products.dat", "r+b");
     if(ptrArchivo == NULL)
     {
         return;
@@ -271,7 +271,7 @@ void modify(int opt, int ID){
 
 void logical_deletion(struct products reg_product, int ID, FILE *ptrArchivo, int index) {
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
-    {
+    {   
         if(ID != reg_product.id)
         {
             index++;
@@ -282,12 +282,13 @@ void logical_deletion(struct products reg_product, int ID, FILE *ptrArchivo, int
         reg_product.id = 0; // Inhabilitado    
             
         fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
+
         if (fwrite == 0) {
             printf("No se pudo borrar logicamente\n");
             return;
         }
 
-        return;
+        break;
     }
     
     return;
@@ -321,15 +322,11 @@ void delete(int opt, int ID){
 
     struct products reg_product;
 
-    ptrArchivo = fopen("products.dat", "a+");
-    if(ptrArchivo == NULL)
+    ptrArchivo = fopen("products.dat", "r+b");
+    tmp = fopen("products.tmp.dat", "wb");
+    if(tmp == NULL || ptrArchivo == NULL)
     {
-        return;
-    }
-
-    tmp = fopen("products.tmp.dat", "a+");
-    if(tmp == NULL)
-    {
+        printf("No se pudo abrir el archivo \n");
         return;
     }
 
@@ -341,22 +338,9 @@ void delete(int opt, int ID){
     switch (opt)
     {
         case 1:
-            
-            while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
-            {
-                if(ID != reg_product.id)
-                {
-                    index++;
-                    continue;
-                }
 
-                fseek(ptrArchivo, (sizeof(reg_product))*index, SEEK_SET);
-                reg_product.id = 0; // Inhabilitado    
-            
-                fwrite(&reg_product, sizeof(reg_product), 1, ptrArchivo);
-                fclose(ptrArchivo);
-                break;
-            }
+            logical_deletion(reg_product, ID, ptrArchivo, index);
+            fclose(ptrArchivo);
             
             printf("Borrado correctamente\n");  
             break;
@@ -364,11 +348,10 @@ void delete(int opt, int ID){
         case 2:
             
             logical_deletion(reg_product, ID, ptrArchivo, index);
-      
-            physical_deletion(reg_product, ptrArchivo, tmp);
 
-            fclose(ptrArchivo);
+            physical_deletion(reg_product, ptrArchivo, tmp);
             fclose(tmp);
+            fclose(ptrArchivo);
 
             remove("products.dat");
 		    rename("products.tmp.dat", "products.dat");
