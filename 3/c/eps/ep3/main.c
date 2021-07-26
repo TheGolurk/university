@@ -348,10 +348,13 @@ void delete(int opt, int ID){
         case 2:
             
             logical_deletion(reg_product, ID, ptrArchivo, index);
+            fclose(ptrArchivo);
 
+            ptrArchivo = fopen("products.dat", "r+b");
             physical_deletion(reg_product, ptrArchivo, tmp);
             fclose(tmp);
             fclose(ptrArchivo);
+
 
             remove("products.dat");
 		    rename("products.tmp.dat", "products.dat");
