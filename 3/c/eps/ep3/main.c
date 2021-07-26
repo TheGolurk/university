@@ -217,9 +217,8 @@ void getPerQuantity(int qty){
 }
 
 //modificar 
-void modify(int ID){
-    
-    int opt = 0;
+void modify(int opt, int ID){
+  
     int index = 0;
     FILE *ptrArchivo;
     struct products reg_product;
@@ -278,7 +277,7 @@ void modify(int ID){
 }
 
 //borrar 
-void delete(int opt=0, int ID){
+void delete(int opt, int ID){
     int index = 0;
     
     FILE *ptrArchivo;
@@ -358,7 +357,7 @@ void delete(int opt=0, int ID){
 
 }
 
-int logical_deletion(reg_product struct products, int ID, ptrArchivo *FILE, int index) {
+int logical_deletion(struct products reg_product , int ID, FILE *ptrArchivo, int index) {
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
     {
         if(ID != reg_product.id)
@@ -381,7 +380,7 @@ int logical_deletion(reg_product struct products, int ID, ptrArchivo *FILE, int 
     return 0;
 }
 
-int physical_deletion(reg_product struct products, ptrArchivo *FILE, tmp *FILE, int index) {
+int physical_deletion(struct products reg_product, FILE *ptrArchivo, FILE *tmp, int index) {
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
     {
         if(reg_product.id == 0)
@@ -444,7 +443,7 @@ int main(int argc, char const *argv[])
                 printf("Ingrese el ID del producto a modificar:\n");
                 scanf("%d",&ID);
     
-                modify(ID);
+                modify(opt,ID);
                 break;
             
             case 6:
