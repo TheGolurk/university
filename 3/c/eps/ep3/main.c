@@ -314,7 +314,7 @@ void logical_deletion(struct products reg_product, int ID, FILE *ptrArchivo, int
     return;
 }
 
-void physical_deletion(struct products reg_product, FILE *ptrArchivo, int ID, int index) {
+void physical_deletion(struct products reg_product, FILE *ptrArchivo, FILE *ptrEscribir, int ID, int index) {
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
     {
         if(reg_product.id != ID)
@@ -324,11 +324,7 @@ void physical_deletion(struct products reg_product, FILE *ptrArchivo, int ID, in
         }
 
         fseek(ptrArchivo, (sizeof(reg_product))*index, SEEK_SET);
-        fwrite(NULL, sizeof(reg_product), 1 , ptrArchivo);
-        if (fwrite == 0) {
-            printf("No se pudo borrar Fisicamente\n");
-            return;
-        }
+        
 
         break;
     }
@@ -341,17 +337,9 @@ void delete(int opt, int ID){
     int index = 0;
     
     FILE *ptrArchivo;
-    FILE *tmp;
+    FILE *ptrEscribir;
 
     struct products reg_product;
-
-    ptrArchivo = fopen("products.dat", "r+b");
-    tmp = fopen("products.tmp.dat", "wb");
-    if(tmp == NULL || ptrArchivo == NULL)
-    {
-        printf("No se pudo abrir el archivo \n");
-        return;
-    }
 
     if (ID == 0) {
         printf("No se puede eliminar un ID 0\n");
@@ -362,6 +350,13 @@ void delete(int opt, int ID){
     {
         case 1:
 
+            ptrArchivo = fopen("products.dat", "r+b");
+            if(ptrArchivo == NULL)
+            {
+                printf("No se pudo abrir el archivo \n");
+                return;
+            }
+
             logical_deletion(reg_product, ID, ptrArchivo, index);
             fclose(ptrArchivo);
             
@@ -370,8 +365,19 @@ void delete(int opt, int ID){
 
         case 2:
 
-            physical_deletion(reg_product, ptrArchivo, ID, index);
+            ptrArchivo = fopen("products.dat", "r");
+            ptrEscribir = fopen("products.dat", "r+");
+            if(ptrArchivo == NULL || ptrEscribir)
+            {
+                printf("No se pudo abrir el archivo \n");
+                return;
+            }
+
+            physical_deletion(reg_product, ptrArchivo, ptrEscribir, ID, index);
             fclose(ptrArchivo);
+            fclose(ptrEscribir);
+
+            _showAll();
             
             break;
         
