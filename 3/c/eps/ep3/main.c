@@ -104,6 +104,26 @@ void getAll(){
     fclose(ptrArchivo);
 }
 
+void _showAll() {
+    FILE *ptrArchivo;
+    struct products reg_product;
+
+    ptrArchivo = fopen("products.dat", "r");
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+    while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
+    {  
+        printf(" id = %d\n name = %s\n brand = %s\n mesure = %s\n quantity = %d\n buying price = %0.2f\n sale price = %0.2f\n\n", 
+        reg_product.id, reg_product.name_P, reg_product.brand, reg_product.unit_mesure, reg_product. quantity,
+        reg_product.buying_price, reg_product.sale_price);
+    }
+    
+    fclose(ptrArchivo);
+}
+
+
 //consultar por clave o  nombre
 void getByID(int opt){
     int id;
@@ -294,24 +314,27 @@ void logical_deletion(struct products reg_product, int ID, FILE *ptrArchivo, int
     return;
 }
 
-void physical_deletion(struct products reg_product, FILE *ptrArchivo, FILE *tmp) {
+void physical_deletion(struct products reg_product, FILE *ptrArchivo, int ID, int index) {
     while(fread(&reg_product, sizeof(struct products), 1, ptrArchivo))
     {
-        if(reg_product.id == 0)
+        if(reg_product.id != ID)
         {
+            index++;
             continue;
         }
-                    
-        fwrite(&reg_product, sizeof(reg_product), 1, tmp);
+
+        fseek(ptrArchivo, (sizeof(reg_product))*index, SEEK_SET);
+        fwrite(NULL, sizeof(reg_product), 1 , ptrArchivo);
         if (fwrite == 0) {
-            printf("No se pudo borrar logicamente\n");
+            printf("No se pudo borrar Fisicamente\n");
             return;
         }
+
+        break;
     }
 
     return;
 }
-
 
 //borrar 
 void delete(int opt, int ID){
@@ -346,18 +369,9 @@ void delete(int opt, int ID){
             break;
 
         case 2:
-            
-            logical_deletion(reg_product, ID, ptrArchivo, index);
+
+            physical_deletion(reg_product, ptrArchivo, ID, index);
             fclose(ptrArchivo);
-
-            ptrArchivo = fopen("products.dat", "r+b");
-            physical_deletion(reg_product, ptrArchivo, tmp);
-            fclose(tmp);
-            fclose(ptrArchivo);
-
-
-            remove("products.dat");
-		    rename("products.tmp.dat", "products.dat");
             
             break;
         
@@ -441,8 +455,3 @@ int main(int argc, char const *argv[])
 
     return 0;
 }
-
-
-
-
-
