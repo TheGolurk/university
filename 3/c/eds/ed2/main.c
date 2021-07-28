@@ -35,6 +35,7 @@ void to_file(int rows, int columns, int values[][2]) {
     if (fwrite != 0) {
         printf("Escrito correctamente! \n");
     }
+    fclose(file_meta);
 
     for (size_t i = 0; i < rows; i++)
     {
@@ -50,7 +51,6 @@ void to_file(int rows, int columns, int values[][2]) {
         
     }
     
-    fclose(file_meta);
     fclose(file_data);
 }
 
