@@ -9,14 +9,12 @@ struct arr_data_meta {
 
 struct arr_data
 {
-    int values[10000][10000];
+    int value;
 };
 
-void to_file(int rows, int columns, int values[][]) {
+void to_file(int rows, int columns, int values[][2]) {
     struct arr_data_meta meta;
-    struct arr_data arr_data_data;
-    
-    memcpy(arr_data_data.values, values, sizeof(values));
+    struct arr_data data;
 
     FILE *file_meta;
     FILE *file_data;
@@ -38,21 +36,25 @@ void to_file(int rows, int columns, int values[][]) {
         printf("Escrito correctamente! \n");
     }
 
-    fclose(file_meta);
-
     for (size_t i = 0; i < rows; i++)
     {
         for (size_t j = 0; j < columns; j++)
         {
-            //fwrite(*values[i][j], sizeof(values), 1, file_data);
-            printf("%d", arr_data_data.values[i][j]);
-        }        
+            data.value = values[i][j];
+            
+            fwrite(&meta, sizeof(struct arr_data_meta), 1, file_meta);
+            if (fwrite == 0) {
+                printf("Hubo un error escribiendo! \n");
+            }
+        }
+        
     }
-
+    
+    fclose(file_meta);
     fclose(file_data);
 }
 
-void average(int rows, int columns, int values[][]) {
+void average(int rows, int columns, int values[][2]) {
 
 }
 
