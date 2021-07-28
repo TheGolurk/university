@@ -20,7 +20,7 @@ void to_file(int rows, int columns, int values[][2]) {
     FILE *file_data;
 
     file_meta = fopen("file_meta.bin", "a+");
-    file_meta = fopen("file_data.bin", "a+");
+    file_data = fopen("file_data.bin", "a+");
 
     if (file_meta == NULL || file_data == NULL)
     {
@@ -35,7 +35,7 @@ void to_file(int rows, int columns, int values[][2]) {
     if (fwrite != 0) {
         printf("Escrito correctamente! \n");
     }
-    fclose(file_meta);
+    fclose(file_meta);  
 
     for (size_t i = 0; i < rows; i++)
     {
@@ -43,14 +43,14 @@ void to_file(int rows, int columns, int values[][2]) {
         {
             data.value = values[i][j];
             
-            fwrite(&meta, sizeof(struct arr_data_meta), 1, file_meta);
+            fwrite(&data, sizeof(struct arr_data_meta), 1, file_data);
             if (fwrite == 0) {
                 printf("Hubo un error escribiendo! \n");
             }
         }
         
     }
-    
+
     fclose(file_data);
 }
 
