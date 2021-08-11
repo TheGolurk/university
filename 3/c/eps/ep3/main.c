@@ -32,40 +32,19 @@ struct products
 void add()
 {   
     FILE *ptrArchivo;
-    ptrArchivo = fopen("products.dat", "a+");
+    ptrArchivo = fopen("vuelos.dat", "a+");
     if (ptrArchivo == NULL) {
         return;
     }
 
     struct products reg_product,reg;
 
-    printf("Asignación de clave para el producto:\n");
-    scanf("%d", &reg_product.id);
-
-    printf("Introduce el nombre del producto a registar:\n");
-    scanf("%s", &reg_product.name_P);  
-    
-    printf("Introduce la marca:\n");
-    scanf("%s", &reg_product.brand);
-    
-    printf("Unidad de medida: \n");
-    scanf("%s", &reg_product.unit_mesure);
-    
-    printf("Cantidad disponible del producto:\n");
-    scanf("%d", &reg_product.quantity);
-    
-    printf("Precio de compra: \n");
-    scanf("%f", &reg_product.buying_price);
-    
-    printf("Precio de venta: \n");
-    scanf("%f", &reg_product.sale_price);
-
      while(fread(&reg, sizeof(struct products), 1, ptrArchivo))
      {
         if(reg_product.id == reg.id  ||  strcmp(reg_product.name_P, reg.name_P) == 0)
         {
             printf("Clave ya registrado\n");
-            printf("Nombre de producto ya registrado\n");
+            printf("Horario de vuelo ya registrado\n");
     
             return;
         }
