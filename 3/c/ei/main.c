@@ -100,8 +100,6 @@ void add_flight() {
 
 void modify_seat() {
 
-
-
 }
 
 void flights() {
@@ -116,8 +114,7 @@ void flights() {
 
     while(fread(&reg_flights, sizeof(struct tickets),1,ptrArchivo))
     {
-        printf("ID: %d\n  Origin: %s\n Destiny:%s\n  Date:%d\n  Time:%d\n ",reg_flights.ID,reg_flights.origin, reg_flights.origin, reg_flights.destiny, reg_flights.date, reg_flights.time_f, reg_flights.);
-
+        printf("ID: %d\n  Origin: %s\n Destiny:%s\n  Date:%d\n  Time:%d\n ",reg_flights.ID,reg_flights.origin, reg_flights.origin, reg_flights.destiny, reg_flights.date, reg_flights.time_f);
     }
 
     fclose(ptrArchivo);
