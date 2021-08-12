@@ -41,7 +41,7 @@ int available_flights(int ID) {
     ptrArchivo= fopen ("vuelos.dat","r");
     if(ptrArchivo == NULL)
     {
-        return;
+        return -1;
     }
     
     while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
@@ -118,45 +118,47 @@ void add_seat() {
     fclose(ptrArchivo);
 
     // Restamos uno a los asientos disponibles
-    FILE *ptrArchivo;
-    ptrArchivo= fopen ("vuelos.dat","r+b");
+    FILE *ptrArchivo_seat;
+    ptrArchivo_seat = fopen ("vuelos.dat","r+b");
     struct flight reg_flights;
 
-    if(ptrArchivo == NULL)
+    if(ptrArchivo_seat == NULL)
     {
         return;
     }
 
-    while(fread(&reg_flights, sizeof(struct flight), 1, ptrArchivo))
+    while(fread(&reg_flights, sizeof(struct flight), 1, ptrArchivo_seat))
     {
         if(reg_passenger.id_flight != reg_flights.ID)
         {
             continue;
         }
 
-        fseek(ptrArchivo, (sizeof(reg_flights)), SEEK_SET);
+        fseek(ptrArchivo_seat, (sizeof(reg_flights)), SEEK_SET);
         reg_flights.available = reg_flights.available - 1;
         
-        fwrite(&reg_flights, sizeof(reg_flights), 1, ptrArchivo);
+        fwrite(&reg_flights, sizeof(reg_flights), 1, ptrArchivo_seat);
         break;
     }
 
-    fclose(ptrArchivo);
+    fclose(ptrArchivo_seat);
 }
 
 //agregar vuelo del pasajero
 void add_flight() {
-    
     FILE *ptrArchivo;
-    ptrArchivo= fopen ("vuelos.dat","a+");
+    ptrArchivo = fopen ("vuelos.dat","a+");
     
     FILE *ptrArchivo_seats;
     ptrArchivo_seats = fopen ("pasajeros.dat","a+");
 
-    if(ptrArchivo == NULL || ptrArchivo_seats)
+    if(ptrArchivo == NULL || ptrArchivo_seats == NULL)
     {
+        printf("No se puedo abrir el archivo \n");
         return;
     }
+
+    int check = 0;
     
     struct flight reg_flights, reg;
     struct passenger pass;
@@ -175,18 +177,18 @@ void add_flight() {
     scanf("%d", &reg_flights.date);
     
     printf("Hora:\n");
-    scanf("%f", &reg_flights.time_f);
+    scanf("%0.2f", &reg_flights.time_f);
 
     reg_flights.available = available_size;
 
     while(fread(&reg, sizeof(struct flight), 1, ptrArchivo))
     {
-
+        check = 1;
         if(reg_flights.ID == reg.ID || reg_flights.date ==reg.date || reg_flights.time_f == reg.time_f)
         {
 
-            printf("Buscando si existen vuelos...\n");
-            continue;
+            printf("ID o Fecha ya utilizados\n");
+            break;
         }
 
         fwrite(&reg_flights, sizeof(struct flight), 1, ptrArchivo);
@@ -198,6 +200,13 @@ void add_flight() {
             printf("ERROR");
         }
     }
+    
+    if (check = 0)
+    {
+        fwrite(&reg_flights, sizeof(struct flight), 1, ptrArchivo);
+    }
+    
+
     fclose(ptrArchivo);
 
     // Agregar los boletos para el vuelo 
@@ -354,13 +363,13 @@ void available_s(int *available_seats[max_size], int *size) {
     while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
     {
         if (flights.available > 0) {
-            available_seats[index] = flights.ID;
+            *available_seats[index] = flights.ID;
             index++;
         }
     }
 
     fclose(ptrArchivo);
-    size = index;
+    *size = index;
 }
 
 void get_seats(int available_seats[max_size], int size) {
@@ -387,79 +396,84 @@ void get_seats(int available_seats[max_size], int size) {
 
 int main(int argc, char const *argv[])
 {
-    int option;
+    int option = 0;
     int ID;
     int avalaible_flights[max_size];
     int size;
 
-    printf("1.- Agregar un vuelo \n2- Agregar un asiento \n 3.- Modificar un vuelo \n4.- Modificar informacion de asiento vendido \n 5.- Consultar informacion de un asiento\n");
-    printf("6.- Consultar informacion completa de un vuelo \n7.- Consultar asientos disponibles en todos los vuelos \n 8.- Salir \n");
-    scanf("%d", &option);
-
-    switch(option)
+    while (option != 8)
     {
-        case 1:
-            add_flight();
-            break;
+        
+        printf("1.- Agregar un vuelo \n2- Agregar un asiento \n3.- Modificar un vuelo \n4.- Modificar informacion de asiento vendido \n5.- Consultar informacion de un asiento\n");
+        printf("6.- Consultar informacion completa de un vuelo \n7.- Consultar asientos disponibles en todos los vuelos \n8.- Salir \n");
+        scanf("%d", &option);
 
-        case 2:
-            add_seat();
+        switch(option)
+        {
+            case 1:
+                add_flight();
+                break;
 
-            break;
+            case 2:
+                add_seat();
 
-        case 3:
+                break;
 
-            printf("Ingrese el ID del vuelo a modificar:\n");
-            scanf("%d", &ID);
+            case 3:
 
-            modify_sold(ID);
+                printf("Ingrese el ID del vuelo a modificar:\n");
+                scanf("%d", &ID);
 
-            break;
+                modify_sold(ID);
 
-        case 4:
+                break;
 
-            printf("Ingrese el ID del asiento a modificar:\n");
-            scanf("%d", &ID);
-            
-            modify_seat(ID);
+            case 4:
 
-            break;
-            
-        case 5:
+                printf("Ingrese el ID del asiento a modificar:\n");
+                scanf("%d", &ID);
+                
+                modify_seat(ID);
 
-            printf("Ingrese el ID del asiento \n");
-            scanf("%d", &ID);
+                break;
+                
+            case 5:
 
-            get_seat(ID);
+                printf("Ingrese el ID del asiento \n");
+                scanf("%d", &ID);
 
-            break;
+                get_seat(ID);
 
-        case 6:
+                break;
 
-            printf("Ingrese el ID del vuelo \n");
-            scanf("%d", &ID);
-            inf_complete_flight(ID);
+            case 6:
 
-            break;
+                printf("Ingrese el ID del vuelo \n");
+                scanf("%d", &ID);
+                inf_complete_flight(ID);
 
-        case 7:
+                break;
 
-            available_s(*available_flights, &size);
-            get_seats(available_flights, size);
+            case 7:
 
-            break;
+                available_s(*available_flights, &size);
+                get_seats(available_flights, size);
 
-        case 8:
+                break;
 
-            printf("Adios");
-            break;
+            case 8:
 
-        default:
-            printf("Opcion incorrecta\n");
-            return;
-    
+                printf("Adios");
+                break;
+
+            default:
+                printf("Opcion incorrecta\n");
+                option = 0;
+                break;
+        
+        }
+
     }
-
 
     return 0;
 }
