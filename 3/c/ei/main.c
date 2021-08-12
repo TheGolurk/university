@@ -161,7 +161,7 @@ void add_flight() {
     struct flight reg_flights, reg;
     struct passenger pass;
 
-    printf("Introducir ID único de vuelo:\n ");
+    printf("Introducir ID unico de vuelo:\n ");
     scanf("%d", &reg_flights.ID);
     
     printf("Lugar de Origen:\n");
@@ -209,7 +209,6 @@ void add_flight() {
         fwrite(&pass, sizeof(struct passenger), 1, ptrArchivo_seats);
     }
         
-
     fclose(ptrArchivo_seats);
 }
  
@@ -354,7 +353,7 @@ void available_s(int *available_seats[max_size], int *size) {
     
     while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
     {
-        if (flights.available < 0) {
+        if (flights.available > 0) {
             available_seats[index] = flights.ID;
             index++;
         }
@@ -369,16 +368,18 @@ void get_seats(int available_seats[max_size], int size) {
     ptrArchivo= fopen ("vuelos.dat","r");
 
     struct passenger _passenger;
-
-    int index = 0;
     
     while(fread(&_passenger, sizeof(struct passenger), 1,ptrArchivo))
     {
-        if (available_seats[index] == _passenger.id_flight && _passenger.available == 0)
+        
+        for (size_t i = 0; i < size; i++)
         {
-            printf("Vuelo %d y asiento %d cuenta con disponibilidad", _passenger.id_flight, _passenger.id_seat);
+            if (available_seats[i] == _passenger.id_flight && _passenger.available == 0)
+            {
+                printf("Vuelo %d y asiento %d cuenta con disponibilidad", _passenger.id_flight, _passenger.id_seat);
+            }
         }
-        index++;
+        
     }
     
 }
