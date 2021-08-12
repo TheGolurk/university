@@ -403,7 +403,7 @@ int main(int argc, char const *argv[])
 
     while (option != 8)
     {
-        
+        fflush(stdin);
         printf("1.- Agregar un vuelo \n2- Agregar un asiento \n3.- Modificar un vuelo \n4.- Modificar informacion de asiento vendido \n5.- Consultar informacion de un asiento\n");
         printf("6.- Consultar informacion completa de un vuelo \n7.- Consultar asientos disponibles en todos los vuelos \n8.- Salir \n");
         scanf("%d", &option);
