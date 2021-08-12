@@ -13,7 +13,7 @@ By:Hernández Nájera Christian & Valle González Lorena
 #define available_size 30
 #define max_size 9999
 
-// TODO: raname all the structs names of tickets to flights or whatever fuck, also rename wrong function names
+// TODO: rename all the structs names of tickets to flights or whatever fuck, also rename wrong function names
 // When another seat is added, available should have the value of = n - 1 
 
 
@@ -141,24 +141,85 @@ void add_flight() {
 }
 
 
-
-//modificar vuelos
-void modify_sold() {
+//AQUI REALIZAR
+//modificar vuelos vendidos
+void modify_sold(int id) 
+{
     FILE *ptrArchivo;
     ptrArchivo= fopen ("vuelos.dat","r+b");
+    struct tickets reg_flights;
+
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+
+    while(fread(&reg_flights, sizeof(struct tickets), 1, ptrArchivo))
+    {
+        if(id != reg_flights.ID)
+        {
+            printf("ID no encontrado");
+            continue;
+        }
+    
+        fseek(ptrArchivo, (sizeof(reg_flights)), SEEK_SET);
         
+        printf(" Nuevo Lugar de Origen:\n");
+        scanf("%s", &reg_flights.origin);
+        
+        printf("Nuevo Lugar de Destino: \n");
+        scanf("%s", &reg_flights.destiny);
+        
+        printf("NUEVO HORARIO DE VUELO:\n\n");
+        printf("Fecha:\n");
+        scanf("%d", &reg_flights.date);
+        
+        printf("Hora:\n");
+        scanf("%f", &reg_flights.time_f);
+
+        fwrite(&reg_flights, sizeof(reg_flights), 1, ptrArchivo);
+
+
+        if (fwrite != 0) 
+        {
+            printf("MODIFICADO CORECTAMENTE! \n");
+        }
+        fclose(ptrArchivo);
+        break;
+    }         
+         
 }
 
 
-
+//AQUÍ REALIZAR
 //modificar asiento
-void modify_seat() {
+void modify_seat(int id_s) 
+{
     FILE *ptrArchivo;
     ptrArchivo= fopen ("pasajeros.dat","r+b");
 
+    struct passenger reg_passenger;
+
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+
+    while(fread(&reg_passenger, sizeof(struct products), 1, ptrArchivo))
+    {
+        if(id_s != reg_passenger.id_seat)
+        {
+            continue;
+        }
+     fseek(ptrArchivo, (sizeof(reg_passenger)), SEEK_SET);
+
+        printf("Nombre del pasajero:\n");
+        scanf("%s", &reg_passenger.name);
+        
+        printf("Introducir identificador de vuelo:\n");
+        scanf("%d", &reg_passenger.id_flight);
+    }
 }
-
-
 
 // consultar información de un asiento
 void get_seat(int ID) {
@@ -175,7 +236,7 @@ void get_seat(int ID) {
     {
         if (ID == _passenger.id_seat)
         {
-            printf("ID asiento: %d, ID del vuelo: %d, nombre: %d", _passenger.id_seat, _passenger.id_flight, _passenger.name);
+            printf("ID asiento: %d, ID del vuelo: %d, Nombre: %d", _passenger.id_seat, _passenger.id_flight, _passenger.name);
             break;
         }
     }
@@ -244,6 +305,8 @@ int main(int argc, char const *argv[])
 {
     int option;
     int ID;
+    int id;
+    int id_s
 
 
     printf("1.- Agregar un vuelo \n2- Agregar un asiento \n 3.- Modificar un vuelo \n4.- Modificar informacion de asiento vendido \n 5.- Consultar informacion de un asiento\n");
@@ -262,13 +325,20 @@ int main(int argc, char const *argv[])
             break;
 
         case 3:
-            modify_sold();
+
+            printf("Ingrese el ID del vuelo a modificar:\n");
+            scanf("%d", &id);
+
+            modify_sold(id);
 
             break;
 
         case 4:
 
-            modify_seat();
+            printf("Ingrese el ID del asiento a modificar:\n");
+            scanf("%d", &id_s);
+            
+            modify_seat(id_s);
 
             break;
             
