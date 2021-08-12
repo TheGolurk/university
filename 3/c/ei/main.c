@@ -10,12 +10,8 @@ By:Hernández Nájera Christian & Valle González Lorena
 #include <stdlib.h>
 #include <string.h>
 
-#define available_size 30
+#define available_size 20
 #define max_size 9999
-
-// TODO: rename all the structs names of tickets to flights or whatever fuck, also rename wrong function names
-// When another seat is added, available should have the value of = n - 1 
-
 
 struct flight
 {
@@ -32,6 +28,7 @@ struct passenger
     char*name[max_size]; //nombre del pasajero
     int id_flight;   //identificador de vuelo
     int id_seat; // identificador único de asiento 
+    int available;
 };
 
 
@@ -77,11 +74,12 @@ void add_seat() {
     
     struct passenger reg_passenger, pass;
 
+    int vuelo = 0;
     printf("Nombre del pasajero:\n");
     scanf("%s", &reg_passenger.name);
     
     printf("Introducir identificador de vuelo:\n");
-    scanf("%d", &reg_passenger.id_flight);
+    scanf("%d", &vuelo);
     
     printf(" Introducir identificador único de asiento:\n");
     scanf("%d", &reg_passenger.id_seat);
@@ -95,7 +93,7 @@ void add_seat() {
     int res = 0;
     while(fread(&pass, sizeof(struct passenger), 1, ptrArchivo))
     {
-        if(reg_passenger.id_flight != pass.id_flight && reg_passenger.id_seat != pass.id_seat)
+        if(vuelo != pass.id_flight && reg_passenger.id_seat != pass.id_seat && pass.available == 0)
         {
             res = 1;
         } else {
@@ -104,6 +102,7 @@ void add_seat() {
     }
 
     if (res == 1) {
+        reg_passenger.available = 1;
         fwrite(&reg_passenger, sizeof(struct passenger), 1,ptrArchivo);
         if(fwrite !=0)
         {
@@ -150,13 +149,17 @@ void add_flight() {
     
     FILE *ptrArchivo;
     ptrArchivo= fopen ("vuelos.dat","a+");
+    
+    FILE *ptrArchivo_seats;
+    ptrArchivo_seats = fopen ("pasajeros.dat","a+");
 
-    if(ptrArchivo == NULL)
+    if(ptrArchivo == NULL || ptrArchivo_seats)
     {
         return;
     }
     
     struct flight reg_flights, reg;
+    struct passenger pass;
 
     printf("Introducir ID único de vuelo:\n ");
     scanf("%d", &reg_flights.ID);
@@ -173,8 +176,8 @@ void add_flight() {
     
     printf("Hora:\n");
     scanf("%f", &reg_flights.time_f);
-    
 
+    reg_flights.available = available_size;
 
     while(fread(&reg, sizeof(struct flight), 1, ptrArchivo))
     {
@@ -195,8 +198,19 @@ void add_flight() {
             printf("ERROR");
         }
     }
-
     fclose(ptrArchivo);
+
+    // Agregar los boletos para el vuelo 
+    for (size_t i = 0; i < reg_flights.available; i++)
+    {
+        pass.id_flight = reg_flights.ID;
+        // Available: 0 esta libre, 1 esta ocupado.
+        pass.available = 0;
+        fwrite(&pass, sizeof(struct passenger), 1, ptrArchivo_seats);
+    }
+        
+
+    fclose(ptrArchivo_seats);
 }
  
 
@@ -273,8 +287,7 @@ void modify_seat(int id_s)
         printf("Nombre del pasajero:\n");
         scanf("%s", &reg_passenger.name);
         
-        printf("Introducir identificador de vuelo:\n");
-        scanf("%d", &reg_passenger.id_flight);
+        fwrite(&reg_passenger, sizeof(struct passenger), 1, ptrArchivo);
     }
 }
 
