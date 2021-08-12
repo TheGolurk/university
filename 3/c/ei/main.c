@@ -339,11 +339,12 @@ void inf_complete_flight(int ID) {
 }
 
 
-
 // consultar asientos disponibles en todos los vuelos
-void available_s() {
+void available_s(int *available_seats[max_size], int *size) {
     FILE *ptrArchivo;
     struct flight flights;
+
+    int index = 0;
 
     ptrArchivo= fopen ("pasajeros.dat","r");
     if(ptrArchivo == NULL)
@@ -353,20 +354,33 @@ void available_s() {
     
     while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
     {
-        printf("Vuelo: %d cuenta con %d asientos disponibles", flights.ID, flights.available);
+        if (flights.available < 0) {
+            available_seats[index] = flights.ID;
+            index++;
+        }
     }
 
     fclose(ptrArchivo);
-    
-
+    size = index;
 }
 
-void get_seats() {
+void get_seats(int available_seats[max_size], int size) {
     FILE *ptrArchivo;
     ptrArchivo= fopen ("vuelos.dat","r");
-    
 
-    // What's the point of this function? If the previous function you can see the seats available per flight, 
+    struct passenger _passenger;
+
+    int index = 0;
+    
+    while(fread(&_passenger, sizeof(struct passenger), 1,ptrArchivo))
+    {
+        if (available_seats[index] == _passenger.id_flight && _passenger.available == 0)
+        {
+            printf("Vuelo %d y asiento %d cuenta con disponibilidad", _passenger.id_flight, _passenger.id_seat);
+        }
+        index++;
+    }
+    
 }
 
 
@@ -374,6 +388,8 @@ int main(int argc, char const *argv[])
 {
     int option;
     int ID;
+    int avalaible_flights[max_size];
+    int size;
 
     printf("1.- Agregar un vuelo \n2- Agregar un asiento \n 3.- Modificar un vuelo \n4.- Modificar informacion de asiento vendido \n 5.- Consultar informacion de un asiento\n");
     printf("6.- Consultar informacion completa de un vuelo \n7.- Consultar asientos disponibles en todos los vuelos \n 8.- Salir \n");
@@ -427,8 +443,8 @@ int main(int argc, char const *argv[])
 
         case 7:
 
-            available_s();
-            get_seats();
+            available_s(*available_flights, &size);
+            get_seats(available_flights, size);
 
             break;
 
