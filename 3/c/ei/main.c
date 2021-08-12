@@ -17,7 +17,7 @@ By:Hernández Nájera Christian & Valle González Lorena
 // When another seat is added, available should have the value of = n - 1 
 
 
-struct tickets
+struct flight
 {
     int ID;  //identificador único de vuelo
     char origin[max_size];   //lugar de origen
@@ -34,6 +34,36 @@ struct passenger
     int id_seat; // identificador único de asiento 
 };
 
+
+int available_flights(int ID) {
+    FILE *ptrArchivo;
+    struct flight flights;
+
+    int available_seats = 0;
+
+    ptrArchivo= fopen ("vuelos.dat","r");
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+    
+    while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
+    {
+        if (ID == flights.ID)
+        {
+            if (flights.available == 0)
+            {
+                available_seats = 0;
+            } else {
+                available_seats = flights.available;
+            }
+            break;
+        }
+    }
+
+    fclose(ptrArchivo);
+    return available_seats;
+}
 
 //agregar un asiento
 void add_seat() {
@@ -56,6 +86,12 @@ void add_seat() {
     printf(" Introducir identificador único de asiento:\n");
     scanf("%d", &reg_passenger.id_seat);
     
+    int av = available_flights(reg_passenger.id_flight);
+    if (av == 0) {
+        printf("Ya no hay asientos disponibles para ese vuelo\n");
+        return;
+    }
+
     int res = 0;
     while(fread(&pass, sizeof(struct passenger), 1, ptrArchivo))
     {
@@ -76,11 +112,38 @@ void add_seat() {
         else{
             printf("ERROR");
         }
+    } else {
+        printf("El asiento esta ocupado\n");
+    }
+
+    fclose(ptrArchivo);
+
+    // Restamos uno a los asientos disponibles
+    FILE *ptrArchivo;
+    ptrArchivo= fopen ("vuelos.dat","r+b");
+    struct flight reg_flights;
+
+    if(ptrArchivo == NULL)
+    {
+        return;
+    }
+
+    while(fread(&reg_flights, sizeof(struct flight), 1, ptrArchivo))
+    {
+        if(reg_passenger.id_flight != reg_flights.ID)
+        {
+            continue;
+        }
+
+        fseek(ptrArchivo, (sizeof(reg_flights)), SEEK_SET);
+        reg_flights.available = reg_flights.available - 1;
+        
+        fwrite(&reg_flights, sizeof(reg_flights), 1, ptrArchivo);
+        break;
     }
 
     fclose(ptrArchivo);
 }
-
 
 //agregar vuelo del pasajero
 void add_flight() {
@@ -93,8 +156,7 @@ void add_flight() {
         return;
     }
     
-    
-    struct tickets reg_flights, reg;
+    struct flight reg_flights, reg;
 
     printf("Introducir ID único de vuelo:\n ");
     scanf("%d", &reg_flights.ID);
@@ -114,20 +176,17 @@ void add_flight() {
     
 
 
-    while(fread(&reg, sizeof(struct tickets), 1, ptrArchivo))
+    while(fread(&reg, sizeof(struct flight), 1, ptrArchivo))
     {
 
         if(reg_flights.ID == reg.ID || reg_flights.date ==reg.date || reg_flights.time_f == reg.time_f)
         {
 
-            printf("ID único de vuelo ya registrado\n");
-            printf("Horario de vuelo  ya registrado\n");
-            
-            return;
+            printf("Buscando si existen vuelos...\n");
+            continue;
         }
 
-        fwrite(&reg_flights, sizeof(struct tickets), 1, ptrArchivo);
-
+        fwrite(&reg_flights, sizeof(struct flight), 1, ptrArchivo);
         if(fwrite !=0)
         {
             printf("Escrito correctamente\n");
@@ -139,7 +198,7 @@ void add_flight() {
 
     fclose(ptrArchivo);
 }
-
+ 
 
 //AQUI REALIZAR
 //modificar vuelos vendidos
@@ -147,18 +206,17 @@ void modify_sold(int id)
 {
     FILE *ptrArchivo;
     ptrArchivo= fopen ("vuelos.dat","r+b");
-    struct tickets reg_flights;
+    struct flight reg_flights;
 
     if(ptrArchivo == NULL)
     {
         return;
     }
 
-    while(fread(&reg_flights, sizeof(struct tickets), 1, ptrArchivo))
+    while(fread(&reg_flights, sizeof(struct flight), 1, ptrArchivo))
     {
         if(id != reg_flights.ID)
         {
-            printf("ID no encontrado");
             continue;
         }
     
@@ -178,7 +236,6 @@ void modify_sold(int id)
         scanf("%f", &reg_flights.time_f);
 
         fwrite(&reg_flights, sizeof(reg_flights), 1, ptrArchivo);
-
 
         if (fwrite != 0) 
         {
@@ -205,13 +262,13 @@ void modify_seat(int id_s)
         return;
     }
 
-    while(fread(&reg_passenger, sizeof(struct products), 1, ptrArchivo))
+    while(fread(&reg_passenger, sizeof(struct passenger), 1, ptrArchivo))
     {
         if(id_s != reg_passenger.id_seat)
         {
             continue;
         }
-     fseek(ptrArchivo, (sizeof(reg_passenger)), SEEK_SET);
+        fseek(ptrArchivo, (sizeof(reg_passenger)), SEEK_SET);
 
         printf("Nombre del pasajero:\n");
         scanf("%s", &reg_passenger.name);
@@ -245,11 +302,10 @@ void get_seat(int ID) {
 }
 
 
-
 //consultar información completa de un vuelo 
 void inf_complete_flight(int ID) {
     FILE *ptrArchivo;
-    struct tickets flights;
+    struct flight flights;
 
     ptrArchivo= fopen ("vuelos.dat","r");
     if(ptrArchivo == NULL)
@@ -257,7 +313,7 @@ void inf_complete_flight(int ID) {
         return;
     }
     
-    while(fread(&flights, sizeof(struct tickets), 1,ptrArchivo))
+    while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
     {
         if (ID == flights.ID)
         {
@@ -274,7 +330,7 @@ void inf_complete_flight(int ID) {
 // consultar asientos disponibles en todos los vuelos
 void available_s() {
     FILE *ptrArchivo;
-    struct tickets flights;
+    struct flight flights;
 
     ptrArchivo= fopen ("pasajeros.dat","r");
     if(ptrArchivo == NULL)
@@ -282,7 +338,7 @@ void available_s() {
         return;
     }
     
-    while(fread(&flights, sizeof(struct tickets), 1,ptrArchivo))
+    while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
     {
         printf("Vuelo: %d cuenta con %d asientos disponibles", flights.ID, flights.available);
     }
@@ -305,9 +361,6 @@ int main(int argc, char const *argv[])
 {
     int option;
     int ID;
-    int id;
-    int id_s
-
 
     printf("1.- Agregar un vuelo \n2- Agregar un asiento \n 3.- Modificar un vuelo \n4.- Modificar informacion de asiento vendido \n 5.- Consultar informacion de un asiento\n");
     printf("6.- Consultar informacion completa de un vuelo \n7.- Consultar asientos disponibles en todos los vuelos \n 8.- Salir \n");
@@ -327,18 +380,18 @@ int main(int argc, char const *argv[])
         case 3:
 
             printf("Ingrese el ID del vuelo a modificar:\n");
-            scanf("%d", &id);
+            scanf("%d", &ID);
 
-            modify_sold(id);
+            modify_sold(ID);
 
             break;
 
         case 4:
 
             printf("Ingrese el ID del asiento a modificar:\n");
-            scanf("%d", &id_s);
+            scanf("%d", &ID);
             
-            modify_seat(id_s);
+            modify_seat(ID);
 
             break;
             
@@ -353,6 +406,8 @@ int main(int argc, char const *argv[])
 
         case 6:
 
+            printf("Ingrese el ID del vuelo \n");
+            scanf("%d", &ID);
             inf_complete_flight(ID);
 
             break;
