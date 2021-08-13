@@ -131,7 +131,7 @@ void add_seat() {
     index = 0;
     while(fread(&reg_flights, sizeof(struct flight), 1, ptrArchivo_seat))
     {
-        if(reg_passenger.id_flight != reg_flights.ID)
+        if(vuelo!= reg_flights.ID)
         {
             index++;
             continue;
@@ -139,7 +139,7 @@ void add_seat() {
 
         fseek(ptrArchivo_seat, (sizeof(reg_flights))*index, SEEK_SET);
 
-        reg_flights.available = 1000000000;      
+        reg_flights.available = reg_flights.available - 1;      
         fwrite(&reg_flights, sizeof(struct flight), 1, ptrArchivo_seat);
         break;
     }
