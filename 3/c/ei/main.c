@@ -95,10 +95,11 @@ void add_seat() {
     int res = 0;
     while(fread(&pass, sizeof(struct passenger), 1, ptrArchivo))
     {
-        fseek(ptrArchivo, (sizeof(pass))*index, SEEK_SET);
-        //printf("%d %d %d %d %d \n", vuelo, pass.id_flight, reg_passenger.id_seat, pass.id_seat, pass.available);
+        printf("%d %d %d %d %d \n", vuelo, pass.id_flight, reg_passenger.id_seat, pass.id_seat, pass.available);
         if(vuelo == pass.id_flight && reg_passenger.id_seat != pass.id_seat && pass.available == 0)
         {
+            fseek(ptrArchivo, (sizeof(pass))*index, SEEK_SET);
+
             reg_passenger.available = 1;
             fwrite(&reg_passenger, sizeof(struct passenger), 1,ptrArchivo);
             if(fwrite !=0)
@@ -123,6 +124,7 @@ void add_seat() {
 
     if(ptrArchivo_seat == NULL)
     {
+        printf("No se pudo abrir el archivo\n");
         return;
     }
 
@@ -136,9 +138,9 @@ void add_seat() {
         }
 
         fseek(ptrArchivo_seat, (sizeof(reg_flights))*index, SEEK_SET);
-        reg_flights.available = reg_flights.available - 1;
-        
-        fwrite(&reg_flights, sizeof(reg_flights), 1, ptrArchivo_seat);
+
+        reg_flights.available = 1000000000;      
+        fwrite(&reg_flights, sizeof(struct flight), 1, ptrArchivo_seat);
         break;
     }
 
