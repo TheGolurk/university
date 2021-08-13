@@ -365,7 +365,7 @@ void available_s(int *available_seats[max_size], int *size) {
 
     int index = 0;
 
-    ptrArchivo= fopen ("pasajeros.dat","r");
+    ptrArchivo= fopen ("vuelos.dat","r");
     if(ptrArchivo == NULL)
     {
         return;
@@ -374,34 +374,42 @@ void available_s(int *available_seats[max_size], int *size) {
     while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
     {
         if (flights.available > 0) {
-            *available_seats[index] = flights.ID;
+            available_seats[index] = flights.ID;
             index++;
         }
     }
 
     fclose(ptrArchivo);
-    *size = index;
+   *size = index;
 }
 
 void get_seats(int available_seats[max_size], int size) {
     FILE *ptrArchivo;
-    ptrArchivo= fopen ("vuelos.dat","r");
+    ptrArchivo = fopen ("pasajeros.dat","r");
 
+    if (ptrArchivo == NULL)
+    {
+        printf("No se pudo abrir \n");
+        return;
+    }
+    
+    int index = 1;
     struct passenger _passenger;
     
     while(fread(&_passenger, sizeof(struct passenger), 1,ptrArchivo))
     {
-        
         for (size_t i = 0; i < size; i++)
         {
             if (available_seats[i] == _passenger.id_flight && _passenger.available == 0)
             {
-                printf("Vuelo %d y asiento %d cuenta con disponibilidad", _passenger.id_flight, _passenger.id_seat);
+                printf("Vuelo %d y asiento numero %d sin ID %d cuenta con disponibilidad\n", _passenger.id_flight, index, _passenger.id_seat);
             }
         }
         
+        index++;
     }
-    
+
+    fclose(ptrArchivo);   
 }
 
 
@@ -409,8 +417,8 @@ int main(int argc, char const *argv[])
 {
     int option = 0;
     int ID;
-    int avalaible_flights[max_size];
-    int size;
+    int *avalaible_flights_arr[max_size];
+    int *size;
 
     while (option != 8)
     {
@@ -467,8 +475,15 @@ int main(int argc, char const *argv[])
 
             case 7:
 
-                available_s(*available_flights, &size);
-                get_seats(available_flights, size);
+                available_s(&avalaible_flights_arr, &size);
+
+                if (size == 0)
+                {
+                    printf("No hay informacion \n");
+                    break;
+                }
+                                
+                get_seats(avalaible_flights_arr, size);
 
                 break;
 
