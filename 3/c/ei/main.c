@@ -177,7 +177,7 @@ void add_flight() {
     scanf("%d", &reg_flights.date);
     
     printf("Hora:\n");
-    scanf("%0.2f", &reg_flights.time_f);
+    scanf("%f", &reg_flights.time_f);
 
     reg_flights.available = available_size;
 
