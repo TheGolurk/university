@@ -46,7 +46,6 @@ int available_flights(int ID) {
     
     while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
     {
-        printf("%d %d \n",ID, flights.ID, flights.available);
         if (ID == flights.ID)
         {
             if (flights.available == 0)
@@ -95,7 +94,6 @@ void add_seat() {
     int res = 0;
     while(fread(&pass, sizeof(struct passenger), 1, ptrArchivo))
     {
-        printf("%d %d %d %d %d \n", vuelo, pass.id_flight, reg_passenger.id_seat, pass.id_seat, pass.available);
         if(vuelo == pass.id_flight && reg_passenger.id_seat != pass.id_seat && pass.available == 0)
         {
             fseek(ptrArchivo, (sizeof(pass))*index, SEEK_SET);
@@ -254,6 +252,9 @@ void modify_sold(int id)
     
         fseek(ptrArchivo, (sizeof(reg_flights))*index, SEEK_SET);
         
+        reg_flights.ID = reg_flights.ID;
+        reg_flights.available = reg_flights.available;
+
         printf("Nuevo Lugar de Origen:\n");
         scanf("%s", &reg_flights.origin);
         
@@ -325,7 +326,7 @@ void get_seat(int ID) {
     {
         if (ID == _passenger.id_seat)
         {
-            printf("ID asiento: %d, ID del vuelo: %d, Nombre: %s", _passenger.id_seat, _passenger.id_flight, _passenger.name);
+            printf("ID asiento: %d, ID del vuelo: %d, Nombre: %s \n", _passenger.id_seat, _passenger.id_flight, _passenger.name);
             break;
         }
     }
