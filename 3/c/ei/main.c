@@ -46,6 +46,7 @@ int available_flights(int ID) {
     
     while(fread(&flights, sizeof(struct flight), 1,ptrArchivo))
     {
+        printf("%d %d \n",ID, flights.ID, flights.available);
         if (ID == flights.ID)
         {
             if (flights.available == 0)
@@ -65,7 +66,7 @@ int available_flights(int ID) {
 //agregar un asiento
 void add_seat() {
     FILE *ptrArchivo;
-    ptrArchivo= fopen ("pasajeros.dat","a+");
+    ptrArchivo= fopen ("pasajeros.dat","r+b");
 
     if(ptrArchivo == NULL)
     {
@@ -84,35 +85,33 @@ void add_seat() {
     printf(" Introducir identificador único de asiento:\n");
     scanf("%d", &reg_passenger.id_seat);
     
-    int av = available_flights(reg_passenger.id_flight);
+    int av = available_flights(vuelo);
     if (av == 0) {
         printf("Ya no hay asientos disponibles para ese vuelo\n");
         return;
     }
 
+    int index = 0;
     int res = 0;
     while(fread(&pass, sizeof(struct passenger), 1, ptrArchivo))
     {
-        if(vuelo != pass.id_flight && reg_passenger.id_seat != pass.id_seat && pass.available == 0)
+        fseek(ptrArchivo, (sizeof(pass))*index, SEEK_SET);
+        //printf("%d %d %d %d %d \n", vuelo, pass.id_flight, reg_passenger.id_seat, pass.id_seat, pass.available);
+        if(vuelo == pass.id_flight && reg_passenger.id_seat != pass.id_seat && pass.available == 0)
         {
-            res = 1;
-        } else {
-            res = 0;
-        }   
-    }
+            reg_passenger.available = 1;
+            fwrite(&reg_passenger, sizeof(struct passenger), 1,ptrArchivo);
+            if(fwrite !=0)
+            {
+                printf("Escrito correctamente\n");
+            }
+            else{
+                printf("ERROR");
+            }
+            break;
+        }
 
-    if (res == 1) {
-        reg_passenger.available = 1;
-        fwrite(&reg_passenger, sizeof(struct passenger), 1,ptrArchivo);
-        if(fwrite !=0)
-        {
-            printf("Escrito correctamente\n");
-        }
-        else{
-            printf("ERROR");
-        }
-    } else {
-        printf("El asiento esta ocupado\n");
+        index++;
     }
 
     fclose(ptrArchivo);
@@ -127,14 +126,16 @@ void add_seat() {
         return;
     }
 
+    index = 0;
     while(fread(&reg_flights, sizeof(struct flight), 1, ptrArchivo_seat))
     {
         if(reg_passenger.id_flight != reg_flights.ID)
         {
+            index++;
             continue;
         }
 
-        fseek(ptrArchivo_seat, (sizeof(reg_flights)), SEEK_SET);
+        fseek(ptrArchivo_seat, (sizeof(reg_flights))*index, SEEK_SET);
         reg_flights.available = reg_flights.available - 1;
         
         fwrite(&reg_flights, sizeof(reg_flights), 1, ptrArchivo_seat);
@@ -186,13 +187,12 @@ void add_flight() {
         check = 1;
         if(reg_flights.ID == reg.ID || reg_flights.date ==reg.date || reg_flights.time_f == reg.time_f)
         {
-
             printf("ID o Fecha ya utilizados\n");
             break;
         }
 
         fwrite(&reg_flights, sizeof(struct flight), 1, ptrArchivo);
-        if(fwrite !=0)
+        if(fwrite != 0)
         {
             printf("Escrito correctamente\n");
         }
@@ -201,12 +201,18 @@ void add_flight() {
         }
     }
     
-    if (check = 0)
+    if (check == 0)
     {
         fwrite(&reg_flights, sizeof(struct flight), 1, ptrArchivo);
+        if(fwrite != 0)
+        {
+            printf("Escrito correctamente\n");
+        }
+        else{
+            printf("ERROR");
+        }
     }
     
-
     fclose(ptrArchivo);
 
     // Agregar los boletos para el vuelo 
@@ -328,7 +334,7 @@ void inf_complete_flight(int ID) {
     FILE *ptrArchivo;
     struct flight flights;
 
-    ptrArchivo= fopen ("vuelos.dat","r");
+    ptrArchivo= fopen("vuelos.dat","r");
     if(ptrArchivo == NULL)
     {
         return;
