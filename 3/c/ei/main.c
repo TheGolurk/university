@@ -293,13 +293,15 @@ void modify_seat(int id_s)
         return;
     }
 
+    int index = 0;
     while(fread(&reg_passenger, sizeof(struct passenger), 1, ptrArchivo))
     {
         if(id_s != reg_passenger.id_seat)
         {
+            index++;
             continue;
         }
-        fseek(ptrArchivo, (sizeof(reg_passenger)), SEEK_SET);
+        fseek(ptrArchivo, (sizeof(reg_passenger))*index, SEEK_SET);
 
         printf("Nombre del pasajero:\n");
         scanf("%s", &reg_passenger.name);
@@ -323,7 +325,7 @@ void get_seat(int ID) {
     {
         if (ID == _passenger.id_seat)
         {
-            printf("ID asiento: %d, ID del vuelo: %d, Nombre: %d", _passenger.id_seat, _passenger.id_flight, _passenger.name);
+            printf("ID asiento: %d, ID del vuelo: %d, Nombre: %s", _passenger.id_seat, _passenger.id_flight, _passenger.name);
             break;
         }
     }
