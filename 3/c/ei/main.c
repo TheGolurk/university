@@ -243,16 +243,18 @@ void modify_sold(int id)
         return;
     }
 
+    int index = 0;
     while(fread(&reg_flights, sizeof(struct flight), 1, ptrArchivo))
     {
         if(id != reg_flights.ID)
         {
+            index++;
             continue;
         }
     
-        fseek(ptrArchivo, (sizeof(reg_flights)), SEEK_SET);
+        fseek(ptrArchivo, (sizeof(reg_flights))*index, SEEK_SET);
         
-        printf(" Nuevo Lugar de Origen:\n");
+        printf("Nuevo Lugar de Origen:\n");
         scanf("%s", &reg_flights.origin);
         
         printf("Nuevo Lugar de Destino: \n");
@@ -265,8 +267,7 @@ void modify_sold(int id)
         printf("Hora:\n");
         scanf("%f", &reg_flights.time_f);
 
-        fwrite(&reg_flights, sizeof(reg_flights), 1, ptrArchivo);
-
+        fwrite(&reg_flights, sizeof(struct flight), 1, ptrArchivo);
         if (fwrite != 0) 
         {
             printf("MODIFICADO CORECTAMENTE! \n");
