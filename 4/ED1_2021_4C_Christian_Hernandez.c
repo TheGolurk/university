@@ -11,7 +11,7 @@ ED1
 
 struct Word {
     char Letter;
-    struct Word *next;
+    struct Word *Next;
 };
 
 struct Employee {
@@ -23,6 +23,7 @@ struct Employee {
 int main(int argc, char const *argv[])
 {
     int opt = 0;
+    struct Word Queue;
     
     while (opt != 4)
     {
@@ -40,8 +41,17 @@ int main(int argc, char const *argv[])
         case 2:
 
 	        char str[100];
+            char charAt;
         	printf("Enter a word");
             scanf("%s", &str);
+
+
+            int i = 0;
+	        while((charAt = str[i]) != '\0')
+	        {
+		        push(&Queue, charAt);
+		        i++;
+	        }
 
             break;
 
@@ -63,3 +73,16 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
+struct Word* getNode()
+{
+	struct Word *newNode = (struct Word*)malloc(sizeof(struct Word));
+	return newNode;
+}
+
+void push(struct Word *queue, char item)
+{
+	struct Word another = *queue;
+	queue = getNode();
+	queue->Letter = item;
+	queue->Next = &another;
+}
