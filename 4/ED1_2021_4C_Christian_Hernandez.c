@@ -19,11 +19,16 @@ struct Employee {
     char CURP[18];
 };
 
+struct Word* getNode();
+
+void push(struct Word *queue, char item);
+
+void readQueue(struct Word *queue);
 
 int main(int argc, char const *argv[])
 {
     int opt = 0;
-    struct Word Queue;
+    struct Word *Queue;
     
     while (opt != 4)
     {
@@ -42,9 +47,8 @@ int main(int argc, char const *argv[])
 
 	        char str[100];
             char charAt;
-        	printf("Enter a word");
+        	printf("Enter a word: \n");
             scanf("%s", &str);
-
 
             int i = 0;
 	        while((charAt = str[i]) != '\0')
@@ -52,6 +56,8 @@ int main(int argc, char const *argv[])
 		        push(&Queue, charAt);
 		        i++;
 	        }
+
+            readQueue(Queue);
 
             break;
 
@@ -85,4 +91,15 @@ void push(struct Word *queue, char item)
 	queue = getNode();
 	queue->Letter = item;
 	queue->Next = &another;
+}
+
+void readQueue(struct Word *queue){
+    if(queue == NULL){
+        printf ("Doesn't exist \n");
+    }else{
+        while(queue != NULL){
+            printf ("%c ->", queue->Letter);
+            queue = queue->Next;
+        }
+    }    
 }
