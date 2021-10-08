@@ -17,7 +17,8 @@ struct Word {
 struct Employee {
     char Name[100];
     char CURP[18];
-}; 
+};
+
 
 int main(int argc, char const *argv[])
 {
@@ -37,7 +38,11 @@ int main(int argc, char const *argv[])
             break;
         
         case 2:
-            printf("2 \n");
+
+	        char str[100];
+        	printf("Enter a word");
+            scanf("%s", &str);
+
             break;
 
         case 3:
@@ -57,3 +62,4 @@ int main(int argc, char const *argv[])
 
     return 0;
 }
+
