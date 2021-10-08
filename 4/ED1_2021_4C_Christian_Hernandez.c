@@ -8,6 +8,8 @@ ED1
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
 
 struct Word {
     char Letter;
@@ -124,8 +126,8 @@ void insert(char Name[100], char CURP[18], struct Employee **start, struct Emplo
         return;
     }
 
-    new->Name = Name;
-    new->CURP = CURP;
+    strcpy(new->Name, Name);
+    strcpy(new->CURP, CURP);
     new->prev = NULL;
     new->next = *start;
 
