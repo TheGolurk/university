@@ -17,6 +17,8 @@ struct Word {
 struct Employee {
     char Name[100];
     char CURP[18];
+    struct Employee *prev;
+    struct Employee *next;
 };
 
 struct Word* getNode();
@@ -25,10 +27,14 @@ void push(struct Word *queue, char item);
 
 void readQueue(struct Word *queue);
 
+void insert(char Name[100], char CURP[18], struct Employee **start, struct Employee **finish);
+
 int main(int argc, char const *argv[])
 {
     int opt = 0;
     struct Word *Queue;
+    struct Employee *e1 = NULL, *e2 = NULL;
+    char Name[100], CURP[18];
     
     while (opt != 4)
     {
@@ -40,7 +46,13 @@ int main(int argc, char const *argv[])
         switch (opt)
         {
         case 1:
-            printf("1 \n");
+            printf("Name \n");
+            scanf("%s", &Name);
+            printf("CURP \n");
+            scanf("%s", &CURP);
+
+            insert(Name, CURP, &e1, &e2);
+
             break;
         
         case 2:
@@ -102,4 +114,25 @@ void readQueue(struct Word *queue){
             queue = queue->Next;
         }
     }    
+}
+
+void insert(char Name[100], char CURP[18], struct Employee **start, struct Employee **finish){
+    struct Employee *new;
+    new = (struct Employee*) malloc(sizeof(struct Employee));
+
+    if (new == NULL) {
+        return;
+    }
+
+    new->Name = Name;
+    new->CURP = CURP;
+    new->prev = NULL;
+    new->next = *start;
+
+    if (*start == NULL) {
+        *finish = new;
+    }else{
+        (*start)->prev = new;
+    }
+    *start = new;
 }
