@@ -27,8 +27,8 @@ int main(int argc, char const *argv[])
     {
     
         printf("Introduce an option: \n");
-        printf("1.- Insert employee \n 2.- Test Palindrome word \n 3.- Show Employees \n 4.- Exit \n");
-        scanf("%d", opt);
+        printf(" 1.- Insert employee \n 2.- Test Palindrome word \n 3.- Show Employees \n 4.- Exit \n \n");
+        scanf("%d", &opt);
 
         switch (opt)
         {
