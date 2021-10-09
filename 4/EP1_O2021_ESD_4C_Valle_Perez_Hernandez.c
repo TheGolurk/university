@@ -8,6 +8,11 @@ GRADO Y GRUPO: 4.C ITI
 REPOSITORIO: https://github.com/TheGolurk/university/blob/master/4/EP1_O2021_ESD_4C_Valle_Perez_Hernandez.c
 */
 
+// Links a recursos que nos puede ayudar a hacer esta cosa
+// https://gist.github.com/rdleon/d569a219c6144c4dfc04366fd6298554
+// https://github.com/rafaeltardivo/C-Queue/blob/master/queue.c
+// https://gist.github.com/fenrig/2624655
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -20,22 +25,19 @@ struct Register {
     float checkin;
     float checkout;
     char  name[30];
-    
 };
 
 struct queue{
     struct Register data;
-    struct queue *next;
+    struct queue *next; 
 };
 
-// Links a recursos que nos puede ayudar a hacer esta cosa
-// https://gist.github.com/rdleon/d569a219c6144c4dfc04366fd6298554
-// https://github.com/rafaeltardivo/C-Queue/blob/master/queue.c
-// https://gist.github.com/fenrig/2624655
+
+int insert(struct queue **start, struct queue **finish, struct Register data);
+struct Register delete(struct queue **start, struct queue **finish);
+int empty(struct queue *start);
 
 
-
-// aqui las definiciones nadamas. despues del main van las funciones
 void check_in();
 void check_out();
 void show();
@@ -90,4 +92,13 @@ void check_out() {
 
 void show() {
 
+}
+
+
+int insert(struct queue **start, struct queue **finish, struct Register data)
+{
+    struct queue *new;
+    new=(struct queue*)malloc(sizeof(struct queue));
+
+    return 0;
 }
