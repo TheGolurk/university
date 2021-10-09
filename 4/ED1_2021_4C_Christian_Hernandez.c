@@ -31,6 +31,8 @@ void readQueue(struct Word *queue);
 
 void insert(char Name[100], char CURP[18], struct Employee **start, struct Employee **finish);
 
+int checkCurp();
+
 int main(int argc, char const *argv[])
 {
     int opt = 0;
@@ -125,6 +127,14 @@ void insert(char Name[100], char CURP[18], struct Employee **start, struct Emplo
     if (new == NULL) {
         return;
     }
+
+    int i = checkCurp();
+    if (i != 1)
+    {
+        /* code */
+    }
+    
+    
 
     strcpy(new->Name, Name);
     strcpy(new->CURP, CURP);
