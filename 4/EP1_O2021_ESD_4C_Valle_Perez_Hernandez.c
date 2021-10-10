@@ -38,7 +38,7 @@ int insert(struct queue **start, struct queue **finish, struct Register data);
 struct Register delete(struct queue **start, struct queue **finish);
 int empty(struct queue *start);
 struct Register first(struct queue *start); 
-struct Register read(struct Register newdata);
+struct Register read();
 
 
 void check_in();
@@ -106,7 +106,7 @@ int insert(struct queue **start, struct queue **finish, struct Register newdata)
         return 0;
     }
 
-    newdata = read(newdata);
+    newdata = read();
 
     new->data = newdata;
     new->next = NULL;
@@ -127,7 +127,7 @@ struct Register delete(struct queue **start, struct queue **finish)
     }
 
     struct queue toRemove = *start;
-    dataRemoved =toRemove-> data;
+    dataRemoved = toRemove->data;
 
     *start = toRemove->next;
     if (*start == NULL)
@@ -149,7 +149,18 @@ int empty(struct queue *start){
 
 }
 
-struct Register read(struct Register newdata) {
+struct Register first(struct queue *start){
+
+    struct Register info;
+    if (empty(start))
+    {
+        return info;
+    }
+    return start->data;
+}
+
+struct Register read() {
+    struct Register newdata;
    printf("ingresa la fecha \n");
    scanf("%d", &newdata.date);
    
