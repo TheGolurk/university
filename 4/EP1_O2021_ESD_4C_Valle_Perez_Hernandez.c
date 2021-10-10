@@ -15,6 +15,7 @@ REPOSITORIO: https://github.com/TheGolurk/university/blob/master/4/EP1_O2021_ESD
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // struct
 struct Register {
@@ -36,6 +37,8 @@ struct queue{
 int insert(struct queue **start, struct queue **finish, struct Register data);
 struct Register delete(struct queue **start, struct queue **finish);
 int empty(struct queue *start);
+struct Register first(struct queue *start); 
+struct Register read(struct Register newdata);
 
 
 void check_in();
@@ -95,16 +98,75 @@ void show() {
 }
 
 
-int insert(struct queue **start, struct queue **finisih, struct Register data)
+int insert(struct queue **start, struct queue **finish, struct Register newdata)
 {
     struct queue *new;
     new=(struct queue*)malloc(sizeof(struct queue));
     if (new == NULL) {
-        return -1;
+        return 0;
     }
 
-    
-    
-    
+    newdata = read(newdata);
+
+    new->data = newdata;
+    new->next = NULL;
+    if (*start == NULL)
+    {
+        *start = new;
+
+    }
+    *finish=new;
+    return 1;
+}
+
+struct Register delete(struct queue **start, struct queue **finish)
+{
+    struct Register dataRemoved;
+    if (*start == NULL){
+        return dataRemoved;
+    }
+
+    struct queue toRemove = *start;
+    dataRemoved =toRemove-> data;
+
+    *start = toRemove->next;
+    if (*start == NULL)
+    {
+        *finish == NULL;
+    }
+    free(toRemove);
+
+    return dataRemoved;    
+}
+
+int empty(struct queue *start){
+
+    if (start == NULL)
+    {
+        return 1;
+    }
     return 0;
+
+}
+
+struct Register read(struct Register newdata) {
+   printf("ingresa la fecha \n");
+   scanf("%d", &newdata.date);
+   
+   printf("ingrese hora de entrada \n");
+   scanf("%f", &newdata.checkin);
+
+   printf("ingrese el modelo \n");
+   scanf("%[^\n]%*c", &newdata.model);
+
+   printf("ingrese el color \n");
+   scanf("%[^\n]%*c", &newdata.color);
+
+   printf("ingrese el nombre \n");
+   scanf("%[^\n]%*c", &newdata.name);
+
+   printf("ingrese las placas \n");
+   scanf("%[^\n]%*c", &newdata.carplates);
+
+   return newdata; 
 }
