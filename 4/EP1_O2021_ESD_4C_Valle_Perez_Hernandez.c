@@ -33,7 +33,7 @@ struct queue{
 };
 
 
-int insert(struct queue **start, struct queue **finish, struct Register data);
+int insert(struct queue **item, struct Register data);
 struct Register delete(struct queue **start, struct queue **finish);
 int empty(struct queue *start);
 
@@ -95,10 +95,19 @@ void show() {
 }
 
 
-int insert(struct queue **start, struct queue **finish, struct Register data)
+int insert(struct queue **item, struct Register data)
 {
     struct queue *new;
     new=(struct queue*)malloc(sizeof(struct queue));
+    if (new == NULL) {
+        return -1;
+    }
 
+    new->data.date = 9;
+
+    item->next = *new;
+    
+    
+    
     return 0;
 }
