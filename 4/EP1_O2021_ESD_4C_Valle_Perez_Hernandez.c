@@ -45,8 +45,10 @@ struct Register delete(struct queue **start, struct queue **finish);
 int empty(struct queue *start);
 struct Register first(struct queue *start); 
 struct Register read();
+struct Register getfirst(struct queue *last);
 void Menu();
-void show();
+void show(struct queue *last);
+void historial();
 
 int main(int argc, char const *argv[])
 {
@@ -84,9 +86,12 @@ void Menu(){
             break;
 
         case 2:
+            show(start);
+
             break;
         
         case 3:
+
             break;
             
         case 4:
@@ -100,7 +105,15 @@ void Menu(){
 
 }
 
-void show() {
+void show(struct queue *last) {
+    struct Register data;
+
+    data = getfirst(last);
+    if( strcmp(data.carplates, "No hay nada") == 0) {
+        printf("no hay nada");
+    } else {
+        printf("Nombre: %s %s", data.name, data.lastname);
+    }
 
 }
 
@@ -126,7 +139,7 @@ int insert(struct queue **start, struct queue **finish, struct Register newdata)
 
 struct Register delete(struct queue **start, struct queue **finish)
 {
-    struct Register dataRemoved;
+    struct Register dataRemoved ={"no data"};
     if (*start == NULL){
         return dataRemoved;
     }
@@ -145,6 +158,7 @@ struct Register delete(struct queue **start, struct queue **finish)
 }
 
 int empty(struct queue *start){
+
     if (start == NULL)
     {
         return 1;
@@ -153,9 +167,17 @@ int empty(struct queue *start){
     return 0;
 }
 
+struct Register getfirst(struct queue *last){
+    struct Register info = {"no data"};
+    if (empty(last)==1){
+        return info;
+    }
+    return last->data;
+}
+
 struct Register first(struct queue *start){
 
-    struct Register info;
+    struct Register info = {"no data"};
     if (empty(start))
     {
         return info;
