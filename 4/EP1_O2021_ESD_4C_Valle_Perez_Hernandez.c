@@ -5,16 +5,8 @@ EQUIPO: Valle Gonzalez Lorena
 
 GRADO Y GRUPO: 4.C ITI
 
-REPOSITORIO: https://github.com/TheGolurk/university/blob/master/4/EP1_O2021_ESD_4C_Valle_Perez_Hernandez.c
+EP_1
 */
-
-// Links a recursos que nos puede ayudar a hacer esta cosa
-// https://gist.github.com/rdleon/d569a219c6144c4dfc04366fd6298554
-// https://github.com/rafaeltardivo/C-Queue/blob/master/queue.c
-// https://gist.github.com/fenrig/2624655
-
-
-// Comando: gcc EP1_O2021_ESD_4C_Valle_Perez_Hernandez.c -o a.out && ./a.out
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -86,18 +78,20 @@ void Menu(){
             break;
 
         case 2:
-            show(start);
 
             break;
         
         case 3:
+            show(start);
 
             break;
             
         case 4:
+            printf("Nos vemos \n");
             break;
         
         default:
+            printf("Opcion incorrecta \n");
             break;
         }
 
@@ -112,7 +106,9 @@ void show(struct queue *last) {
     if( strcmp(data.carplates, "No hay nada") == 0) {
         printf("no hay nada");
     } else {
-        printf("Nombre: %s %s", data.name, data.lastname);
+        printf("Nombre: %s %s \n", data.name, data.lastname);
+        printf("Placas: %s \n", data.carplates);
+        printf("Hora llegada: %0.2f \n", data.checkin);
     }
 
 }
