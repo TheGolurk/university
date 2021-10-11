@@ -17,7 +17,7 @@ REPOSITORIO: https://github.com/TheGolurk/university/blob/master/4/EP1_O2021_ESD
 #include <stdlib.h>
 #include <string.h>
 
-// struct
+// Register es un struct que contiene todos los datos necesarios para registrar un auto
 struct Register {
     char  carplates[30];
     char  model[30];
@@ -28,6 +28,7 @@ struct Register {
     char  name[30];
 };
 
+// queue es un struct que nos permite tener colas como estructura de datos
 struct queue{
     struct Register data;
     struct queue *next; 
@@ -39,12 +40,10 @@ struct Register delete(struct queue **start, struct queue **finish);
 int empty(struct queue *start);
 struct Register first(struct queue *start); 
 struct Register read();
-
-
-void check_in();
-void check_out();
-void show();
 void Menu();
+
+
+void show();
 
 int main(int argc, char const *argv[])
 {
@@ -54,11 +53,14 @@ int main(int argc, char const *argv[])
 }
 
 void Menu(){
+
+    struct Register aux;
+    struct queue *start = NULL, *finish = NULL, *start1 = NULL, *start2 = NULL;
+
     int opt;
     printf("Ingresa una opcion \n");
     printf(" 1.- Registrar entrada \n 2.- Registrar Salida \n 3.- Mostrar \n 4.- Salir \n");
     scanf("%d", &opt);
-
 
     while (opt != 4)
     {
@@ -66,6 +68,17 @@ void Menu(){
         switch (opt)
         {
         case 1:
+
+            int isInserted = insert(start, finish, read());
+            if (isInserted != 1)
+            {
+                printf("no se pudo insertar \n");
+                break;
+            } else {
+                printf("agregado \n");
+            }
+            
+
             break;
 
         case 2:
@@ -85,14 +98,6 @@ void Menu(){
 
 }
 
-void check_in() {
-
-}
-
-void check_out() {
-
-}
-
 void show() {
 
 }
@@ -106,7 +111,6 @@ int insert(struct queue **start, struct queue **finish, struct Register newdata)
         return 0;
     }
 
-    newdata = read();
 
     new->data = newdata;
     new->next = NULL;
@@ -116,6 +120,7 @@ int insert(struct queue **start, struct queue **finish, struct Register newdata)
 
     }
     *finish=new;
+
     return 1;
 }
 
@@ -140,13 +145,12 @@ struct Register delete(struct queue **start, struct queue **finish)
 }
 
 int empty(struct queue *start){
-
     if (start == NULL)
     {
         return 1;
     }
-    return 0;
 
+    return 0;
 }
 
 struct Register first(struct queue *start){
