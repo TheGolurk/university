@@ -13,6 +13,9 @@ REPOSITORIO: https://github.com/TheGolurk/university/blob/master/4/EP1_O2021_ESD
 // https://github.com/rafaeltardivo/C-Queue/blob/master/queue.c
 // https://gist.github.com/fenrig/2624655
 
+
+// Comando: gcc EP1_O2021_ESD_4C_Valle_Perez_Hernandez.c -o a.out && ./a.out
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,8 +46,6 @@ int empty(struct queue *start);
 struct Register first(struct queue *start); 
 struct Register read();
 void Menu();
-
-
 void show();
 
 int main(int argc, char const *argv[])
@@ -60,26 +61,25 @@ void Menu(){
     struct queue *start = NULL, *finish = NULL, *start1 = NULL, *start2 = NULL;
 
     int opt;
-    printf("Ingresa una opcion \n");
-    printf(" 1.- Registrar entrada \n 2.- Registrar Salida \n 3.- Mostrar \n 4.- Salir \n");
-    scanf("%d", &opt);
 
     while (opt != 4)
     {
+
+        printf("Ingresa una opcion \n");
+        printf(" 1.- Registrar entrada \n 2.- Registrar Salida \n 3.- Mostrar \n 4.- Salir \n");
+        scanf("%d", &opt);
 
         switch (opt)
         {
         case 1:
 
-            int isInserted = insert(start, finish, read());
-            if (isInserted != 1)
-            {
-                printf("no se pudo insertar \n");
-                break;
+            aux = read();
+            int isInserted = insert(&start, &finish, aux);
+            if (isInserted != 1) {
+                printf("no se inserto \n");
             } else {
-                printf("agregado \n");
+                printf("insertado \n");
             }
-            
 
             break;
 
@@ -113,13 +113,11 @@ int insert(struct queue **start, struct queue **finish, struct Register newdata)
         return 0;
     }
 
-
     new->data = newdata;
     new->next = NULL;
     if (*start == NULL)
     {
         *start = new;
-
     }
     *finish=new;
 
@@ -190,7 +188,7 @@ struct Register read() {
     scanf("%[^\n]%*c", newdata.carplates);
 
     printf("ingrese la edad \n");
-    scanf("%[^\n]%*c", newdata.age);
+    scanf("%d%*c", &newdata.age);
 
     return newdata; 
 }
