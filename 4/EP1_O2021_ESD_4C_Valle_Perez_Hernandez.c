@@ -126,7 +126,7 @@ struct Register delete(struct queue **start, struct queue **finish)
         return dataRemoved;
     }
 
-    struct queue toRemove = *start;
+    struct queue *toRemove = *start;
     dataRemoved = toRemove->data;
 
     *start = toRemove->next;
