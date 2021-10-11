@@ -26,6 +26,8 @@ struct Register {
     float checkin;
     float checkout;
     char  name[30];
+    int   age;
+    char lastname[30];
 };
 
 // queue es un struct que nos permite tener colas como estructura de datos
@@ -165,23 +167,30 @@ struct Register first(struct queue *start){
 
 struct Register read() {
     struct Register newdata;
-   printf("ingresa la fecha \n");
-   scanf("%d", &newdata.date);
+
+    printf("ingresa la fecha \n");
+    scanf("%d%*c", &newdata.date);
    
-   printf("ingrese hora de entrada \n");
-   scanf("%f", &newdata.checkin);
+    printf("ingrese hora de entrada \n");
+    scanf("%f%*c", &newdata.checkin);
 
-   printf("ingrese el modelo \n");
-   scanf("%[^\n]%*c", &newdata.model);
+    printf("ingrese el modelo \n");
+    scanf("%[^\n]%*c", newdata.model);
 
-   printf("ingrese el color \n");
-   scanf("%[^\n]%*c", &newdata.color);
+    printf("ingrese el color \n");
+    scanf("%[^\n]%*c", newdata.color);
 
-   printf("ingrese el nombre \n");
-   scanf("%[^\n]%*c", &newdata.name);
+    printf("ingrese el nombre \n");
+    scanf("%[^\n]%*c", newdata.name);
 
-   printf("ingrese las placas \n");
-   scanf("%[^\n]%*c", &newdata.carplates);
+    printf("ingrese su apellido \n");
+    scanf("%[^\n]%*c", newdata.lastname);
 
-   return newdata; 
+    printf("ingrese las placas \n");
+    scanf("%[^\n]%*c", newdata.carplates);
+
+    printf("ingrese la edad \n");
+    scanf("%[^\n]%*c", newdata.age);
+
+    return newdata; 
 }
