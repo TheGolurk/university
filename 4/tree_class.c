@@ -27,6 +27,11 @@ struct Nodo {
 	struct Nodo *der;
 };
 
+struct elemento {
+	struct Nodo *dato;
+	struct elemento *sig;
+};
+
 int insertar(int nuevoDato, struct Nodo **raiz);
 void inOrden(struct Nodo *raiz);
 void preOrden(struct Nodo *raiz);
@@ -96,7 +101,6 @@ void inOrden(struct Nodo *raiz) {
 	inOrden(raiz->der);
 }
 
-
 void preOrden(struct Nodo *raiz) {
 	if (raiz == NULL) {
 		return;
@@ -115,4 +119,59 @@ void postOrden(struct Nodo *raiz) {
 	postOrden(raiz->izq);
 	postOrden(raiz->der);
 	printf("%d, ", raiz->dato);
+}
+
+int insertarCola(struct elemento **inicio, struct elemento **fin, struct Nodo *datoNuevo) {
+    struct elemento *nuevo;
+    nuevo = (struct elemento *) malloc(sizeof (struct elemento));
+    if (nuevo == NULL){
+        return 0;
+    }
+    nuevo->dato = datoNuevo;
+    nuevo->sig = NULL;
+    if (*inicio == NULL){
+        *inicio = nuevo;
+    }else{
+        (*fin)->sig= nuevo;
+    }
+    *fin = nuevo;
+    return 1;
+}
+
+struct Nodo * eliminarCola(struct elemento **inicio, struct elemento **fin) {
+    struct Nodo *datoEliminado = NULL; 
+    if (*inicio == NULL){
+        return datoEliminado;
+    }
+
+    struct elemento*eliminado = *inicio;
+    datoEliminado = eliminado->dato;
+
+    *inicio = eliminado->sig;
+    if (*inicio == NULL){
+        *fin = NULL;
+    }
+
+    free(eliminado);
+
+    return datoEliminado;
+}
+
+int estaVacia(struct elemento *inicio) {
+	if (inicio == NULL)
+	{
+		return 1;
+	}
+	
+	return 0;
+}
+
+struct Nodo * primero(struct elemento *inicio) {
+	struct Nodo *info = NULL;
+	if (estaVacia(inicio) == 1)
+	{
+		return info;
+	}
+	
+	return inicio->dato;
 }
