@@ -1,6 +1,6 @@
 /*
 Recorridos
--Profundidad
+-Profundidad: Solo recorre en derecha o izquierda
 	-Pre orden
 		-visitar raiz
 		- recorrer en preorden sub arbol izquierdo
@@ -13,7 +13,7 @@ Recorridos
 		-recorrer en post orden sub arbol izq
 		-recorrer en post orden sub arbol der
 		-visitar raiz
--Amplitud
+-Amplitud: 
 */
 
 // REPOR: https://github.com/TheGolurk/university/tree/master/4 
@@ -29,6 +29,9 @@ struct Nodo {
 
 int insertar(int nuevoDato, struct Nodo **raiz);
 void inOrden(struct Nodo *raiz);
+void preOrden(struct Nodo *raiz);
+void postOrden(struct Nodo *raiz);
+
 
 int main() {
 	struct Nodo *raiz = NULL;
@@ -91,4 +94,25 @@ void inOrden(struct Nodo *raiz) {
 	inOrden(raiz->izq);
 	printf("%d, ", raiz->dato);
 	inOrden(raiz->der);
+}
+
+
+void preOrden(struct Nodo *raiz) {
+	if (raiz == NULL) {
+		return;
+	}
+
+	printf("%d, ", raiz->dato);
+	preOrden(raiz->izq);
+	preOrden(raiz->der);
+}
+
+void postOrden(struct Nodo *raiz) {
+	if (raiz == NULL) {
+		return;
+	}
+
+	postOrden(raiz->izq);
+	postOrden(raiz->der);
+	printf("%d, ", raiz->dato);
 }
