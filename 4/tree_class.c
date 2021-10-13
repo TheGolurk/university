@@ -16,6 +16,8 @@ Recorridos
 -Amplitud
 */
 
+// REPOR: https://github.com/TheGolurk/university/tree/master/4 
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -35,6 +37,10 @@ int main() {
 	insertar(9, &raiz);
 	insertar(10, &raiz);
 	insertar(3, &raiz);
+	insertar(4, &raiz);
+	insertar(11, &raiz);
+	insertar(19, &raiz);
+
 
 	inOrden(raiz);
 
