@@ -114,6 +114,24 @@ int eliminar(struct Nodo **raiz, int datoEliminado) {
 			int datoEliminado;
 			eliminado = *raiz;
 			datoEliminado = eliminado->dato;
+			if (eliminado->izq == NULL && eliminado->der == NULL)
+			{
+				*raiz = NULL;
+			} else {
+				
+				if (eliminado->der == NULL)
+				{
+					*raiz = eliminado->izq;
+				} else {
+					if (eliminado->izq == NULL)
+					{
+						*raiz = eliminado->der;
+					}
+					
+				}
+				
+			}
+			
 
 			free(eliminado);
 			return datoEliminado;
