@@ -118,14 +118,29 @@ int eliminar(struct Nodo **raiz, int datoEliminado) {
 			{
 				*raiz = NULL;
 			} else {
-				
-				if (eliminado->der == NULL)
+
+				if (eliminado->der == NULL) // hijo izquierdo
 				{
 					*raiz = eliminado->izq;
 				} else {
-					if (eliminado->izq == NULL)
+					
+					if (eliminado->izq == NULL) //hijo derecho
 					{
 						*raiz = eliminado->der;
+					} else {
+
+						struct Nodo *auxHijo = eliminado->der, *auxPadre = eliminado;
+						while (auxHijo->izq != NULL)
+						{
+							auxPadre = auxHijo;
+							auxHijo = auxHijo->izq;	
+						}
+
+						auxPadre->izq = auxHijo->der;
+						auxHijo->izq = eliminado->izq;
+						auxHijo->der = eliminado->der;
+						*raiz = auxHijo;
+
 					}
 					
 				}
