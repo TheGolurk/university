@@ -53,11 +53,24 @@ int main() {
 	insertar(19, &raiz);
 
 	inOrden(raiz);
-
 	recAmplitud(raiz);
 
+/*
+	printf("\n");
 	eliminar(&raiz, 1);
 	inOrden(raiz);
+	recAmplitud(raiz);
+
+	printf("\n");
+	eliminar(&raiz, 10);
+	inOrden(raiz);
+	recAmplitud(raiz);
+*/
+
+	printf("\n");
+	eliminar(&raiz, 5);
+	inOrden(raiz);
+	recAmplitud(raiz);
 
 	return 0;
 }
@@ -256,7 +269,7 @@ void recAmplitud(struct Nodo *raiz) {
 
 	while(!estaVacia(inicio)) {
 		aux = eliminarCola(&inicio, &fin);
-		printf("%d \n", aux->dato);
+		printf("%d ", aux->dato);
 		
 		if (aux->izq != NULL)
 		{
