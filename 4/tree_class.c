@@ -37,6 +37,7 @@ void inOrden(struct Nodo *raiz);
 void preOrden(struct Nodo *raiz);
 void postOrden(struct Nodo *raiz);
 void recAmplitud(struct Nodo *raiz);
+int eliminar(struct Nodo **raiz, int datoEliminado);
 
 
 int main() {
@@ -54,6 +55,9 @@ int main() {
 	inOrden(raiz);
 
 	recAmplitud(raiz);
+
+	eliminar(&raiz, 1);
+	inOrden(raiz);
 
 	return 0;
 }
