@@ -36,6 +36,7 @@ int insertar(int nuevoDato, struct Nodo **raiz);
 void inOrden(struct Nodo *raiz);
 void preOrden(struct Nodo *raiz);
 void postOrden(struct Nodo *raiz);
+void recAmplitud(struct Nodo *raiz);
 
 
 int main() {
@@ -45,12 +46,14 @@ int main() {
 	insertar(9, &raiz);
 	insertar(10, &raiz);
 	insertar(3, &raiz);
+	insertar(1, &raiz);
 	insertar(4, &raiz);
 	insertar(11, &raiz);
 	insertar(19, &raiz);
 
-
 	inOrden(raiz);
+
+	recAmplitud(raiz);
 
 	return 0;
 }
@@ -88,7 +91,20 @@ int insertar(int nuevoDato, struct Nodo **raiz) {
 		
 	}
 	
+}
 
+int eliminar(struct Nodo **raiz, int datoEliminado) {
+	if (*raiz == NULL)
+	{
+		return -1;
+	}
+
+	if (datoEliminado < (*raiz)->dato)
+	{
+
+	}
+	
+	
 }
 
 void inOrden(struct Nodo *raiz) {
@@ -174,4 +190,29 @@ struct Nodo * primero(struct elemento *inicio) {
 	}
 	
 	return inicio->dato;
+}
+
+void recAmplitud(struct Nodo *raiz) {
+	struct elemento *inicio=NULL, *fin=NULL;
+
+	insertarCola(&inicio, &fin, raiz);
+
+	struct Nodo *aux;
+
+	while(!estaVacia(inicio)) {
+		aux = eliminarCola(&inicio, &fin);
+		printf("%d \n", aux->dato);
+		
+		if (aux->izq != NULL)
+		{
+			insertarCola(&inicio, &fin, aux->izq);
+		}
+		if (aux->der!= NULL)
+		{
+			insertarCola(&inicio, &fin, aux->der);
+		}
+	}
+
+
+	printf("\n");
 }
