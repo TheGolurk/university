@@ -101,6 +101,24 @@ int eliminar(struct Nodo **raiz, int datoEliminado) {
 
 	if (datoEliminado < (*raiz)->dato)
 	{
+		return eliminar( &((*raiz))->izq , datoEliminado);
+	} else {
+		
+		if (datoEliminado > (*raiz)->dato)
+		{
+			return eliminar( &((*raiz))->der , datoEliminado);
+		} else {
+
+			// Dato enctronado
+			struct Nodo *eliminado;
+			int datoEliminado;
+			eliminado = *raiz;
+			datoEliminado = eliminado->dato;
+
+			free(eliminado);
+			return datoEliminado;
+		}
+		
 
 	}
 	
