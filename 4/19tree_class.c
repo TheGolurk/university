@@ -14,7 +14,7 @@ struct elemento {
 };
 
 int insertar(char nuevoDato[], struct Nodo **raiz);
-int eliminar(struct Nodo **raiz, int datoEliminado);
+char * eliminar(struct Nodo **raiz, char  datoE[]);
 void inOrden(struct Nodo *raiz);
 void preOrden(struct Nodo *raiz);
 void postOrden(struct Nodo *raiz);
@@ -23,18 +23,18 @@ void recAmplitud(struct Nodo *raiz);
 
 int main() {
 	struct Nodo *raiz = NULL;
-	insertar(5, &raiz);
-	insertar(15, &raiz);
-	insertar(9, &raiz);
-	insertar(10, &raiz);
-	insertar(3, &raiz);
-	insertar(1, &raiz);
-	insertar(4, &raiz);
-	insertar(11, &raiz);
-	insertar(19, &raiz);
+	insertar("morado", &raiz);
+	insertar("azul", &raiz);
+	insertar("amarillo", &raiz);
+	insertar("blanco", &raiz);
+	insertar("verde", &raiz);
+	insertar("negro", &raiz);
+	insertar("violeta", &raiz);
+	insertar("rojo", &raiz);
+	insertar("gris", &raiz);
 
 	inOrden(raiz);
-	recAmplitud(raiz);
+	//recAmplitud(raiz);
 
 /*
 	printf("\n");
@@ -49,7 +49,7 @@ int main() {
 */
 
 	printf("\n");
-	eliminar(&raiz, 5);
+	eliminar(&raiz, "verde");
 	inOrden(raiz);
 	recAmplitud(raiz);
 
@@ -75,12 +75,12 @@ int insertar(char nuevoDato[], struct Nodo **raiz) {
 	}
 
 	// No permitiendo repetidos (alternativa recursiva)
-	if (nuevoDato < (*raiz)->dato)
+	if (strcmp(nuevoDato, (*raiz)->dato) < 0)
 	{
 		return insertar(nuevoDato, &((*raiz)->izq));
 	} else {
 		// quitamos el if si quieremos repetidos
-		if (nuevoDato > (*raiz)->dato)
+		if (strcmp(nuevoDato, (*raiz)->dato) > 0)
 		{
 			return insertar(nuevoDato,  &((*raiz)->der));
 		} else {
@@ -91,69 +91,48 @@ int insertar(char nuevoDato[], struct Nodo **raiz) {
 	
 }
 
-int eliminar(struct Nodo **raiz, int datoEliminado) {
-	if (*raiz == NULL)
-	{
-		return -1;
+char * eliminar(struct Nodo **raiz, char  datoE[]){
+	if(*raiz==NULL){
+		return NULL;
 	}
-
-	if (datoEliminado < (*raiz)->dato)
-	{
-		return eliminar( &((*raiz))->izq , datoEliminado);
-	} else {
-		
-		if (datoEliminado > (*raiz)->dato)
-		{
-			return eliminar( &((*raiz))->der , datoEliminado);
-		} else {
-
-			// Dato enctronado
+	
+	if(strcmp(datoE, (*raiz)->dato)<0){
+		return  eliminar(&((*raiz)->izq), datoE);
+	}else{
+		if(strcmp(datoE, (*raiz)->dato)>0){
+			return  eliminar(&((*raiz)->der), datoE);
+		}else{
 			struct Nodo *eliminado;
-			int datoEliminado;
-			eliminado = *raiz;
-			datoEliminado = eliminado->dato;
-			if (eliminado->izq == NULL && eliminado->der == NULL)
-			{
-				*raiz = NULL;
-			} else {
-
-				if (eliminado->der == NULL) // hijo izquierdo
-				{
-					*raiz = eliminado->izq;
-				} else {
-					
-					if (eliminado->izq == NULL) //hijo derecho
-					{
-						*raiz = eliminado->der;
-					} else {
-
-						struct Nodo *auxHijo = eliminado->der, *auxPadre = eliminado;
-						while (auxHijo->izq != NULL)
-						{
-							auxPadre = auxHijo;
-							auxHijo = auxHijo->izq;	
-						}
-
-						auxPadre->izq = auxHijo->der;
-						auxHijo->izq = eliminado->izq;
-						auxHijo->der = eliminado->der;
-						*raiz = auxHijo;
-
-					}
-					
-				}
-				
-			}
+			char*  datoEliminado;//="";
+			datoEliminado=(char*)malloc(50);
+			eliminado=*raiz;
+			strcpy(datoEliminado,eliminado->dato);
+			if(eliminado->izq==NULL &&  eliminado->der==NULL){
+				*raiz=NULL;
 			
-
+			}else{
+				if( eliminado->der==NULL){ //Tiene un sólo hijo el izquierdo
+					*raiz=eliminado->izq;
+				}else{
+					if( eliminado->izq==NULL){ //Tiene un sólo hijo, el derecho
+					*raiz=eliminado->der;
+					}else{
+						struct  Nodo *auxHijo=eliminado->der, *auxPadre=eliminado;
+						while(auxHijo->izq!=NULL){
+							auxPadre=auxHijo;
+							auxHijo=auxHijo->izq;
+						}
+						auxPadre->izq=auxHijo->der;
+						auxHijo->izq=eliminado->izq;
+						auxHijo->der=eliminado->der;
+						*raiz=auxHijo;
+					}
+				}
+			}
 			free(eliminado);
 			return datoEliminado;
 		}
-		
-
 	}
-	
-	
 }
 
 void inOrden(struct Nodo *raiz) {
@@ -162,7 +141,7 @@ void inOrden(struct Nodo *raiz) {
 	}
 
 	inOrden(raiz->izq);
-	printf("%d, ", raiz->dato);
+	printf("%s, ", raiz->dato);
 	inOrden(raiz->der);
 }
 
@@ -171,7 +150,7 @@ void preOrden(struct Nodo *raiz) {
 		return;
 	}
 
-	printf("%d, ", raiz->dato);
+	printf("%s, ", raiz->dato);
 	preOrden(raiz->izq);
 	preOrden(raiz->der);
 }
@@ -183,7 +162,7 @@ void postOrden(struct Nodo *raiz) {
 
 	postOrden(raiz->izq);
 	postOrden(raiz->der);
-	printf("%d, ", raiz->dato);
+	printf("%s, ", raiz->dato);
 }
 
 int insertarCola(struct elemento **inicio, struct elemento **fin, struct Nodo *datoNuevo) {
@@ -250,7 +229,7 @@ void recAmplitud(struct Nodo *raiz) {
 
 	while(!estaVacia(inicio)) {
 		aux = eliminarCola(&inicio, &fin);
-		printf("%d ", aux->dato);
+		printf("%s ", aux->dato);
 		
 		if (aux->izq != NULL)
 		{
