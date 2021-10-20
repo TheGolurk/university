@@ -19,6 +19,7 @@ void inOrden(struct Nodo *raiz);
 void preOrden(struct Nodo *raiz);
 void postOrden(struct Nodo *raiz);
 void recAmplitud(struct Nodo *raiz);
+int buscar(struct Nodo *raiz, char datoB[]);
 
 
 int main() {
@@ -243,4 +244,20 @@ void recAmplitud(struct Nodo *raiz) {
 
 
 	printf("\n");
+}
+
+int buscar(struct Nodo *raiz, char datoB[]) {
+    if(raiz  == NULL) {
+        return 0;
+    }
+
+    if (strcmp(datoB, raiz->dato) == 0) {
+        return 1;
+    }
+    
+    if(strcmp(datoB, raiz->dato) < 0) {
+        return buscar(raiz->izq, datoB);
+    } else {
+        return buscar(raiz->der, datoB);
+    }
 }
