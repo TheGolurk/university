@@ -29,8 +29,13 @@ int buscar(struct Nodo *raiz, int datoB);
 
 int main() {
 	struct Nodo *raiz = NULL;
-	insertar("morado", &raiz);
-	insertar("azul", &raiz);
+    struct Grupo auxGrupo = {15, "asd"};
+
+	insertar(auxGrupo, &raiz);
+
+    auxGrupo.id = 3;
+	insertar(auxGrupo, &raiz);
+    /*
 	insertar("amarillo", &raiz);
 	insertar("blanco", &raiz);
 	insertar("verde", &raiz);
@@ -38,6 +43,7 @@ int main() {
 	insertar("violeta", &raiz);
 	insertar("rojo", &raiz);
 	insertar("gris", &raiz);
+    */
 
 	inOrden(raiz);
 	//recAmplitud(raiz);
@@ -55,7 +61,7 @@ int main() {
 */
 
 	printf("\n");
-	eliminar(&raiz, "verde");
+	eliminar(&raiz, 15);
 	inOrden(raiz);
 	recAmplitud(raiz);
 
@@ -112,7 +118,7 @@ struct Grupo eliminar(struct Nodo **raiz, int datoE){
 			struct Nodo *eliminado;
 			struct Grupo datoEliminado;//="";
 			eliminado=*raiz;
-            datoEliminado = eliminado->dato
+            datoEliminado = eliminado->dato;
 
 			if(eliminado->izq==NULL &&  eliminado->der==NULL){
 				*raiz=NULL;
@@ -148,7 +154,7 @@ void inOrden(struct Nodo *raiz) {
 	}
 
 	inOrden(raiz->izq);
-	printf("%s, ", raiz->dato);
+	printf("%d, ", raiz->dato.id);
 	inOrden(raiz->der);
 }
 
@@ -157,7 +163,7 @@ void preOrden(struct Nodo *raiz) {
 		return;
 	}
 
-	printf("%s, ", raiz->dato);
+	printf("%d, ", raiz->dato.id);
 	preOrden(raiz->izq);
 	preOrden(raiz->der);
 }
@@ -169,7 +175,7 @@ void postOrden(struct Nodo *raiz) {
 
 	postOrden(raiz->izq);
 	postOrden(raiz->der);
-	printf("%s, ", raiz->dato);
+	printf("%d, ", raiz->dato.id);
 }
 
 int insertarCola(struct elemento **inicio, struct elemento **fin, struct Nodo *datoNuevo) {
@@ -257,11 +263,11 @@ int buscar(struct Nodo *raiz, int datoB) {
         return 0;
     }
 
-    if (strcmp(datoB, raiz->dato) == 0) {
+    if (datoB == raiz->dato.id) {
         return 1;
     }
     
-    if(strcmp(datoB, raiz->dato) < 0) {
+    if(datoB < raiz->dato.id) {
         return buscar(raiz->izq, datoB);
     } else {
         return buscar(raiz->der, datoB);
