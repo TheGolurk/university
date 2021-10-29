@@ -1,14 +1,24 @@
+/******
+ÁRBOLES BINARIOS
+HERNÁNDEZ NAJÉRA CHRISTIAN  HNCO200217 
+4°C  ED2 
+29/oct/2021 
+*******/
+
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 struct Producto {
-    int ID;
+    int clave;
     char descripcion[100];
     float precio;
-    float precio_provedor;
-    char marca[30];
-    int piezas_disponibles;
+    float redondeo;
+    char notas[100];
+    int preciosugerido;
     struct Producto *izq;
     struct Producto *der;
 };
@@ -19,66 +29,64 @@ struct elemento {
 };
 
 int insertar(struct Producto nuevoDato, struct Producto **raiz);
-void recorridoInOrden(struct Producto *raiz);
+void inOrden(struct Producto *raiz);
+struct Producto leer();
 
 int main(int argc, char const *argv[])
 {
 
-    // [x] insertar
-    // [] mostrar
-    // [] vaciar
-    // [] nivel de un producto en particular
-    // [x] menu
-
-    int o = 1;
+    int opc = 1;
     struct Producto *raiz = NULL;
 
-    while (o != 5) {
+    do
+    {
 
-        printf("1 agregar\n 2 mostrar \n 3 vaciar \n 4 buscar y mostrar nivel \n 5 salir"); 
-        scanf("%d", &o);
+        printf("1-añadir\n 2-listar \n 3-vaciat todo el arbol \n 4-buscar \n 5-acabar"); 
+        scanf("%d", &opc);
 
-        if (o == 1)
+        switch (opc)
         {
-            
-            struct Producto p;
-           
-            
-            printf("ingrese el id \n");
-            scanf("%d", &p.ID);
-            
-            printf("Ingrese la descripcion del producto:\n");
-            scanf("%s",&p.descripcion);
+        case 1:
 
-            printf("Ingrese el precio  del producto:\n");
-            scanf("%f",&p.precio);
+            insertar(leer(), &raiz);
+            break;
+        
+        case 2:
 
-            printf("Ingrese el precio de provedor:\n");
-            scanf("%f",&p.precio_provedor);
+            inOrden(raiz);
 
-            printf("Ingrese la marca del producto:\n") ;
-            scanf("%s",&p.marca);
-            
-            printf("Ingrese las piezas disponibles del producto:\n");
-            scanf("%d",&p.piezas_disponibles);
-            
+            break;
+          
+        }
 
-            int i = insertar(p, &raiz);
-
-
-        } else if (o == 2) {
-
-            recorridoInOrden(raiz);
-
-        } else if (o == 3) {
-
-        } else if (o == 4) {
-
-        }      
-
-    }
+    } while (opc != 5);
+    
 
     return 0;
+}
+
+struct Producto leer() {
+    struct Producto nuevoDato; 
+            
+    printf("ingrese la clave \n");
+    scanf("%d", &nuevoDato.clave);
+            
+    printf("Ingrese la descripcion del producto:\n");
+    scanf("%s",&nuevoDato.descripcion);
+
+    printf("Ingrese precio\n");
+    scanf("%f",&nuevoDato.precio);
+
+    printf("Ingrese precio sugerido\n");
+    scanf("%d",&nuevoDato.preciosugerido);
+
+    printf("Ingrese notas:\n") ;
+    scanf("%s",&nuevoDato.notas);
+            
+    printf("Ingrese redondeo:\n");
+    scanf("%f",&nuevoDato.redondeo);
+
+    return nuevoDato;
 }
 
 int insertar(struct Producto nuevoDato, struct Producto **raiz) {
@@ -90,12 +98,15 @@ int insertar(struct Producto nuevoDato, struct Producto **raiz) {
 			return 0;
 		}
 
-		nuevo->ID = nuevoDato.ID; 
-        strcpy(nuevo->descripcion, nuevoDato.descripcion);
+        
+		nuevo->clave = nuevoDato.clave; 
         nuevo->precio = nuevoDato.precio;
-        nuevo->precio_provedor = nuevoDato.precio_provedor;
-        strcpy(nuevo->marca, nuevoDato.marca);
-        nuevo->piezas_disponibles = nuevoDato.piezas_disponibles;
+        nuevo->preciosugerido = nuevoDato.preciosugerido;
+        nuevo->redondeo = nuevoDato.redondeo;
+
+        strcpy(nuevo->notas, nuevoDato.notas);
+        strcpy(nuevo->descripcion, nuevoDato.descripcion);
+
 		nuevo->izq = NULL;
 		nuevo->der = NULL;
 
@@ -104,11 +115,11 @@ int insertar(struct Producto nuevoDato, struct Producto **raiz) {
 		return 1;
 	}
 
-	if (nuevoDato.ID < (*raiz)->ID)
+	if (nuevoDato.clave < (*raiz)->clave)
 	{
 		return insertar(nuevoDato, &((*raiz)->izq));
 	} else {
-		if (nuevoDato.ID > (*raiz)->ID)
+		if (nuevoDato.clave > (*raiz)->clave)
 		{
 			return insertar(nuevoDato,  &((*raiz)->der));
 		} else {
@@ -119,17 +130,12 @@ int insertar(struct Producto nuevoDato, struct Producto **raiz) {
 	
 }
 
-void recorridoInOrden(struct Producto *raiz) {
+void inOrden(struct Producto *raiz) {
     if (raiz == NULL) {
 		return;
 	}
 
 	inOrden(raiz->izq);
-	printf("%d, ", raiz->ID);
-    printf("%s, ", raiz->descripcion);
-    printf("%f, ", raiz->precio);
-    printf("%d, ", raiz->precio_provedor);
-    printf("%s, ", raiz->marca);
-    printf("%d, ", raiz->piezas_disponibles);
+	printf("%d %s %f %f %s %d \n", raiz->clave,raiz->descripcion,raiz->precio,raiz->redondeo,raiz->notas,raiz->preciosugerido);
 	inOrden(raiz->der);
 }
