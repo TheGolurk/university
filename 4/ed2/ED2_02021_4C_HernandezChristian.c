@@ -44,29 +44,31 @@ int main(int argc, char const *argv[])
             struct Producto p;
            
             
-            printf("ingrese id \n");
+            printf("ingrese el id \n");
             scanf("%d", &p.ID);
             
-            printf("Ingrese la descripcion del producto:\n" );
+            printf("Ingrese la descripcion del producto:\n");
             scanf("%s",&p.descripcion);
 
-            printf("Ingrese la descripcion del producto:\n" );
-            scanf("%s",&p.descripcion);
+            printf("Ingrese el precio  del producto:\n");
+            scanf("%f",&p.precio);
 
-            printf("Ingrese la descripcion del producto:\n" );
-            scanf("%s",&p.descripcion);
+            printf("Ingrese el precio de provedor:\n");
+            scanf("%f",&p.precio_provedor);
 
-            printf("Ingrese la descripcion del producto:\n" );
-            scanf("%s",&p.descripcion);
+            printf("Ingrese la marca del producto:\n") ;
+            scanf("%s",&p.marca);
             
-            printf("Ingrese la descripcion del producto:\n" );
-            scanf("%s",&p.descripcion);
+            printf("Ingrese las piezas disponibles del producto:\n");
+            scanf("%d",&p.piezas_disponibles);
             
 
             int i = insertar(p, &raiz);
 
 
         } else if (o == 2) {
+
+            recorridoInOrden(raiz);
 
         } else if (o == 3) {
 
@@ -124,5 +126,10 @@ void recorridoInOrden(struct Producto *raiz) {
 
 	inOrden(raiz->izq);
 	printf("%d, ", raiz->ID);
+    printf("%s, ", raiz->descripcion);
+    printf("%f, ", raiz->precio);
+    printf("%d, ", raiz->precio_provedor);
+    printf("%s, ", raiz->marca);
+    printf("%d, ", raiz->piezas_disponibles);
 	inOrden(raiz->der);
 }
