@@ -19,6 +19,7 @@ struct elemento {
 };
 
 int insertar(struct Producto nuevoDato, struct Producto **raiz);
+void recorridoInOrden(struct Producto *raiz);
 
 int main(int argc, char const *argv[])
 {
@@ -27,9 +28,10 @@ int main(int argc, char const *argv[])
     // [] mostrar
     // [] vaciar
     // [] nivel de un producto en particular
-    // [] menu
+    // [x] menu
 
     int o = 1;
+    struct Producto *raiz = NULL;
 
     while (o != 5) {
 
@@ -38,6 +40,31 @@ int main(int argc, char const *argv[])
 
         if (o == 1)
         {
+            
+            struct Producto p;
+           
+            
+            printf("ingrese id \n");
+            scanf("%d", &p.ID);
+            
+            printf("Ingrese la descripcion del producto:\n" );
+            scanf("%s",&p.descripcion);
+
+            printf("Ingrese la descripcion del producto:\n" );
+            scanf("%s",&p.descripcion);
+
+            printf("Ingrese la descripcion del producto:\n" );
+            scanf("%s",&p.descripcion);
+
+            printf("Ingrese la descripcion del producto:\n" );
+            scanf("%s",&p.descripcion);
+            
+            printf("Ingrese la descripcion del producto:\n" );
+            scanf("%s",&p.descripcion);
+            
+
+            int i = insertar(p, &raiz);
+
 
         } else if (o == 2) {
 
@@ -75,12 +102,10 @@ int insertar(struct Producto nuevoDato, struct Producto **raiz) {
 		return 1;
 	}
 
-    // izquierda menor
 	if (nuevoDato.ID < (*raiz)->ID)
 	{
 		return insertar(nuevoDato, &((*raiz)->izq));
 	} else {
-		// quitamos el if si quieremos repetidos
 		if (nuevoDato.ID > (*raiz)->ID)
 		{
 			return insertar(nuevoDato,  &((*raiz)->der));
@@ -90,4 +115,14 @@ int insertar(struct Producto nuevoDato, struct Producto **raiz) {
 		
 	}
 	
+}
+
+void recorridoInOrden(struct Producto *raiz) {
+    if (raiz == NULL) {
+		return;
+	}
+
+	inOrden(raiz->izq);
+	printf("%d, ", raiz->ID);
+	inOrden(raiz->der);
 }
