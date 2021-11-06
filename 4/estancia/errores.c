@@ -12,3 +12,8 @@ void WarnErr(const char *err) {
     printf(ANSI_COLOR_YELLOW "%s" ANSI_COLOR_YELLOW "\n", err);
     printf(ANSI_COLOR_RESET);
 }
+
+void WrongOption() {
+    printf(ANSI_COLOR_YELLOW "OPCION INCORRECTA" ANSI_COLOR_YELLOW "\n");
+    printf(ANSI_COLOR_RESET);
+}
