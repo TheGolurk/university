@@ -16,6 +16,8 @@ compile:
 #include <stdlib.h>
 #include <string.h>
 #include "validator.c"
+#include "administrador.c"
+#include "usuario.c"
 
 
 //declaración del  struct alumno
@@ -149,13 +151,13 @@ int main()
         printf("\n BIENVENIDO A ONLINE SHOP");
         printf("\n---------------------------------------------------");
         printf("Seleccione el modo de usuario:\n");
-        printf("1.-ALUMNO\n2.- ADMINISTRADOR\n3.- Salir");
+        printf("1.- ALUMNO\n2.- ADMINISTRADOR\n3.- Salir\n");
         scanf("%d", &opcion);
 
         switch(opcion)
         {
             case 1:
-                printf("Ingresar ID de identificación");
+                printf("Ingresar ID de identificación\n");
                 scanf("%d", &ID);
 
                 if ( validar_usuario(ID) != 1 )
@@ -163,13 +165,13 @@ int main()
                     printf("Usuario no valido");
                 }
 
-                printf("menu de alumno");
+                mostrar_usuario_menu();
                 
 
                 break;
 
             case 2:
-                printf("Ingresar ID de identificación");
+                printf("Ingresar ID de identificación\n");
                 scanf("%d",&ID);
 
                 if ( validar_usuario(ID) != 2 )
