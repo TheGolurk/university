@@ -70,6 +70,8 @@ void modificar_producto(int id){
     struct productos producto;
 
     int index = 0;
+    int found = 0;
+
     while(fread(&producto, sizeof(struct productos), 1, ptrArchivo))
     {
         if(id != producto.id_producto)
@@ -77,6 +79,8 @@ void modificar_producto(int id){
             index++;
             continue;
         }
+        
+        found = 1;
     
         fseek(ptrArchivo, (sizeof(producto))*index, SEEK_SET);
 
@@ -100,18 +104,56 @@ void modificar_producto(int id){
             printf("MODIFICADO CORECTAMENTE! \n");
         }
         break;
-    }   
+    }
+
+    if (found == 0)
+    {
+        printf("No se encontro el producto");
+    }
+       
 
     fclose(ptrArchivo);
 }
 
-void eliminar_producto(){
+void eliminar_producto(int id){
     FILE *ptrArchivo;
-    ptrArchivo = fopen("productos.dat", "a+");
+    FILE *tmpArchivo;
+
+    ptrArchivo = fopen("productos.dat", "rb");
     if (ptrArchivo == NULL) {
         return;
     }
 
+    tmpArchivo = fopen("tmp.dat", "wb");
+    if (ptrArchivo == NULL) {
+        return;
+    }
+
+
+    int found = 0;
+    struct productos producto;
+
+    while(fread(&producto, sizeof(struct productos), 1, ptrArchivo))
+    {
+        if (producto.id_producto != id)
+        {
+            fwrite(&producto, sizeof(struct productos), 1, tmpArchivo);
+            found = 1;
+            continue;
+        }
+    }
+
+    fclose(ptrArchivo);
+    fclose(tmpArchivo);
+
+    if (found == 0)
+    {
+        printf("No encontrado\n");
+        return;
+    }
+    
+    remove("productos.dat");
+    rename("tmp.dat", "productos.dat");
 }
 
 void mostrar_ventas(){
@@ -132,6 +174,7 @@ void mostrar_ventas(){
 
 void mostrar_menu_administrador(){
     int opc = 0;
+    int id;
    
     while (opc != 5)
     {
@@ -151,11 +194,17 @@ void mostrar_menu_administrador(){
             break;
         
         case 2:
-            modificar_producto();
+            printf("Ingrese el id del producto a buscar:\n");
+            scanf("%d", &id);
+
+            modificar_producto(id);
             break;
 
         case 3:
-            eliminar_producto();
+            printf("Ingrese el id del producto a eliminar:\n");
+            scanf("%d", &id);
+
+            eliminar_producto(id);
             break;
 
         case 4:
