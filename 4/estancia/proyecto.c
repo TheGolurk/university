@@ -12,6 +12,13 @@ VALLE GONZÁLEZ LORENA
     BUILD:
         BASH: $ chmod 777 run.sh && ./run.sh
         MAKEFILE: $ make run
+
+    Notas: El proyecto usa git, en caso de mirar las versiones se puede usar checkout de 
+    tags para volver a el momento en el que se subió la actividad. (Tags a partir de la evidencia de avance 3).
+         - |Solo funciona si se descarga el proyecto desde el repositorio|
+
+    Ej: $ git checkout tags/v0.3 -b develop_tag
+
 */
 
 #include <stdio.h>
