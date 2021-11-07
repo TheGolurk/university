@@ -49,13 +49,6 @@ void agregar_producto(){
     scanf("%f", &reg_producto.precio);
 
     fwrite(&reg_producto, sizeof(struct productos), 1, ptrArchivo);
-    if(fwrite !=0)
-    {
-        printf("agregado correctamente\n");
-    }
-    else{
-        printf("ERROR\n");
-    }
 
     fclose(ptrArchivo);
 }
@@ -87,10 +80,10 @@ void modificar_producto(int id){
         producto.id_producto = producto.id_producto;
 
         printf("Nuevo modelo:\n");
-        scanf("%s", &producto.modelo);
+        scanf("%s", producto.modelo);
         
         printf("Nueva Talla:\n");
-        scanf("%s", &producto.talla);
+        scanf("%s", producto.talla);
         
         printf("Nuevo precio:\n");
         scanf("%f", &producto.precio);
@@ -99,10 +92,6 @@ void modificar_producto(int id){
         scanf("%d", &producto.cant_disponible);
 
         fwrite(&producto, sizeof(struct productos), 1, ptrArchivo);
-        if (fwrite != 0) 
-        {
-            printf("MODIFICADO CORECTAMENTE! \n");
-        }
         break;
     }
 
@@ -165,11 +154,12 @@ void mostrar_ventas(){
 
     struct compras compra;
     
-    while(fread(&compra, sizeof(struct compras), 1,ptrArchivo))
+    while(fread(&compra, sizeof(struct compras), 1, ptrArchivo))
     {
         printf("| %d \t %d \t %d  |", compra.id_compra, compra.id_producto, compra.fcompra);
     }
 
+    fclose(ptrArchivo);
 }
 
 void mostrar_menu_administrador(){
