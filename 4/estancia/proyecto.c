@@ -8,8 +8,10 @@ VALLE GONZÁLEZ LORENA
 
 
 /*
-compile:
- https://dev.to/iamkhalil11/all-you-need-to-know-about-c-static-libraries-1o0b
+    REPO: https://github.com/TheGolurk/university/tree/master/4/estancia
+    BUILD:
+        BASH: $ chmod 777 run.sh && ./run.sh
+        MAKEFILE: $ make run
 */
 
 #include <stdio.h>

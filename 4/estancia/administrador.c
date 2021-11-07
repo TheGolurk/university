@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 //declaración de struct productos
 struct productos{
   int   id_producto;
@@ -12,7 +11,7 @@ struct productos{
   int   cant_disponible;
 };
 
-//declaraci+on de struct compras
+//declaración de struct compras
 struct compras{
   int id_compra;
   int id_producto;
@@ -25,8 +24,6 @@ struct administrador{
   int opcion;
 };
 
-
-
 void agregar_producto(){
     FILE *ptrArchivo;
     ptrArchivo = fopen("productos.dat", "a+");
@@ -36,31 +33,77 @@ void agregar_producto(){
 
     struct productos reg_producto;
 
-    printf("Asignar clave para el producto:");
+    printf("Asignar clave para el producto:\n");
     scanf("%d", &reg_producto.id_producto);
 
-    printf("Modelo:");
+    printf("Modelo:\n");
     scanf("%s", reg_producto.modelo);
 
-    printf("Tallas:");
+    printf("Tallas:\n");
     scanf("%s",reg_producto.talla);
 
-    printf("Cantidad disponible:");
+    printf("Cantidad disponible:\n");
     scanf("%d", &reg_producto.cant_disponible);
 
-    printf("Precio:");
+    printf("Precio:\n");
     scanf("%f", &reg_producto.precio);
+
+    fwrite(&reg_producto, sizeof(struct productos), 1, ptrArchivo);
+    if(fwrite !=0)
+    {
+        printf("agregado correctamente\n");
+    }
+    else{
+        printf("ERROR\n");
+    }
+
+    fclose(ptrArchivo);
 }
 
-void modificar_producto(){
+void modificar_producto(int id){
     FILE *ptrArchivo;
-    ptrArchivo = fopen("productos.dat", "a+");
+    ptrArchivo = fopen("productos.dat", "r+b");
     if (ptrArchivo == NULL) {
         return;
     }
 
-}
+    struct productos producto;
 
+    int index = 0;
+    while(fread(&producto, sizeof(struct productos), 1, ptrArchivo))
+    {
+        if(id != producto.id_producto)
+        {
+            index++;
+            continue;
+        }
+    
+        fseek(ptrArchivo, (sizeof(producto))*index, SEEK_SET);
+
+        producto.id_producto = producto.id_producto;
+
+        printf("Nuevo modelo:\n");
+        scanf("%s", &producto.modelo);
+        
+        printf("Nueva Talla:\n");
+        scanf("%s", &producto.talla);
+        
+        printf("Nuevo precio:\n");
+        scanf("%f", &producto.precio);
+        
+        printf("Nueva cantidad disponible:\n");
+        scanf("%d", &producto.cant_disponible);
+
+        fwrite(&producto, sizeof(struct productos), 1, ptrArchivo);
+        if (fwrite != 0) 
+        {
+            printf("MODIFICADO CORECTAMENTE! \n");
+        }
+        break;
+    }   
+
+    fclose(ptrArchivo);
+}
 
 void eliminar_producto(){
     FILE *ptrArchivo;
@@ -70,7 +113,6 @@ void eliminar_producto(){
     }
 
 }
-
 
 void mostrar_ventas(){
     FILE *ptrArchivo;
@@ -83,11 +125,10 @@ void mostrar_ventas(){
     
     while(fread(&compra, sizeof(struct compras), 1,ptrArchivo))
     {
+        printf("| %d \t %d \t %d  |", compra.id_compra, compra.id_producto, compra.fcompra);
     }
 
 }
-
-
 
 void mostrar_menu_administrador(){
     int opc = 0;
