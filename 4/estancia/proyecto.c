@@ -15,127 +15,10 @@ compile:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "validator.c"
 #include "administrador.c"
 #include "usuario.c"
-
-
-//declaración del  struct alumno
-struct alumno {
-
-    int id_alumno;
-    char nombre[30];
-    char grupo[5];
-    int  opcionRealizar;
-    char modelo[20];
-
-};
-
-//declaración de struct administrador
-struct administrador{
-  int id_identificación;
-  int opcion;
-};
-
-
-//declaración de struct productos
-struct productos{
-  int id_producto;
-  char modelo[20];
-  char talla[15];
-  float precio;
-  int cant_disponible;
-
-};
-
-//declaraci+on de struct compras
-struct compras{
-  int id_compra;
-  int id_producto;
-  int fcompra;
-  
-};
-
-
-//información de los alumnos debe tener consulta de los productos, hacer su compra, consultar compra
-void c_productos(){
-
-    FILE *ptrArchivo;
-    struct alumno alumnos;
-
-    ptrArchivo = fopen ("alumnos.dat", "r");
-
-    if(ptrArchivo == NULL)
-    {
-        return;
-        
-    }
-
-    while(fread(&alumnos, sizeof(struct alumno), 1, ptrArchivo))
-    {
-
-    }
-
-}
-
-void compra(){
-
-}
-
-void c_compra(){
-
-}
-
-
-
-//información del administrador debe contener   para agregar , editar,eliminar y mostrar los productos vendidos
-void agregar(){
-
-    FILE *ptrArchivo;
-    ptrArchivo = fopen("productos.dat", "a+");
-    if (ptrArchivo == NULL) {
-        return;
-    }
-
-    struct productos reg_producto;
-
-    printf("Asignar clave para el producto:");
-    scanf("%d", &reg_producto.id_producto);
-
-
-    printf("Modelo:");
-    scanf("%s", reg_producto.modelo);
-
-    printf("Tallas:");
-    scanf("%s",reg_producto.talla);
-
-
-    printf("Cantidad disponible:");
-    scanf("%d", &reg_producto.cant_disponible);
-
-
-    printf("Precio:");
-    scanf("%f", &reg_producto.precio);
-}
-
-void modificar(){
-
-}
-
-
-void eliminar(){
-
-}
-
-
-void mostrar_ventas(){
-
-}
-
-//para hacer relación de la compra del alumno 
-void inf_compras(){
-
-}
 
 int main()
 {
@@ -147,11 +30,11 @@ int main()
     while(opcion != 3)
     {
 
-        printf("\n---------------------------------------------------");
+        printf("\n-----------------------------------------------");
         printf("\n BIENVENIDO A ONLINE SHOP");
-        printf("\n---------------------------------------------------");
-        printf("Seleccione el modo de usuario:\n");
-        printf("1.- ALUMNO\n2.- ADMINISTRADOR\n3.- Salir\n");
+        printf("\n-----------------------------------------------");
+        printf("\nSeleccione el modo de usuario:");
+        printf("\n1.- ALUMNO\n2.- ADMINISTRADOR\n3.- Salir\n");
         scanf("%d", &opcion);
 
         switch(opcion)
@@ -162,7 +45,8 @@ int main()
 
                 if ( validar_usuario(ID) != 1 )
                 {
-                    printf("Usuario no valido");
+                    printf("Usuario no valido\n");
+                    continue;
                 }
 
                 mostrar_usuario_menu();
@@ -172,27 +56,26 @@ int main()
 
             case 2:
                 printf("Ingresar ID de identificación\n");
-                scanf("%d",&ID);
+                scanf("%d", &ID);
 
                 if ( validar_usuario(ID) != 2 )
                 {
-                    printf("Usuario no valido");
+                    printf("Usuario no valido\n");
+                    continue;
                 }
 
-                printf("menu de administrador");
+                mostrar_menu_administrador();
 
                 break;
 
             case 3:
-                printf("HASTA PRONTO");
+                printf("HASTA PRONTO\n");
                 break;
 
             default:
+                printf("Opcion invalida, adios\n");
                 break;
-
-
         }
-
     }
 
   return 0;

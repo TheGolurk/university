@@ -12,7 +12,6 @@ int validar_usuario(int ID) {
     if (ID == STUDENT_ID) {
         return 1;
     } else if (ID == ADMIN_ID) {
-
         return 2;
     }
 

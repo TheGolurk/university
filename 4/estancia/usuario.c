@@ -2,14 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "errores.c"
-#include "constantes.c"
+
+struct alumno {
+    int  id_alumno;
+    char nombre[30];
+    char grupo[5];
+    int  opcionRealizar;
+    char modelo[20];
+};
 
 void mostrar_productos(){
 
 }
 
-void comprar(){
+void comprar_producto(){
 
 }
 
@@ -25,7 +31,7 @@ void compras_realizadas(){
         
     }
 
-    while(fread(&alumnos, sizeof(struct alumno), 1, ptrArchivo))
+    while(fread(&alumnos, sizeof(alumnos), 1, ptrArchivo))
     {
 
     }
@@ -37,13 +43,11 @@ void mostrar_usuario_menu() {
 
     while (opc != 4)
     {
-        printf(ANSI_COLOR_CYAN "---------------MENU DE USUARIO----------------\n" ANSI_COLOR_CYAN);
-        printf(ANSI_COLOR_RESET);
-        
+        printf("---------------MENU DE USUARIO----------------\n");
         printf("1.- Mostrar Productos \n");
         printf("2.- Hacer una compra \n");
         printf("3.- Compras realizadas\n");
-        printf("----------------4.- Salir--------------------\n");
+        printf("4.- Salir\n");
 
         scanf("%d", &opc);
 
@@ -54,7 +58,7 @@ void mostrar_usuario_menu() {
             break;
 
         case 2:
-            comprar();
+            comprar_producto();
             break;
 
         case 3:
@@ -66,7 +70,7 @@ void mostrar_usuario_menu() {
             break;
         
         default:
-            WrongOption();
+            printf("opcion incorrecta\n");
             break;
         }
     }
