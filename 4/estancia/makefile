@@ -4,6 +4,9 @@ run:
 clean:
 	./clean.sh
 
+clean-bat:
+	./clean-bat.sh
+
 taco:
 	curl -L git.io/taco
 
