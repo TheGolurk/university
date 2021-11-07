@@ -37,7 +37,7 @@ void agregar_producto(){
     scanf("%d", &reg_producto.id_producto);
 
     printf("Modelo:\n");
-    scanf("%s", reg_producto.modelo);
+    scanf("%s",reg_producto.modelo);
 
     printf("Tallas:\n");
     scanf("%s",reg_producto.talla);
@@ -147,7 +147,7 @@ void eliminar_producto(int id){
 
 void mostrar_ventas(){
     FILE *ptrArchivo;
-    ptrArchivo = fopen("compras.dat", "a+");
+    ptrArchivo = fopen("compras.dat", "r");
     if (ptrArchivo == NULL) {
         return;
     }
@@ -162,11 +162,29 @@ void mostrar_ventas(){
     fclose(ptrArchivo);
 }
 
+void mostrar_productos_actuales(){
+    FILE *ptrArchivo;
+    ptrArchivo = fopen("productos.dat", "r");
+    if (ptrArchivo == NULL) {
+        return;
+    }
+
+    struct productos producto;
+    
+    while(fread(&producto, sizeof(struct productos), 1, ptrArchivo))
+    {
+        printf("| ID: %d \t Modelo: %s \t  Talla: %s \t Precio: $%0.2f \t Cantidad disponible: %d |\n", 
+        producto.id_producto, producto.modelo, producto.talla, producto.precio, producto.cant_disponible);
+    }
+
+    fclose(ptrArchivo);
+}
+
 void mostrar_menu_administrador(){
     int opc = 0;
     int id;
    
-    while (opc != 5)
+    while (opc != 6)
     {
 
         printf("--------------MENU DE ADMINISTRADOR----------------\n");
@@ -174,7 +192,8 @@ void mostrar_menu_administrador(){
         printf("2.- Modificar producto\n");  
         printf("3.- Eliminar producto\n");     
         printf("4.- Mostrar productos vendidos\n");   
-        printf("5.- Salir\n");
+        printf("5.- Mostrar todos los productos\n");
+        printf("6.- Salir\n");
         scanf("%d", &opc);
 
         switch (opc)
@@ -202,6 +221,10 @@ void mostrar_menu_administrador(){
             break;
 
         case 5:
+            mostrar_productos_actuales();
+            break;
+
+        case 6:
             printf("\n\n\n");
             break;
         
