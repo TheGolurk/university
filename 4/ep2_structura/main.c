@@ -29,13 +29,22 @@ struct elemento{
     struct elemento *sig;
 };
 
-int insertar(int datoNuevo, struct elemento **inicio, struct elemento **fin);
-int insertarInicio(int datoNuevo, struct elemento **inicio, struct elemento **fin);
+int insertar(struct evento datoNuevo, struct elemento **inicio, struct elemento **fin);
+int insertarInicio(struct evento datoNuevo, struct elemento **inicio, struct elemento **fin);
+int insertarMedio(struct evento datoNuevo, struct elemento *anterior);
+
 struct evento eliminar (struct evento datoE, struct elemento **inicio, struct elemento **fin);
+
 void mostrarTodos(struct elemento *inicio);
 void mostrarEvento(struct elemento *inicio);
+
 void modificar(struct elemento *inicio);
+
 int validarDia(struct tm primeraFecha, struct tm segundaFecha);
+int esMayor(struct tm primeraFecha, struct tm segundaFecha);
+
+struct evento agregar(); 
+
 
 //NOTAS
 //Agregar evento (no debe rpetirse fecha y hora) estar ordenados por la fecha
@@ -44,8 +53,52 @@ int validarDia(struct tm primeraFecha, struct tm segundaFecha);
 //mostrar eventos de un día (por fecha específica)
 //modificar descripción o invitados
 
+int main (int argc, char **argv)
+{
+    struct elemento *inicio=NULL, *fin=NULL;
+    int i, dato;
 
-int insertar(int datoNuevo, struct elemento **inicio, struct elemento **fin)
+    int opcion = 0;
+
+    while (opcion != 6)
+    {
+        printf("--------------------AGENDA------------------------");
+        printf("1.-Agendar evento\n  2.- Eliminar  evento\n 3.-Modificar evento \n ");
+        printf("4.-Consultar eventos\n 5.-Consultar evento por fecha \n 6.- Salir");
+        scanf("%d", &opcion);
+
+        switch (opcion)
+        {
+        case 1:
+            insertar(agregar(), &inicio, &fin);
+            break;
+
+        case 2:
+            break;
+
+        case 3:
+            break;
+
+        case 4:
+            mostrarTodos(inicio);
+            break;
+
+        case 5:
+            mostrarEvento(inicio);
+            break;
+
+        case 6:
+            printf("HASTA LUEGO\n");
+            break;
+
+        default:
+            printf("Opcion incorrecta, intente de nuevo\n");
+            break;
+        }
+    }
+}
+
+int insertar(struct evento datoNuevo, struct elemento **inicio, struct elemento **fin)
 {
     if(*inicio == NULL){
         return insertarInicio(datoNuevo,inicio,fin);
@@ -54,7 +107,7 @@ int insertar(int datoNuevo, struct elemento **inicio, struct elemento **fin)
 
     while (aux1 != NULL)
     {
-        if (datoNuevo > aux1->dato)
+        if (esMayor(datoNuevo.fecha, aux1->dato.fecha) == 1)
         {
             aux1 =aux1->sig;
         }
@@ -65,10 +118,11 @@ int insertar(int datoNuevo, struct elemento **inicio, struct elemento **fin)
     {
         return insertarInicio(datoNuevo, inicio,fin);
     }
-    
+
+    return insertarMedio(datoNuevo, aux1); 
 }
 
-int insertarInicio(int datoNuevo, struct elemento **inicio, struct elemento **fin)
+int insertarInicio(struct evento datoNuevo, struct elemento **inicio, struct elemento **fin)
 {
     struct elemento *nuevo;
     nuevo=(struct elemento *)malloc(sizeof(struct elemento));
@@ -89,11 +143,30 @@ int insertarInicio(int datoNuevo, struct elemento **inicio, struct elemento **fi
 
 }
 
+int insertarMedio(struct evento datoNuevo, struct elemento *anterior)
+{
+    struct elemento *nuevo;
+    nuevo =(struct elemento *)malloc(sizeof(struct elemento));
+
+    if (nuevo == NULL)
+    {
+        return 0;
+    }
+
+    nuevo->dato = datoNuevo;
+    nuevo->ant = anterior;
+    nuevo->sig = anterior->sig;
+    
+
+    nuevo->sig->ant = nuevo;
+    anterior->sig = nuevo;
+    return 1;
+}
+
+
 
 struct evento eliminar (struct evento datoE, struct elemento **inicio, struct elemento **fin)
 {
-
-
 
 }
 
@@ -101,11 +174,10 @@ void modificar(struct elemento *inicio)
 {
 
 
-
 }
 
 
-void agregar() {
+struct evento agregar() {
     struct evento e;
 
     printf("Ingresa el nombre de evento: \n");
@@ -134,53 +206,10 @@ void agregar() {
 
     printf("Hora de finalización: \n");
     scanf("%d", &e.horaFin);
+
+    return e;
 }
 
-
-int main (int argc, char **argv)
-{
-    struct elemento *inicio=NULL, *fin=NULL;
-    int i, dato;
-
-    int opcion = 0;
-
-    while (opcion != 6)
-    {
-        printf("--------------------AGENDA------------------------");
-        printf("1.-Agendar evento\n  2.- Eliminar  evento\n 3.-Modificar evento \n ");
-        printf("4.-Consultar eventos\n 5.-Consultar evento por fecha \n 6.- Salir");
-        scanf("%d", &opcion);
-
-        switch (opcion)
-        {
-        case 1:
-
-            break;
-
-        case 2:
-            break;
-
-        case 3:
-            break;
-
-        case 4:
-            mostrarTodos(inicio);
-            break;
-
-        case 5:
-            mostrarEvento(inicio);
-            break;
-
-        case 6:
-            printf("HASTA LUEGO\n");
-            break;
-
-        default:
-            printf("Opcion incorrecta, intente de nuevo\n");
-            break;
-        }
-    }
-}
 
 void mostrarTodos(struct elemento *inicio) {
     if (inicio == NULL) {
@@ -199,10 +228,14 @@ void mostrarTodos(struct elemento *inicio) {
 }
 
 int validarDia(struct tm primeraFecha, struct tm segundaFecha) {
-    double sec = difftime(primeraFecha, segundaFecha);
-    if (sec == 0) {
-        return 1;
+
+    if (primeraFecha.tm_year == segundaFecha.tm_year && 
+    primeraFecha.tm_mon == segundaFecha.tm_mon && 
+    primeraFecha.tm_mday == segundaFecha.tm_mday)
+    {
+       return 1; 
     }
+    
 
     return 0;
 }
@@ -266,4 +299,18 @@ void mostrarEvento(struct elemento *inicio) {
             break;
         }
     }
+}
+
+int esMayor(struct tm primeraFecha, struct tm segundaFecha) {
+    if (primeraFecha.tm_year > segundaFecha.tm_year &&
+        primeraFecha.tm_mon > segundaFecha.tm_mon &&
+        primeraFecha.tm_mday > segundaFecha.tm_mday &&
+        primeraFecha.tm_hour > segundaFecha.tm_hour)
+    {
+        return 1;
+    } else {
+        return 0;
+    }
+    
+    return 0;
 }
