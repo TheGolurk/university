@@ -34,7 +34,11 @@ int insertar(struct evento datoNuevo, struct elemento **inicio, struct elemento 
 int insertarInicio(struct evento datoNuevo, struct elemento **inicio, struct elemento **fin);
 int insertarMedio(struct evento datoNuevo, struct elemento *anterior);
 
-struct evento eliminar (struct evento datoE, struct elemento **inicio, struct elemento **fin);
+int eliminar (struct evento datoE, struct elemento **inicio, struct elemento **fin);
+int eliminarInicio(struct elemento **inicio, struct elemento **fin);
+int eliminarMedio(struct elemento *eliminado);
+int eliminarFinal(struct elemento **inicio, struct elemento **fin);
+
 
 void mostrarTodos(struct elemento *inicio);
 void mostrarEvento(struct elemento *inicio);
@@ -75,7 +79,7 @@ int main (int argc, char **argv)
             break;
 
         case 2:
-            // eliminar();
+            int eliminado = eliminar(agregar(), &inicio, &fin);
             break;
 
         case 3:
@@ -167,10 +171,88 @@ int insertarMedio(struct evento datoNuevo, struct elemento *anterior)
 
 
 
-struct evento eliminar (struct evento datoE, struct elemento **inicio, struct elemento **fin)
+int eliminar (struct evento datoE, struct elemento **inicio, struct elemento **fin)
+{
+    struct elemento *aux;
+    aux = *inicio;
+
+    while (aux != NULL){
+        if ( strcmp(aux->dato.nombreEvento, datoE.nombreEvento) == 0 &&
+            validarDia(aux->dato.fecha, datoE.fecha) == 0 ) {
+            break;
+        }
+        aux = aux->sig;
+    }
+
+    if (aux == NULL){
+        return -1;
+    }
+    if(aux->ant == NULL){
+        return eliminarInicio(inicio, fin);
+    }
+    if(aux->sig == NULL){
+        return eliminarInicio(inicio, fin);
+    }
+    return eliminarMedio(aux);
+}
+
+int eliminarInicio(struct elemento **inicio, struct elemento **fin) {
+    int datoEliminado = -1;
+
+    if(*inicio == NULL){
+        return datoEliminado;
+    }
+
+    struct elemento *eliminado = *inicio;
+
+    *inicio = (*inicio)->sig;
+
+    if (*inicio==NULL){
+        (*fin)=NULL;
+    }else{
+        (*inicio)->ant = NULL;
+    }
+    free(eliminado);
+
+    return 1;
+}
+
+int eliminarMedio(struct elemento *eliminado)
 {
 
+    eliminado->ant->sig = eliminado->sig;
+
+    eliminado->sig->ant = eliminado->ant;
+
+    free(eliminado);
+
+    return 1;
 }
+
+int eliminarFinal(struct elemento **inicio, struct elemento **fin)
+{
+    int datoEliminado = -1;
+
+    if(*inicio == NULL){
+        return datoEliminado;
+    }
+
+    struct elemento *eliminado = *fin;
+
+    *fin = (*fin)->ant;
+
+    if (*fin==NULL){
+        *inicio = NULL;
+    }else{
+        (*fin)->sig = NULL;
+    }
+    free(eliminado);
+
+    return 1;
+}
+
+
+
 
 void modificar(struct elemento *inicio)
 {
@@ -221,7 +303,7 @@ void mostrarTodos(struct elemento *inicio) {
 
     while (inicio != NULL)
     {
-        printf("|%s| (%s) anio: %d. mes: %d. dia: %d. hora: %d. Invitado: %s\n", inicio->dato.nombreEvento,
+        printf("Evento:|%s|\n Descripcion:(%s) Año: %d. Mes: %d. Dia: %d. Hora: %d. Invitado: %s\n", inicio->dato.nombreEvento,
         inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
         inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
 
@@ -249,7 +331,7 @@ void mostrarEvento(struct elemento *inicio) {
     }
     
     struct tm fechaReq;
-    printf("Ingrese el anio \n");
+    printf("Ingrese el año \n");
     scanf("%d", &fechaReq.tm_year);
 
     printf("Ingrese el mes \n");
@@ -273,7 +355,7 @@ void mostrarEvento(struct elemento *inicio) {
         return;
     }
 
-        printf("Evento: |%s| (%s) año: %d. mes: %d. dia: %d. hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
+        printf("Evento: |%s| Descripción: (%s) Año: %d. Mes: %d. Dia: %d. Hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
         inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
         inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
 
@@ -290,7 +372,7 @@ void mostrarEvento(struct elemento *inicio) {
 
             inicio = inicio->sig;
 
-            printf("|%s| (%s) año: %d. mes: %d. dia: %d. hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
+            printf("Evento:|%s| \n Descripción:(%s)\n Año: %d. Mes: %d. Dia: %d. Hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
             inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
             inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
             break;
@@ -303,7 +385,7 @@ void mostrarEvento(struct elemento *inicio) {
 
             inicio = inicio->ant;
 
-            printf("|%s| (%s) año: %d. mes: %d. dia: %d. hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
+            printf("Evento|%s|\n Descripción:(%s) Año: %d. Mes: %d. Dia: %d. Hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
             inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
             inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
             break;
