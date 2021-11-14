@@ -80,6 +80,15 @@ int main (int argc, char **argv)
 
         case 2:
             int eliminado = eliminar(consultar(), &inicio, &fin);
+
+            if (eliminado == 1)
+            {
+                printf("eliminado correctamente\n");
+            } else if (eliminado == -1) {
+                printf("No se elimino\n");
+            }
+            
+
             break;
 
         case 3:
@@ -178,7 +187,7 @@ int eliminar (struct evento datoE, struct elemento **inicio, struct elemento **f
 
     while (aux != NULL){
         if ( strcmp(aux->dato.nombreEvento, datoE.nombreEvento) == 0 &&
-            validarDia(aux->dato.fecha, datoE.fecha) == 0 ) {
+            validarDia(aux->dato.fecha, datoE.fecha) == 1 ) {
             break;
         }
         aux = aux->sig;
