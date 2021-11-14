@@ -14,11 +14,12 @@ EP2_Implementación y uso de listas de datos
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <string.h>
 
 struct evento{
     char nombreEvento[30];
-    char descripcion;
-    int invitados[30];
+    char descripcion[30];
+    char invitados[30];
     struct tm fecha;
     int horaFin;
 };
@@ -62,18 +63,19 @@ int main (int argc, char **argv)
 
     while (opcion != 6)
     {
-        printf("--------------------AGENDA------------------------");
-        printf("1.-Agendar evento\n  2.- Eliminar  evento\n 3.-Modificar evento \n ");
-        printf("4.-Consultar eventos\n 5.-Consultar evento por fecha \n 6.- Salir");
+        printf("\n--------------------AGENDA------------------------\n");
+        printf(" 1.-Agendar evento\n 2.- Eliminar  evento\n 3.-Modificar evento");
+        printf("\n 4.-Consultar eventos\n 5.-Consultar evento por fecha \n 6.- Salir\n");
         scanf("%d", &opcion);
 
         switch (opcion)
-        {
+        { 
         case 1:
             insertar(agregar(), &inicio, &fin);
             break;
 
         case 2:
+            // eliminar();
             break;
 
         case 3:
@@ -219,7 +221,7 @@ void mostrarTodos(struct elemento *inicio) {
 
     while (inicio != NULL)
     {
-        printf("|%s| (%s) anio: %d. mes: %d. dia: %d. hora: %d. Invitado: %s", inicio->dato.nombreEvento,
+        printf("|%s| (%s) anio: %d. mes: %d. dia: %d. hora: %d. Invitado: %s\n", inicio->dato.nombreEvento,
         inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
         inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
 
@@ -256,48 +258,62 @@ void mostrarEvento(struct elemento *inicio) {
     printf("Ingrese el dia \n");
     scanf("%d", &fechaReq.tm_mday);
 
-    char opc = ' ';
-    int flag = 0;
+    int opc = 0;
 
-    while (inicio != NULL || opc == 'n') {
-
-        if (flag != 0) {
-            return;
-        }
-
+    while (inicio != NULL) {
         if ( validarDia(inicio->dato.fecha, fechaReq) == 0 ) {
             inicio = inicio->sig;
             continue;
         }
+        break; 
+    }
 
-        printf("|%s| (%s) anio: %d. mes: %d. dia: %d. hora: %d. Invitado: %s", inicio->dato.nombreEvento,
+    if (inicio == NULL) {
+        printf("Sin datos\n");
+        return;
+    }
+
+        printf("|%s| (%s) año: %d. mes: %d. dia: %d. hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
         inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
         inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
 
-        printf("Mostrar siguiente(s), anterior(a) o salir(n)? a/s/n");
-        scanf("%c", opc);
+        printf("Mostrar siguiente(1), anterior(2) o salir(0)? 0/1/2\n");
+        scanf("%d", &opc);
 
-        switch (opc)
-        {
-        case 's':
+    switch (opc)
+    {
+        case 1:
+            if (inicio->sig == NULL) {
+                printf("Sin datos\n");
+                return;
+            }
+
             inicio = inicio->sig;
-            flag = 1;
+
+            printf("|%s| (%s) año: %d. mes: %d. dia: %d. hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
+            inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
+            inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
             break;
         
-        case 'a': 
+        case 2: 
+            if (inicio->ant == NULL) {
+                printf("Sin datos\n");
+                return;
+            }
+
             inicio = inicio->ant;
-            flag = 1;
+
+            printf("|%s| (%s) año: %d. mes: %d. dia: %d. hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
+            inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
+            inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
             break;
  
-        case 'n':
-            flag = 1; 
+        case 0: 
             break;
  
         default:
             printf("opcion incorrecta \n");
-            opc = 'n';
             break;
-        }
     }
 }
 
