@@ -273,7 +273,7 @@ void mostrarEvento(struct elemento *inicio) {
         return;
     }
 
-        printf("|%s| (%s) año: %d. mes: %d. dia: %d. hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
+        printf("Evento: |%s| (%s) año: %d. mes: %d. dia: %d. hora: %d. Invitado: %s \n", inicio->dato.nombreEvento,
         inicio->dato.descripcion, inicio->dato.fecha.tm_year,inicio->dato.fecha.tm_mon,
         inicio->dato.fecha.tm_mday, inicio->dato.fecha.tm_hour, inicio->dato.invitados);
 
