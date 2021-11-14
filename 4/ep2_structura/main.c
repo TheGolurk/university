@@ -49,7 +49,7 @@ int validarDia(struct tm primeraFecha, struct tm segundaFecha);
 int esMayor(struct tm primeraFecha, struct tm segundaFecha);
 
 struct evento agregar(); 
-
+struct evento consultar(); 
 
 //NOTAS
 //Agregar evento (no debe rpetirse fecha y hora) estar ordenados por la fecha
@@ -79,7 +79,7 @@ int main (int argc, char **argv)
             break;
 
         case 2:
-            int eliminado = eliminar(agregar(), &inicio, &fin);
+            int eliminado = eliminar(consultar(), &inicio, &fin);
             break;
 
         case 3:
@@ -290,6 +290,24 @@ struct evento agregar() {
 
     printf("Hora de finalización: \n");
     scanf("%d", &e.horaFin);
+
+    return e;
+}
+
+struct evento consultar() {
+    struct evento e;
+
+    printf("Ingresa el nombre de evento: \n");
+    scanf("%s",e.nombreEvento);
+
+    printf(" Introduzca el dia para el evento:\n ");
+    scanf("%d", &e.fecha.tm_mday);
+
+    printf(" Introduzca el mes en numero: \n ");
+    scanf("%d", &e.fecha.tm_mon);
+
+    printf(" Introduzca el año: \n");
+    scanf("%d",&e.fecha.tm_year);
 
     return e;
 }
