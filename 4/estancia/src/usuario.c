@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 
 struct alumno {
@@ -11,19 +12,54 @@ struct alumno {
     char modelo[20];
 };
 
-void mostrar_productos(){
+struct productos{
+    int   id_producto;
+    char  modelo[20];
+    char  talla[15];
+    float precio;
+    int   cant_disponible;
+};
 
+struct compras{
+    int id_usuario;
+    int id_producto;
+    struct tm fecha;
+};
+
+
+
+void mostrar_productos(){
+    FILE *ptrArchivo;
+    ptrArchivo = fopen("productos.dat", "r");
+    if (ptrArchivo == NULL) {
+        return;
+    }
+
+    struct productos producto;
+    
+    while(fread(&producto, sizeof(struct productos), 1, ptrArchivo))
+    {
+        printf("| ID: %d \t Modelo: %s \t  Talla: %s \t Precio: $%0.2f \t Cantidad disponible: %d |\n", 
+        producto.id_producto, producto.modelo, producto.talla, producto.precio, producto.cant_disponible);
+    }
+
+    fclose(ptrArchivo);
 }
 
 void comprar_producto(){
+    
 
+    // listar productos
+    // leer el producto a eliminar
+    // modificar el archivo de productos (la cantidad) 
+    // agrega en el archivo de compras (usuario + producto)
 }
 
-void compras_realizadas(){
+void compras_realizadas(int ID){
     FILE *ptrArchivo;
     struct alumno alumnos;
 
-    ptrArchivo = fopen ("alumnos.dat", "r");
+    ptrArchivo = fopen ("compras.dat", "r");
 
     if(ptrArchivo == NULL)
     {
@@ -38,7 +74,7 @@ void compras_realizadas(){
 
 }
 
-void mostrar_usuario_menu() {
+void mostrar_usuario_menu(int ID) {
     int opc = 0;
 
     while (opc != 4)
@@ -62,7 +98,7 @@ void mostrar_usuario_menu() {
             break;
 
         case 3:
-            compras_realizadas();
+            compras_realizadas(ID);
             break;
 
         case 4:

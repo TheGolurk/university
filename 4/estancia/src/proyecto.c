@@ -58,7 +58,7 @@ int main()
                     continue;
                 }
 
-                mostrar_usuario_menu();
+                mostrar_usuario_menu(ID);
                 
 
                 break;
