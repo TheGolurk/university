@@ -25,6 +25,8 @@ VALLE GONZÁLEZ LORENA
 #include <stdlib.h>
 #include <string.h>
 
+
+#include "general.c"
 #include "validator.c"
 #include "administrador.c"
 #include "usuario.c"

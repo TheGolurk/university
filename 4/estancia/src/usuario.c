@@ -4,30 +4,6 @@
 #include <time.h>
 
 
-struct alumno {
-    int  id_alumno;
-    char nombre[30];
-    char grupo[5];
-    int  opcionRealizar;
-    char modelo[20];
-};
-
-struct productos{
-    int   id_producto;
-    char  modelo[20];
-    char  talla[15];
-    float precio;
-    int   cant_disponible;
-};
-
-struct compras{
-    int id_usuario;
-    int id_producto;
-    struct tm fecha;
-};
-
-
-
 void mostrar_productos(){
     FILE *ptrArchivo;
     ptrArchivo = fopen("productos.dat", "r");
@@ -142,9 +118,9 @@ void compras_realizadas(int id_usuario){
             {
                 if (compra.id_producto == producto.id_producto)
                 {
-                    printf("| ID: %d \t Modelo: %s \t  Talla: %s \t Precio: $%0.2f \t. Fecha de compra %d/%d/%d |\n", 
+                    printf("| ID: %d \t Modelo: %s \t  Talla: %s \t Precio: $%0.2f \t Fecha de compra %d/%d/%d |\n", 
                     producto.id_producto, producto.modelo, producto.talla, producto.precio,
-                    compra.fecha.tm_year, compra.fecha.tm_mon, compra.fecha.tm_mday);
+                    compra.fecha.tm_year+1900, compra.fecha.tm_mon+1, compra.fecha.tm_mday);
                 }
             }
             fclose(ptrArchivo2);

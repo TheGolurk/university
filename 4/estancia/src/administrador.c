@@ -2,27 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-//declaración de struct productos
-struct productos{
-  int   id_producto;
-  char  modelo[20];
-  char  talla[15];
-  float precio;
-  int   cant_disponible;
-};
 
-//declaración de struct compras
-struct compras{
-  int id_compra;
-  int id_producto;
-  int fcompra;
-};
-
-//declaración de struct administrador
-struct administrador{
-  int id_identificación;
-  int opcion;
-};
 
 void agregar_producto(){
     FILE *ptrArchivo;
@@ -156,7 +136,7 @@ void mostrar_ventas(){
     
     while(fread(&compra, sizeof(struct compras), 1, ptrArchivo))
     {
-        printf("| %d \t %d \t %d/%d/%d  |", compra.id_usuario, compra.id_producto, 
+        printf("| %d \t %d \t %d/%d/%d  |\n", compra.id_usuario, compra.id_producto, 
         compra.fecha.tm_year, compra.fecha.tm_mon, compra.fecha.tm_mday);
     }
 
