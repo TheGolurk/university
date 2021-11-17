@@ -156,7 +156,8 @@ void mostrar_ventas(){
     
     while(fread(&compra, sizeof(struct compras), 1, ptrArchivo))
     {
-        printf("| %d \t %d \t %d  |", compra.id_compra, compra.id_producto, compra.fcompra);
+        printf("| %d \t %d \t %d/%d/%d  |", compra.id_usuario, compra.id_producto, 
+        compra.fecha.tm_year, compra.fecha.tm_mon, compra.fecha.tm_mday);
     }
 
     fclose(ptrArchivo);
