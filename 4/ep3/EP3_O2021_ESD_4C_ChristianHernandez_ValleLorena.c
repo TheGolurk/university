@@ -17,10 +17,10 @@ void generarInstancia(int tam, int min, int max);
 int * generarDatosBuscadosExistentes(int tam, int datos[],int porcentaje);
 int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje);
 void  mostrar(int  tam, int  datos[]);
+int* obtenerDatos(int tam, int porcentaje);
 
 int main()
 {
-
     int tam, tamB, min, max, porcentaje;
     int *datos, *datosB_E, *datosB_NE;    
     int opc=1;
@@ -36,7 +36,7 @@ int main()
                 printf("Ingresa el tamaño:\n");
                 scanf("%d", &tam);
 
-                printf("Ingresa el porcentaje:\n");
+                printf("Ingresa el porcentaje: %(10,50,100)\n");
                 scanf("%d", &porcentaje);
 
                 generarInstancia(tam, min, max);
@@ -52,8 +52,6 @@ int main()
         }
     }
 
-
-
     mostrar(tam, datos);
     tamB=tam*porcentaje/100;
     
@@ -66,6 +64,59 @@ int main()
     
     return 0;
 }
+
+int* obtenerDatos(int tam, int porcentaje)
+{
+    int *datos;
+    int tamNuevo;
+
+    switch (porcentaje)
+    {
+    case 10:
+        tamNuevo = (tam*0.10) - 1;
+        break;
+    
+    case 50:
+        tamNuevo = (tam / 2) - 1;
+        break;
+
+    case 100:
+        tamNuevo = tam -1;
+        break;
+
+    default:
+        printf("Porcentaje incorrecto");
+        return datos;
+        break;
+    }
+
+
+    datos=(int *)malloc(sizeof(int)*tamNuevo);
+
+    FILE *ptrArchivo;
+    ptrArchivo = fopen("EP3.dat", "r");
+    if (ptrArchivo == NULL) {
+        return;
+    }
+
+    struct instancia e;
+    
+    int index = 0;
+    while(fread(&e, sizeof(struct instancia), 1, ptrArchivo))
+    {
+        if (index == tamNuevo)
+        {
+            break;
+        }
+
+        datos[index]= e.dato;
+
+        index++;
+    }
+
+    fclose(ptrArchivo);
+}
+    
 
 void  mostrar(int  tam, int  datos[]){
    int  i;
@@ -89,6 +140,8 @@ void generarInstancia(int tam, int min, int max){
     for(size_t i=0;i<tam;i++){
         e.dato = rand()%(max-min+1)+min;
     }
+
+    fclose(ptrArchivo);
 }
 
 int * generarDatosBuscadosExistentes(int tam, int datos[],int porcentaje){
