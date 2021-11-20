@@ -18,14 +18,9 @@ VALLE GONZÁLEZ LORENA
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <string.h>
-#include "validator.c"
-
 
 #define ADMIN_ID 9999
 #define ARR_SIZE(x)  (sizeof(x) / sizeof((x)[0]))
-
-
 
 // structs
 struct productos{
