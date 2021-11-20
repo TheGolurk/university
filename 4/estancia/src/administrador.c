@@ -1,88 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 
 
-void agregar_producto(){
-    FILE *ptrArchivo;
-    ptrArchivo = fopen("productos.dat", "a+");
-    if (ptrArchivo == NULL) {
-        return;
-    }
-
-    struct productos reg_producto;
-
-    printf("Asignar clave para el producto:\n");
-    scanf("%d", &reg_producto.id_producto);
-
-    printf("Modelo:\n");
-    scanf("%s",reg_producto.modelo);
-
-    printf("Tallas:\n");
-    scanf("%s",reg_producto.talla);
-
-    printf("Cantidad disponible:\n");
-    scanf("%d", &reg_producto.cant_disponible);
-
-    printf("Precio:\n");
-    scanf("%f", &reg_producto.precio);
-
-    fwrite(&reg_producto, sizeof(struct productos), 1, ptrArchivo);
-
-    fclose(ptrArchivo);
-}
-
-void modificar_producto(int id){
-    FILE *ptrArchivo;
-    ptrArchivo = fopen("productos.dat", "r+b");
-    if (ptrArchivo == NULL) {
-        return;
-    }
-
-    struct productos producto;
-
-    int index = 0;
-    int found = 0;
-
-    while(fread(&producto, sizeof(struct productos), 1, ptrArchivo))
-    {
-        if(id != producto.id_producto)
-        {
-            index++;
-            continue;
-        }
-        
-        found = 1;
-    
-        fseek(ptrArchivo, (sizeof(producto))*index, SEEK_SET);
-
-        producto.id_producto = producto.id_producto;
-
-        printf("Nuevo modelo:\n");
-        scanf("%s", producto.modelo);
-        
-        printf("Nueva Talla:\n");
-        scanf("%s", producto.talla);
-        
-        printf("Nuevo precio:\n");
-        scanf("%f", &producto.precio);
-        
-        printf("Nueva cantidad disponible:\n");
-        scanf("%d", &producto.cant_disponible);
-
-        fwrite(&producto, sizeof(struct productos), 1, ptrArchivo);
-        break;
-    }
-
-    if (found == 0)
-    {
-        printf("No se encontro el producto");
-    }
-       
-
-    fclose(ptrArchivo);
-}
 
 void eliminar_producto(int id){
     FILE *ptrArchivo;
