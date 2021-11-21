@@ -54,6 +54,7 @@ void mostrar_productos();
 void comprar_producto(int ID);
 void compras_realizadas(int id_usuario);
 void mostrar_usuario_menu(int ID);
+void buscar_producto_id(int id, char *nombre, struct tm fecha);
 
 // validador
 int encontrar_alumno(int ID); 
@@ -398,10 +399,10 @@ void comprar_producto(int ID){
     
         fseek(ptrArchivo, (sizeof(producto))*index, SEEK_SET);
 
-        producto.id_producto = producto.id_producto;
-        strcpy(producto.modelo,producto.modelo);
-        strcpy(producto.talla, producto.talla);
-        producto.precio = producto.precio;
+        // producto.id_producto = producto.id_producto;
+        // strcpy(producto.modelo,producto.modelo);
+        // strcpy(producto.talla, producto.talla);
+        // producto.precio = producto.precio;
         producto.cant_disponible = producto.cant_disponible-1;
 
         fwrite(&producto, sizeof(struct productos), 1, ptrArchivo);
@@ -433,43 +434,44 @@ void comprar_producto(int ID){
 void compras_realizadas(int id_usuario){
     FILE *ptrArchivo;
     struct compras compra;
-
-    ptrArchivo = fopen ("compras.dat", "r");
-
-    if(ptrArchivo == NULL)
-    {
+    
+    ptrArchivo = fopen("compras.dat", "r");
+    if (ptrArchivo == NULL) {
         return;
     }
 
-    FILE *ptrArchivo2;
+    while(fread(&compra, sizeof(compra), 1, ptrArchivo))
+    {
+
+        if (id_usuario == compra.id_usuario)
+        {
+           buscar_producto_id(compra.id_producto, compra.nombre, compra.fecha); 
+        }
+        
+    }
+
+    fclose(ptrArchivo);
+}
+
+void buscar_producto_id(int id, char *nombre, struct tm fecha) {
+   FILE *ptrArchivo2;
     ptrArchivo2 = fopen("productos.dat", "r");
     if (ptrArchivo2 == NULL) {
         return;
     }
 
     struct productos producto;
-
-    while(fread(&compra, sizeof(compra), 1, ptrArchivo))
+    while(fread(&producto, sizeof(struct productos), 1, ptrArchivo2))
     {
-        if (id_usuario == compra.id_usuario)
+        if (id == producto.id_producto)
         {
-    
-            while(fread(&producto, sizeof(struct productos), 1, ptrArchivo2))
-            {
-                if (compra.id_producto == producto.id_producto)
-                {
-                    printf("| Nombre: %s \t ID: %d \t Modelo: %s \t  Talla: %s \t Precio: $%0.2f \t Fecha de compra %d/%d/%d |\n", 
-                    compra.nombre,producto.id_producto, producto.modelo, producto.talla, producto.precio,
-                    compra.fecha.tm_year+1900, compra.fecha.tm_mon+1, compra.fecha.tm_mday);
-                }
+            printf("| Nombre: %s \t ID: %d \t Modelo: %s \t  Talla: %s \t Precio: $%0.2f \t Fecha de compra %d/%d/%d |\n", 
+                nombre, producto.id_producto, producto.modelo, producto.talla, producto.precio,
+                fecha.tm_year+1900, fecha.tm_mon+1, fecha.tm_mday);
             }
-            fclose(ptrArchivo2);
-
-        }
-        
     }
 
-    fclose(ptrArchivo);
+    fclose(ptrArchivo2);
 }
 
 void mostrar_usuario_menu(int ID) {
