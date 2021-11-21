@@ -149,6 +149,8 @@ void agregar_producto(){
 
     fwrite(&reg_producto, sizeof(struct productos), 1, ptrArchivo);
 
+    printf("Producto Registrado\n");
+
     fclose(ptrArchivo);
 }
 
@@ -198,6 +200,9 @@ void modificar_producto(int id){
     {
         printf("No se encontro el producto");
     }
+
+
+    printf("Producto modificado\n");
        
 
     fclose(ptrArchivo);
@@ -276,6 +281,8 @@ void eliminar_producto(int id){
         printf("No encontrado\n");
         return;
     }
+
+    printf("Producto eliminado\n");
     
     remove("productos.dat");
     rename("tmp.dat", "productos.dat");
