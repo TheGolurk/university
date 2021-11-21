@@ -399,10 +399,10 @@ void comprar_producto(int ID){
     
         fseek(ptrArchivo, (sizeof(producto))*index, SEEK_SET);
 
-        // producto.id_producto = producto.id_producto;
-        // strcpy(producto.modelo,producto.modelo);
-        // strcpy(producto.talla, producto.talla);
-        // producto.precio = producto.precio;
+        producto.id_producto = producto.id_producto;
+        strcpy(producto.modelo,producto.modelo);
+        strcpy(producto.talla, producto.talla);
+        producto.precio = producto.precio;
         producto.cant_disponible = producto.cant_disponible-1;
 
         fwrite(&producto, sizeof(struct productos), 1, ptrArchivo);
@@ -427,6 +427,8 @@ void comprar_producto(int ID){
     compra.fecha = *localtime(&t);
 
     fwrite(&compra, sizeof(struct compras), 1, ptrArchivo2);
+
+    printf("Compra realizada\n");
 
     fclose(ptrArchivo2);
 }
