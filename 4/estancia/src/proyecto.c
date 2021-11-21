@@ -35,6 +35,8 @@ struct compras{
     int id_usuario;
     int id_producto;
     struct tm fecha;
+    char nombre[50]; 
+    char matricula[20];
 };
 
 
@@ -229,7 +231,8 @@ void mostrar_ventas(){
     
     while(fread(&compra, sizeof(struct compras), 1, ptrArchivo))
     {
-        printf("| ID alumno: %d \t ID producto: %d \t Fecha: %d/%d/%d  |\n", compra.id_usuario, compra.id_producto, 
+        printf("| Nombre: %s \t Matricula: %s \t ID alumno: %d \t ID producto: %d \t Fecha: %d/%d/%d  |\n", 
+        compra.nombre, compra.matricula, compra.id_usuario, compra.id_producto, 
         compra.fecha.tm_year + 1900, compra.fecha.tm_mon, compra.fecha.tm_mday);
     }
 
@@ -374,6 +377,12 @@ void comprar_producto(int ID){
     struct compras compra;
     struct productos producto;
 
+    printf("Ingresar nombre: \n");
+    scanf("%s",compra.nombre);
+
+    printf("Ingresar matricula: \n");
+    scanf("%s",compra.matricula);
+
     int index = 0;
     int found = 0;
 
@@ -410,7 +419,9 @@ void comprar_producto(int ID){
 
     compra.id_usuario = ID;
     compra.id_producto = id_producto;
-    
+    strcpy(compra.nombre, compra.nombre); 
+    strcpy(compra.matricula, compra.matricula);
+
     time_t t = time(NULL);
     compra.fecha = *localtime(&t);
 
@@ -447,8 +458,8 @@ void compras_realizadas(int id_usuario){
             {
                 if (compra.id_producto == producto.id_producto)
                 {
-                    printf("| ID: %d \t Modelo: %s \t  Talla: %s \t Precio: $%0.2f \t Fecha de compra %d/%d/%d |\n", 
-                    producto.id_producto, producto.modelo, producto.talla, producto.precio,
+                    printf("| Nombre: %s \t ID: %d \t Modelo: %s \t  Talla: %s \t Precio: $%0.2f \t Fecha de compra %d/%d/%d |\n", 
+                    compra.nombre,producto.id_producto, producto.modelo, producto.talla, producto.precio,
                     compra.fecha.tm_year+1900, compra.fecha.tm_mon+1, compra.fecha.tm_mday);
                 }
             }
