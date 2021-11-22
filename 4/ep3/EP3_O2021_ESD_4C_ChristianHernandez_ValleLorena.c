@@ -14,9 +14,9 @@ struct instancia
 };
 
 void generarInstancia(int tam, int min, int max);
-int * generarDatosBuscadosExistentes(int tam, int datos[],int porcentaje);
+int * generarDatosBuscadosExistentes(int tam, int porcentaje);
 int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje);
-void  mostrar(int  tam, int  datos[]);
+void mostrar();
 int* obtenerDatos(int tam, int porcentaje);
 
 int main()
@@ -24,6 +24,8 @@ int main()
     int tam, tamB, min, max, porcentaje;
     int *datos, *datosB_E, *datosB_NE;    
     int opc=1;
+    int opc2;
+    
 
     while(opc != 2)
     {
@@ -40,6 +42,13 @@ int main()
                 scanf("%d", &porcentaje);
 
                 generarInstancia(tam, min, max);
+                
+                printf("Desea mostrar instancia creada?.\n 1.Si 2.No.\n");
+                scanf("%d",&opc2);
+                if (opc2 == 1)
+                {
+                    mostrar();
+                }                
                 break;
             
             case 2:
@@ -52,6 +61,7 @@ int main()
         }
     }
 
+/*
     mostrar(tam, datos);
     tamB=tam*porcentaje/100;
     
@@ -60,7 +70,7 @@ int main()
     
     datosB_NE=generarDatosBuscadosNE(tam, min, max, porcentaje);
     mostrar(tamB, datosB_NE);
-    
+    */    
     
     return 0;
 }
@@ -118,13 +128,23 @@ int* obtenerDatos(int tam, int porcentaje)
 }
     
 
-void  mostrar(int  tam, int  datos[]){
-   int  i;
-   printf("\n");
-   for(i=0;i<tam;i++){
-       printf ("%d, ", datos[i]);
-   }
-   printf("\n");
+void mostrar(){
+    FILE *ptrArchivo;
+    ptrArchivo = fopen("EP3.dat", "r");
+    if (ptrArchivo == NULL) {
+        return;
+    }
+
+    struct instancia e;
+    
+    printf("\n");
+    while(fread(&e, sizeof(struct instancia), 1, ptrArchivo))
+    {
+        printf("%d ,",e.dato);
+    }
+    printf("\n");
+
+    fclose(ptrArchivo);
 }
 
 void generarInstancia(int tam, int min, int max){
@@ -144,14 +164,18 @@ void generarInstancia(int tam, int min, int max){
     fclose(ptrArchivo);
 }
 
-int * generarDatosBuscadosExistentes(int tam, int datos[],int porcentaje){
+int * generarDatosBuscadosExistentes(int tam, int porcentaje){
     int *datosB, tamB, i;
     tamB=tam*porcentaje/100;
     
     datosB=(int *)malloc(sizeof(int)*tamB);
-    for(i=0;  i<tamB;i++){
+
+    int* datos = obtenerDatos(tam, porcentaje);
+
+    for(i=0; i<tamB; i++){
         datosB[i]=datos[rand()%tam]; 
     }
+    
     return datosB;
 }
 
@@ -160,9 +184,11 @@ int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje){
     tamB=tam*porcentaje/100;
     
     datosB=(int *)malloc(sizeof(int)*tamB);
+
     for(i=0;  i<tam;i++){
-        datosB[i]=rand()%(max-min+1)+min; //[min, max]
+        datosB[i]=rand()%(max-min+1)+min; 
     }
+
     return datosB;
 }
 
