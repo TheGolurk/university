@@ -21,7 +21,7 @@ int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje);
 void mostrar();
 int* obtenerDatos(int tam, int porcentaje);
 void busquedaBinaria(int *datos,int tam, int *datosB, int logs);
-int buscar(int* datos, int ultimo, int tam, int numero);
+int buscar(int* arr, int l, int r, int x);
 void mostrar_informacion(int encontrado, int dato, int logs);
 void obtenerTiempo(clock_t t);
 
@@ -31,7 +31,6 @@ int main()
     int *datos, *datosB_E, *datosB_NE;    
     int opc=1;
     int opc2;
-    
 
     while(opc != 2)
     {
@@ -82,7 +81,7 @@ int main()
                 scanf("%d", &logs);
 
                 clock_t t;
-                t = clock;
+                t = clock();
                 busquedaBinaria(datos, tam, datosB, logs);
                 t = clock() - t;
                 obtenerTiempo(t);
@@ -99,17 +98,6 @@ int main()
         }
     }
 
-/*
-    mostrar(tam, datos);
-    tamB=tam*porcentaje/100;
-    
-    datosB_E=generarDatosBuscadosExistentes(tam,datos,porcentaje);
-    mostrar(tamB, datosB_E);
-    
-    datosB_NE=generarDatosBuscadosNE(tam, min, max, porcentaje);
-    mostrar(tamB, datosB_NE);
-    */    
-    
     return 0;
 }
 
@@ -144,7 +132,8 @@ int* obtenerDatos(int tam, int porcentaje)
     FILE *ptrArchivo;
     ptrArchivo = fopen("EP3.dat", "r");
     if (ptrArchivo == NULL) {
-        return;
+        int *d;
+        return d;
     }
 
     struct instancia e;
@@ -163,6 +152,8 @@ int* obtenerDatos(int tam, int porcentaje)
     }
 
     fclose(ptrArchivo);
+
+    return datos;
 }
     
 
@@ -230,36 +221,17 @@ int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje){
     return datosB;
 }
 
-int busquedasecuencialExp(int tam, int datos[], int tamB, int datosB[]){
-    //tomar  el tiempo
-    int  i;
-    
-    for(i=0; i<tamB;i++){
-        if(busquedaSecuencial(datos, tam, datosB[i])==-1){
-            
-        }else{
-            
-        }
-    }
-    
-    //tomar el tiempo
-    //return diferencia
-}
-
-int buscar(int* datos, int u, int t, int numero) {
-    while (u <= t) { 
-        int medio = u + (t - u) / 2; 
-        
-        if (datos[medio] == numero) 
-            return medio; 
-
-        if (datos[medio] < numero) 
-            t = medio + 1; 
+int buscar(int* arr, int l, int r, int x) {
+    while (l <= r) { 
+        int m = l + (r - l) / 2; 
+        if (arr[m] == x) 
+            return m; 
+        if (arr[m] < x) 
+            l = m + 1; 
         else
-            t = medio - 1; 
+            r = m - 1; 
     }  
-
-    return -1;
+    return -1; 
 }
 
 void busquedaBinaria(int *datos,int tam, int *datosB, int logs) {
