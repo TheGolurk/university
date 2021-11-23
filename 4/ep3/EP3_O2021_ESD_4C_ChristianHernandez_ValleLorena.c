@@ -9,6 +9,7 @@ HERNANDEZ NAJERA CHRISTIAN
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 struct instancia
 {
@@ -46,6 +47,12 @@ int main()
                 printf("Ingresa el porcentaje: %(10,50,100)\n");
                 scanf("%d", &porcentaje);
 
+                printf("Ingrese minimo para generar los numeros\n");
+                scanf("%d", &min);
+
+                printf("Ingrese maximo\n");
+                scanf("%d", &max);
+
                 generarInstancia(tam, min, max);
                 
                 printf("Desea mostrar instancia creada?.\n 1.Si 2.No.\n");
@@ -66,7 +73,7 @@ int main()
                 {
                     datosB =  generarDatosBuscadosExistentes(tam, porcentaje);
                 } else {
-                    int min, max;
+
                     printf("Ingrese minimo\n");
                     scanf("%d", &min);
 
@@ -77,7 +84,7 @@ int main()
                 }
                 
                 int logs;
-                printf("Desea mostrar los datos de busqueda? 1.- si 2.- no");
+                printf("Desea mostrar los datos de busqueda? 1.- si 2.- no\n");
                 scanf("%d", &logs);
 
                 clock_t t;
@@ -188,6 +195,7 @@ void generarInstancia(int tam, int min, int max){
 
     for(size_t i=0;i<tam;i++){
         e.dato = rand()%(max-min+1)+min;
+        fwrite(&e, sizeof(struct instancia), 1, ptrArchivo); 
     }
 
     fclose(ptrArchivo);
@@ -256,5 +264,6 @@ void mostrar_informacion(int encontrado, int dato, int logs) {
 } 
 
 void obtenerTiempo(clock_t t) {
-    printf("La funcion tardo: %.2f segundos\n", ((double)t)/CLOCKS_PER_SEC);
+    double time_taken = (((double)t)/CLOCKS_PER_SEC) * 3600;
+    printf("La funcion tardo: %f segundos\n", time_taken);
 }
