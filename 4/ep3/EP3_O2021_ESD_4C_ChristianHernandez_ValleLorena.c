@@ -74,7 +74,7 @@ int main()
                     datosB =  generarDatosBuscadosExistentes(tam, porcentaje);
                 } else {
 
-                    printf("Ingrese minimo\n");
+                    printf("Ingrese minimo de datos a generar para los datos no existentes\n");
                     scanf("%d", &min);
 
                     printf("Ingrese maximo\n");
@@ -92,6 +92,9 @@ int main()
                 busquedaBinaria(datos, tam, datosB, logs);
                 t = clock() - t;
                 obtenerTiempo(t);
+
+                printf("Eliminando archivo binario \n");
+                remove("EP3.dat");
 
                 break;
             
