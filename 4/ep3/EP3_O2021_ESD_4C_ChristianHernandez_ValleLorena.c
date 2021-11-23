@@ -267,6 +267,5 @@ void mostrar_informacion(int encontrado, int dato, int logs) {
 } 
 
 void obtenerTiempo(clock_t t) {
-    double time_taken = (((double)t)/CLOCKS_PER_SEC) * 3600;
-    printf("La funcion tardo: %f segundos\n", time_taken);
+    printf("La funcion tardo: %f segundos\n", (((double)t)/CLOCKS_PER_SEC) * 3600);
 }
