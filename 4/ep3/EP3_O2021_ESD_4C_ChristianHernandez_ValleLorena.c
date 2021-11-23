@@ -7,6 +7,8 @@ HERNANDEZ NAJERA CHRISTIAN
 
 */
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
 struct instancia
 {
@@ -14,10 +16,14 @@ struct instancia
 };
 
 void generarInstancia(int tam, int min, int max);
-int * generarDatosBuscadosExistentes(int tam, int porcentaje);
+int* generarDatosBuscadosExistentes(int tam, int porcentaje);
 int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje);
 void mostrar();
 int* obtenerDatos(int tam, int porcentaje);
+void busquedaBinaria(int *datos,int tam, int *datosB, int logs);
+int buscar(int* datos, int ultimo, int tam, int numero);
+void mostrar_informacion(int encontrado, int dato, int logs);
+void obtenerTiempo(clock_t t);
 
 int main()
 {
@@ -48,7 +54,39 @@ int main()
                 if (opc2 == 1)
                 {
                     mostrar();
-                }                
+                }
+
+                int *datos = obtenerDatos(tam, porcentaje);
+
+                int datosExis;
+                printf("Datos existentes? 1.-Si 2.-No\n");
+                scanf("%d", &datosExis);
+
+                int *datosB;
+                if (datosExis == 1)
+                {
+                    datosB =  generarDatosBuscadosExistentes(tam, porcentaje);
+                } else {
+                    int min, max;
+                    printf("Ingrese minimo\n");
+                    scanf("%d", &min);
+
+                    printf("Ingrese maximo\n");
+                    scanf("%d", &max);
+
+                    datosB =  generarDatosBuscadosNE(tam, min, max, porcentaje);
+                }
+                
+                int logs;
+                printf("Desea mostrar los datos de busqueda? 1.- si 2.- no");
+                scanf("%d", &logs);
+
+                clock_t t;
+                t = clock;
+                busquedaBinaria(datos, tam, datosB, logs);
+                t = clock() - t;
+                obtenerTiempo(t);
+
                 break;
             
             case 2:
@@ -164,7 +202,7 @@ void generarInstancia(int tam, int min, int max){
     fclose(ptrArchivo);
 }
 
-int * generarDatosBuscadosExistentes(int tam, int porcentaje){
+int* generarDatosBuscadosExistentes(int tam, int porcentaje){
     int *datosB, tamB, i;
     tamB=tam*porcentaje/100;
     
@@ -206,4 +244,45 @@ int busquedasecuencialExp(int tam, int datos[], int tamB, int datosB[]){
     
     //tomar el tiempo
     //return diferencia
+}
+
+int buscar(int* datos, int u, int t, int numero) {
+    while (u <= t) { 
+        int medio = u + (t - u) / 2; 
+        
+        if (datos[medio] == numero) 
+            return medio; 
+
+        if (datos[medio] < numero) 
+            t = medio + 1; 
+        else
+            t = medio - 1; 
+    }  
+
+    return -1;
+}
+
+void busquedaBinaria(int *datos,int tam, int *datosB, int logs) {
+
+    for (size_t i = 0; i < tam; i++)
+    {
+        int encontrado =  buscar(datos, 0, tam, datosB[i]);
+        mostrar_informacion(encontrado, datosB[i], logs); 
+    }
+    
+}
+
+void mostrar_informacion(int encontrado, int dato, int logs) {
+    if (logs == 1)
+    {
+        if (encontrado == -1) {
+            printf("%d no encontrado\n", dato);
+        } else {
+            printf("%d encontrado\n", dato);
+        }
+    }
+} 
+
+void obtenerTiempo(clock_t t) {
+    printf("La funcion tardo: %.2f segundos\n", ((double)t)/CLOCKS_PER_SEC);
 }
