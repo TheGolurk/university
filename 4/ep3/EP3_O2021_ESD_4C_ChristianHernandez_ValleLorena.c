@@ -74,13 +74,14 @@ int main()
                     datosB =  generarDatosBuscadosExistentes(tam, porcentaje);
                 } else {
 
+                    int min2, max2;
                     printf("Ingrese minimo de datos a generar para los datos no existentes\n");
-                    scanf("%d", &min);
+                    scanf("%d", &min2);
 
                     printf("Ingrese maximo\n");
-                    scanf("%d", &max);
+                    scanf("%d", &max2);
 
-                    datosB =  generarDatosBuscadosNE(tam, min, max, porcentaje);
+                    datosB =  generarDatosBuscadosNE(tam, min2, max2, porcentaje);
                 }
                 
                 int logs;
@@ -225,7 +226,7 @@ int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje){
     
     datosB=(int *)malloc(sizeof(int)*tamB);
 
-    for(i=0;  i<tam;i++){
+    for(i=0;  i<tamB;i++){
         datosB[i]=rand()%(max-min+1)+min; 
     }
 
