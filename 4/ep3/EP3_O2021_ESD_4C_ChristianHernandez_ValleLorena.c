@@ -10,6 +10,9 @@ HERNANDEZ NAJERA CHRISTIAN
 #include <time.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/time.h>
+
+#define NELEMS(x)  (sizeof(x) / sizeof((x)[0]))
 
 struct instancia
 {
@@ -24,7 +27,7 @@ int* obtenerDatos(int tam, int porcentaje);
 void busquedaBinaria(int *datos,int tam, int *datosB, int logs);
 int buscar(int* arr, int l, int r, int x);
 void mostrar_informacion(int encontrado, int dato, int logs);
-void obtenerTiempo(clock_t t);
+double obtener_tiempo();
 
 int main()
 {
@@ -83,16 +86,22 @@ int main()
 
                     datosB =  generarDatosBuscadosNE(tam, min2, max2, porcentaje);
                 }
+
+                printf("datos %d datosb %d %d %d\n", NELEMS(datos), NELEMS(datosB), tam, porcentaje );
                 
                 int logs;
+                
                 printf("Desea mostrar los datos de busqueda? 1.- si 2.- no\n");
                 scanf("%d", &logs);
+                
+                double start = obtener_tiempo();
 
-                clock_t t;
-                t = clock();
+
                 busquedaBinaria(datos, tam, datosB, logs);
-                t = clock() - t;
-                obtenerTiempo(t);
+
+                double end = obtener_tiempo();
+                printf("TOTAL DE TIEMPO = %f secs\n", end-start);
+
 
                 printf("Eliminando archivo binario \n");
                 remove("EP3.dat");
@@ -152,7 +161,7 @@ int* obtenerDatos(int tam, int porcentaje)
     int index = 0;
     while(fread(&e, sizeof(struct instancia), 1, ptrArchivo))
     {
-        if (index == tamNuevo)
+        if (index < tamNuevo)
         {
             break;
         }
@@ -234,21 +243,23 @@ int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje){
 }
 
 int buscar(int* arr, int l, int r, int x) {
-    while (l <= r) { 
-        int m = l + (r - l) / 2; 
-        if (arr[m] == x) 
-            return m; 
-        if (arr[m] < x) 
-            l = m + 1; 
-        else
-            r = m - 1; 
-    }  
+    if (r >= l) { 
+        int mid = l + (r - l) / 2; 
+        if (arr[mid] == x) 
+            return mid; 
+        if (arr[mid] > x) 
+            return buscar(arr, l, mid - 1, x); 
+        return buscar(arr, mid + 1, r, x); 
+    } 
     return -1; 
 }
 
 void busquedaBinaria(int *datos,int tam, int *datosB, int logs) {
+    int n = NELEMS(datosB);
+    printf("size %d", n);
 
-    for (size_t i = 0; i < tam; i++)
+    printf("size %d\n", n);
+    for (size_t i = 0; i < n; i++)
     {
         int encontrado =  buscar(datos, 0, tam, datosB[i]);
         mostrar_informacion(encontrado, datosB[i], logs); 
@@ -269,4 +280,10 @@ void mostrar_informacion(int encontrado, int dato, int logs) {
 
 void obtenerTiempo(clock_t t) {
     printf("La funcion tardo: %f segundos\n", (((double)t)/CLOCKS_PER_SEC) * 3600);
+}
+
+double obtener_tiempo() {
+    struct timeval t;
+    gettimeofday(&t, NULL);
+    return t.tv_sec + t.tv_usec/1000000.0;;
 }
