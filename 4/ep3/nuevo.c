@@ -15,9 +15,9 @@ HERNANDEZ NAJERA CHRISTIAN
 int* generarInstancia(int tam, int min, int max);
 int* generarDatosBuscadosExistentes(int tam, int porcentaje, int* datos);
 int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje);
-int* obtenerDatos(int tam, int porcentaje, int* datos);
 
 int buscar(int* arr, int l, int r, int x);
+int obtenerTam(int tam, int porcentaje);
 
 double obtener_tiempo();
 
@@ -55,6 +55,8 @@ int main ()
 
                 datos = generarInstancia(tam, min, max);
                 mostrar(tam, datos);
+
+                int tamb = obtenerTam(tam, porcentaje);
                 
                 int datosExis;
                 printf("Datos existentes? 1.-Si 2.-No\n");
@@ -74,14 +76,12 @@ int main ()
                 }
 
                 int logs;
-                int tamb = sizeof(datosb) / sizeof(datosb[0]); 
-
                 printf("Desea mostrar los datos de busqueda? 1.- si 2.- no\n");
                 scanf("%d", &logs);
                 
                 double start = obtener_tiempo();
                 
-                busquedaBinaria(datos, tam, datosb, logs, tamb - 1);
+                busquedaBinaria(datos, tam, datosb, logs, tamb);
                 
                 double end = obtener_tiempo();
                 printf("TOTAL DE TIEMPO = %f secs\n", end-start);
@@ -107,39 +107,28 @@ int main ()
     return 0;
 }
 
-int* obtenerDatos(int tam, int porcentaje, int* datos){
+int obtenerTam(int tam, int porcentaje) {
     int tamNuevo;
 
     switch (porcentaje)
     {
     case 10:
-        tamNuevo = (tam*0.10) - 1;
+        tamNuevo = (tam*0.10);
         break;
     
     case 50:
-        tamNuevo = (tam / 2) - 1;
+        tamNuevo = (tam / 2);
         break;
 
     case 100:
-        tamNuevo = tam -1;
+        tamNuevo = tam;
         break;
-
     default:
-        printf("Porcentaje incorrecto");
-        return datos;
-        break;
+        tamNuevo = 0;
     }
 
-    int* datosb=(int *)malloc(sizeof(int)*tamNuevo);
-
-    for (size_t i = 0; i < tamNuevo; i++)
-    {
-        datosb[i] = datos[i];
-    }
-    
-    return datosb;
+    return tamNuevo;
 }
-    
 
 void mostrar(int tam, int* datos){
     printf("\n");
@@ -162,12 +151,12 @@ int* generarInstancia(int tam, int min, int max){
 }
 
 int* generarDatosBuscadosExistentes(int tam, int porcentaje, int* datos){
-    int *datosB, tamB, i;
+    int *datosB, tamB;
     tamB=tam*porcentaje/100;
     
     datosB=(int *)malloc(sizeof(int)*tamB);
 
-    for(i=0; i<tamB; i++){
+    for(size_t i=0; i<tamB; i++){
         datosB[i]=datos[rand()%tam]; 
     }
     
@@ -175,12 +164,12 @@ int* generarDatosBuscadosExistentes(int tam, int porcentaje, int* datos){
 }
 
 int* generarDatosBuscadosNE(int tam, int min, int max, int porcentaje){
-    int *datosB, tamB, i;
+    int *datosB, tamB;
     tamB=tam*porcentaje/100;
     
     datosB=(int *)malloc(sizeof(int)*tamB);
 
-    for(i=0;  i<tamB;i++){
+    for(size_t i=0; i<tamB; i++){
         datosB[i]=rand()%(max-min+1)+min; 
     }
 
