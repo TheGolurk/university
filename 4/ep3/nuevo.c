@@ -55,6 +55,39 @@ int main ()
 
                 datos = generarInstancia(tam, min, max);
                 mostrar(tam, datos);
+                
+                int datosExis;
+                printf("Datos existentes? 1.-Si 2.-No\n");
+                scanf("%d", &datosExis);
+                
+                datosb = generarDatosBuscadosExistentes(tam, porcentaje, datos);
+
+                if (datosExis == 2)
+                {
+                    printf("Ingrese minimo de datos a generar para los datos no existentes\n");
+                    scanf("%d", &min);
+
+                    printf("Ingrese maximo\n");
+                    scanf("%d", &max);
+
+                    datosb = generarDatosBuscadosNE(tam, min, max, porcentaje);
+                }
+
+                int logs;
+                int tamb = sizeof(datosb) / sizeof(datosb[0]); 
+
+                printf("Desea mostrar los datos de busqueda? 1.- si 2.- no\n");
+                scanf("%d", &logs);
+                
+                double start = obtener_tiempo();
+                
+                busquedaBinaria(datos, tam, datosb, logs, tamb - 1);
+                
+                double end = obtener_tiempo();
+                printf("TOTAL DE TIEMPO = %f secs\n", end-start);
+
+                printf("Eliminando archivo binario \n");
+                remove("EP3.dat");
 
                 break;
 
