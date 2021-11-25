@@ -23,6 +23,7 @@ type StudentsFunctions interface {
 	ValidateStudent(next echo.HandlerFunc) echo.HandlerFunc
 	GetStudentsAssistance(c echo.Context) error
 	existPlate(plate string) (exist bool)
+	Add(c echo.Context) error
 }
 
 func (s Student) Login(c echo.Context) error {
@@ -73,7 +74,7 @@ func (s *Student) PassAssistance(c echo.Context) error {
 		return c.String(http.StatusInternalServerError, fmt.Sprintf("an error occurred %v", err))
 	}
 	if rows < 1 {
-		return c.String(http.StatusInternalServerError, "not inserter")
+		return c.String(http.StatusInternalServerError, "not inserted")
 	}
 
 	if err := tx.Commit(); err != nil {
@@ -101,8 +102,69 @@ func (s *Student) ValidateStudent(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
+func (s Student) Add(c echo.Context) error {
+	student := models.Student{}
+
+	err := c.Bind(&student)
+	if err != nil {
+		return c.String(http.StatusBadRequest, "no student provided")
+	}
+
+	ctx := context.Background()
+	tx, err := s.DB.BeginTx(ctx, &sql.TxOptions{Isolation: sql.LevelSerializable})
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "an error occurred")
+	}
+
+	res, err := tx.ExecContext(ctx, `INSERT INTO ALUMNO (Nombre, Matricula, Carrera, Edad) 
+										VALUES ($1, $2, $3, $4)`,
+										student.Nombre, student.Matricula, student.Carrera, student.Edad)
+	if err != nil {
+		if rollbackErr := tx.Rollback(); rollbackErr != nil {
+			log.Fatalf("insert failed: %v, unable to back: %v", err, rollbackErr)
+		}
+		return c.String(http.StatusInternalServerError, fmt.Sprintf("an error occurred %v", err))
+	}
+
+	rows, err := res.RowsAffected()
+	if err != nil {
+		return c.String(http.StatusInternalServerError, fmt.Sprintf("an error occurred %v", err))
+	}
+	if rows < 1 {
+		return c.String(http.StatusInternalServerError, "not inserted")
+	}
+
+	if err := tx.Commit(); err != nil {
+		log.Fatal(err)
+		return c.String(http.StatusInternalServerError, "an error occurred when commit")
+	}
+
+	return c.String(http.StatusOK, "added student")
+}
+
+func (s Student) GetStudents(c echo.Context) error {
+	students := make([]models.Student,0)
+	student := models.Student{}
+
+	rows, err := s.DB.Query(`SELECT * FROM ALUMNO`)
+
+	if err != nil {
+		return c.String(http.StatusInternalServerError, fmt.Sprintf("an error occurred %v", err))
+	}
+
+	for rows.Next() {
+		if err = rows.Scan(&student.ID, &student.Nombre, &student.Matricula, &student.Carrera, &student.Edad); err != nil {
+			return c.String(http.StatusInternalServerError, fmt.Sprintf("scanner error %v", err))
+		}
+
+		students = append(students, student)
+	}
+
+	return c.JSON(http.StatusOK, students)
+}
+
 func (s Student) GetStudentsAssistance(c echo.Context) error {
-	students := []models.StudentsAssistance{}
+	students := make([]models.StudentsAssistance,0)
 	student := models.StudentsAssistance{}
 
 	rows, err := s.DB.Query(`SELECT Nombre, Carrera, AA.Matricula, 

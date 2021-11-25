@@ -34,7 +34,9 @@ func StartServer() {
 	}
 	e.POST("student/assistance/:plate", student.PassAssistance, student.ValidateStudent)
 	e.POST("student/:plate", student.Login)
+	e.POST("student/add", student.Add)
 	e.GET("students/assistance", student.GetStudentsAssistance)
+	e.GET("students", student.GetStudents)
 
 	if err := s.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)
