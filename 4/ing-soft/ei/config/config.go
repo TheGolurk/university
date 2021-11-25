@@ -9,5 +9,5 @@ type DB struct {
 	PORT     int    `env:"PORT"`
 	USER     string `env:"USER"`
 	PASSWORD string `env:"PASSWORD"`
-	DB       string `env:"DB"`
+	DBNAME   string `env:"DB"`
 }

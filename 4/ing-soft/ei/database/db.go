@@ -14,7 +14,7 @@ func GetDB() *sql.DB {
 	}
 
 	conn := fmt.Sprintf("host=%s port=%d dbname=%s user=%s password='%s' sslmode=require",
-		cfg.HOST, cfg.PORT, cfg.DB, cfg.USER, cfg.PASSWORD)
+		cfg.HOST, cfg.PORT, cfg.DBNAME, cfg.USER, cfg.PASSWORD)
 
 	db, err := sql.Open("postgres", conn)
 	if err != nil {
