@@ -7,3 +7,10 @@ type Student struct {
 	Carrera   string `json:"carrera,omitempty"`
 	Edad      int    `json:"edad,omitempty"`
 }
+
+type StudentsAssistance struct {
+	Nombre    string `json:"nombre,omitempty"`
+	Carrera   string `json:"carrera,omitempty"`
+	Matricula string `json:"matricula,omitempty"`
+	Fecha     string `json:"fecha,omitempty"`
+}

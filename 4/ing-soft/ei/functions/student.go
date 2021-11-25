@@ -102,7 +102,25 @@ func (s *Student) ValidateStudent(next echo.HandlerFunc) echo.HandlerFunc {
 }
 
 func (s Student) GetStudentsAssistance(c echo.Context) error {
-	return c.String(http.StatusOK, "")
+	students := []models.StudentsAssistance{}
+	student := models.StudentsAssistance{}
+
+	rows, err := s.DB.Query(`SELECT Nombre, Carrera, AA.Matricula, 
+       Fecha FROM ALUMNO JOIN ASISTENCIA_ALUMNO AA on ALUMNO.Matricula = AA.Matricula`)
+
+	if err != nil {
+		return c.String(http.StatusInternalServerError, fmt.Sprintf("an error occurred %v", err))
+	}
+
+	for rows.Next() {
+		if err = rows.Scan(&student.Nombre, &student.Carrera, &student.Matricula, &student.Fecha); err != nil {
+			return c.String(http.StatusInternalServerError, fmt.Sprintf("scanner error %v", err))
+		}
+
+		students = append(students, student)
+	}
+
+	return c.JSON(http.StatusOK, students)
 }
 
 func (s Student) existPlate(plate string) (exist bool) {
