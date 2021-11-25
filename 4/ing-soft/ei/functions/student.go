@@ -24,12 +24,18 @@ type StudentsFunctions interface {
 	GetStudentsAssistance(c echo.Context) error
 	existPlate(plate string) (exist bool)
 	Add(c echo.Context) error
+	GetStudents(c echo.Context) error
+	GetCurrent(c echo.Context) error
 }
 
 func (s Student) Login(c echo.Context) error {
 	plate := c.Param("plate")
 	if plate == "" {
 		return c.String(http.StatusBadRequest, "Missing plate")
+	}
+
+	if !s.existPlate(plate) {
+		return c.NoContent(http.StatusNotFound)
 	}
 
 	cookie := new(http.Cookie)
@@ -142,6 +148,25 @@ func (s Student) Add(c echo.Context) error {
 	return c.String(http.StatusOK, "added student")
 }
 
+func (s *Student) GetCurrent(c echo.Context) error {
+	student := models.Student{}
+
+	cookie, err := c.Cookie("matricula")
+	if err != nil {
+		return c.String(http.StatusInternalServerError, fmt.Sprintf("%v", err))
+	}
+
+	plate := cookie.Value
+	err = s.DB.QueryRow(`SELECT * FROM ALUMNO WHERE Matricula = $1 LIMIT 1`, plate).
+		Scan(&student.ID, &student.Nombre, &student.Matricula, &student.Carrera, &student.Edad)
+
+	if errors.Is(sql.ErrNoRows, err) {
+		return c.NoContent(http.StatusNotFound)
+	}
+
+	return c.JSON(http.StatusOK, student)
+}
+
 func (s Student) GetStudents(c echo.Context) error {
 	students := make([]models.Student,0)
 	student := models.Student{}
@@ -186,8 +211,6 @@ func (s Student) GetStudentsAssistance(c echo.Context) error {
 }
 
 func (s Student) existPlate(plate string) (exist bool) {
-	// https://pkg.go.dev/database/sql#example-Tx.Rollback
-
 	student := models.Student{}
 	err := s.DB.QueryRow(`SELECT Nombre FROM ALUMNO WHERE Matricula = $1 LIMIT 1`, plate).Scan(&student.Nombre)
 

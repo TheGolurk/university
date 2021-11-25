@@ -17,6 +17,11 @@ func StartServer() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
+	}))
+
 	s := http.Server{
 		Addr:    ":3000",
 		Handler: e,
@@ -37,6 +42,7 @@ func StartServer() {
 	e.POST("student/add", student.Add)
 	e.GET("students/assistance", student.GetStudentsAssistance)
 	e.GET("students", student.GetStudents)
+	e.GET("student", student.GetCurrent)
 
 	if err := s.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)
