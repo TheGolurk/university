@@ -2,6 +2,7 @@ package functions
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/gommon/log"
 	"net/http"
 	"time"
 )
@@ -31,6 +32,7 @@ func ValidateStudent(next echo.HandlerFunc) echo.HandlerFunc {
 			return err
 		}
 
+		log.Info("Trying pass assistance with ", cookie.Value)
 		if !existPlate(cookie.Value) {
 			return c.String(http.StatusInternalServerError, "Plate doesn't exist")
 		}
@@ -44,6 +46,6 @@ func GetStudentsAsistence(c echo.Context) error {
 }
 
 func existPlate(plate string) (exist bool) {
-	exist = false
+	exist = true
 	return
 }
