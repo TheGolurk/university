@@ -14,7 +14,7 @@ import (
 func StartServer() {
 	e := echo.New()
 
-	// e.Use(middleware.Logger())
+	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
 	s := http.Server{
@@ -30,6 +30,7 @@ func StartServer() {
 
 	student := functions.Student{
 		DB: database.GetDB(),
+		Plate: "",
 	}
 	e.POST("student/assistance/:plate", student.PassAssistance, student.ValidateStudent)
 	e.POST("student/:plate", student.Login)
