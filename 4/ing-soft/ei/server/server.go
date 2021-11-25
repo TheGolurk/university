@@ -14,12 +14,18 @@ import (
 func StartServer() {
 	e := echo.New()
 
-	e.Use(middleware.Logger())
+	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
 	s := http.Server{
 		Addr:    ":3000",
 		Handler: e,
+	}
+
+	DB := database.GetDB()
+	if DB == nil {
+		log.Fatal("Cannot start DB")
+		return
 	}
 
 	student := functions.Student{

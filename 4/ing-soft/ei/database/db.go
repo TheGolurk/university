@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/caarlos0/env/v6"
+	_ "github.com/lib/pq"
 	"upemor.com/asistence/config"
 )
 
@@ -13,7 +14,7 @@ func GetDB() *sql.DB {
 		return nil
 	}
 
-	conn := fmt.Sprintf("host=%s port=%d dbname=%s user=%s password='%s' sslmode=require",
+	conn := fmt.Sprintf("host=%s port=%d dbname=%s user=%s password='%s' sslmode=disable",
 		cfg.HOST, cfg.PORT, cfg.DBNAME, cfg.USER, cfg.PASSWORD)
 
 	db, err := sql.Open("postgres", conn)

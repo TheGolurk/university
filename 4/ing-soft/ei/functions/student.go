@@ -2,6 +2,7 @@ package functions
 
 import (
 	"database/sql"
+	"errors"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/gommon/log"
 	"net/http"
@@ -64,12 +65,6 @@ func (s Student) existPlate(plate string) (exist bool) {
 
 	student := models.Student{}
 	err := s.DB.QueryRow(`SELECT Nombre FROM ALUMNO WHERE Matricula = $1 LIMIT 1`, plate).Scan(&student.Nombre)
-	if err != nil {
-		return false
-	}
-	if student.Nombre == "" {
-		return false
-	}
 
-	return true
+	return !errors.Is(sql.ErrNoRows, err)
 }
