@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/gommon/log"
 	"net/http"
 	"time"
+	"upemor.com/asistence/models"
 )
 
 type Student struct {
@@ -17,6 +18,7 @@ type StudentsFunctions interface {
 	PassAssistance(c echo.Context) error
 	ValidateStudent(next echo.HandlerFunc) echo.HandlerFunc
 	GetStudentsAssistance(c echo.Context) error
+	existPlate(plate string) (exist bool)
 }
 
 func (s Student) Login(c echo.Context) error {
@@ -45,7 +47,7 @@ func (s Student) ValidateStudent(next echo.HandlerFunc) echo.HandlerFunc {
 		}
 
 		log.Info("Trying pass assistance with ", cookie.Value)
-		if !existPlate(cookie.Value) {
+		if !s.existPlate(cookie.Value) {
 			return c.String(http.StatusInternalServerError, "Plate doesn't exist")
 		}
 
@@ -57,7 +59,17 @@ func (s Student) GetStudentsAssistance(c echo.Context) error {
 	return c.String(http.StatusOK, "")
 }
 
-func existPlate(plate string) (exist bool) {
-	exist = true
-	return
+func (s Student) existPlate(plate string) (exist bool) {
+	// https://pkg.go.dev/database/sql#example-Tx.Rollback
+
+	student := models.Student{}
+	err := s.DB.QueryRow(`SELECT Nombre FROM ALUMNO WHERE Matricula = $1 LIMIT 1`, plate).Scan(&student.Nombre)
+	if err != nil {
+		return false
+	}
+	if student.Nombre == "" {
+		return false
+	}
+
+	return true
 }

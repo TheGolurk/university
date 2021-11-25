@@ -9,4 +9,6 @@ services:
     environment:
       POSTGRES_USER: upemor 
       POSTGRES_PASSWORD: lobos_rojos
-      POSTGRES_DB: asistencia 
+      POSTGRES_DB: asistencia
+    volumes:
+      - ./data:/var/lib/postgresql/
