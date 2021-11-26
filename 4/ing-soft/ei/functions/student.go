@@ -43,7 +43,7 @@ func (s Student) Login(c echo.Context) error {
 	cookie.Value = plate
 	cookie.Expires = time.Now().Add(24 * time.Hour)
 	c.SetCookie(cookie)
-	return c.String(http.StatusOK, "Ok")
+	return c.JSON(http.StatusOK, plate)
 }
 
 func (s *Student) PassAssistance(c echo.Context) error {
@@ -153,7 +153,7 @@ func (s *Student) GetCurrent(c echo.Context) error {
 
 	cookie, err := c.Cookie("matricula")
 	if err != nil {
-		return c.String(http.StatusInternalServerError, fmt.Sprintf("%v", err))
+		return c.String(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
 
 	plate := cookie.Value
@@ -164,6 +164,7 @@ func (s *Student) GetCurrent(c echo.Context) error {
 		return c.NoContent(http.StatusNotFound)
 	}
 
+	fmt.Println(student)
 	return c.JSON(http.StatusOK, student)
 }
 

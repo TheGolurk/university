@@ -18,8 +18,9 @@ func StartServer() {
 	e.Use(middleware.Recover())
 
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowCredentials: true,
 		AllowOrigins: []string{"*"},
-		AllowMethods: []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
+		AllowMethods: []string{"*"},
 	}))
 
 	s := http.Server{

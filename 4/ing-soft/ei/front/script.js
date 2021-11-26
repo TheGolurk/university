@@ -16,10 +16,14 @@ async function login() {
         })
         .then(res => {
             if (res.status != 200) {
+                alert('No encontrado');
                 throw new Error('An error ocurred in login')
             }
-            console.log('data', res);
-            res.json()
+
+            res.json().then(r => {
+                document.cookie = `matricula=${r}; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/;`;
+                location.replace('http://127.0.0.1:5500/front/assistance.html');
+            });
         })
         .catch(error => console.error('Error:', error))
         .then(response => console.log('Success:', response));
