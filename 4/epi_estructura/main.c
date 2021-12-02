@@ -54,11 +54,14 @@ void consultarContactos(struct Nodo *raiz);
 void consultarContactosCiudad(struct Nodo *raiz);
 void consularContactoPorTelefono(struct Nodo *raiz);
 void consultarTodo(struct Nodo **raiz);
+void inOrden(struct Nodo *raiz);
+
 
 int modificarContacto(struct contacto contacto, struct datostelefono datostelefono ,struct Nodo **raiz);
 
 struct contacto leerDatos();
 struct datostelefono leerDatosTelefono();
+
 
 int validarInsertar(char aPaterno[15], char aMaretno[15], char nombre[15], 
                     char aPaternoRaiz[15], char aMaretnoRaiz[15], char nombreRaiz[15]);
@@ -66,10 +69,11 @@ int validarInsertar(char aPaterno[15], char aMaretno[15], char nombre[15],
 int main()
 {
     int opcion;
-    printf("1.-Agregar contacto\n  2.-Agregar telefono\n 3.-Eliminar contacto\n 4.-  \n  5.-\n ");
-     printf("6.-   7.-   8.-   9.-  10.-");
-    while (opcion !=10)
+    printf("1.-Agregar contacto\n  2.-Agregar telefono\n 3.-Eliminar contacto por nombre\n");
+    printf("4.-Eliminar telefono de contacto\n  5.-Eliminar telefono\n 6.-Consultar telefonos de contacto\n");
+    printf("7.-Consultar contacto por telef   \n.-   9Modificar contacto\n.-  1Mostrar contactos\n 1- Salir\n");
 
+    while (opcion !=10)
     {
         switch(opcion)
         {
@@ -105,16 +109,11 @@ int main()
                 break;
 
             default:
-                break;
-
-
+                printf("opcion incorrecta \n");
         }
     }
     
-
-
     return 0;
-
 }
 
 // -1 Para menor
@@ -142,9 +141,19 @@ int insertar(struct contacto c, struct Nodo **raiz) {
 		if (nuevo == NULL) {
 			return 0;
 		}
+ 
+        strcpy( nuevo->contactos.aPaterno,c.aPaterno) ; 
+        stpcpy( nuevo->contactos.aMaterno, c.aMaterno);
+        strcpy( nuevo->contactos.nombre, c.nombre);
+        nuevo->contactos.edad = c.edad;
+        strcpy( nuevo->contactos.ciudad, c.ciudad);
+        strcpy( nuevo->contactos.puesto, c.puesto);
+        strcpy( nuevo->contactos.empresa, c.empresa);
+        nuevo->contactos.numero = c.numero;
+        nuevo->contactos.fechaNacimiento = c.fechaNacimiento;
+        nuevo->contactos.nodoLista->d = leerDatosTelefono();
 
-        // meterlo los datos
-        // nuevo->dato = nuevoDato;
+
 		nuevo->izq = NULL;
 		nuevo->der = NULL;
 
@@ -167,4 +176,37 @@ int insertar(struct contacto c, struct Nodo **raiz) {
 			return 0;
 		}
 	}
+}
+
+struct contacto leerDatos() {
+    struct contacto c;
+
+    printf("ingresa nombre\n");
+    scanf("%s", c.nombre);
+
+    
+    
+    return c;
+}
+
+struct datostelefono leerDatosTelefono() {
+    struct datostelefono d;
+
+    printf("ingresa direccion\n");
+    scanf("%s", d.direccion);
+
+    return d;
+}
+
+void inOrden(struct Nodo *raiz) {
+	if (raiz == NULL) {
+		return;
+	}
+
+	inOrden(raiz->izq);
+    
+    // asi con todos los datos
+	printf("%s, ", raiz->contactos.nombre);
+
+	inOrden(raiz->der);
 }
