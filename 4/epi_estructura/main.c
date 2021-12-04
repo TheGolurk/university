@@ -177,6 +177,90 @@ int insertar(struct contacto c, struct Nodo **raiz) {
 	}
 }
 
+int insertarNumero(char nombre[], struct datostelefono datostelefono, struct Nodo **raiz) {
+    // https://www.tutorialspoint.com/learn_c_by_examples/simple_linked_list_program_in_c.htm
+    return 0;
+}
+
+int eliminarContacto(char nombre[], struct Nodo **raiz) {
+    // datoEliminado tendria que ser el nombre en lugar de eso
+    // yoo cree la funcion para comparar los nombres
+    // linea 164 - 167, donde retorna
+    // -1 Para menor
+    // 1 Para mayor
+    // 0 ninguno
+
+	if (*raiz == NULL)
+	{
+		return -1;
+	}
+
+    // debes pasarle los nombres que llegan por parametro (debes agregarlos, arriba solo puse une)
+    int eliminarValidado = validarInsertar(c.aPaterno, c.aMaterno, c.nombre, 
+                (*raiz)->contactos.aPaterno, (*raiz)->contactos.aMaterno, (*raiz)->contactos.nombre);
+
+
+	if ( eliminarValidado == -1  )
+	{
+		return eliminar( &((*raiz))->izq , datoEliminado);
+	} else {
+		
+		if (datoEliminado > (*raiz)->dato)
+		{
+			return eliminar( &((*raiz))->der , datoEliminado);
+		} else {
+
+			// Dato enctronado
+			struct Nodo *eliminado;
+			int datoEliminado;
+			eliminado = *raiz;
+			datoEliminado = eliminado->dato;
+			if (eliminado->izq == NULL && eliminado->der == NULL)
+			{
+				*raiz = NULL;
+			} else {
+
+				if (eliminado->der == NULL) // hijo izquierdo
+				{
+					*raiz = eliminado->izq;
+				} else {
+					
+					if (eliminado->izq == NULL) //hijo derecho
+					{
+						*raiz = eliminado->der;
+					} else {
+
+						struct Nodo *auxHijo = eliminado->der, *auxPadre = eliminado;
+						while (auxHijo->izq != NULL)
+						{
+							auxPadre = auxHijo;
+							auxHijo = auxHijo->izq;	
+						}
+
+						auxPadre->izq = auxHijo->der;
+						auxHijo->izq = eliminado->izq;
+						auxHijo->der = eliminado->der;
+						*raiz = auxHijo;
+
+					}
+					
+				}
+				
+			}
+			
+
+			free(eliminado);
+			return datoEliminado;
+		}
+		
+
+	}
+	
+	
+    
+    return 0;
+}
+
 struct contacto leerDatos() {
     struct contacto c;
 
@@ -223,7 +307,8 @@ struct datostelefono leerDatosTelefono() {
     printf("ingresa nombre de algun familiar\n");
     scanf("%s", d.nombreFamiliar);
 
-    return d;}
+    return d;
+}
 
 void inOrden(struct Nodo *raiz) {
 	if (raiz == NULL) {
@@ -232,10 +317,12 @@ void inOrden(struct Nodo *raiz) {
 
 	inOrden(raiz->izq);
     
-    // asi con todos los datos
 	printf("%s, %s, %s ", raiz->contactos.nombre, raiz->contactos.aPaterno, raiz->contactos.aMaterno);
-    printf("%d,%s, %s ");
+    printf("%d ", raiz->contactos.edad);
+    printf("%d", raiz->contactos.fechaNacimiento);
+    printf("%s", raiz->contactos.ciudad);
+    printf("%s", raiz->contactos.puesto);
+    printf("%s", raiz->contactos.empresa);
 
 	inOrden(raiz->der);
-//me voy a salir , no se si nos llevemos la compu y alal ale seguimos
 }
