@@ -91,7 +91,7 @@ int main()
         printf("1.-Agregar contacto \n2.-Agregar telefono 3.-Eliminar contacto por nombre");
         printf("\n4.-Eliminar telefono de contacto \n5.-Eliminar telefono \n6.-Consultar telefonos de contacto");
         printf("\n7.-Consultar por nombres \n8.-Consultar contacto por telefono \n9.-Modificar contacto ");
-        printf("\n10.-Mostrar contactos \n11.-Salir");
+        printf("\n10.-Mostrar contactos \n11.-Salir:\n");
         scanf("%d",&opcion);
         
         switch(opcion)
