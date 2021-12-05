@@ -63,14 +63,14 @@ void inOrderNombresV2(char* nombre, struct Nodo *raiz);
 void inOrderNombresV3(struct datostelefono d,struct Nodo *raiz);
 void imprimirListaContactos(struct nodoLista *datos);
 
-
-
 int modificarContacto(struct contacto contacto, struct datostelefono datostelefono ,struct Nodo **raiz);
 
 struct contacto leerDatos();
 struct datostelefono leerDatosTelefono();
 struct contacto leerNombresCompletos(); 
 long leerNumero();
+
+void liberarMemoria(struct Nodo **raiz);
 
 int validarTexto(char aPaterno[15], char aMaretno[15], char nombre[15], 
                     char aPaternoRaiz[15], char aMaretnoRaiz[15], char nombreRaiz[15]);
@@ -137,7 +137,7 @@ int main()
                 }else{
                     printf("telefono no encontrado\n");
                 }
-                
+
                 break;
 
             case 6:
@@ -172,6 +172,8 @@ int main()
                 printf("opcion incorrecta \n");
         }
     }
+
+    liberarMemoria(&raiz);
     
     return 0;
 }
@@ -593,4 +595,13 @@ long leerNumero() {
     scanf("%ld", &num);
     
     return num;
+}
+
+void liberarMemoria(struct Nodo **raiz) {
+    if (raiz)
+    {
+        liberarMemoria(&((*raiz))->izq);
+        liberarMemoria(&((*raiz))->der);
+        free(raiz);
+    } 
 }
