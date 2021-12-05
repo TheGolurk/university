@@ -45,8 +45,8 @@ struct nodoLista {
 };
 
 int insertar(struct contacto c, struct Nodo **raiz);
-int insertarNumero(char nombre[], struct datostelefono datostelefono, struct Nodo **raiz);
-int eliminarContacto(char nombre[], struct Nodo **raiz);
+int insertarNumero(char* aPaterno, char* aMaterno, char* nombre, struct datostelefono datostelefono, struct Nodo **raiz);
+int eliminarContacto(char* aPaterno, char* aMaterno, char* nombre, struct Nodo **raiz);
 int eliminarNumeroDeContacto(char nombre[], long numero, struct Nodo **raiz);
 int eliminarNumeroDesconocido(long numero, struct Nodo **raiz);
 
@@ -63,7 +63,7 @@ struct contacto leerDatos();
 struct datostelefono leerDatosTelefono();
 
 
-int validarInsertar(char aPaterno[15], char aMaretno[15], char nombre[15], 
+int validarTexto(char aPaterno[15], char aMaretno[15], char nombre[15], 
                     char aPaternoRaiz[15], char aMaretnoRaiz[15], char nombreRaiz[15]);
 
 int main()
@@ -115,10 +115,11 @@ int main()
     return 0;
 }
 
-// -1 Para menor
+// 2 texto igual
 // 1 Para mayor
+// -1 Para menor
 // 0 ninguno
-int validarInsertar(char aPaterno[15], char aMaterno[15], char nombre[15], 
+int validarTexto(char aPaterno[15], char aMaterno[15], char nombre[15], 
                     char aPaternoRaiz[15], char aMaternoRaiz[15], char nombreRaiz[15])
 {
     if ( strcmp(nombre, nombreRaiz) < 0 && strcmp(aPaterno, aPaternoRaiz) < 0 && strcmp(aMaterno, aMaternoRaiz) < 0  )
@@ -127,6 +128,9 @@ int validarInsertar(char aPaterno[15], char aMaterno[15], char nombre[15],
     } else if ( strcmp(nombre, nombreRaiz) > 0 && strcmp(aPaterno, aPaternoRaiz) > 0 && strcmp(aMaterno, aMaternoRaiz) > 0  )
     {
         return 1;
+    } else if (strcmp(nombre,nombreRaiz) == 0 && strcmp(aPaterno,aPaternoRaiz) == 0 && strcmp(aMaterno,aMaternoRaiz) == 0)
+    { 
+        return 2;
     }
     
     return 0;
@@ -161,7 +165,7 @@ int insertar(struct contacto c, struct Nodo **raiz) {
 		return 1;
 	}
 
-    int insertarValidado = validarInsertar(c.aPaterno, c.aMaterno, c.nombre, 
+    int insertarValidado = validarTexto(c.aPaterno, c.aMaterno, c.nombre, 
                 (*raiz)->contactos.aPaterno, (*raiz)->contactos.aMaterno, (*raiz)->contactos.nombre);
 
 	if (insertarValidado == -1)
@@ -177,55 +181,74 @@ int insertar(struct contacto c, struct Nodo **raiz) {
 	}
 }
 
-int insertarNumero(char nombre[], struct datostelefono datostelefono, struct Nodo **raiz) {
-    // https://www.tutorialspoint.com/learn_c_by_examples/simple_linked_list_program_in_c.htm
+
+int insertarNumero(char* aPaterno, char* aMaterno, char* nombre, struct datostelefono datostelefono, struct Nodo **raiz) {
+    if(raiz  == NULL) {
+        return 0;
+    }
+    int insertarValidado =validarTexto(aPaterno, aMaterno, nombre,
+                (*raiz)->contactos.aPaterno,(*raiz)->contactos.aMaterno, (*raiz)->contactos.nombre);
+
+    if (insertarValidado == 2)
+    {
+        (*raiz)->contactos.nodoLista = (struct nodoLista*)malloc(sizeof(struct nodoLista));
+        (*raiz)->contactos.nodoLista->d = datostelefono;
+        (*raiz)->contactos.nodoLista->sig =  NULL;
+
+        return 1;
+    }
+
+    if(insertarValidado == -1) {
+        return buscar(aPaterno, aMaterno, nombre, &((*raiz))->izq);
+    } else {
+        return buscar(aPaterno, aMaterno, nombre, &((*raiz))->der);
+    }
+    
     return 0;
 }
 
-int eliminarContacto(char nombre[], struct Nodo **raiz) {
-    // datoEliminado tendria que ser el nombre en lugar de eso
-    // yoo cree la funcion para comparar los nombres
-    // linea 164 - 167, donde retorna
-    // -1 Para menor
-    // 1 Para mayor
-    // 0 ninguno
-
+int eliminarContacto(char* aPaterno, char* aMaterno, char* nombre, struct Nodo **raiz) {
 	if (*raiz == NULL)
 	{
 		return -1;
 	}
-
-    // debes pasarle los nombres que llegan por parametro (debes agregarlos, arriba solo puse une)
-    int eliminarValidado = validarInsertar(c.aPaterno, c.aMaterno, c.nombre, 
-                (*raiz)->contactos.aPaterno, (*raiz)->contactos.aMaterno, (*raiz)->contactos.nombre);
-
-
+    
+    int eliminarValidado = validarTexto(
+                aPaterno, 
+                aMaterno, 
+                nombre, 
+                (*raiz)->contactos.aPaterno, 
+                (*raiz)->contactos.aMaterno, 
+                (*raiz)->contactos.nombre);
+    
+    if (eliminarValidado == 0)
+    {
+        return -1;
+    }
+    
 	if ( eliminarValidado == -1  )
 	{
-		return eliminar( &((*raiz))->izq , datoEliminado);
+		return eliminar(aPaterno, aMaterno, nombre, &((*raiz))->izq);
 	} else {
 		
-		if (datoEliminado > (*raiz)->dato)
+		if (eliminarValidado == 1)
 		{
-			return eliminar( &((*raiz))->der , datoEliminado);
+			return eliminar( aPaterno, aMaterno, nombre, &((*raiz))->der);
 		} else {
-
-			// Dato enctronado
+            
 			struct Nodo *eliminado;
-			int datoEliminado;
 			eliminado = *raiz;
-			datoEliminado = eliminado->dato;
 			if (eliminado->izq == NULL && eliminado->der == NULL)
 			{
 				*raiz = NULL;
 			} else {
 
-				if (eliminado->der == NULL) // hijo izquierdo
+				if (eliminado->der == NULL) 
 				{
 					*raiz = eliminado->izq;
 				} else {
 					
-					if (eliminado->izq == NULL) //hijo derecho
+					if (eliminado->izq == NULL) 
 					{
 						*raiz = eliminado->der;
 					} else {
@@ -247,17 +270,13 @@ int eliminarContacto(char nombre[], struct Nodo **raiz) {
 				}
 				
 			}
-			
 
 			free(eliminado);
-			return datoEliminado;
+			return 0;
 		}
 		
-
 	}
 	
-	
-    
     return 0;
 }
 
