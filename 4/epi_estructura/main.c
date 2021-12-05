@@ -55,7 +55,9 @@ void consultarContactosCiudad(struct Nodo *raiz);
 void consularContactoPorTelefono(struct Nodo *raiz);
 void consultarTodo(struct Nodo **raiz);
 void inOrden(struct Nodo *raiz);
+void inOrderNombres(char* nombre, struct Nodo *raiz);
 void imprimirListaContactos(struct nodoLista *datos);
+void eliminarNumero(long numero, struct nodoLista** raiz);
 
 
 int modificarContacto(struct contacto contacto, struct datostelefono datostelefono ,struct Nodo **raiz);
@@ -357,6 +359,25 @@ struct datostelefono leerDatosTelefono() {
     return d;
 }
 
+void inOrderNombres(char* nombre, struct Nodo *raiz) {
+    if (raiz == NULL) {
+		return;
+	}
+
+	inOrden(raiz->izq);
+    if ( strcmp(nombre, raiz->contactos.nombre) == 0 )
+    {
+        printf("%s, %s, %s ", raiz->contactos.nombre, raiz->contactos.aPaterno, raiz->contactos.aMaterno);
+        printf("%d ", raiz->contactos.edad);
+        printf("%d", raiz->contactos.fechaNacimiento);
+        printf("%s", raiz->contactos.ciudad);
+        printf("%s", raiz->contactos.puesto);
+        printf("%s", raiz->contactos.empresa);
+        imprimirListaContactos(raiz->contactos.nodoLista);
+    }
+	inOrden(raiz->der);
+}
+
 void inOrden(struct Nodo *raiz) {
 	if (raiz == NULL) {
 		return;
@@ -399,4 +420,26 @@ struct contacto leerNombresCompletos() {
     return c;
 }
 
+void eliminarNumero(long numero, struct nodoLista** raiz)
+{
+    struct nodoLista *temp = *raiz, *prev;
+ 
+    if (temp != NULL && temp->d.telefonoPersonal == numero) {
+        *raiz = temp->sig; 
+        free(temp); 
+        return;
+    }
+ 
 
+    while (temp != NULL && temp->d.telefonoPersonal != numero) {
+        prev = temp;
+        temp = temp->sig;
+    }
+ 
+    if (temp == NULL)
+        return;
+ 
+    prev->sig = temp->sig;
+ 
+    free(temp);
+}
