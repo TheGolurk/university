@@ -47,8 +47,9 @@ struct nodoLista {
 int insertar(struct contacto c, struct Nodo **raiz);
 int insertarNumero(char* aPaterno, char* aMaterno, char* nombre, struct datostelefono datostelefono, struct Nodo **raiz);
 int eliminarContacto(char* aPaterno, char* aMaterno, char* nombre, struct Nodo **raiz);
-int eliminarNumeroDeContacto(char nombre[], long numero, struct Nodo **raiz);
+int eliminarNumeroDeContacto(struct contacto nombres, long numero, struct Nodo **raiz, struct Nodo *raizB);
 int eliminarNumeroDesconocido(long numero, struct Nodo **raiz);
+int eliminarNumero(long numero, struct nodoLista** raiz);
 
 void consultarContactos(struct Nodo *raiz);
 void consultarContactosCiudad(struct Nodo *raiz);
@@ -57,7 +58,7 @@ void consultarTodo(struct Nodo **raiz);
 void inOrden(struct Nodo *raiz);
 void inOrderNombres(char* nombre, struct Nodo *raiz);
 void imprimirListaContactos(struct nodoLista *datos);
-void eliminarNumero(long numero, struct nodoLista** raiz);
+
 
 
 int modificarContacto(struct contacto contacto, struct datostelefono datostelefono ,struct Nodo **raiz);
@@ -65,7 +66,7 @@ int modificarContacto(struct contacto contacto, struct datostelefono datostelefo
 struct contacto leerDatos();
 struct datostelefono leerDatosTelefono();
 struct contacto leerNombresCompletos(); 
-
+long leerNumero();
 
 int validarTexto(char aPaterno[15], char aMaretno[15], char nombre[15], 
                     char aPaternoRaiz[15], char aMaretnoRaiz[15], char nombreRaiz[15]);
@@ -86,7 +87,7 @@ int main()
 
             case 1:
                 int insertado = insertar( leerDatos(), &raiz );
-                if (insertar == 1) {
+                if (insertado == 1) {
                     printf("Contacto insertado\n");
                 }
                 
@@ -97,7 +98,7 @@ int main()
                 struct contacto nombres = leerNombresCompletos();
 
                 int insertado = insertarNumero(nombres.aPaterno, nombres.aMaterno, nombres.nombre, leerDatosTelefono(), &raiz);
-                if (insertar == 1) {
+                if (insertado == 1) {
                     printf("numero insertado\n");
                 }
 
@@ -106,12 +107,21 @@ int main()
             case 3:
                 struct contacto nombres =leerNombresCompletos();
                 int eliminado = eliminarContacto(nombres.aPaterno, nombres.aMaterno, nombres.nombre,&raiz);
-                if (insertar == 1) {
+                if (eliminado == 1) {
                     printf("contacto eliminado\n");
                 }
                 break;
 
             case 4:
+                struct contacto nombres =leerNombresCompletos();
+                int eliminado = eliminarNumeroDeContacto(nombres, leerNumero() ,&raiz, raiz);
+                if (eliminado == 1)
+                {
+                    printf("telefono eliminado\n");
+                }else{
+                    printf("telefono no encontrado\n");
+                }
+                
                 break;
 
             case 5:
@@ -420,14 +430,14 @@ struct contacto leerNombresCompletos() {
     return c;
 }
 
-void eliminarNumero(long numero, struct nodoLista** raiz)
+int eliminarNumero(long numero, struct nodoLista** raiz)
 {
     struct nodoLista *temp = *raiz, *prev;
  
     if (temp != NULL && temp->d.telefonoPersonal == numero) {
         *raiz = temp->sig; 
         free(temp); 
-        return;
+        return 1;
     }
  
 
@@ -437,9 +447,48 @@ void eliminarNumero(long numero, struct nodoLista** raiz)
     }
  
     if (temp == NULL)
-        return;
- 
+        return 0;
+
     prev->sig = temp->sig;
- 
+
     free(temp);
+
+    return 1;
+}
+
+int eliminarNumeroDeContacto(struct contacto nombres, long numero, struct Nodo **raiz, struct Nodo *raizB) {
+	if (raizB == NULL) {
+		return;
+	}
+
+	eliminarNumeroDeContacto(nombres, numero, raiz, raizB->izq);
+
+    
+    if ( validarTexto(
+        nombres.aPaterno, 
+        nombres.aPaterno, 
+        nombres.nombre,
+        raizB->contactos.aPaterno,
+        raizB->contactos.aMaterno, 
+        raizB->contactos.nombre) == 0 )
+    {
+        int eliminado = eliminarNumero(numero, (*raiz)->contactos.nodoLista); 
+        if (eliminado == 1) {
+            return 1;   
+        } else {
+            return 0;
+        }
+    
+    }
+
+	eliminarNumeroDeContacto(nombres, numero, raiz, raizB->der);
+}
+
+long leerNumero() {
+    long num = 0;
+
+    printf("ingresa numero personal \n");
+    scanf("%ld", &num);
+    
+    return num;
 }
