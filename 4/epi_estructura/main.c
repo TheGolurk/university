@@ -91,7 +91,7 @@ int main()
         printf("1.-Agregar contacto \n2.-Agregar telefono 3.-Eliminar contacto por nombre");
         printf("\n4.-Eliminar telefono de contacto \n5.-Eliminar telefono \n6.-Consultar telefonos de contacto");
         printf("\n7.-Consultar por nombres \n8.-Consultar contacto por telefono \n9.-Modificar contacto ");
-        printf("\n10.-Mostrar contactos \n11.-Salir:\n");
+        printf("\n10.-Mostrar contactos \n11.-Salir\n");
         scanf("%d",&opcion);
         
         switch(opcion)
@@ -363,14 +363,14 @@ struct contacto leerDatos() {
     scanf("%s", c.aMaterno);
 
     printf("ingresar fecha de nacimiento (año) :\n");
-    scanf("%d", c.fechaNacimiento.tm_year);
+    scanf("%d", &c.fechaNacimiento.tm_year);
     printf("ingresar fecha de nacimiento (mes) :\n");
-    scanf("%d", c.fechaNacimiento.tm_mon);
+    scanf("%d", &c.fechaNacimiento.tm_mon);
     printf("ingresar fecha de nacimiento (dia) :\n");
-    scanf("%d", c.fechaNacimiento.tm_mday);
+    scanf("%d", &c.fechaNacimiento.tm_mday);
 
     printf("ingresar  edad:\n");
-    scanf("%d", c.edad);
+    scanf("%d", &c.edad);
     printf("ingresar ciudad:\n");
     scanf("%s", c.ciudad);
     printf("ingresar  puesto:\n");
@@ -386,13 +386,13 @@ struct datostelefono leerDatosTelefono() {
     struct datostelefono d;
 
     printf("ingresar telefono fijo:\n");
-    scanf("%ld", d.telefonoFijo);
+    scanf("%ld", &d.telefonoFijo);
     printf("ingresar telefono  de casa:\n");
-    scanf("%ld", d.telefonoCasa);
+    scanf("%ld", &d.telefonoCasa);
     printf("ingresar telefono de trabajo:\n");
-    scanf("%ld",d.telefonoTrabajo);
+    scanf("%ld",&d.telefonoTrabajo);
     printf("ingresar telefono personal:\n");
-    scanf("%ld", d.telefonoPersonal);
+    scanf("%ld", &d.telefonoPersonal);
     printf("ingresa direccion\n");
     scanf("%s", d.direccion);
     printf("ingresa nombre de algun familiar\n");
