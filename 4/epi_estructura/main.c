@@ -209,6 +209,7 @@ int validarTexto(char aPaterno[15], char aMaterno[15], char nombre[15],
 }
 
 int insertar(struct contacto c, struct Nodo **raiz) {
+    printf("hola\n");
 	if (*raiz == NULL) {
 		struct Nodo *nuevo;
 		nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
@@ -226,8 +227,14 @@ int insertar(struct contacto c, struct Nodo **raiz) {
         strcpy( nuevo->contactos.empresa, c.empresa);
         nuevo->contactos.numero = c.numero;
         nuevo->contactos.fechaNacimiento = c.fechaNacimiento;
-        nuevo->contactos.nodoLista->d = leerDatosTelefono();
 
+        struct datostelefono d = leerDatosTelefono();
+        strcpy(nuevo->contactos.nodoLista->d.direccion, d.direccion);
+        strcpy(nuevo->contactos.nodoLista->d.nombreFamiliar, d.nombreFamiliar);
+        nuevo->contactos.nodoLista->d.telefonoCasa = d.telefonoCasa; 
+        nuevo->contactos.nodoLista->d.telefonoFijo = d.telefonoFijo;
+        nuevo->contactos.nodoLista->d.telefonoPersonal = d.telefonoPersonal;
+        nuevo->contactos.nodoLista->d.telefonoTrabajo = d.telefonoTrabajo;
 
 		nuevo->izq = NULL;
 		nuevo->der = NULL;
