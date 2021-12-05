@@ -50,6 +50,7 @@ int eliminarContacto(char* aPaterno, char* aMaterno, char* nombre, struct Nodo *
 int eliminarNumeroDeContacto(struct contacto nombres, long numero, struct Nodo **raiz, struct Nodo *raizB);
 int eliminarNumeroDesconocido(long numero, struct Nodo **raiz);
 int eliminarNumero(long numero, struct nodoLista** raiz);
+int buscarTelefonos(struct datostelefono d, struct nodoLista *datos);
 
 void consultarContactos(struct Nodo *raiz);
 void consultarContactosCiudad(struct Nodo *raiz);
@@ -57,6 +58,8 @@ void consularContactoPorTelefono(struct Nodo *raiz);
 void consultarTodo(struct Nodo **raiz);
 void inOrden(struct Nodo *raiz);
 void inOrderNombres(char* nombre, struct Nodo *raiz);
+void inOrderNombresV2(char* nombre, struct Nodo *raiz);
+void inOrderNombresV3(struct datostelefono d,struct Nodo *raiz);
 void imprimirListaContactos(struct nodoLista *datos);
 
 
@@ -128,6 +131,8 @@ int main()
                 break;
 
             case 6:
+                struct contacto nombres =leerNombresCompletos();
+                inOrderNombresV2(nombres.nombre, raiz);
                 break;
 
             case 7:
@@ -137,6 +142,8 @@ int main()
                 break;
 
             case 8:
+                struct datostelefono telefonos =leerDatosTelefono();
+                inOrderNombresV3(telefonos, raiz);
                 break;
 
             case 9:
@@ -391,6 +398,64 @@ void inOrderNombres(char* nombre, struct Nodo *raiz) {
     }
 	inOrden(raiz->der);
 }
+
+void inOrderNombresV2(char* nombre, struct Nodo *raiz) {
+    if (raiz == NULL) {
+		return;
+	}
+
+	inOrden(raiz->izq);
+    if ( strcmp(nombre, raiz->contactos.nombre) == 0 )
+    {
+        printf("%s, %s, %s ", raiz->contactos.nombre, raiz->contactos.aPaterno, raiz->contactos.aMaterno);
+        printf("%d ", raiz->contactos.edad);
+        printf("%d", raiz->contactos.fechaNacimiento);
+        printf("%s", raiz->contactos.ciudad);
+        printf("%s", raiz->contactos.puesto);
+        printf("%s", raiz->contactos.empresa);
+        imprimirListaContactos(raiz->contactos.nodoLista);
+        return;
+    }
+	inOrden(raiz->der);
+}
+
+void inOrderNombresV3(struct datostelefono d,struct Nodo *raiz) {
+    if (raiz == NULL) {
+		return;
+	}
+
+	inOrden(raiz->izq);
+    if ( buscarTelefonos(d, raiz->contactos.nodoLista) == 0 )
+    {
+        printf("%s, %s, %s ", raiz->contactos.nombre, raiz->contactos.aPaterno, raiz->contactos.aMaterno);
+        printf("%d ", raiz->contactos.edad);
+        printf("%d", raiz->contactos.fechaNacimiento);
+        printf("%s", raiz->contactos.ciudad);
+        printf("%s", raiz->contactos.puesto);
+        printf("%s", raiz->contactos.empresa);
+        imprimirListaContactos(raiz->contactos.nodoLista);
+        return;
+    }
+	inOrden(raiz->der);
+}
+
+int buscarTelefonos(struct datostelefono d, struct nodoLista *datos) {
+     while(datos != NULL) {        
+        
+        if ( d.telefonoPersonal == datos->d.telefonoPersonal &&
+             d.telefonoCasa == datos->d.telefonoCasa && 
+             d.telefonoTrabajo == datos->d.telefonoTrabajo && 
+             d.telefonoFijo == datos->d.telefonoFijo)
+        {
+            return 0;
+        }
+
+        datos = datos->sig; 
+    }
+
+    return 1;
+}
+
 
 void inOrden(struct Nodo *raiz) {
 	if (raiz == NULL) {
