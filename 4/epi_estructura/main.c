@@ -128,6 +128,8 @@ int main()
                 break;
 
             case 5:
+                struct datostelefono telefonos =leerDatosTelefono();
+                inOrderNombresV3(telefonos, raiz);
                 break;
 
             case 6:
@@ -552,6 +554,29 @@ int eliminarNumeroDeContacto(struct contacto nombres, long numero, struct Nodo *
 
 	eliminarNumeroDeContacto(nombres, numero, raiz, raizB->der);
 }
+
+int eliminarNumeroDeContactoV2(long numero, struct datostelefono d, struct Nodo **raiz, struct Nodo *raizB) {
+	if (raizB == NULL) {
+		return;
+	}
+
+	eliminarNumeroDeContactoV2(numero, d, raiz, raizB->izq);
+
+    
+    if ( buscarTelefonos(d, raizB->contactos.nodoLista) == 0 )
+    {
+        int eliminado = eliminarNumero(numero, (*raiz)->contactos.nodoLista); 
+        if (eliminado == 1) {
+            return 1;   
+        } else {
+            return 0;
+        }
+    
+    }
+
+	eliminarNumeroDeContactoV2(numero,d, raiz, raizB->der);
+}
+
 
 long leerNumero() {
     long num = 0;
