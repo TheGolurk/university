@@ -49,6 +49,7 @@ int insertarNumero(char* aPaterno, char* aMaterno, char* nombre, struct datostel
 int eliminarContacto(char* aPaterno, char* aMaterno, char* nombre, struct Nodo **raiz);
 int eliminarNumeroDeContacto(struct contacto nombres, long numero, struct Nodo **raiz, struct Nodo *raizB);
 int eliminarNumeroDesconocido(long numero, struct Nodo **raiz);
+int eliminarNumeroDeContactoV2(long numero, struct datostelefono d, struct Nodo **raiz, struct Nodo *raizB);
 int eliminarNumero(long numero, struct nodoLista** raiz);
 int buscarTelefonos(struct datostelefono d, struct nodoLista *datos);
 
@@ -129,7 +130,14 @@ int main()
 
             case 5:
                 struct datostelefono telefonos =leerDatosTelefono();
-                inOrderNombresV3(telefonos, raiz);
+                eliminarNumeroDeContactoV2(leerNumero(),telefonos, &raiz, raiz);
+                if (eliminado == 1)
+                {
+                    printf("telefono eliminado\n");
+                }else{
+                    printf("telefono no encontrado\n");
+                }
+                
                 break;
 
             case 6:
