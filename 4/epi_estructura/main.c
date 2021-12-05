@@ -55,6 +55,7 @@ void consultarContactosCiudad(struct Nodo *raiz);
 void consularContactoPorTelefono(struct Nodo *raiz);
 void consultarTodo(struct Nodo **raiz);
 void inOrden(struct Nodo *raiz);
+void imprimirListaContactos(struct nodoLista *datos);
 
 
 int modificarContacto(struct contacto contacto, struct datostelefono datostelefono ,struct Nodo **raiz);
@@ -71,8 +72,9 @@ int main()
     int opcion;
     printf("1.-Agregar contacto\n  2.-Agregar telefono\n 3.-Eliminar contacto por nombre\n");
     printf("4.-Eliminar telefono de contacto\n  5.-Eliminar telefono\n 6.-Consultar telefonos de contacto\n");
-    printf("7.-Consultar contacto por telefono\n 8.-Modificar contacto\n 9.-Mostrar contactos\n 10.-Salir\n");
-    while (opcion !=10)
+    printf("7.-Consultar por nombres\n 8.-Consultar contacto por telefono\n 9.-Modificar contacto\n ");
+    printf("10.-Mostrar contactos\n 11.-Salir\n");
+    while (opcion !=11)
     {
         switch(opcion)
         {
@@ -105,6 +107,9 @@ int main()
                 break;
 
             case 10:
+                break;
+            
+            case 11:
                 break;
 
             default:
@@ -342,6 +347,18 @@ void inOrden(struct Nodo *raiz) {
     printf("%s", raiz->contactos.ciudad);
     printf("%s", raiz->contactos.puesto);
     printf("%s", raiz->contactos.empresa);
+    imprimirListaContactos(raiz->contactos.nodoLista);
+    
 
 	inOrden(raiz->der);
+}
+
+void imprimirListaContactos(struct nodoLista *datos) {
+    while(datos != NULL) {        
+        printf("%s %s ,", datos->d.direccion, datos->d.nombreFamiliar);
+        printf("%ld %ld ,", datos->d.telefonoFijo, datos->d.telefonoCasa);
+        printf("%ld %ld ,", datos->d.telefonoPersonal, datos->d.telefonoTrabajo);
+
+        datos = datos->sig; 
+    }
 }
