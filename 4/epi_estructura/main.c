@@ -62,6 +62,7 @@ int modificarContacto(struct contacto contacto, struct datostelefono datostelefo
 
 struct contacto leerDatos();
 struct datostelefono leerDatosTelefono();
+struct contacto leerNombresCompletos(); 
 
 
 int validarTexto(char aPaterno[15], char aMaretno[15], char nombre[15], 
@@ -69,6 +70,8 @@ int validarTexto(char aPaterno[15], char aMaretno[15], char nombre[15],
 
 int main()
 {
+    struct Nodo *raiz = NULL;
+
     int opcion;
     printf("1.-Agregar contacto\n  2.-Agregar telefono\n 3.-Eliminar contacto por nombre\n");
     printf("4.-Eliminar telefono de contacto\n  5.-Eliminar telefono\n 6.-Consultar telefonos de contacto\n");
@@ -80,12 +83,30 @@ int main()
         {
 
             case 1:
+                int insertado = insertar( leerDatos(), &raiz );
+                if (insertar == 1) {
+                    printf("Contacto insertado\n");
+                }
+                
                 break;
                 
             case 2:
+
+                struct contacto nombres = leerNombresCompletos();
+
+                int insertado = insertarNumero(nombres.aPaterno, nombres.aMaterno, nombres.nombre, leerDatosTelefono(), &raiz);
+                if (insertar == 1) {
+                    printf("numero insertado\n");
+                }
+
                 break;
 
             case 3:
+                struct contacto nombres =leerNombresCompletos();
+                int eliminado = eliminarContacto(nombres.aPaterno, nombres.aMaterno, nombres.nombre,&raiz);
+                if (insertar == 1) {
+                    printf("contacto eliminado\n");
+                }
                 break;
 
             case 4:
@@ -107,6 +128,8 @@ int main()
                 break;
 
             case 10:
+                inOrden(raiz);
+
                 break;
             
             case 11:
@@ -362,3 +385,18 @@ void imprimirListaContactos(struct nodoLista *datos) {
         datos = datos->sig; 
     }
 }
+
+struct contacto leerNombresCompletos() {
+    struct contacto c;
+    
+    printf("ingresar nombre:\n");
+    scanf("%s", c.nombre);
+    printf("ingresar  primer apellido:\n");
+    scanf("%s", c.aPaterno);
+    printf("ingresar  segundo apellido:\n");
+    scanf("%s", c.aMaterno);
+
+    return c;
+}
+
+
