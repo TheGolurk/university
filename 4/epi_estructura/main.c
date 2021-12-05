@@ -79,6 +79,11 @@ int main()
 {
     struct Nodo *raiz = NULL;
 
+    struct contacto nombres;
+    struct datostelefono telefonos;
+    int insertado = 0;
+    int eliminado = 0;
+
     int opcion;
     printf("1.-Agregar contacto\n  2.-Agregar telefono\n 3.-Eliminar contacto por nombre\n");
     printf("4.-Eliminar telefono de contacto\n  5.-Eliminar telefono\n 6.-Consultar telefonos de contacto\n");
@@ -90,7 +95,7 @@ int main()
         {
 
             case 1:
-                int insertado = insertar( leerDatos(), &raiz );
+                insertado = insertar( leerDatos(), &raiz );
                 if (insertado == 1) {
                     printf("Contacto insertado\n");
                 }
@@ -99,9 +104,9 @@ int main()
                 
             case 2:
 
-                struct contacto nombres = leerNombresCompletos();
+                nombres = leerNombresCompletos();
 
-                int insertado = insertarNumero(nombres.aPaterno, nombres.aMaterno, nombres.nombre, leerDatosTelefono(), &raiz);
+                insertado = insertarNumero(nombres.aPaterno, nombres.aMaterno, nombres.nombre, leerDatosTelefono(), &raiz);
                 if (insertado == 1) {
                     printf("numero insertado\n");
                 }
@@ -109,16 +114,16 @@ int main()
                 break;
 
             case 3:
-                struct contacto nombres =leerNombresCompletos();
-                int eliminado = eliminarContacto(nombres.aPaterno, nombres.aMaterno, nombres.nombre,&raiz);
+                nombres =leerNombresCompletos();
+                eliminado = eliminarContacto(nombres.aPaterno, nombres.aMaterno, nombres.nombre,&raiz);
                 if (eliminado == 1) {
                     printf("contacto eliminado\n");
                 }
                 break;
 
             case 4:
-                struct contacto nombres =leerNombresCompletos();
-                int eliminado = eliminarNumeroDeContacto(nombres, leerNumero() ,&raiz, raiz);
+                nombres =leerNombresCompletos();
+                eliminado = eliminarNumeroDeContacto(nombres, leerNumero() ,&raiz, raiz);
                 if (eliminado == 1)
                 {
                     printf("telefono eliminado\n");
@@ -129,8 +134,8 @@ int main()
                 break;
 
             case 5:
-                struct datostelefono telefonos =leerDatosTelefono();
-                eliminarNumeroDeContactoV2(leerNumero(),telefonos, &raiz, raiz);
+                telefonos =leerDatosTelefono();
+                eliminado = eliminarNumeroDeContactoV2(leerNumero(),telefonos, &raiz, raiz);
                 if (eliminado == 1)
                 {
                     printf("telefono eliminado\n");
@@ -141,18 +146,18 @@ int main()
                 break;
 
             case 6:
-                struct contacto nombres =leerNombresCompletos();
+                nombres =leerNombresCompletos();
                 inOrderNombresV2(nombres.nombre, raiz);
                 break;
 
             case 7:
-                struct contacto nombres =leerNombresCompletos();
+                nombres =leerNombresCompletos();
                 inOrderNombres(nombres.nombre, raiz);
                 
                 break;
 
             case 8:
-                struct datostelefono telefonos =leerDatosTelefono();
+                telefonos =leerDatosTelefono();
                 inOrderNombresV3(telefonos, raiz);
                 break;
 
@@ -215,7 +220,7 @@ int insertar(struct contacto c, struct Nodo **raiz) {
         strcpy( nuevo->contactos.ciudad, c.ciudad);
         strcpy( nuevo->contactos.puesto, c.puesto);
         strcpy( nuevo->contactos.empresa, c.empresa);
-        strcpy(nuevo->contactos.numero , c.numero);
+        nuevo->contactos.numero = c.numero;
         nuevo->contactos.fechaNacimiento = c.fechaNacimiento;
         nuevo->contactos.nodoLista->d = leerDatosTelefono();
 
