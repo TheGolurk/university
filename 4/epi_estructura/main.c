@@ -131,6 +131,9 @@ int main()
                 break;
 
             case 7:
+                struct contacto nombres =leerNombresCompletos();
+                inOrderNombres(nombres.nombre, raiz);
+                
                 break;
 
             case 8:
@@ -145,6 +148,7 @@ int main()
                 break;
             
             case 11:
+                printf("Saliendo.... \n");
                 break;
 
             default:
