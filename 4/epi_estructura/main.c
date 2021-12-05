@@ -267,9 +267,9 @@ int insertarNumero(char* aPaterno, char* aMaterno, char* nombre, struct datostel
     }
 
     if(insertarValidado == -1) {
-        return buscar(aPaterno, aMaterno, nombre, &((*raiz))->izq);
+        return insertarNumero(aPaterno, aMaterno, nombre,datostelefono, &((*raiz))->izq);
     } else {
-        return buscar(aPaterno, aMaterno, nombre, &((*raiz))->der);
+        return insertarNumero(aPaterno, aMaterno, nombre,datostelefono, &((*raiz))->der);
     }
     
     return 0;
@@ -296,12 +296,12 @@ int eliminarContacto(char* aPaterno, char* aMaterno, char* nombre, struct Nodo *
     
 	if ( eliminarValidado == -1  )
 	{
-		return eliminar(aPaterno, aMaterno, nombre, &((*raiz))->izq);
+		return eliminarContacto(aPaterno, aMaterno, nombre, &((*raiz))->izq);
 	} else {
 		
 		if (eliminarValidado == 1)
 		{
-			return eliminar( aPaterno, aMaterno, nombre, &((*raiz))->der);
+			return eliminarContacto( aPaterno, aMaterno, nombre, &((*raiz))->der);
 		} else {
             
 			struct Nodo *eliminado;
