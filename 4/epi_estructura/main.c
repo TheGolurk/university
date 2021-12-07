@@ -97,7 +97,7 @@ int main()
     while (opcion !=11)
     {
         
-        printf("1.-Agregar contacto \n2.-Agregar telefono 3.-Eliminar contacto por nombre");
+        printf("1.-Agregar contacto \n2.-Agregar telefono \n3.-Eliminar contacto por nombre");
         printf("\n4.-Eliminar telefono de contacto \n5.-Eliminar telefono \n6.-Consultar telefonos de contacto");
         printf("\n7.-Consultar por nombres \n8.-Consultar contacto por telefono \n9.-Modificar contacto ");
         printf("\n10.-Mostrar contactos \n11.-Salir\n");
@@ -687,7 +687,7 @@ long leerDatostelefonoV2() {
     printf("ingresar telefono personal:\n");
     scanf("%ld", &telefonoV2);
 
-
+    return telefonoV2;
 }
 
 void inOrderNombres(char* nombre, struct Nodo *raiz) {
@@ -695,12 +695,12 @@ void inOrderNombres(char* nombre, struct Nodo *raiz) {
 		return;
 	}
 
-	inOrdenNombres(nombre, raiz->izq);
+	inOrderNombres(nombre, raiz->izq);
     if ( strcmp(nombre, raiz->contactos.nombre) == 0 )
     {
         printf("%s, %s, %s ", raiz->contactos.nombre, raiz->contactos.aPaterno, raiz->contactos.aMaterno);
         printf("%d ", raiz->contactos.edad);
-        printf("%d/%d/%d ", raiz->contactos.fechaNacimiento.tm_mday, raiz->contactos.fechaNacimiento.tm_mon, raiz->contactos.fechaNacimiento.tm_mday);
+        printf("%d/%d/%d ", raiz->contactos.fechaNacimiento.tm_year, raiz->contactos.fechaNacimiento.tm_mon, raiz->contactos.fechaNacimiento.tm_mday);
         printf("%s ", raiz->contactos.ciudad);
         printf("%s ", raiz->contactos.puesto);
         printf("%s ", raiz->contactos.empresa);
@@ -708,7 +708,7 @@ void inOrderNombres(char* nombre, struct Nodo *raiz) {
         printf("\n");
         return;
     }
-	inOrdenNombres(nombre, raiz->der);
+	inOrderNombres(nombre, raiz->der);
 }
 
 void inOrderNombresV2(char* nombre, struct Nodo *raiz) {
@@ -716,12 +716,12 @@ void inOrderNombresV2(char* nombre, struct Nodo *raiz) {
 		return;
 	}
 
-	inOrdenNombresV2(nombre, raiz->izq);
+	inOrderNombresV2(nombre, raiz->izq);
     if ( strcmp(nombre, raiz->contactos.nombre) == 0 )
     {
         printf("%s, %s, %s ", raiz->contactos.nombre, raiz->contactos.aPaterno, raiz->contactos.aMaterno);
         printf("%d ", raiz->contactos.edad);
-        printf("%d/%d/%d ", raiz->contactos.fechaNacimiento.tm_mday, raiz->contactos.fechaNacimiento.tm_mon, raiz->contactos.fechaNacimiento.tm_mday);
+        printf("%d/%d/%d ", raiz->contactos.fechaNacimiento.tm_year, raiz->contactos.fechaNacimiento.tm_mon, raiz->contactos.fechaNacimiento.tm_mday);
         printf("%s ", raiz->contactos.ciudad);
         printf("%s ", raiz->contactos.puesto);
         printf("%s ", raiz->contactos.empresa);
@@ -729,7 +729,7 @@ void inOrderNombresV2(char* nombre, struct Nodo *raiz) {
         printf("\n");
         return;
     }
-	inOrdenNombresV2(nombre, raiz->der);
+	inOrderNombresV2(nombre, raiz->der);
 }
 
 void inOrderNombresV3(long telefonoV2,struct Nodo *raiz) {
@@ -737,12 +737,12 @@ void inOrderNombresV3(long telefonoV2,struct Nodo *raiz) {
 		return;
 	}
 
-	inOrdenNombresV3(nombre, raiz->izq);
+	inOrderNombresV3(telefonoV2, raiz->izq);
     if ( buscarTelefonos(telefonoV2, raiz->contactos.nodoLista) == 0 )
     {
         printf("%s, %s, %s ", raiz->contactos.nombre, raiz->contactos.aPaterno, raiz->contactos.aMaterno);
         printf("%d ", raiz->contactos.edad);
-        printf("%d/%d/%d ", raiz->contactos.fechaNacimiento.tm_mday, raiz->contactos.fechaNacimiento.tm_mon, raiz->contactos.fechaNacimiento.tm_mday);
+        printf("%d/%d/%d ", raiz->contactos.fechaNacimiento.tm_year, raiz->contactos.fechaNacimiento.tm_mon, raiz->contactos.fechaNacimiento.tm_mday);
         printf("%s ", raiz->contactos.ciudad);
         printf("%s ", raiz->contactos.puesto);
         printf("%s ", raiz->contactos.empresa);
@@ -750,14 +750,13 @@ void inOrderNombresV3(long telefonoV2,struct Nodo *raiz) {
         printf("\n");
         return;
     }
-	inOrdennNombresV3(nombre, raiz->der);
+	inOrderNombresV3(telefonoV2, raiz->der);
 }
 
 int buscarTelefonos(long telefonoV2, struct nodoLista *datos) {
      while(datos != NULL) {        
         
         if ( telefonoV2 == datos->d.telefonoPersonal )
-        
         {
             return 0;
         }
