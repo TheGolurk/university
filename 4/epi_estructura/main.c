@@ -171,7 +171,7 @@ int main()
 
             case 8:
                 // solo personal
-                telefonoV2 =leerDatosTelefonoV2();
+                telefonoV2 = leerDatostelefonoV2();;
                 inOrderNombresV3(telefonoV2, raiz);
                 break;
 
@@ -402,10 +402,10 @@ void inicializar(struct Nodo **raiz) {
 int validarTexto(char aPaterno[15], char aMaterno[15], char nombre[15], 
                     char aPaternoRaiz[15], char aMaternoRaiz[15], char nombreRaiz[15])
 {
-    if ( strcmp(nombre, nombreRaiz) < 0 && strcmp(aPaterno, aPaternoRaiz) < 0 && strcmp(aMaterno, aMaternoRaiz) < 0  )
+    if ( strcmp(nombre, nombreRaiz) < 0 )
     {
         return -1;
-    } else if ( strcmp(nombre, nombreRaiz) > 0 && strcmp(aPaterno, aPaternoRaiz) > 0 && strcmp(aMaterno, aMaternoRaiz) > 0  )
+    } else if ( strcmp(nombre, nombreRaiz) > 0 )
     {
         return 1;
     } else if (strcmp(nombre,nombreRaiz) == 0 && strcmp(aPaterno,aPaternoRaiz) == 0 && strcmp(aMaterno,aMaternoRaiz) == 0)
@@ -518,11 +518,11 @@ int insertarV2(struct contacto c, struct datostelefono telefonos,struct Nodo **r
 
 	if (insertarValidado == -1)
 	{
-		return insertar(c, &((*raiz)->izq));
+		return insertarV2(c, telefonos, &((*raiz)->izq));
 	} else {
 		if (insertarValidado == 1)
 		{
-			return insertar(c,  &((*raiz)->der));
+			return insertarV2(c, telefonos,  &((*raiz)->der));
 		} else {
 			return 0;
 		}
@@ -530,17 +530,20 @@ int insertarV2(struct contacto c, struct datostelefono telefonos,struct Nodo **r
 }
 
 int insertarNumero(char* aPaterno, char* aMaterno, char* nombre, struct datostelefono datostelefono, struct Nodo **raiz) {
-    if(raiz  == NULL) {
-        return 0;
-    }
+    struct nodoLista *current = (*raiz)->contactos.nodoLista;
+
     int insertarValidado =validarTexto(aPaterno, aMaterno, nombre,
                 (*raiz)->contactos.aPaterno,(*raiz)->contactos.aMaterno, (*raiz)->contactos.nombre);
 
     if (insertarValidado == 2)
     {
-        (*raiz)->contactos.nodoLista = (struct nodoLista*)malloc(sizeof(struct nodoLista));
-        (*raiz)->contactos.nodoLista->d = datostelefono;
-        (*raiz)->contactos.nodoLista->sig =  NULL;
+        while (current->sig != NULL) {
+            current = current->sig;
+        }
+
+        current->sig = (struct nodoLista*)malloc(sizeof(struct nodoLista));
+        current->sig->d = datostelefono;
+        current->sig->sig =  NULL;
 
         return 1;
     }
@@ -548,7 +551,9 @@ int insertarNumero(char* aPaterno, char* aMaterno, char* nombre, struct datostel
     if(insertarValidado == -1) {
         return insertarNumero(aPaterno, aMaterno, nombre,datostelefono, &((*raiz))->izq);
     } else {
-        return insertarNumero(aPaterno, aMaterno, nombre,datostelefono, &((*raiz))->der);
+        if(insertarValidado == 1) {
+            return insertarNumero(aPaterno, aMaterno, nombre,datostelefono, &((*raiz))->der);
+        }
     }
     
     return 0;
