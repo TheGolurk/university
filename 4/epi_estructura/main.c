@@ -75,6 +75,7 @@ char* leerNombresCompletosV2();
 //para árboles inicializar e insertar
 void inicializar(struct Nodo **raiz);
 int insertarV2(struct contacto c, struct datostelefono telefonos,struct Nodo **raiz);
+
 void liberarMemoria(struct Nodo **raiz);
 
 int validarTexto(char aPaterno[15], char aMaretno[15], char nombre[15], 
@@ -83,6 +84,7 @@ int validarTexto(char aPaterno[15], char aMaretno[15], char nombre[15],
 int main()
 {
     struct Nodo *raiz = NULL;
+    inicializar(&raiz);
 
     struct contacto nombres;
     struct datostelefono telefonos;
@@ -316,8 +318,81 @@ void inicializar(struct Nodo **raiz) {
     d.telefonoTrabajo = 7773564133;
     insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
 
+    //4
+    strcpy(c.nombre, "Julio");
+    c.numero = 7777789023;
+    strcpy(c.aPaterno, "Duarte");
+    strcpy(c.aMaterno, "Loises");
+    c.fechaNacimiento.tm_year = 1978; 
+    c.fechaNacimiento.tm_mon = 11;
+    c.fechaNacimiento.tm_mday = 16;
+    c.edad = 23;
+    strcpy(c.ciudad, "  Jojutla");
+    strcpy(c.puesto, "Abogado");
+    strcpy(c.empresa, "Vega");
+    
+    strcpy(d.direccion, "Texcal");
+    d.telefonoPersonal = 7710465593;
+    strcpy(d.nombreFamiliar, "Yaqueline");
+    d.telefonoCasa = 7777828731;
+    d.telefonoFijo = 7723090332;
+    d.telefonoTrabajo = 7713454133;
+    
+    insertarV2(c,d, raiz);
 
+    strcpy(d.direccion, "CENTRAL");
+    d.telefonoPersonal = 7710343423;
+    strcpy(d.nombreFamiliar, "Julian");
+    d.telefonoCasa = 7737824371;
+    d.telefonoFijo = 7723045882;
+    d.telefonoTrabajo = 7734664133;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
 
+    strcpy(d.direccion, "TEJALPA");
+    d.telefonoPersonal = 7745930893;
+    strcpy(d.nombreFamiliar, "ICON");
+    d.telefonoCasa = 7740924433;
+    d.telefonoFijo = 7723888442;
+    d.telefonoTrabajo = 7733901133;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
+
+    //5
+    strcpy(c.nombre, "RIGOR");
+    c.numero = 7771390231;
+    strcpy(c.aPaterno, "Segura");
+    strcpy(c.aMaterno, "Tomia");
+    c.fechaNacimiento.tm_year = 1995; 
+    c.fechaNacimiento.tm_mon = 14;
+    c.fechaNacimiento.tm_mday = 22;
+    c.edad = 25;
+    strcpy(c.ciudad, "3 MARIAS");
+    strcpy(c.puesto, "Pintor");
+    strcpy(c.empresa, "Comex");
+
+    strcpy(d.direccion, "SAN ISIDRO");
+    d.telefonoPersonal = 7710930013;
+    strcpy(d.nombreFamiliar, "Elena");
+    d.telefonoCasa = 7770924351;
+    d.telefonoFijo = 7723040902;
+    d.telefonoTrabajo = 7773319133;
+
+    insertarV2(c,d, raiz);
+
+    strcpy(d.direccion, "REVOLUCION");
+    d.telefonoPersonal = 7710930412;
+    strcpy(d.nombreFamiliar, "ELSA");
+    d.telefonoCasa = 7740924767;
+    d.telefonoFijo = 7723049491;
+    d.telefonoTrabajo = 7733452333;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
+
+    strcpy(d.direccion, "PROGRESO");
+    d.telefonoPersonal = 7710912523;
+    strcpy(d.nombreFamiliar, "JULIO");
+    d.telefonoCasa = 7740924331;
+    d.telefonoFijo = 7724549032;
+    d.telefonoTrabajo = 7773454133;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
 }
 
 // 2 texto igual
