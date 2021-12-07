@@ -71,8 +71,7 @@ struct datostelefono leerDatosTelefono();
 struct contacto leerNombresCompletos(); 
 long leerNumero();
 long leerDatostelefonoV2();
-char* leerNombresCompletosV2();
-//para árboles inicializar e insertar
+const char* leerNombresCompletosV2();
 void inicializar(struct Nodo **raiz);
 int insertarV2(struct contacto c, struct datostelefono telefonos,struct Nodo **raiz);
 
@@ -90,7 +89,7 @@ int main()
     struct datostelefono telefonos;
     int insertado = 0;
     int eliminado = 0;
-    char *nombreV2;
+    const char* nombreV2;
     long telefonoV2;
 
     int opcion = 0;
@@ -162,14 +161,12 @@ int main()
                 break;
 
             case 7:
-                // primer nombre
-                nombreV2 =leerNombresCompletosV2();
+                nombreV2 = leerNombresCompletosV2();
                 inOrderNombres(nombreV2, raiz);
                 
                 break;
 
             case 8:
-                // solo personal
                 telefonoV2 = leerDatostelefonoV2();;
                 inOrderNombresV3(telefonoV2, raiz);
                 break;
@@ -689,7 +686,7 @@ long leerDatostelefonoV2() {
     return telefonoV2;
 }
 
-void inOrderNombres(char* nombre, struct Nodo *raiz) {
+void inOrderNombres(char nombre[], struct Nodo *raiz) {
     if (raiz == NULL) {
 		return;
 	}
@@ -704,7 +701,6 @@ void inOrderNombres(char* nombre, struct Nodo *raiz) {
         printf("%s ", raiz->contactos.puesto);
         printf("%s ", raiz->contactos.empresa);
         imprimirListaContactos(raiz->contactos.nodoLista);
-        printf("\n");
         return;
     }
 	inOrderNombres(nombre, raiz->der);
@@ -725,7 +721,6 @@ void inOrderNombresV2(char* nombre, struct Nodo *raiz) {
         printf("%s ", raiz->contactos.puesto);
         printf("%s ", raiz->contactos.empresa);
         imprimirListaContactos(raiz->contactos.nodoLista);
-        printf("\n");
         return;
     }
 	inOrderNombresV2(nombre, raiz->der);
@@ -746,7 +741,6 @@ void inOrderNombresV3(long telefonoV2,struct Nodo *raiz) {
         printf("%s ", raiz->contactos.puesto);
         printf("%s ", raiz->contactos.empresa);
         imprimirListaContactos(raiz->contactos.nodoLista);
-        printf("\n");
         return;
     }
 	inOrderNombresV3(telefonoV2, raiz->der);
@@ -791,8 +785,7 @@ void imprimirListaContactos(struct nodoLista *datos) {
     while(datos != NULL) {        
         printf("\n%s %s ", datos->d.direccion, datos->d.nombreFamiliar);
         printf("\n%ld %ld ", datos->d.telefonoFijo, datos->d.telefonoCasa);
-        printf("\n%ld %ld ", datos->d.telefonoPersonal, datos->d.telefonoTrabajo);
-        printf("\n");
+        printf("\n%ld %ld \n", datos->d.telefonoPersonal, datos->d.telefonoTrabajo);
 
         datos = datos->sig; 
     }
@@ -806,34 +799,35 @@ struct contacto leerNombresCompletos() {
     return c;
 }
 
-char* leerNombresCompletosV2() {
-    char nombre[30];
+const char* leerNombresCompletosV2() {
+    char* nombre;
 
     printf("ingresar  nombre a buscar:\n");
-    scanf("%s", &nombre);
+    scanf("%s", nombre);
 
 
     return nombre;
 }
 
-int eliminarNumero(long numero, struct nodoLista **raiz)
+int eliminarNumero(long numero, struct nodoLista** raiz)
 {
-    struct nodoLista *temp = raiz, *prev;
- 
+    struct nodoLista* temp = *raiz;
+    struct nodoLista* previous;
+
     if (temp->sig == NULL) {
-        raiz = NULL;
+        *raiz = NULL;
         free(temp); 
         return 1;
     }
 
     if(temp!=NULL && temp->d.telefonoPersonal == numero) {
-        raiz = temp->sig;
+        *raiz = temp->sig;
         free(temp);
         return 1;
     }
 
     while (temp != NULL && temp->d.telefonoPersonal != numero) {
-        prev = temp;
+        previous = temp;
         temp = temp->sig;
     }
  
@@ -841,7 +835,7 @@ int eliminarNumero(long numero, struct nodoLista **raiz)
         return 0;
     }
 
-    prev->sig = temp->sig;
+    previous->sig = temp->sig;
 
     free(temp);
 
@@ -864,7 +858,7 @@ int eliminarNumeroDeContacto(struct contacto nombres, long numero, struct Nodo *
         raizB->contactos.aMaterno, 
         raizB->contactos.nombre) == 0 )
     {
-        int eliminado = eliminarNumero(numero, (*raiz)->contactos.nodoLista); 
+        int eliminado = eliminarNumero(numero, &(*raiz)->contactos.nodoLista);
         if (eliminado == 1) {
             return 1;   
         } else {
@@ -886,7 +880,7 @@ int eliminarNumeroDeContactoV2(long numero, struct Nodo **raiz, struct Nodo *rai
     
     if ( buscarTelefonos(numero, raizB->contactos.nodoLista) == 0 )
     {
-        int eliminado = eliminarNumero(numero, (*raiz)->contactos.nodoLista); 
+        int eliminado = eliminarNumero(numero, &(*raiz)->contactos.nodoLista);
         if (eliminado == 1) {
             return 1;   
         } else {
