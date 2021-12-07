@@ -1,0 +1,4 @@
+/home/golurk/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/golurk/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/ninja/linux/ninja -G Ninja /home/golurk/stuff/university/4/epi_estructura
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/golurk/stuff/university/4/epi_estructura/cmake-build-debug

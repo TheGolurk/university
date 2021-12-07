@@ -1,0 +1,3 @@
+/home/golurk/stuff/university/4/epi_estructura/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/golurk/stuff/university/4/epi_estructura/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/golurk/stuff/university/4/epi_estructura/cmake-build-debug/CMakeFiles/epi_estructura.dir

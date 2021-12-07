@@ -51,7 +51,8 @@ int eliminarNumeroDeContacto(struct contacto nombres, long numero, struct Nodo *
 int eliminarNumeroDesconocido(long numero, struct Nodo **raiz);
 int eliminarNumeroDeContactoV2(long numero, struct datostelefono d, struct Nodo **raiz, struct Nodo *raizB);
 int eliminarNumero(long numero, struct nodoLista *raiz);
-int buscarTelefonos(struct datostelefono d, struct nodoLista *datos);
+int buscarTelefonos(long telefonoV2, struct nodoLista *datos);
+
 
 void consultarContactos(struct Nodo *raiz);
 void consultarContactosCiudad(struct Nodo *raiz);
@@ -60,7 +61,7 @@ void consultarTodo(struct Nodo **raiz);
 void inOrden(struct Nodo *raiz);
 void inOrderNombres(char* nombre, struct Nodo *raiz);
 void inOrderNombresV2(char* nombre, struct Nodo *raiz);
-void inOrderNombresV3(struct datostelefono d,struct Nodo *raiz);
+void inOrderNombresV3(long telefonoV2,struct Nodo *raiz);
 void imprimirListaContactos(struct nodoLista *datos);
 
 int modificarContacto(struct contacto contacto, struct datostelefono datostelefono ,struct Nodo **raiz);
@@ -69,6 +70,8 @@ struct contacto leerDatos();
 struct datostelefono leerDatosTelefono();
 struct contacto leerNombresCompletos(); 
 long leerNumero();
+long leerDatostelefonoV2();
+char* leerNombresCompletosV2();
 
 void liberarMemoria(struct Nodo **raiz);
 
@@ -83,6 +86,8 @@ int main()
     struct datostelefono telefonos;
     int insertado = 0;
     int eliminado = 0;
+    char *nombreV2;
+    long telefonoV2;
 
     int opcion = 0;
     while (opcion !=11)
@@ -154,14 +159,16 @@ int main()
                 break;
 
             case 7:
-                nombres =leerNombresCompletos();
-                inOrderNombres(nombres.nombre, raiz);
+                // primer nombre
+                nombreV2 =leerNombresCompletosV2();
+                inOrderNombres(nombreV2, raiz);
                 
                 break;
 
             case 8:
-                telefonos =leerDatosTelefono();
-                inOrderNombresV3(telefonos, raiz);
+                // solo personal
+                telefonoV2 =leerDatosTelefonoV2();
+                inOrderNombresV3(telefonoV2, raiz);
                 break;
 
             case 9:
@@ -209,7 +216,6 @@ int validarTexto(char aPaterno[15], char aMaterno[15], char nombre[15],
 }
 
 int insertar(struct contacto c, struct Nodo **raiz) {
-    printf("hola\n");
 	if (*raiz == NULL) {
 		struct Nodo *nuevo;
 		nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
@@ -228,13 +234,20 @@ int insertar(struct contacto c, struct Nodo **raiz) {
         nuevo->contactos.numero = c.numero;
         nuevo->contactos.fechaNacimiento = c.fechaNacimiento;
 
-        struct datostelefono d = leerDatosTelefono();
-        strcpy(nuevo->contactos.nodoLista->d.direccion, d.direccion);
-        strcpy(nuevo->contactos.nodoLista->d.nombreFamiliar, d.nombreFamiliar);
-        nuevo->contactos.nodoLista->d.telefonoCasa = d.telefonoCasa; 
-        nuevo->contactos.nodoLista->d.telefonoFijo = d.telefonoFijo;
-        nuevo->contactos.nodoLista->d.telefonoPersonal = d.telefonoPersonal;
-        nuevo->contactos.nodoLista->d.telefonoTrabajo = d.telefonoTrabajo;
+        nuevo->contactos.nodoLista = (struct nodoLista*)malloc(sizeof(struct nodoLista));
+        if (nuevo->contactos.nodoLista == NULL) {
+            return 0;
+        }
+
+        struct datostelefono telefonos;
+        telefonos = leerDatosTelefono();
+        
+        strcpy(nuevo->contactos.nodoLista->d.direccion, telefonos.direccion);
+        strcpy(nuevo->contactos.nodoLista->d.nombreFamiliar, telefonos.nombreFamiliar);
+        nuevo->contactos.nodoLista->d.telefonoCasa = telefonos.telefonoCasa; 
+        nuevo->contactos.nodoLista->d.telefonoFijo = telefonos.telefonoFijo;
+        nuevo->contactos.nodoLista->d.telefonoPersonal = telefonos.telefonoPersonal;
+        nuevo->contactos.nodoLista->d.telefonoTrabajo = telefonos.telefonoTrabajo;
 
 		nuevo->izq = NULL;
 		nuevo->der = NULL;
@@ -408,6 +421,15 @@ struct datostelefono leerDatosTelefono() {
     return d;
 }
 
+long leerDatostelefonoV2() {
+    long telefonoV2;
+
+    printf("ingresar telefono personal:\n");
+    scanf("%ld", &telefonoV2);
+
+
+}
+
 void inOrderNombres(char* nombre, struct Nodo *raiz) {
     if (raiz == NULL) {
 		return;
@@ -423,6 +445,8 @@ void inOrderNombres(char* nombre, struct Nodo *raiz) {
         printf("%s", raiz->contactos.puesto);
         printf("%s", raiz->contactos.empresa);
         imprimirListaContactos(raiz->contactos.nodoLista);
+        printf("\n");
+        return;
     }
 	inOrden(raiz->der);
 }
@@ -442,18 +466,19 @@ void inOrderNombresV2(char* nombre, struct Nodo *raiz) {
         printf("%s", raiz->contactos.puesto);
         printf("%s", raiz->contactos.empresa);
         imprimirListaContactos(raiz->contactos.nodoLista);
+        printf("\n");
         return;
     }
 	inOrden(raiz->der);
 }
 
-void inOrderNombresV3(struct datostelefono d,struct Nodo *raiz) {
+void inOrderNombresV3(long telefonoV2,struct Nodo *raiz) {
     if (raiz == NULL) {
 		return;
 	}
 
 	inOrden(raiz->izq);
-    if ( buscarTelefonos(d, raiz->contactos.nodoLista) == 0 )
+    if ( buscarTelefonos(telefonoV2, raiz->contactos.nodoLista) == 0 )
     {
         printf("%s, %s, %s ", raiz->contactos.nombre, raiz->contactos.aPaterno, raiz->contactos.aMaterno);
         printf("%d ", raiz->contactos.edad);
@@ -462,18 +487,17 @@ void inOrderNombresV3(struct datostelefono d,struct Nodo *raiz) {
         printf("%s", raiz->contactos.puesto);
         printf("%s", raiz->contactos.empresa);
         imprimirListaContactos(raiz->contactos.nodoLista);
+        printf("\n");
         return;
     }
 	inOrden(raiz->der);
 }
 
-int buscarTelefonos(struct datostelefono d, struct nodoLista *datos) {
+int buscarTelefonos(long telefonoV2, struct nodoLista *datos) {
      while(datos != NULL) {        
         
-        if ( d.telefonoPersonal == datos->d.telefonoPersonal &&
-             d.telefonoCasa == datos->d.telefonoCasa && 
-             d.telefonoTrabajo == datos->d.telefonoTrabajo && 
-             d.telefonoFijo == datos->d.telefonoFijo)
+        if ( telefonoV2 == datos->d.telefonoPersonal )
+        
         {
             return 0;
         }
@@ -525,6 +549,16 @@ struct contacto leerNombresCompletos() {
     scanf("%s", c.aMaterno);
 
     return c;
+}
+
+char* leerNombresCompletosV2() {
+    char nombre[30];
+
+    printf("ingresar  nombre a buscar:\n");
+    scanf("%s", &nombre);
+
+
+    return nombre;
 }
 
 int eliminarNumero(long numero, struct nodoLista *raiz)
@@ -589,7 +623,7 @@ int eliminarNumeroDeContactoV2(long numero, struct datostelefono d, struct Nodo 
 	eliminarNumeroDeContactoV2(numero, d, raiz, raizB->izq);
 
     
-    if ( buscarTelefonos(d, raizB->contactos.nodoLista) == 0 )
+    if ( buscarTelefonos(numero, raizB->contactos.nodoLista) == 0 )
     {
         int eliminado = eliminarNumero(numero, (*raiz)->contactos.nodoLista); 
         if (eliminado == 1) {
@@ -612,6 +646,8 @@ long leerNumero() {
     
     return num;
 }
+
+
 
 void liberarMemoria(struct Nodo **raiz) {
     if (raiz)
