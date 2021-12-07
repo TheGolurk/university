@@ -72,7 +72,9 @@ struct contacto leerNombresCompletos();
 long leerNumero();
 long leerDatostelefonoV2();
 char* leerNombresCompletosV2();
-
+//para árboles inicializar e insertar
+void inicializar(struct Nodo **raiz);
+int insertarV2(struct contacto c, struct datostelefono telefonos,struct Nodo **raiz);
 void liberarMemoria(struct Nodo **raiz);
 
 int validarTexto(char aPaterno[15], char aMaretno[15], char nombre[15], 
@@ -194,6 +196,130 @@ int main()
     return 0;
 }
 
+
+void inicializar(struct Nodo **raiz) {
+    
+    struct contacto c;
+    struct datostelefono d;
+
+    // 1    
+    strcpy(c.nombre, "Carla");
+    c.numero = 7771009823;
+    strcpy(c.aPaterno, "Aguilar");
+    strcpy(c.aMaterno, "Vidal");
+    c.fechaNacimiento.tm_year = 2000; 
+    c.fechaNacimiento.tm_mon = 9;
+    c.fechaNacimiento.tm_mday = 23;
+    c.edad = 25;
+    strcpy(c.ciudad, "Cuernavaca");
+    strcpy(c.puesto, "Cajera");
+    strcpy(c.empresa, "Banamex");
+    
+    strcpy(d.direccion, "REVOLUCION");
+    d.telefonoPersonal = 7710930323;
+    strcpy(d.nombreFamiliar, "Luis");
+    d.telefonoCasa = 7740124721;
+    d.telefonoFijo = 7723349432;
+    d.telefonoTrabajo = 7733489133;
+    
+    insertarV2(c,d, raiz);
+
+    strcpy(d.direccion, "TORRES");
+    d.telefonoPersonal = 7710930323;
+    strcpy(d.nombreFamiliar, "Habacuc");  
+    d.telefonoCasa = 7778902444;
+    d.telefonoFijo = 7773056789;
+    d.telefonoTrabajo = 7733459233;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
+
+    strcpy(d.direccion, "CIVAC");
+    d.telefonoPersonal = 7710945323;
+    strcpy(d.nombreFamiliar, "JUAN");
+    d.telefonoCasa = 7740920021;
+    d.telefonoFijo = 7703049432;
+    d.telefonoTrabajo = 7733434133;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
+
+    //2
+    strcpy(c.nombre, "Lola");
+    c.numero = 7773209823;
+    strcpy(c.aPaterno, "Perez");
+    strcpy(c.aMaterno, "Garcenes");
+    c.fechaNacimiento.tm_year = 2000; 
+    c.fechaNacimiento.tm_mon = 12;
+    c.fechaNacimiento.tm_mday = 12;
+    c.edad = 99;
+    strcpy(c.ciudad, "Tejalpa");
+    strcpy(c.puesto, "Ayudante");
+    strcpy(c.empresa, "Pizzeria");
+    
+    strcpy(d.direccion, "ATLAHUACAN");
+    d.telefonoPersonal = 7710930378;
+    strcpy(d.nombreFamiliar, "Ortiz");
+    d.telefonoCasa = 7740928731;
+    d.telefonoFijo = 7723049332;
+    d.telefonoTrabajo = 7734554133;
+    
+    insertarV2(c,d, raiz);
+
+    strcpy(d.direccion, "MARGARITA");
+    d.telefonoPersonal = 7710933423;
+    strcpy(d.nombreFamiliar, "Olivia");
+    d.telefonoCasa = 7737824721;
+    d.telefonoFijo = 7723045432;
+    d.telefonoTrabajo = 7734454133;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
+
+    strcpy(d.direccion, "TEXCLA");
+    d.telefonoPersonal = 7745930323;
+    strcpy(d.nombreFamiliar, "PEREZ");
+    d.telefonoCasa = 7740924451;
+    d.telefonoFijo = 7723049442;
+    d.telefonoTrabajo = 7733114133;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
+
+    //3
+    strcpy(c.nombre, "Eduardo");
+    c.numero = 7771390233;
+    strcpy(c.aPaterno, "Reyes");
+    strcpy(c.aMaterno, "Juarez");
+    c.fechaNacimiento.tm_year = 1999; 
+    c.fechaNacimiento.tm_mon = 4;
+    c.fechaNacimiento.tm_mday = 2;
+    c.edad = 25;
+    strcpy(c.ciudad, "Cuautla");
+    strcpy(c.puesto, "Plomero");
+    strcpy(c.empresa, "Cemex");
+
+    strcpy(d.direccion, "BENITOJUAREZ");
+    d.telefonoPersonal = 7710930323;
+    strcpy(d.nombreFamiliar, "Kira");
+    d.telefonoCasa = 7770924341;
+    d.telefonoFijo = 7723040032;
+    d.telefonoTrabajo = 7773899133;
+
+    insertarV2(c,d, raiz);
+
+    strcpy(d.direccion, "CAPIRI");
+    d.telefonoPersonal = 7710930453;
+    strcpy(d.nombreFamiliar, "JAIME");
+    d.telefonoCasa = 7740924743;
+    d.telefonoFijo = 7723049400;
+    d.telefonoTrabajo = 7733455633;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
+
+    strcpy(d.direccion, "CENTRO");
+    d.telefonoPersonal = 7710934523;
+    strcpy(d.nombreFamiliar, "KAREN");
+    d.telefonoCasa = 7740924451;
+    d.telefonoFijo = 7728049032;
+    d.telefonoTrabajo = 7773564133;
+    insertarNumero(c.aPaterno, c.aMaterno, c.nombre, d, raiz);
+
+
+
+}
+
 // 2 texto igual
 // 1 Para mayor
 // -1 Para menor
@@ -273,6 +399,60 @@ int insertar(struct contacto c, struct Nodo **raiz) {
 	}
 }
 
+int insertarV2(struct contacto c, struct datostelefono telefonos,struct Nodo **raiz) {
+	if (*raiz == NULL) {
+		struct Nodo *nuevo;
+		nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
+		
+		if (nuevo == NULL) {
+			return 0;
+		}
+ 
+        strcpy( nuevo->contactos.aPaterno,c.aPaterno) ; 
+        stpcpy( nuevo->contactos.aMaterno, c.aMaterno);
+        strcpy( nuevo->contactos.nombre, c.nombre);
+        nuevo->contactos.edad = c.edad;
+        strcpy( nuevo->contactos.ciudad, c.ciudad);
+        strcpy( nuevo->contactos.puesto, c.puesto);
+        strcpy( nuevo->contactos.empresa, c.empresa);
+        nuevo->contactos.numero = c.numero;
+        nuevo->contactos.fechaNacimiento = c.fechaNacimiento;
+
+        nuevo->contactos.nodoLista = (struct nodoLista*)malloc(sizeof(struct nodoLista));
+        if (nuevo->contactos.nodoLista == NULL) {
+            return 0;
+        }
+        
+        strcpy(nuevo->contactos.nodoLista->d.direccion, telefonos.direccion);
+        strcpy(nuevo->contactos.nodoLista->d.nombreFamiliar, telefonos.nombreFamiliar);
+        nuevo->contactos.nodoLista->d.telefonoCasa = telefonos.telefonoCasa; 
+        nuevo->contactos.nodoLista->d.telefonoFijo = telefonos.telefonoFijo;
+        nuevo->contactos.nodoLista->d.telefonoPersonal = telefonos.telefonoPersonal;
+        nuevo->contactos.nodoLista->d.telefonoTrabajo = telefonos.telefonoTrabajo;
+
+		nuevo->izq = NULL;
+		nuevo->der = NULL;
+
+		*raiz = nuevo;
+
+		return 1;
+	}
+
+    int insertarValidado = validarTexto(c.aPaterno, c.aMaterno, c.nombre, 
+                (*raiz)->contactos.aPaterno, (*raiz)->contactos.aMaterno, (*raiz)->contactos.nombre);
+
+	if (insertarValidado == -1)
+	{
+		return insertar(c, &((*raiz)->izq));
+	} else {
+		if (insertarValidado == 1)
+		{
+			return insertar(c,  &((*raiz)->der));
+		} else {
+			return 0;
+		}
+	}
+}
 
 int insertarNumero(char* aPaterno, char* aMaterno, char* nombre, struct datostelefono datostelefono, struct Nodo **raiz) {
     if(raiz  == NULL) {
