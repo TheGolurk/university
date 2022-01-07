@@ -20,3 +20,6 @@ main
 # vendor/
 
 main
+
+.vscode
+.idea
