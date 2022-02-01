@@ -23,3 +23,4 @@ main
 
 .vscode
 .idea
+containers/mysql/mysqldata/*
