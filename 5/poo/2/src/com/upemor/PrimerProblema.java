@@ -3,7 +3,7 @@ package com.upemor;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main {
+public class PrimerProblema {
 
     public static void main(String[] args) {
 
