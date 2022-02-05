@@ -6,10 +6,11 @@ public class Alumno {
     private String Matricula;
     private Materia[] Materias;
 
-    public Alumno(String nombre, int edad, String matricula) {
+    public Alumno(String nombre, int edad, String matricula, Materia[] materias) {
         Nombre = nombre;
         Edad = edad;
         Matricula = matricula;
+        Materias = materias;
     }
 
     public String getNombre() {
@@ -49,8 +50,7 @@ public class Alumno {
     }
 
     public void ConsultarCalificaciones() {
-        for (Materia m: this.getMaterias()
-             ) {
+        for (Materia m: this.getMaterias()) {
             System.out.println("Materia: " + m.getNombre() + " Calificaion: " + m.getCalificacion());
         }
     }

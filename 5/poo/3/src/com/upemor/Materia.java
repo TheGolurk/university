@@ -6,6 +6,11 @@ public class Materia {
     private String Nombre;
     private double Calificacion;
 
+    public Materia(String nombre, double calificacion) {
+        Nombre = nombre;
+        Calificacion = calificacion;
+    }
+
     public String getNombre() {
         return Nombre;
     }
@@ -21,7 +26,5 @@ public class Materia {
     public void setCalificacion(double calificacion) {
         Calificacion = calificacion;
     }
-
-
 
 }
