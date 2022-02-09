@@ -1,30 +1,58 @@
 package com.upemor;
 
-import java.util.Scanner;
+import com.github.javafaker.Faker;
+
+import java.util.Random;
 
 public class Main {
 
+    private static Faker faker = new Faker();
+
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Random r = new Random();
 
-        Materia[] materias = new Materia[3];
+        Alumno[] grupo1 = new Alumno[
+                r.ints(20,50).findFirst().orElse(0)
+                ];
+        Alumno[] grupo2 = new Alumno[
+                r.ints(20,50).findFirst().orElse(0)
+                ];
 
-        for (int i = 0; i < materias.length; i++)  {
-            System.out.println("Ingresa nombre");
-            var nom = sc.next();
-
-            System.out.println("Ingresa calificacion");
-            var cal = sc.nextDouble();
-
-            materias[i] = new Materia(nom, cal);
-        }
-
-        Alumno a1 = new Alumno("Juan", 10, "QWEASD123", materias);
-
-        a1.ConsultarCalificaciones();
-
-        System.out.println("Alumno: " + a1.getNombre() + " tiene un promedio de: " + a1.CalcularPromedio());
-
+        llenarGrupo(grupo1);
+        llenarGrupo(grupo2);
+        imprimir(grupo1);
+        imprimir(grupo2);
     }
+
+    public static void llenarGrupo(Alumno[] alumnos) {
+        for (int i = 0; i < alumnos.length; i++) {
+
+            Materia[] materias = new Materia[10];
+            for (int j = 0; j < materias.length; j++)  {
+                var nom = faker.name().title();
+                var cal = faker.number().numberBetween(0,100);
+
+                materias[j] = new Materia(nom, cal);
+            }
+
+            alumnos[i] = new Alumno(
+                    faker.name().firstName(),
+                    faker.number().numberBetween(18, 70),
+                    faker.code().isbn10(),
+                    materias
+            );
+        }
+    }
+
+    public static void imprimir(Alumno[] alumnos) {
+        for (int i = 0; i < alumnos.length; i++) {
+            System.out.println("Alumno: " +
+                    alumnos[i].getNombre() +
+                    " tiene un promedio de: " +
+                    alumnos[i].CalcularPromedio()
+            );
+        }
+    }
+
 }
