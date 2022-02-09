@@ -45,10 +45,6 @@ public class Alumno {
         Materias = materias;
     }
 
-    public void RegistrarAlumno() {
-
-    }
-
     public void ConsultarCalificaciones() {
         for (Materia m: this.getMaterias()) {
             System.out.println("Materia: " + m.getNombre() + " Calificaion: " + m.getCalificacion());
