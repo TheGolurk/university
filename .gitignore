@@ -5,8 +5,6 @@
 *.so
 *.dylib
 
-main
-
 # Test binary, built with `go test -c`
 *.test
 
@@ -18,8 +16,6 @@ main
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-
-main
 
 .vscode
 .idea
