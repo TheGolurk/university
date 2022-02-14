@@ -1,7 +1,6 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
+import javax.print.DocFlavor;
 
 public class Conjunto {
 
@@ -10,22 +9,6 @@ public class Conjunto {
 
     public Conjunto(int[] conjuntoA, int[] conjuntoB) {
         ConjuntoA = conjuntoA;
-        ConjuntoB = conjuntoB;
-    }
-
-    public int[] getConjuntoA() {
-        return ConjuntoA;
-    }
-
-    public void setConjuntoA(int[] conjuntoA) {
-        ConjuntoA = conjuntoA;
-    }
-
-    public int[] getConjuntoB() {
-        return ConjuntoB;
-    }
-
-    public void setConjuntoB(int[] conjuntoB) {
         ConjuntoB = conjuntoB;
     }
 
@@ -140,17 +123,51 @@ public class Conjunto {
     }
 
     public int[] interseccionSobrecargada(int[] conjunto3) {
+        int[] resultado = new int[300];
+        var index = 0;
 
+        for (int j : ConjuntoA) {
+            if (j != 0) {
+                if ( buscarElemento(ConjuntoB, j) && buscarElemento(conjunto3, j) ) {
+                    resultado[index] = j;
+                    index++;
+                }
+            }
+        }
 
-
-        return conjunto3;
+        return resultado;
     }
 
-    public int[] Diferencia(int[] conjunto1, int[] conjunto2){
-        return conjunto1;
+    public int[] Diferencia(){
+        int[] resultado = new int[300];
+        var index = 0;
+
+        return resultado;
     }
 
-    public int[] DiferenciaSobrecargada(int[] conjunto1, int[] conjunto2, int[] conjunto3) {
-        return conjunto1;
+    public int[] DiferenciaSobrecargada(int[] conjunto3) {
+        int[] resultado = new int[300];
+        var index = 0;
+
+        for (int j : ConjuntoA) {
+            if (j != 0) {
+                if ( !buscarElemento(ConjuntoB, j) && !buscarElemento(conjunto3, j)) {
+                    resultado[index] = j;
+                    index++;
+                }
+            }
+        }
+
+        return resultado;
+    }
+
+    private boolean buscarElemento(int[] elementos, int elemento) {
+        for (int i : elementos) {
+            if (i == elemento) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
