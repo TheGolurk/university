@@ -41,4 +41,15 @@ public class FechaTest {
         Assertions.assertEquals(9, res.getDia());
     }
 
+    @Test
+    public void TestDiferencia() {
+        Fecha f2 = new Fecha(30, 1, 2022);
+
+        Fecha f3 = new Fecha(9, 2, 2022);
+
+        var res = f2.Diferencia(f2,f3);
+
+        Assertions.assertEquals(10, res);
+    }
+
 }
