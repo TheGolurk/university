@@ -80,31 +80,25 @@ public class Fecha {
         int mes = fechaActual.getMes();
         int diasDelMes = diasMes(mes);
 
-        int restaDias = fechaActual.getDia() - dias;
+        diasDelMes = diasDelMes - (diasDelMes - fechaActual.getDia());
 
-        if (restaDias > 0) {
-            fechaActual.setDia( restaDias );
-            return fechaActual;
-        } else {
-            int diasFaltantes = dias - fechaActual.getDia();
-            while (diasFaltantes > diasDelMes){
-                diasFaltantes -= diasDelMes;
-                if (mes == 1) {
-                    mes = 12;
-                } else {
-                    mes--;
-                }
+        int diasFaltantes = dias;
+
+        while (diasFaltantes > diasDelMes) {
+            diasFaltantes -= diasDelMes;
+
+            mes--;
+            if (mes == 0) {
+                mes = 12;
+                fechaActual.setAño( fechaActual.getAño() - 1 );
             }
 
-
-            fechaActual.setDia( diasDelMes - diasFaltantes);
-            fechaActual.setMes(mes);
-            fechaActual.setAño(getAño());
-
-            return fechaActual;
+            diasDelMes = diasMes(mes);
         }
+        fechaActual.setDia( diasDelMes - diasFaltantes);
+        fechaActual.setMes(mes);
 
-        // return fechaActual;
+        return fechaActual;
     }
 
     public int Diferencia( Fecha fecha1, Fecha fecha2){
@@ -130,6 +124,4 @@ public class Fecha {
         }
     }
 
-    public static class conjuntos {
-    }
 }

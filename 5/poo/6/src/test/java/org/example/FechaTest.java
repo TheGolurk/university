@@ -14,9 +14,14 @@ public class FechaTest {
         Fecha nueva = f2.FechaAnterior(f2, 40);
         Assertions.assertEquals(21, nueva.getDia());
 
-        Fecha nueva2 = f2.FechaAnterior(f2, 120);
+        Fecha f3 = new Fecha(30,1,2022);
+        Fecha nueva2 = f2.FechaAnterior(f3, 120);
         Fecha postNueva2 = new Fecha(2, 10, 2021);
         Assertions.assertEquals(postNueva2.getDia(), nueva2.getDia());
+
+        Fecha f4 = new Fecha(30,1, 2022);
+        var res = f2.FechaAnterior(f4, 10);
+        Assertions.assertEquals(20, res.getDia());
     }
 
     @Test
