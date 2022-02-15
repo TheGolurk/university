@@ -54,33 +54,26 @@ public class Fecha {
     }
 
     public Fecha FechaSiguiente(Fecha fechaActual, int dias) {
-        // OBTIENE LOS DIAS DEL MES
         int mes = fechaActual.getMes();
         int diasDelMes = diasMes(mes);
 
-        int sumaDias = fechaActual.getDia() + dias;
+        int diasFaltantes = diasDelMes - fechaActual.getDia();
+        int diferencia = dias - diasFaltantes;
 
-        if (sumaDias <= diasDelMes) {
-            fechaActual.setDia(sumaDias);
-        } else {
-            int diasFaltantes = diasDelMes - fechaActual.getDia();
-            int diferencia = sumaDias - diasFaltantes;
-
+        while (diferencia > diasDelMes) {
             mes++;
             diasDelMes = diasMes(mes);
-            while (diferencia > diasDelMes) {
-                diferencia = diferencia - diasDelMes;
+            diferencia -= diasDelMes;
 
-                mes++;
-                // actualizar variable diasDelMes con el mes correcto
-                // comprobar si el mes es 12 para pasar al siguiente año
-                // mes > 12
-                // fechaActual.setAño(); sumarle un año
+            if (mes == 12) {
+                mes = 1;
+                fechaActual.setAño( fechaActual.getAño() + 1 );
             }
-
-            // asignar valores
         }
-        return new Fecha(1,1,1);
+        fechaActual.setDia(diferencia);
+        fechaActual.setMes(mes);
+
+        return fechaActual;
     }
 
     public Fecha FechaAnterior( Fecha fechaActual, int dias ){
