@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.print.DocFlavor;
+import java.util.Arrays;
 
 public class Conjunto {
 
@@ -10,6 +11,9 @@ public class Conjunto {
     public Conjunto(int[] conjuntoA, int[] conjuntoB) {
         ConjuntoA = conjuntoA;
         ConjuntoB = conjuntoB;
+    }
+
+    public Conjunto() {
     }
 
     public void Agregar(int dato, int conjunto){
@@ -59,16 +63,16 @@ public class Conjunto {
     public int[] Union(){
         int[] resultado = new int[200];
         var index =0;
-        for (int i = 0; i < ConjuntoA.length; i++) {
-            if( ConjuntoA[i] != 0) {
-                resultado[index] = ConjuntoA[i];
+        for (int j : ConjuntoA) {
+            if (j != 0) {
+                resultado[index] = j;
                 index++;
             }
         }
 
-        for (int i = 0; i < ConjuntoB.length; i++) {
-            if( ConjuntoB[i] != 0) {
-                resultado[index] = ConjuntoB[i];
+        for (int j : ConjuntoB) {
+            if (j != 0) {
+                resultado[index] = j;
                 index++;
             }
         }
@@ -79,21 +83,21 @@ public class Conjunto {
     public int[] UnionSobrecargada(int[] conjunto3) {
         int[] resultado = new int[300];
         var index=0;
-        for (int i = 0; i < ConjuntoA.length; i++) {
-            if (ConjuntoA[i] != 0) {
-                resultado[index] = ConjuntoA[i];
+        for (int j : ConjuntoA) {
+            if (j != 0) {
+                resultado[index] = j;
                 index++;
             }
         }
-        for (int i = 0; i < ConjuntoB.length; i++) {
-            if( ConjuntoB[i] != 0) {
-                resultado[index] = ConjuntoB[i];
+        for (int j : ConjuntoB) {
+            if (j != 0) {
+                resultado[index] = j;
                 index++;
             }
         }
-        for (int i = 0; i < conjunto3.length; i++) {
-            if( conjunto3[i] != 0) {
-                resultado[index] = conjunto3[i];
+        for (int j : conjunto3) {
+            if (j != 0) {
+                resultado[index] = j;
                 index++;
             }
         }
@@ -105,13 +109,11 @@ public class Conjunto {
         int[] resultado = new int[200];
         var index = 0;
 
-        for (int i = 0; i < ConjuntoA.length; i++) {
-            if (ConjuntoA[i] != 0){
-                var ValorAbuscar = ConjuntoA[i];
-
-                for (int j = 0; j < ConjuntoB.length; j++) {
-                    if (ValorAbuscar == ConjuntoB[j]){
-                        resultado[index] = ConjuntoB[j];
+        for (int k : ConjuntoA) {
+            if (k != 0) {
+                for (int i : ConjuntoB) {
+                    if (k == i) {
+                        resultado[index] = i;
                         index++;
                         break;
                     }
@@ -142,6 +144,17 @@ public class Conjunto {
         int[] resultado = new int[300];
         var index = 0;
 
+        for(int j: ConjuntoA){
+            if(j !=0){
+                if(!buscarElemento(ConjuntoB, j)){
+                    resultado[index] =j;
+                    index++;
+                }
+
+            }
+
+        }
+
         return resultado;
     }
 
@@ -169,5 +182,23 @@ public class Conjunto {
         }
 
         return false;
+    }
+
+    public void imprimir() {
+
+        for (int j : ConjuntoA) {
+            if (j != 0) {
+                System.out.printf("%d, ", j);
+            }
+        }
+        System.out.println("");
+
+
+        for (int j : ConjuntoB) {
+            if (j != 0) {
+                System.out.printf("%d, ", j);
+            }
+        }
+        System.out.println("");
     }
 }
