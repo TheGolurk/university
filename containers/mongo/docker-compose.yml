@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 16384
+    environment:
+      MONGO_INITDB_DATABASE: 'admin'
+      MONGO_INITDB_ROOT_USERNAME: 'admin'
+      MONGO_INITDB_ROOT_PASSWORD: 'admin'
