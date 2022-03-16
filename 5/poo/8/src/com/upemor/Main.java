@@ -1,5 +1,6 @@
 package com.upemor;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -9,6 +10,26 @@ public class Main {
 
     public static void main(String[] args) {
         Start();
+    }
+
+    public void registrarRestaurador() {
+        System.out.println("Ingrese RFC");
+        var RFC = sc.next();
+
+        System.out.println("Ingrese sueldo");
+        var Sueldo = sc.nextDouble();
+
+        System.out.println("Ingrese nombre");
+        var Nombre = sc.next();
+
+        Restaurador restaurador = new Restaurador(Nombre,RFC,Sueldo);
+        var res = biblioteca.RegistrarEmpleado(restaurador);
+        if (res) {
+            System.out.println("Restaurador registrado");
+            return;
+        }
+
+        System.out.println("No se pudo registrar");
     }
 
     public static void Start() {
@@ -27,11 +48,7 @@ public class Main {
 
             switch (opc){
                 case 1 -> {
-                    var RFC = sc.next();
-                    var Sueldo = sc.nextDouble();
-                    var Nombre = sc.next();
-                    Empleado empleado = new Empleado(Nombre, RFC, Sueldo);
-                    var res = biblioteca.RegistrarEmpleado(empleado);
+
                 }
                 case 2 -> {
 

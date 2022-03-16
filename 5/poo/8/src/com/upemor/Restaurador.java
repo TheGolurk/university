@@ -2,10 +2,10 @@ package com.upemor;
 
 import java.util.ArrayList;
 
-public class Restaurador extends Prestamo {
-    public Restaurador(ArrayList<com.upemor.Libro> librosARestaurar) {
-        LibrosARestaurar = librosARestaurar;
-    }
-
+public class Restaurador extends Empleado {
     private ArrayList<Libro> LibrosARestaurar;
+
+    public Restaurador(String nombre, String RFC, double sueldo) {
+        super(nombre, RFC, sueldo);
+    }
 }

@@ -13,4 +13,8 @@ public class Prestamo {
     }
 
     private Libro Libro;
+
+    public Prestamo() {
+
+    }
 }
