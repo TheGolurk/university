@@ -1,12 +1,9 @@
 package com.upemor;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
-    private static Scanner sc = new Scanner(System.in);
     private static Biblioteca biblioteca = new Biblioteca();
 
     public static void main(String[] args) {
@@ -23,14 +20,17 @@ public class Main {
     }
 
     public static void registrarRestaurador() {
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("Ingrese RFC");
-        var RFC = sc.next();
+        var RFC = sc.nextLine();
 
         System.out.println("Ingrese sueldo");
         var Sueldo = sc.nextDouble();
 
+        sc.nextLine();
         System.out.println("Ingrese nombre");
-        var Nombre = sc.next();
+        var Nombre = sc.nextLine();
 
         Restaurador restaurador = new Restaurador(Nombre,RFC,Sueldo);
         validarRegistrado(
@@ -39,14 +39,17 @@ public class Main {
     }
 
     public static Restaurador obtenerRestaurador() {
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("Ingrese RFC");
-        var RFC = sc.next();
+        var RFC = sc.nextLine();
 
         System.out.println("Ingrese sueldo");
         var Sueldo = sc.nextDouble();
 
+        sc.nextLine();
         System.out.println("Ingrese nombre");
-        var Nombre = sc.next();
+        var Nombre = sc.nextLine();
 
         return new Restaurador(Nombre,RFC,Sueldo);
     }
@@ -60,17 +63,19 @@ public class Main {
     }
 
     public static Libro obtenerLbro(){
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("Titulo");
-        var Titulo = sc.next();
+        var Titulo = sc.nextLine();
 
         System.out.println("Autor");
-        var Autor = sc.next();
+        var Autor = sc.nextLine();
 
         System.out.println("Editorial");
-        var Editorial = sc.next();
+        var Editorial = sc.nextLine();
 
         System.out.println("ISBN");
-        var ISBN = sc.next();
+        var ISBN = sc.nextLine();
 
         return new Libro(Titulo, Autor, Editorial, ISBN);
     }
@@ -84,17 +89,20 @@ public class Main {
     }
 
     public static void registrarUsuario() {
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("Numero registro");
         var NumReg = sc.nextInt();
 
+        sc.nextLine();
         System.out.println("Nombre");
-        var Nombre = sc.next();
+        var Nombre = sc.nextLine();
 
         System.out.println("Direccion");
-        var Direccion = sc.next();
+        var Direccion = sc.nextLine();
 
         System.out.println("Telefono");
-        var Telefono = sc.next();
+        var Telefono = sc.nextLine();
 
         Usuario usuario = new Usuario(NumReg, Nombre, Direccion, Telefono);
         validarRegistrado(
@@ -103,6 +111,8 @@ public class Main {
     }
 
     public static void registrarPrestamoLibro() {
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("Ingrese NumeroRegistro");
         var num = sc.nextInt();
 
@@ -118,11 +128,13 @@ public class Main {
     }
 
     public static void registrarLibroARestaurar() {
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("Ingrese RFC");
-        var rfc = sc.next();
+        var rfc = sc.nextLine();
 
         System.out.println("Ingrese ISBN");
-        var isbn = sc.next();
+        var isbn = sc.nextLine();
 
         // Search employee
         biblioteca.getEmpleados().forEach(empleado -> {
@@ -147,8 +159,10 @@ public class Main {
     }
 
     public static void registrarEmpleadoASupervisor() {
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("RFC del supervisor");
-        var RFC = sc.next();
+        var RFC = sc.nextLine();
 
         biblioteca.getEmpleados().forEach(empleado -> {
 
@@ -159,12 +173,13 @@ public class Main {
                 sup.AgregarEmpleadoAcargo(
                         obtenerRestaurador()
                 );
-                
+
             }
         });
     }
 
     public static void Start() {
+        Scanner sc = new Scanner(System.in);
         var opc = 0;
 
         do {
