@@ -14,7 +14,6 @@ public class Main {
         var opc = 0;
 
         do {
-
             System.out.println("1.- Registrar libros");
             System.out.println("2.- Registrar usuarios");
             System.out.println("3.- Registrar empleados restauradores");
@@ -27,6 +26,9 @@ public class Main {
 
             switch (opc){
                 case 1 -> {
+
+                }
+                case 2 -> {
 
                 }
                 case 3 -> {
