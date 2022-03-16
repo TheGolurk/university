@@ -12,7 +12,16 @@ public class Main {
         Start();
     }
 
-    public void registrarRestaurador() {
+    public static void validarRegistrado(boolean res) {
+        if (res) {
+            System.out.println("Registrado");
+            return;
+        }
+
+        System.out.println("No se pudo registrar");
+    }
+
+    public static void registrarRestaurador() {
         System.out.println("Ingrese RFC");
         var RFC = sc.next();
 
@@ -23,13 +32,25 @@ public class Main {
         var Nombre = sc.next();
 
         Restaurador restaurador = new Restaurador(Nombre,RFC,Sueldo);
-        var res = biblioteca.RegistrarEmpleado(restaurador);
-        if (res) {
-            System.out.println("Restaurador registrado");
-            return;
-        }
+        validarRegistrado(
+                biblioteca.RegistrarEmpleado(restaurador)
+        );
+    }
 
-        System.out.println("No se pudo registrar");
+    public static void registrarSupervisor() {
+        System.out.println("Ingrese RFC");
+        var RFC = sc.next();
+
+        System.out.println("Ingrese sueldo");
+        var Sueldo = sc.nextDouble();
+
+        System.out.println("Ingrese nombre");
+        var Nombre = sc.next();
+
+        Restaurador restaurador = new Restaurador(Nombre,RFC,Sueldo);
+        validarRegistrado(
+                biblioteca.RegistrarEmpleado(restaurador)
+        );
     }
 
     public static void Start() {
@@ -39,7 +60,7 @@ public class Main {
             System.out.println("1.- Registrar libros");
             System.out.println("2.- Registrar usuarios");
             System.out.println("3.- Registrar empleados restauradores");
-            System.out.println("4.- Registrar empleados administradores");
+            System.out.println("4.- Registrar empleados supervisores");
             System.out.println("5.- Registrar prestamo de un libro para un usuario");
             System.out.println("6.- Registrar libros a restaurar para empleado restaurador");
             System.out.println("7.- Registrar empleados restauradores para un empleado supervisor");
@@ -53,12 +74,8 @@ public class Main {
                 case 2 -> {
 
                 }
-                case 3 -> {
-
-                }
-                case 4 -> {
-
-                }
+                case 3 -> registrarRestaurador();
+                case 4 -> registrarSupervisor();
                 case 5 -> {
 
                 }
