@@ -53,6 +53,16 @@ public class Main {
         );
     }
 
+    public static void registrarLibro() {}
+
+    public static void registrarUsuario() {}
+
+    public static void registrarPrestamoLibro() {}
+
+    public static void registrarLibroARestaurar() {}
+
+    public static void registrarEmpleadoASupervisor() {}
+
     public static void Start() {
         var opc = 0;
 
@@ -68,23 +78,13 @@ public class Main {
             opc = sc.nextInt();
 
             switch (opc){
-                case 1 -> {
-
-                }
-                case 2 -> {
-
-                }
+                case 1 -> registrarLibro();
+                case 2 -> registrarUsuario();
                 case 3 -> registrarRestaurador();
                 case 4 -> registrarSupervisor();
-                case 5 -> {
-
-                }
-                case 6 -> {
-
-                }
-                case 7 -> {
-
-                }
+                case 5 -> registrarPrestamoLibro();
+                case 6 -> registrarLibroARestaurar();
+                case 7 -> registrarEmpleadoASupervisor();
                 case 8 -> {
                     System.out.println("Adios");
                 }
