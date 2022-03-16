@@ -1,4 +1,4 @@
 package com.upemor;
 
-public class Restaurador {
+public class Restaurador extends Prestamo {
 }

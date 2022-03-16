@@ -1,4 +1,7 @@
 package com.upemor;
 
-public class Supervisor{
+import java.util.ArrayList;
+
+public class Supervisor extends Empleado{
+    private ArrayList<Restaurador> EmpleadosACargo;
 }
