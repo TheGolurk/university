@@ -53,9 +53,44 @@ public class Main {
         );
     }
 
-    public static void registrarLibro() {}
+    public static void registrarLibro() {
+        System.out.println("Titulo");
+        var Titulo = sc.next();
 
-    public static void registrarUsuario() {}
+        System.out.println("Autor");
+        var Autor = sc.next();
+
+        System.out.println("Editorial");
+        var Editorial = sc.next();
+
+        System.out.println("ISBN");
+        var ISBN = sc.next();
+
+        Libro libro = new Libro(Titulo, Autor, Editorial, ISBN);
+        validarRegistrado(
+                biblioteca.RegistrarLibro(libro)
+        );
+    }
+
+
+    public static void registrarUsuario() {
+        System.out.println("Numero registro");
+        var NumReg = sc.nextInt();
+
+        System.out.println("Nombre");
+        var Nombre = sc.next();
+
+        System.out.println("Direccion");
+        var Direccion = sc.next();
+
+        System.out.println("Telefono");
+        var Telefono = sc.next();
+
+        Usuario usuario = new Usuario(NumReg, Nombre, Direccion, Telefono);
+        validarRegistrado(
+                biblioteca.RegistrarUsuario(usuario)
+        );
+    }
 
     public static void registrarPrestamoLibro() {}
 

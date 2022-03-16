@@ -5,19 +5,18 @@ import java.util.ArrayList;
 public class Usuario {
     private int NumeroRegistro;
     private String Nombre;
-    private String direccion;
-    private String telefono;
+    private String Direccion;
+    private String Telefono;
     private ArrayList<Prestamo> LibrosPrestados;
 
     public boolean SolicitarNuevoLibro(Libro libro) {
         return true;
     }
 
-    public Usuario(int numeroRegistro, String nombre, String direccion, String telefono, ArrayList<Prestamo> librosPrestados) {
+    public Usuario(int numeroRegistro, String nombre, String direccion, String telefono) {
         NumeroRegistro = numeroRegistro;
         Nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        LibrosPrestados = librosPrestados;
+        Direccion = direccion;
+        Telefono = telefono;
     }
 }

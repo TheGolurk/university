@@ -8,17 +8,28 @@ public class Biblioteca {
     private ArrayList<Empleado> Empleados;
 
     public boolean RegistrarUsuario(Usuario usuario) {
-        return true;
+        return Usuarios.add(usuario);
     }
 
 
     public boolean RegistrarLibro(Libro libro) {
-        return true;
+        return Libros.add(libro);
     }
 
 
     public boolean RegistrarEmpleado(Empleado empleado) {
-        return true;
+        return Empleados.add(empleado);
     }
 
+    public ArrayList<Usuario> getUsuarios() {
+        return Usuarios;
+    }
+
+    public ArrayList<Libro> getLibros() {
+        return Libros;
+    }
+
+    public ArrayList<Empleado> getEmpleados() {
+        return Empleados;
+    }
 }
