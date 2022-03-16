@@ -12,4 +12,20 @@ public class Libro {
         Editorial = editorial;
         this.ISBN = ISBN;
     }
+
+    public String getTitulo() {
+        return Titulo;
+    }
+
+    public String getAutor() {
+        return Autor;
+    }
+
+    public String getEditorial() {
+        return Editorial;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
 }

@@ -19,4 +19,24 @@ public class Usuario {
         Direccion = direccion;
         Telefono = telefono;
     }
+
+    public int getNumeroRegistro() {
+        return NumeroRegistro;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public String getDireccion() {
+        return Direccion;
+    }
+
+    public String getTelefono() {
+        return Telefono;
+    }
+
+    public ArrayList<Prestamo> getLibrosPrestados() {
+        return LibrosPrestados;
+    }
 }

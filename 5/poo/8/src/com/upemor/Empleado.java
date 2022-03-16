@@ -10,4 +10,16 @@ public class Empleado {
         this.RFC = RFC;
         Sueldo = sueldo;
     }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public String getRFC() {
+        return RFC;
+    }
+
+    public double getSueldo() {
+        return Sueldo;
+    }
 }

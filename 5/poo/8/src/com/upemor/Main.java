@@ -53,7 +53,7 @@ public class Main {
         );
     }
 
-    public static void registrarLibro() {
+    public static Libro obtenerLbro(){
         System.out.println("Titulo");
         var Titulo = sc.next();
 
@@ -66,12 +66,16 @@ public class Main {
         System.out.println("ISBN");
         var ISBN = sc.next();
 
-        Libro libro = new Libro(Titulo, Autor, Editorial, ISBN);
-        validarRegistrado(
-                biblioteca.RegistrarLibro(libro)
-        );
+        return new Libro(Titulo, Autor, Editorial, ISBN);
     }
 
+    public static void registrarLibro() {
+        validarRegistrado(
+                biblioteca.RegistrarLibro(
+                        obtenerLbro()
+                )
+        );
+    }
 
     public static void registrarUsuario() {
         System.out.println("Numero registro");
@@ -92,9 +96,46 @@ public class Main {
         );
     }
 
-    public static void registrarPrestamoLibro() {}
+    public static void registrarPrestamoLibro() {
+        System.out.println("Ingrese NumeroRegistro");
+        var num = sc.nextInt();
 
-    public static void registrarLibroARestaurar() {}
+        biblioteca.getUsuarios().forEach(usuario -> {
+            if (usuario.getNumeroRegistro() == num) {
+
+                usuario.SolicitarNuevoLibro(
+                        obtenerLbro()
+                );
+
+            }
+        });
+    }
+
+    public static void registrarLibroARestaurar() {
+        System.out.println("Ingrese RFC");
+        var rfc = sc.next();
+
+        System.out.println("Ingrese ISBN");
+        var isbn = sc.next();
+
+        biblioteca.getEmpleados().forEach(empleado -> {
+
+            if (empleado.getRFC().equals(rfc)) {
+                
+                biblioteca.getLibros().forEach(libro -> {
+
+                    if (libro.getISBN().equals(isbn)) {
+                        var res = (Restaurador) empleado;
+                        res.AgregarLibroARestaurar(libro);
+                    }
+
+                });
+
+            }
+
+        });
+
+    }
 
     public static void registrarEmpleadoASupervisor() {}
 
