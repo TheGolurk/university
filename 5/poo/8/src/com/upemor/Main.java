@@ -1,5 +1,6 @@
 package com.upemor;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,7 +38,7 @@ public class Main {
         );
     }
 
-    public static void registrarSupervisor() {
+    public static Restaurador obtenerRestaurador() {
         System.out.println("Ingrese RFC");
         var RFC = sc.next();
 
@@ -47,9 +48,14 @@ public class Main {
         System.out.println("Ingrese nombre");
         var Nombre = sc.next();
 
-        Restaurador restaurador = new Restaurador(Nombre,RFC,Sueldo);
+        return new Restaurador(Nombre,RFC,Sueldo);
+    }
+
+    public static void registrarSupervisor() {
         validarRegistrado(
-                biblioteca.RegistrarEmpleado(restaurador)
+                biblioteca.RegistrarEmpleado(
+                        obtenerRestaurador()
+                )
         );
     }
 
@@ -118,12 +124,15 @@ public class Main {
         System.out.println("Ingrese ISBN");
         var isbn = sc.next();
 
+        // Search employee
         biblioteca.getEmpleados().forEach(empleado -> {
 
             if (empleado.getRFC().equals(rfc)) {
-                
+
+                // Search book
                 biblioteca.getLibros().forEach(libro -> {
 
+                    // Match book and add to employee to restore
                     if (libro.getISBN().equals(isbn)) {
                         var res = (Restaurador) empleado;
                         res.AgregarLibroARestaurar(libro);
@@ -137,7 +146,23 @@ public class Main {
 
     }
 
-    public static void registrarEmpleadoASupervisor() {}
+    public static void registrarEmpleadoASupervisor() {
+        System.out.println("RFC del supervisor");
+        var RFC = sc.next();
+
+        biblioteca.getEmpleados().forEach(empleado -> {
+
+            // We know that this RFC becomes from a supervisor, and we can cast the employee
+            if (empleado.getRFC().equals(RFC)) {
+                var sup = (Supervisor) empleado;
+
+                sup.AgregarEmpleadoAcargo(
+                        obtenerRestaurador()
+                );
+                
+            }
+        });
+    }
 
     public static void Start() {
         var opc = 0;
