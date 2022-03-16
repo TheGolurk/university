@@ -9,8 +9,8 @@ public class Usuario {
     private String Telefono;
     private ArrayList<Prestamo> LibrosPrestados;
 
-    public boolean SolicitarNuevoLibro(Libro libro) {
-        return true;
+    public boolean SolicitarNuevoLibro(Prestamo prestamo) {
+        return LibrosPrestados.add(prestamo);
     }
 
     public Usuario(int numeroRegistro, String nombre, String direccion, String telefono) {

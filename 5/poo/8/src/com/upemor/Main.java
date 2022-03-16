@@ -1,5 +1,8 @@
 package com.upemor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -80,6 +83,10 @@ public class Main {
         return new Libro(Titulo, Autor, Editorial, ISBN);
     }
 
+    public static Prestamo obtenerPrestamo() {
+        return new Prestamo(LocalDate.now(), obtenerLbro());
+    }
+
     public static void registrarLibro() {
         validarRegistrado(
                 biblioteca.RegistrarLibro(
@@ -120,7 +127,7 @@ public class Main {
             if (usuario.getNumeroRegistro() == num) {
 
                 usuario.SolicitarNuevoLibro(
-                        obtenerLbro()
+                        obtenerPrestamo()
                 );
 
             }

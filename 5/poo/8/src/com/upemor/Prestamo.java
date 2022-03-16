@@ -1,20 +1,19 @@
 package com.upemor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Prestamo {
-    private Date FechaPrestamo;
-    private Date FechaRegreso;
+    private LocalDate FechaPrestamo;
+    private LocalDate FechaRegreso;
+    private Libro Libro;
 
-    public Prestamo(Date fechaPrestamo, Date fechaRegreso, com.upemor.Libro libro) {
+    public Prestamo(LocalDate fechaPrestamo, Libro libro) {
         FechaPrestamo = fechaPrestamo;
-        FechaRegreso = fechaRegreso;
         Libro = libro;
     }
 
-    private Libro Libro;
-
-    public Prestamo() {
-
+    public void setFechaRegreso(LocalDate fechaRegreso) {
+        FechaRegreso = fechaRegreso;
     }
 }
