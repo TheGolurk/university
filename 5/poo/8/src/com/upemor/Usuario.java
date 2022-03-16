@@ -9,10 +9,15 @@ public class Usuario {
     private String telefono;
     private ArrayList<Prestamo> LibrosPrestados;
 
-
     public boolean SolicitarNuevoLibro(Libro libro) {
         return true;
     }
 
-
+    public Usuario(int numeroRegistro, String nombre, String direccion, String telefono, ArrayList<Prestamo> librosPrestados) {
+        NumeroRegistro = numeroRegistro;
+        Nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        LibrosPrestados = librosPrestados;
+    }
 }

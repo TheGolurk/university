@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     private static Scanner sc = new Scanner(System.in);
+    private static Biblioteca biblioteca = new Biblioteca();
 
     public static void main(String[] args) {
         Start();
@@ -26,7 +27,11 @@ public class Main {
 
             switch (opc){
                 case 1 -> {
-
+                    var RFC = sc.next();
+                    var Sueldo = sc.nextDouble();
+                    var Nombre = sc.next();
+                    Empleado empleado = new Empleado(Nombre, RFC, Sueldo);
+                    var res = biblioteca.RegistrarEmpleado(empleado);
                 }
                 case 2 -> {
 
