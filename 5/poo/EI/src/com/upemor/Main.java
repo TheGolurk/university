@@ -45,7 +45,7 @@ public class Main {
             System.out.println("******* 7.- MOSTRAR EL INFORME DE UNA SUCURSAL *******");
             System.out.println("********************* 9.- SALIR **********************");
             System.out.println("******************************************************");
-            System.out.println("Selecciona la Opcion que Desees (1-8)");
+            System.out.println("****** Selecciona la Opcion que Desees (1-8) *********");
             opc=sc.nextInt();
 
             switch(opc){
@@ -92,6 +92,7 @@ public class Main {
                     break;
 
                 case 3:
+                    sucursalUtilidades.AgregarClienteSucursal(ArchivoClientes, ArchivoSucursal);
 
                     break;
 

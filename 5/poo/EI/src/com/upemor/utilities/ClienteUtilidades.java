@@ -18,14 +18,14 @@ public class ClienteUtilidades {
             out.writeObject(c);
             out.close();
             fos.close();
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             return false;
         }
 
         return true;
     }
 
-    public void Crear(String nombreArchivo ){
+    public void Crear(String nombreArchivo) {
         File f = new File(nombreArchivo);
 
         try {
@@ -35,7 +35,8 @@ public class ClienteUtilidades {
             out.writeObject(new Cliente("", 1, ""));
             fos.close();
             out.close();
-        }catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     public void ConsultarClientes(String nombreArchivo) {
@@ -48,15 +49,17 @@ public class ClienteUtilidades {
 
             while (true) {
                 Cliente obj = (Cliente) input.readObject();
-                System.out.printf("Nombre: %s Edad: %s Correo: %s \n",obj.getNombre(), obj.getEdad(), obj.getCorreo());
+                System.out.printf("Nombre: %s Edad: %s Correo: %s \n", obj.getNombre(), obj.getEdad(), obj.getCorreo());
             }
 
-        } catch (IOException | ClassNotFoundException ignored) {}
+        } catch (IOException | ClassNotFoundException ignored) {
+        }
 
         try {
             assert input != null;
             input.close();
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     public void EditarCliente(String nombreArchivo) {
@@ -91,7 +94,8 @@ public class ClienteUtilidades {
                 ous.writeObject(obj);
             }
 
-        }catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         try {
             assert fis != null;
@@ -102,14 +106,15 @@ public class ClienteUtilidades {
             fos.close();
             assert ous != null;
             ous.close();
-        }catch (Exception ignored){}
+        } catch (Exception ignored) {
+        }
 
         if (original.delete()) {
             aux.renameTo(original);
         }
     }
 
-    public void EliminarCliente(String nombreArchivo){
+    public void EliminarCliente(String nombreArchivo) {
         File original = new File(nombreArchivo);
         File aux = new File(String.format("%s_tmp", nombreArchivo));
 
@@ -134,7 +139,8 @@ public class ClienteUtilidades {
                 }
             }
 
-        }catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         try {
             assert fis != null;
@@ -145,18 +151,19 @@ public class ClienteUtilidades {
             fos.close();
             assert ous != null;
             ous.close();
-        }catch (Exception ignored){}
+        } catch (Exception ignored) {
+        }
 
         if (original.delete()) {
             aux.renameTo(original);
         }
     }
 
-    public Cliente ObtenerCliente(){
+    public Cliente ObtenerCliente() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Ingrese nombre:");
-        String nombre =sc.nextLine();
+        String nombre = sc.nextLine();
 
         System.out.println("Ingresa edad:");
         int edad = sc.nextInt();
