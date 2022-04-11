@@ -1,7 +1,8 @@
 package com.upemor;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Taller {
+public class Taller implements Serializable {
     private ArrayList<Servicio> Servicios;
 
     public boolean AgregarServicio(Servicio s) {

@@ -1,8 +1,9 @@
 package com.upemor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Sucursal {
+public class Sucursal implements Serializable {
 
     private String Direccion;
     private Gerente Gerente;
@@ -18,7 +19,6 @@ public class Sucursal {
         return Empleados.add(e);
 
     }
-
 
     public Sucursal(String direccion, Gerente gerente, Taller taller) {
         Direccion=direccion;

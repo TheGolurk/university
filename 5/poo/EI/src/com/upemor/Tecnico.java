@@ -1,8 +1,9 @@
 package com.upemor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tecnico extends Empleado{
+public class Tecnico extends Empleado implements Serializable {
 
     private ArrayList<Servicio> Servicios;
 

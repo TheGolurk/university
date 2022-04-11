@@ -1,8 +1,9 @@
 package com.upemor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Agencia {
+public class Agencia implements Serializable {
     private ArrayList<Sucursal> Sucursales;
 
     public Agencia() {

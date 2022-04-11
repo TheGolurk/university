@@ -1,6 +1,8 @@
 package com.upemor;
 
-public class Auto {
+import java.io.Serializable;
+
+public class Auto implements Serializable {
     private String Modelo;
     private double Costo;
 
