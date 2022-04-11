@@ -56,7 +56,6 @@ public class ClienteUtilidades {
             assert input != null;
             input.close();
         } catch (Exception ignored) {}
-
     }
     
 }

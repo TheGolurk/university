@@ -24,14 +24,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        new ClienteUtilidades().Crear(ArchivoClientes);
-
-        clienteUtilidades.Crear(ArchivoClientes);
-
-        clienteUtilidades.AgregarCliente( ArchivoClientes, new Cliente("Rodolfo", 10, "asd"));
-
-
-        clienteUtilidades.ConsultarClientes(ArchivoClientes);
+        // MENU
 
     }
 
