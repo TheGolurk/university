@@ -3,6 +3,7 @@ package com.upemor.utilities;
 import com.upemor.*;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class SucursalUtilidades {
 
@@ -36,7 +37,7 @@ public class SucursalUtilidades {
         }catch (Exception ignored) {}
     }
 
-    public void ConsultarEmpleado(String nombreArchivo) {
+    public void ConsultarSucursales(String nombreArchivo) {
         File f = new File(nombreArchivo);
         ObjectInputStream input = null;
 
@@ -46,7 +47,28 @@ public class SucursalUtilidades {
 
             while (true) {
                 Sucursal obj = (Sucursal) input.readObject();
-                System.out.println(obj.getDireccion());
+
+                System.out.printf("Sucursal %s \n", obj.getDireccion());
+
+                // CLIENTES
+                obj.getClientes().forEach(cliente -> {
+                    System.out.printf("Cliente %s. Total compras: %d Total servicios: %d \n",
+                            cliente.getNombre(),
+                            cliente.getCompras().size(),
+                            cliente.getServicios().size()
+                    );
+                });
+
+
+                // VENDEDORES
+                obj.getEmpleados().forEach(empleado -> {
+                    var vendedor = (Vendedor) empleado;
+                    System.out.printf("Vendedor %s. Total ventas autos %d \n",
+                            vendedor.getNombre(),
+                            vendedor.getCompras().size()
+                    );
+                });
+
             }
 
         } catch (IOException | ClassNotFoundException ignored) {}
@@ -57,6 +79,26 @@ public class SucursalUtilidades {
         } catch (Exception ignored) {}
     }
 
+    public Sucursal ObtenerSucursal() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Ingrese direccion");
+        String direccion = sc.nextLine();
+
+        System.out.println("Datos del gerente");
+        sc.nextLine();
+
+        System.out.println("Nombre");
+        String nombre = sc.nextLine();
+
+        System.out.println("RFC");
+        String rfc = sc.nextLine();
+
+        System.out.println("Salario");
+        Double salario = sc.nextDouble();
+
+        return new Sucursal(direccion, new Gerente(nombre, rfc, salario), new Taller());
+    }
 
 
 }

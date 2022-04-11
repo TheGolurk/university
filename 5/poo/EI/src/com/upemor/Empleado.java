@@ -14,6 +14,18 @@ public class Empleado implements Serializable {
         Salario=salario;
     }
 
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public void setRFC(String RFC) {
+        this.RFC = RFC;
+    }
+
+    public void setSalario(Double salario) {
+        Salario = salario;
+    }
+
     public String getNombre() {
         return Nombre;
     }

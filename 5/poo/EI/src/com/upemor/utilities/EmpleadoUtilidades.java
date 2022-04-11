@@ -1,10 +1,9 @@
 package com.upemor.utilities;
 
-import com.upemor.AppendingObjectOutputStream;
-import com.upemor.Cliente;
-import com.upemor.Empleado;
+import com.upemor.*;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class EmpleadoUtilidades {
 
@@ -49,7 +48,7 @@ public class EmpleadoUtilidades {
 
             while (true) {
                 Empleado obj = (Empleado) input.readObject();
-                System.out.println(obj.getRFC());
+                System.out.printf("Nombre: %s RFC: %s \n", obj.getNombre(), obj.getRFC());
             }
 
         } catch (IOException | ClassNotFoundException ignored) {}
@@ -58,6 +57,118 @@ public class EmpleadoUtilidades {
             assert input != null;
             input.close();
         } catch (Exception ignored) {}
+    }
+
+    public void EditarEmpleado(String nombreArchivo) {
+        File original = new File(nombreArchivo);
+        File aux = new File(String.format("%s_tmp", nombreArchivo));
+
+        var RFC = ObtenerRFC();
+
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        FileOutputStream fos = null;
+        ObjectOutputStream ous = null;
+
+        try {
+            fis = new FileInputStream(original);
+            ois = new ObjectInputStream(fis);
+
+            fos = new FileOutputStream(aux);
+            ous = new ObjectOutputStream(fos);
+
+            while (true) {
+                var obj = (Empleado) ois.readObject();
+                if (obj.getRFC().equals(RFC)) {
+                   var auxEmpleado = ObtenerEmpleado();
+                   obj.setNombre(auxEmpleado.getNombre());
+                   obj.setRFC(auxEmpleado.getRFC());
+                   obj.setSalario(auxEmpleado.getSalario());
+                }
+
+                ous.writeObject(obj);
+            }
+
+        }catch (Exception ignored) {}
+
+        try {
+            assert fis != null;
+            fis.close();
+            assert ois != null;
+            ois.close();
+            assert fos != null;
+            fos.close();
+            assert ous != null;
+            ous.close();
+        }catch (Exception ignored){}
+
+        if (original.delete()) {
+            aux.renameTo(original);
+        }
+    }
+
+    public void EliminarEmpleado(String nombreArchivo) {
+        File original = new File(nombreArchivo);
+        File aux = new File(String.format("%s_tmp", nombreArchivo));
+
+        var RFC = ObtenerRFC();
+
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        FileOutputStream fos = null;
+        ObjectOutputStream ous = null;
+
+        try {
+            fis = new FileInputStream(original);
+            ois = new ObjectInputStream(fis);
+
+            fos = new FileOutputStream(aux);
+            ous = new ObjectOutputStream(fos);
+
+            while (true) {
+                var obj = (Empleado) ois.readObject();
+                if (!obj.getRFC().equals(RFC)) {
+                    ous.writeObject(obj);
+                }
+            }
+
+        }catch (Exception ignored) {}
+
+        try {
+            assert fis != null;
+            fis.close();
+            assert ois != null;
+            ois.close();
+            assert fos != null;
+            fos.close();
+            assert ous != null;
+            ous.close();
+        }catch (Exception ignored){}
+
+        if (original.delete()) {
+            aux.renameTo(original);
+        }
+    }
+
+    public Empleado ObtenerEmpleado(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Ingrese nombre:");
+        String nombre =sc.nextLine();
+
+        System.out.println("Ingresa rfc:");
+        String rfc = sc.nextLine();
+
+        System.out.println("Ingresa salario:");
+        Double salario = sc.nextDouble();
+
+        return new Empleado(nombre, rfc,salario);
+    }
+
+    public String ObtenerRFC() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingresa rfc:");
+        return sc.nextLine();
     }
 
 }

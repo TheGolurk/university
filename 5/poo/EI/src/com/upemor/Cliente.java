@@ -18,6 +18,18 @@ public class Cliente implements Serializable {
         Servicios = new ArrayList<Servicio>();
     }
 
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public void setEdad(int edad) {
+        Edad = edad;
+    }
+
+    public void setCorreo(String correo) {
+        Correo = correo;
+    }
+
     public String getNombre() {
         return Nombre;
     }

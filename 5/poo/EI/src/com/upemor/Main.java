@@ -25,6 +25,9 @@ public class Main {
     private static final SucursalUtilidades sucursalUtilidades = new SucursalUtilidades();
 
     public static void main(String[] args) {
+        clienteUtilidades.Crear(ArchivoClientes);
+        empleadoUtilidades.Crear(ArchivoEmpleados);
+        sucursalUtilidades.Crear(ArchivoSucursal);
 
         Scanner sc =new Scanner(System.in);
         int opc = 0;
@@ -47,12 +50,44 @@ public class Main {
 
             switch(opc){
                 case 1:
-
+                    sucursalUtilidades.AgregarSucursal(ArchivoSucursal, sucursalUtilidades.ObtenerSucursal());
                     break;
 
                 case 2:
-                    int
 
+                    int o1 =0;
+                    System.out.println("OPCIONES PARA CLIENTE:");
+                    System.out.println("1.-Registrar");
+                    System.out.println("2.-Editar");
+                    System.out.println("3.-Consultar");
+                    System.out.println("4.-Eliminar");
+                    System.out.println("Ingresa la opcion a realizar:");
+                    o1=sc.nextInt();
+                    switch (o1){
+                        case 1:
+                            // registrar
+                            clienteUtilidades.AgregarCliente(ArchivoClientes, clienteUtilidades.ObtenerCliente());
+                            break;
+
+                        case 2:
+                            // editar
+                            clienteUtilidades.EditarCliente(ArchivoClientes);
+                            break;
+
+                        case 3:
+                            // consultar
+                            clienteUtilidades.ConsultarClientes(ArchivoClientes);
+                            break;
+
+                        case 4:
+                            // eliminar
+                            clienteUtilidades.EliminarCliente(ArchivoClientes);
+                            break;
+
+                        default:
+                            System.out.println("Opcion incorrecta");
+                            break;
+                    }
 
                     break;
 
@@ -62,19 +97,36 @@ public class Main {
 
                 case 4:
 
-                    System.out.println("Elige el tipo de empleado a registrar: 1.VENDEDOR, 2. TECNICO");
-                    var opcionempleado = sc.nextInt();
+                    int o2 =0;
+                    System.out.println("OPCIONES PARA EMPLEADO:");
+                    System.out.println("1.-Registrar");
+                    System.out.println("2.- Editar");
+                    System.out.println("3.-Consultar");
+                    System.out.println("4.-Eliminar");
+                    System.out.println("Ingresa la opcion a realizar:");
+                    o2=sc.nextInt();
+                    switch (o2){
+                        case 1:
+                            // registrar
+                            empleadoUtilidades.AgregarEmpleado(ArchivoEmpleados, empleadoUtilidades.ObtenerEmpleado());
+                            break;
 
-                    sc.nextLine();
-                    System.out.println(" Ingresa direccion");
-                    String direccion = sc.nextLine();
+                        case 2:
+                            // editar
+                            empleadoUtilidades.EditarEmpleado(ArchivoEmpleados);
+                            break;
+                        case 3:
+                            // consultar
+                            empleadoUtilidades.ConsultarEmpleado(ArchivoEmpleados);
+                            break;
+                        case 4:
+                            // eliminar
+                            empleadoUtilidades.EliminarEmpleado(ArchivoEmpleados);
+                            break;
 
-                    if(opcionempleado == 1){
-
-                    }
-
-                    if(opcionempleado ==2){
-
+                        default:
+                            System.out.println("Opcion incorrecta");
+                            break;
                     }
 
                     break;
@@ -89,12 +141,13 @@ public class Main {
                     break;
 
                 case 7:
+                    sucursalUtilidades.ConsultarSucursales(ArchivoSucursal);
 
                     break;
 
             }
 
-        }while(opc!=9);
+        }while(opc!=8);
 
     }
 
