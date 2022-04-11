@@ -29,41 +29,41 @@ public class Main {
         empleadoUtilidades.Crear(ArchivoEmpleados);
         sucursalUtilidades.Crear(ArchivoSucursal);
 
-        Scanner sc =new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int opc = 0;
 
-        do{
+        do {
             System.out.println("******************************************************");
             System.out.println("************************ MENU ************************");
             System.out.println("******************************************************");
             System.out.println("************* 1.- REGISTRAR UNA SUCURSAL *************");
             System.out.println("************* 2.-  GESTIONAR UN CLIENTE ***************");
-            System.out.println("+* 3.- REGISTRAR UN CLIENTE QUE ACUEDA A UNA SUCURSAL *");
+            System.out.println("+* 3.- REGISTRAR UN CLIENTE QUE ACUDA A UNA SUCURSAL *");
             System.out.println("************* 4.- GESTIONAR EMPLEADOS *****************");
             System.out.println("5.- REGISTRAR LA COMPRA DE UN CLIENTE EN UNA SUCURSAL ");
             System.out.println("******* 6.- SOLICITAR UN SERVICIO PARA UN AUTO *******");
             System.out.println("******* 7.- MOSTRAR EL INFORME DE UNA SUCURSAL *******");
-            System.out.println("********************* 9.- SALIR **********************");
+            System.out.println("********************* 8.- SALIR **********************");
             System.out.println("******************************************************");
             System.out.println("****** Selecciona la Opcion que Desees (1-8) *********");
-            opc=sc.nextInt();
+            opc = sc.nextInt();
 
-            switch(opc){
+            switch (opc) {
                 case 1:
                     sucursalUtilidades.AgregarSucursal(ArchivoSucursal, sucursalUtilidades.ObtenerSucursal());
                     break;
 
                 case 2:
 
-                    int o1 =0;
+                    int o1 = 0;
                     System.out.println("OPCIONES PARA CLIENTE:");
                     System.out.println("1.-Registrar");
                     System.out.println("2.-Editar");
                     System.out.println("3.-Consultar");
                     System.out.println("4.-Eliminar");
                     System.out.println("Ingresa la opcion a realizar:");
-                    o1=sc.nextInt();
-                    switch (o1){
+                    o1 = sc.nextInt();
+                    switch (o1) {
                         case 1:
                             // registrar
                             clienteUtilidades.AgregarCliente(ArchivoClientes, clienteUtilidades.ObtenerCliente());
@@ -93,20 +93,19 @@ public class Main {
 
                 case 3:
                     sucursalUtilidades.AgregarClienteSucursal(ArchivoClientes, ArchivoSucursal);
-
                     break;
 
                 case 4:
 
-                    int o2 =0;
+                    int o2 = 0;
                     System.out.println("OPCIONES PARA EMPLEADO:");
                     System.out.println("1.-Registrar");
                     System.out.println("2.- Editar");
                     System.out.println("3.-Consultar");
                     System.out.println("4.-Eliminar");
                     System.out.println("Ingresa la opcion a realizar:");
-                    o2=sc.nextInt();
-                    switch (o2){
+                    o2 = sc.nextInt();
+                    switch (o2) {
                         case 1:
                             // registrar
                             empleadoUtilidades.AgregarEmpleado(ArchivoEmpleados, empleadoUtilidades.ObtenerEmpleado());
@@ -133,22 +132,20 @@ public class Main {
                     break;
 
                 case 5:
-
+                    sucursalUtilidades.CompraClienteSucursal(ArchivoSucursal);
                     break;
 
                 case 6:
-
-
+                    sucursalUtilidades.ServicioAutoSucursal(ArchivoSucursal);
                     break;
 
                 case 7:
                     sucursalUtilidades.ConsultarSucursales(ArchivoSucursal);
-
                     break;
 
             }
 
-        }while(opc!=8);
+        } while (opc != 8);
 
     }
 

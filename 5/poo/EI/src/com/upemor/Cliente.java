@@ -23,6 +23,14 @@ public class Cliente implements Serializable {
         Servicios = new ArrayList<Servicio>();
     }
 
+    public boolean AgregarCompra(Compra c) {
+        return Compras.add(c);
+    }
+
+    public boolean AgregarServicio(Servicio s) {
+        return Servicios.add(s);
+    }
+
     public void setNombre(String nombre) {
         Nombre = nombre;
     }

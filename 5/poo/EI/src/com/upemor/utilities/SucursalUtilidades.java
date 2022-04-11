@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class SucursalUtilidades {
 
+    //case 1
     public boolean AgregarSucursal(String nombreArchivo, Sucursal s) {
         File f = new File(nombreArchivo);
 
@@ -24,6 +25,7 @@ public class SucursalUtilidades {
         return true;
     }
 
+    //case 3
     public boolean AgregarClienteSucursal(String clienteNombreArchivo, String nombreArchivo) {
         File clienteArchivo = new File(clienteNombreArchivo);
         ObjectInputStream input = null;
@@ -50,7 +52,7 @@ public class SucursalUtilidades {
             return false;
         }
 
-        // Edit sucursal
+        // Edit sucursal and add client
         File original = new File(nombreArchivo);
         File aux = new File(String.format("%s_tmp", nombreArchivo));
 
@@ -101,6 +103,129 @@ public class SucursalUtilidades {
         return true;
     }
 
+
+    //case 5
+
+    public boolean CompraClienteSucursal(String nombreArchivo) {
+        var nombreCliente = ObtenerNombreCliente();
+
+        File original = new File(nombreArchivo);
+        File aux = new File(String.format("%s_tmp", nombreArchivo));
+
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        FileOutputStream fos = null;
+        ObjectOutputStream ous = null;
+
+        var clienteUtilidades = new ClienteUtilidades();
+
+        var direccionSucursal = ObtenerDireccionSucursal();
+
+        try {
+            fis = new FileInputStream(original);
+            ois = new ObjectInputStream(fis);
+
+            fos = new FileOutputStream(aux);
+            ous = new ObjectOutputStream(fos);
+
+            while (true) {
+                Sucursal obj = (Sucursal) ois.readObject();
+                if (obj.getDireccion().equals(direccionSucursal)) {
+
+                    obj.getClientes().forEach(cliente -> {
+                        if (cliente.getNombre().equals(nombreCliente)) {
+                            cliente.AgregarCompra(ObtenerCompra());
+                        }
+                    });
+                }
+
+
+                ous.writeObject(obj);
+            }
+
+        } catch (Exception ignored) {
+        }
+
+        try {
+            assert fis != null;
+            fis.close();
+            assert ois != null;
+            ois.close();
+            assert fos != null;
+            fos.close();
+            assert ous != null;
+            ous.close();
+        } catch (Exception ignored) {
+        }
+
+        if (original.delete()) {
+            aux.renameTo(original);
+        }
+
+        return true;
+    }
+
+    //case 6
+    public boolean ServicioAutoSucursal(String nombreArchivo) {
+        var nombreCliente = ObtenerNombreCliente();
+
+        File original = new File(nombreArchivo);
+        File aux = new File(String.format("%s_tmp", nombreArchivo));
+
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        FileOutputStream fos = null;
+        ObjectOutputStream ous = null;
+
+        var clienteUtilidades = new ClienteUtilidades();
+
+        var direccionSucursal = ObtenerDireccionSucursal();
+
+        try {
+            fis = new FileInputStream(original);
+            ois = new ObjectInputStream(fis);
+
+            fos = new FileOutputStream(aux);
+            ous = new ObjectOutputStream(fos);
+
+            while (true) {
+                Sucursal obj = (Sucursal) ois.readObject();
+                if (obj.getDireccion().equals(direccionSucursal)) {
+
+                    obj.getClientes().forEach(cliente -> {
+                        if (cliente.getNombre().equals(nombreCliente)) {
+                            cliente.AgregarServicio(ObtenerServicio());
+                        }
+                    });
+                }
+
+
+                ous.writeObject(obj);
+            }
+
+        } catch (Exception ignored) {
+        }
+
+        try {
+            assert fis != null;
+            fis.close();
+            assert ois != null;
+            ois.close();
+            assert fos != null;
+            fos.close();
+            assert ous != null;
+            ous.close();
+        } catch (Exception ignored) {
+        }
+
+        if (original.delete()) {
+            aux.renameTo(original);
+        }
+
+        return true;
+    }
+
+
     public void Crear(String nombreArchivo) {
         File f = new File(nombreArchivo);
 
@@ -115,6 +240,7 @@ public class SucursalUtilidades {
         }
     }
 
+    //case 7
     public void ConsultarSucursales(String nombreArchivo) {
         File f = new File(nombreArchivo);
         ObjectInputStream input = null;
@@ -159,12 +285,23 @@ public class SucursalUtilidades {
         }
     }
 
+    //hacer que pida nombre
     public String ObtenerNombreCliente() {
-        return "";
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Ingrese el nombre del cliente");
+        String nombre = sc.nextLine();
+
+        return nombre;
     }
 
     public String ObtenerDireccionSucursal() {
-        return "";
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Ingrese la dirección de la sucursal:");
+        String direccion = sc.nextLine();
+
+        return direccion;
     }
 
     public Sucursal ObtenerSucursal() {
@@ -186,6 +323,45 @@ public class SucursalUtilidades {
         Double salario = sc.nextDouble();
 
         return new Sucursal(direccion, new Gerente(nombre, rfc, salario), new Taller());
+    }
+
+    //para el case 5
+    public Compra ObtenerCompra() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Ingrese fecha:");
+        String fecha = sc.nextLine();
+
+        return new Compra(fecha, ObtenerAuto());
+
+    }
+
+    //para case 6
+    public Auto ObtenerAuto() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese modelo:");
+        String modelo = sc.nextLine();
+
+        System.out.println("Ingrese costo:");
+        Double costo = sc.nextDouble();
+
+        return new Auto(modelo, costo);
+    }
+
+    //para el case 7
+    public Servicio ObtenerServicio() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Ingrese Nombre:");
+        String nombre = sc.nextLine();
+
+        System.out.println("Ingrese Descripcion:");
+        String descripcion = sc.nextLine();
+
+        System.out.println("Ingrese costo:");
+        Double costo = sc.nextDouble();
+
+        return new Servicio(nombre, descripcion, costo, ObtenerAuto());
     }
 
 
