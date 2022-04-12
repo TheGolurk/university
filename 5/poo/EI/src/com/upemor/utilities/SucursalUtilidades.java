@@ -48,7 +48,7 @@ public class SucursalUtilidades {
         } catch (IOException | ClassNotFoundException ignored) {
         }
 
-        if (clienteActual.getNombre().length() < 1) {
+        if (clienteActual.getNombre() == null) {
             System.out.println("No se encontro el cliente");
             return false;
         }
@@ -62,8 +62,6 @@ public class SucursalUtilidades {
         FileOutputStream fos = null;
         ObjectOutputStream ous = null;
 
-        var clienteUtilidades = new ClienteUtilidades();
-
         var direccionSucursal = ObtenerDireccionSucursal();
 
         try {
@@ -76,7 +74,7 @@ public class SucursalUtilidades {
             while (true) {
                 Sucursal obj = (Sucursal) ois.readObject();
                 if (obj.getDireccion().equals(direccionSucursal)) {
-                    obj.AgregarCliente(clienteUtilidades.ObtenerCliente());
+                    obj.AgregarCliente(clienteActual);
                 }
 
                 ous.writeObject(obj);
@@ -331,7 +329,7 @@ public class SucursalUtilidades {
         System.out.println("Ingrese direccion");
         String direccion = sc.nextLine();
 
-        System.out.println("Datos del gerente");
+        System.out.println("Datos del gerente (Presione enter)");
         sc.nextLine();
 
         System.out.println("Nombre");

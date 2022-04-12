@@ -25,10 +25,6 @@ public class Main {
     private static final SucursalUtilidades sucursalUtilidades = new SucursalUtilidades();
 
     public static void main(String[] args) {
-        clienteUtilidades.Crear(ArchivoClientes);
-        empleadoUtilidades.Crear(ArchivoEmpleados);
-        sucursalUtilidades.Crear(ArchivoSucursal);
-
         Scanner sc = new Scanner(System.in);
         int opc = 0;
 
@@ -43,7 +39,8 @@ public class Main {
             System.out.println("5.- REGISTRAR LA COMPRA DE UN CLIENTE EN UNA SUCURSAL ");
             System.out.println("******* 6.- SOLICITAR UN SERVICIO PARA UN AUTO *******");
             System.out.println("******* 7.- MOSTRAR EL INFORME DE UNA SUCURSAL *******");
-            System.out.println("********************* 8.- SALIR **********************");
+            System.out.println("**************** 8.- Crear archivos ******************");
+            System.out.println("********************* 9.- SALIR **********************");
             System.out.println("******************************************************");
             System.out.println("****** Selecciona la Opcion que Desees (1-8) *********");
             opc = sc.nextInt();
@@ -143,9 +140,24 @@ public class Main {
                     sucursalUtilidades.ConsultarSucursales(ArchivoSucursal);
                     break;
 
+                case 8:
+
+                    clienteUtilidades.Crear(ArchivoClientes);
+                    empleadoUtilidades.Crear(ArchivoEmpleados);
+                    sucursalUtilidades.Crear(ArchivoSucursal);
+                    break;
+
+                case 9:
+                    System.out.println("Adios");
+                    break;
+
+                default:
+                    System.out.println("Opcion incorrecta");
+                    return;
+
             }
 
-        } while (opc != 8);
+        } while (opc != 9);
 
     }
 
