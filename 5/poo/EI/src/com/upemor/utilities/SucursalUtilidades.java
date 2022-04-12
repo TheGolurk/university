@@ -3,6 +3,7 @@ package com.upemor.utilities;
 import com.upemor.*;
 
 import java.io.*;
+import java.util.EnumMap;
 import java.util.Scanner;
 
 public class SucursalUtilidades {
@@ -105,7 +106,6 @@ public class SucursalUtilidades {
 
 
     //case 5
-
     public boolean CompraClienteSucursal(String nombreArchivo) {
         var nombreCliente = ObtenerNombreCliente();
 
@@ -117,9 +117,9 @@ public class SucursalUtilidades {
         FileOutputStream fos = null;
         ObjectOutputStream ous = null;
 
-        var clienteUtilidades = new ClienteUtilidades();
-
+        var RFC = ObtenerRFC();
         var direccionSucursal = ObtenerDireccionSucursal();
+        var Compra = ObtenerCompra();
 
         try {
             fis = new FileInputStream(original);
@@ -134,7 +134,14 @@ public class SucursalUtilidades {
 
                     obj.getClientes().forEach(cliente -> {
                         if (cliente.getNombre().equals(nombreCliente)) {
-                            cliente.AgregarCompra(ObtenerCompra());
+                            cliente.AgregarCompra(Compra);
+                        }
+                    });
+
+                    obj.getEmpleados().forEach(empleado -> {
+                        var vendedor = (Vendedor) empleado;
+                        if (vendedor.getRFC().equals(RFC)) {
+                            vendedor.AgregarCompra(Compra);
                         }
                     });
                 }
@@ -180,6 +187,8 @@ public class SucursalUtilidades {
         var clienteUtilidades = new ClienteUtilidades();
 
         var direccionSucursal = ObtenerDireccionSucursal();
+        var RFCEmpleado = ObtenerRFC();
+        var servicio = ObtenerServicio();
 
         try {
             fis = new FileInputStream(original);
@@ -188,17 +197,24 @@ public class SucursalUtilidades {
             fos = new FileOutputStream(aux);
             ous = new ObjectOutputStream(fos);
 
+
             while (true) {
                 Sucursal obj = (Sucursal) ois.readObject();
                 if (obj.getDireccion().equals(direccionSucursal)) {
 
                     obj.getClientes().forEach(cliente -> {
                         if (cliente.getNombre().equals(nombreCliente)) {
-                            cliente.AgregarServicio(ObtenerServicio());
+                            cliente.AgregarServicio(servicio);
+                        }
+                    });
+
+                    obj.getEmpleados().forEach(empleado -> {
+                        var tecnico = (Tecnico) empleado;
+                        if (tecnico.getRFC().equals(RFCEmpleado)) {
+                            tecnico.AgregarServicio(servicio);
                         }
                     });
                 }
-
 
                 ous.writeObject(obj);
             }
@@ -233,7 +249,12 @@ public class SucursalUtilidades {
             var fos = new FileOutputStream(f);
             var out = new ObjectOutputStream(fos);
 
-            out.writeObject(new Sucursal("", new Gerente("", "", 0.0), new Taller()));
+            out.writeObject(
+                    new Sucursal("Av.Revolucion",
+                            new Gerente("Pedro", "PDLI020123DNF", 15000.0),
+                            new Taller()
+                    )
+            );
             fos.close();
             out.close();
         } catch (Exception ignored) {
@@ -362,6 +383,12 @@ public class SucursalUtilidades {
         Double costo = sc.nextDouble();
 
         return new Servicio(nombre, descripcion, costo, ObtenerAuto());
+    }
+
+    public String ObtenerRFC() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese RFC del empleado");
+        return sc.nextLine();
     }
 
 

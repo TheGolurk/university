@@ -32,7 +32,7 @@ public class EmpleadoUtilidades {
             var fos = new FileOutputStream(f);
             var out = new ObjectOutputStream(fos);
 
-            out.writeObject(new Empleado("", "", 0.0));
+            out.writeObject(new Empleado("Liliana", "LFNV020310DF", 13000.00));
             fos.close();
             out.close();
         }catch (Exception ignored) {}

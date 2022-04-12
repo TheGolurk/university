@@ -32,7 +32,7 @@ public class ClienteUtilidades {
             var fos = new FileOutputStream(f);
             var out = new ObjectOutputStream(fos);
 
-            out.writeObject(new Cliente("", 1, ""));
+            out.writeObject(new Cliente("Juan", 27, "juan@gmail.com"));
             fos.close();
             out.close();
         } catch (Exception ignored) {
