@@ -55,7 +55,7 @@ public class SucursalUtilidades {
 
         // Edit sucursal and add client
         File original = new File(nombreArchivo);
-        File aux = new File(String.format("%s_tmp", nombreArchivo));
+        File aux = new File(String.format("tmp_%s", nombreArchivo));
 
         FileInputStream fis = null;
         ObjectInputStream ois = null;
@@ -110,7 +110,7 @@ public class SucursalUtilidades {
         var nombreCliente = ObtenerNombreCliente();
 
         File original = new File(nombreArchivo);
-        File aux = new File(String.format("%s_tmp", nombreArchivo));
+        File aux = new File(String.format("tmp_%s", nombreArchivo));
 
         FileInputStream fis = null;
         ObjectInputStream ois = null;
@@ -177,7 +177,7 @@ public class SucursalUtilidades {
         var nombreCliente = ObtenerNombreCliente();
 
         File original = new File(nombreArchivo);
-        File aux = new File(String.format("%s_tmp", nombreArchivo));
+        File aux = new File(String.format("tmp_%s", nombreArchivo));
 
         FileInputStream fis = null;
         ObjectInputStream ois = null;

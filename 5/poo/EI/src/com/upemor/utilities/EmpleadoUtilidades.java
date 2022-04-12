@@ -61,7 +61,7 @@ public class EmpleadoUtilidades {
 
     public void EditarEmpleado(String nombreArchivo) {
         File original = new File(nombreArchivo);
-        File aux = new File(String.format("%s_tmp", nombreArchivo));
+        File aux = new File(String.format("tmp_%s", nombreArchivo));
 
         var RFC = ObtenerRFC();
 
@@ -109,7 +109,7 @@ public class EmpleadoUtilidades {
 
     public void EliminarEmpleado(String nombreArchivo) {
         File original = new File(nombreArchivo);
-        File aux = new File(String.format("%s_tmp", nombreArchivo));
+        File aux = new File(String.format("tmp_%s", nombreArchivo));
 
         var RFC = ObtenerRFC();
 

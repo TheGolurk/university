@@ -64,9 +64,7 @@ public class ClienteUtilidades {
 
     public void EditarCliente(String nombreArchivo) {
         File original = new File(nombreArchivo);
-        File aux = new File(String.format("%s_tmp", nombreArchivo));
-
-        var nombreCliente = obtenerNombre();
+        File aux = new File(String.format("tmp_%s", nombreArchivo));
 
         FileInputStream fis = null;
         ObjectInputStream ois = null;
@@ -116,7 +114,7 @@ public class ClienteUtilidades {
 
     public void EliminarCliente(String nombreArchivo) {
         File original = new File(nombreArchivo);
-        File aux = new File(String.format("%s_tmp", nombreArchivo));
+        File aux = new File(String.format("tmp_%s", nombreArchivo));
 
         FileInputStream fis = null;
         ObjectInputStream ois = null;
