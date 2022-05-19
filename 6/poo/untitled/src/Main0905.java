@@ -15,7 +15,7 @@ public class Main0905 {
                 System.out.printf("%d / %d = %s \n", a[i], v, s);
             }catch (ArrayIndexOutOfBoundsException ex) {
                 System.err.println("No hay valores en esta posicion");
-            }catch (Exception ex) {
+            }catch (ArithmeticException ex) {
                 System.out.println("No se puede dividir por este valor");
             }
         }

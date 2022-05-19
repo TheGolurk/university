@@ -9,6 +9,6 @@ public class resta {
     }
 
     public double hacerResta() throws Exception {
-     throw new Exception();
+        return n1 - n2;
     }
 }
