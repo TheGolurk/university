@@ -2,8 +2,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        var res = Integer.parseInt(JOptionPane.showInputDialog("1 2"));
+        var res = Integer.parseInt(JOptionPane.showInputDialog(" 1.- Dibujar Rectangulo \n 2.- Dibujar Ovalo \n 3.- Dibujar espiral"));
 
         JPanel panel = null;
         switch (res) {
