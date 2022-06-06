@@ -1,7 +1,7 @@
 // Autor: Diego Peña Medina
-// Descripcion:
-// Fecha:
-// Tipo y nombre de la evidencia:
+// Descripcion: Implementar un programa en lenguaje C, en el que se deberán utilizar estructuras (struct), alias de estructuras (typedef), estructuras anidadas y apuntadores.
+// Fecha: 5-06-22
+// Tipo y nombre de la evidencia:EP1.Programa con TDA
 
 #include <stdio.h>
 
