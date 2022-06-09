@@ -5,15 +5,15 @@ import numpy as np
 def function(x):
     return pow(x,10)-1
 
-def bisection(x0, x1, e):
+def falsaP(x0, x1, e):
     paso = 1
     paro = True
     x2Anterior = 0
     while paro:
-        x2 = (x0 + x1)/2
+        sup = function(x1) * (x0 - x1) 
+        inf = function(x0) - function(x1)
+        x2 = x1 - ( sup  /  inf )
         
-        #print('Iteration %d, x2 = %0.6f and f(x2) = %0.6f' % (paro, x2, function(x2)))
-
         evaluacionValor = function(x0) * function(x2)
 
         errorAproximado = 0
@@ -61,5 +61,5 @@ if function(x0) * function(x1) > 0.0:
     print("no se puede con estos valores")
 else:
     print ("{:<10} {:<10} {:<10} {:<10} {:<10} ".format('Iteracion','xl', 'xu', 'xr', 'Ea'))
-    bisection(x0, x1, e)
+    falsaP(x0, x1, e)
     plt.show()
