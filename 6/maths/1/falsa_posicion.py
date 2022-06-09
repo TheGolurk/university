@@ -22,7 +22,7 @@ def falsaP(x0, x1, e):
             errorAproximado = 100
         else:
            # errorAproximado =  abs( ( (function(x2)-function(x0)) / function(x2) ) * 100 ) 
-            errorAproximado =   (( x2-x2Anterior) / x2 ) * 100
+            errorAproximado =   abs((( x2-x2Anterior) / x2 ) * 100)
 
         print("{:<10} {:<10.2f} {:<10.2f} {:<10.2f} {:<10.2f}".format(paso,x0, x1, x2, errorAproximado))
 
