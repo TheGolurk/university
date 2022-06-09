@@ -3,7 +3,8 @@ import numpy as np
 
 # function es la funcion dada
 def function(x):
-    return pow(x,10)-1
+    return pow(x,4) - ( 8 * pow(x,3) ) - (35 * pow(x,2)) + (450*x) - 1001
+
 
 def falsaP(x0, x1, e):
     paso = 1
@@ -41,9 +42,9 @@ def falsaP(x0, x1, e):
 
         paro = errorAproximado > e
 
-x0 = 0
-x1 = 1.3
-e = 5.0
+x0 = 4.5
+x1 = 6
+e = 0.5
 
 x = np.arange(-75,75)
 y = function(x)
