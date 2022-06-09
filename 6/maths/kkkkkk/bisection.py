@@ -1,13 +1,9 @@
-from cmath import pi
 import matplotlib.pyplot as plt
 import numpy as np
-import math
-from math import e
 
 # function es la funcion dada
 def function(x):
-    expon =  e ** (2 * x)
-    return expon * math.sin(x)
+    return pow(x,4) - ( 8 * pow(x,3) ) - (35 * pow(x,2)) + (450*x) - 1001
 
 def bisection(x0, x1, e):
     paso = 1
@@ -30,7 +26,7 @@ def bisection(x0, x1, e):
 
         print("{:<10} {:<10.2f} {:<10.2f} {:<10.2f} {:<10.2f}".format(paso,x0, x1, x2, errorAproximado))
 
-        #plt.plot(x2,errorAproximado, 'bo' )
+        plt.plot(x2,errorAproximado, 'bo' )
 
         paso += 1
 
@@ -45,13 +41,25 @@ def bisection(x0, x1, e):
 
         paro = errorAproximado > e
 
-x0 = -0.5
-x1 = 1
-e = 0.1
+x0 = 4.5
+x1 = 6
+e = 0.5
+
+x = np.arange(-75,75)
+y = function(x)
+
+plt.plot( x, y, 'b' )
+
+plt.axhline(0,color='black')
+plt.axvline(0,color='black')
+
+plt.minorticks_on()
+plt.grid( True, 'minor', markevery=2, linestyle='--' )
+plt.grid( True, 'major', markevery=10 )
 
 if function(x0) * function(x1) > 0.0:
     print("no se puede con estos valores")
 else:
     print ("{:<10} {:<10} {:<10} {:<10} {:<10} ".format('Iteracion','xl', 'xu', 'xr', 'Ea'))
     bisection(x0, x1, e)
-    #plt.show()
+    plt.show()
