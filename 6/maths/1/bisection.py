@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 # function es la funcion dada
 def function(x):
     return pow(x,10)-1
@@ -21,6 +24,9 @@ def bisection(x0, x1, e):
            # errorAproximado =  abs( ( (function(x2)-function(x0)) / function(x2) ) * 100 ) 
             errorAproximado =   (( x2-x2Anterior) / x2 ) * 100
 
+
+        plt.plot(x2,errorAproximado, 'ro' )
+
         paso += 1
 
         if evaluacionValor < 0:
@@ -34,15 +40,28 @@ def bisection(x0, x1, e):
 
         paro = errorAproximado > e
 
-# x0 = float(input("x0: "))
-#x1 = float(input("x1: "))
-# e = float(input("error: "))
-
 x0 = 0
 x1 = 1.3
 e = 5.0
+
+def f(x):
+    return x
+
+x = np.arange(-100,100)
+y = f(x)
+
+#plt.plot( x, y, 'b' )
+
+plt.axhline(0,color='black')
+plt.axvline(0,color='black')
+
+plt.minorticks_on()
+plt.grid( True, 'minor', markevery=2, linestyle='--' )
+plt.grid( True, 'major', markevery=10 )
+
 
 if function(x0) * function(x1) > 0.0:
     print("no se puede con estos valores")
 else:
     bisection(x0, x1, e)
+    plt.show()
