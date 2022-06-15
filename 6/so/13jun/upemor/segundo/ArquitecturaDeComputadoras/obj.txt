@@ -1,0 +1,2 @@
+el objetivo de arquitectura de computadoras es entender como funciona una computadora desde
+su hardware

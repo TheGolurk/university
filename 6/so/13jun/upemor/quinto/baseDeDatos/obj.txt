@@ -1,0 +1,1 @@
+el objetivo de base de datos es entender como funcionan las bases de datos desde su software

@@ -1,0 +1,11 @@
+unrar te permite descomprimir archivos rar 
+
+UNRAR 6.11 freeware      Copyright (c) 1993-2022 Alexander Roshal
+
+
+Extracting from /home/golurk/Downloads/asd.rar
+
+Creating    ./asd                                                     OK
+Creating    ./asd/Login                                               OK
+Creating    ./asd/Login/.idea                                         OK
+

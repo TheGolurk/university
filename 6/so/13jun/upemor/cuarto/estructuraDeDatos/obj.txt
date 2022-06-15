@@ -1,0 +1,2 @@
+el objetivo de estructura de datos es poder entender el funcionamiento primitivo de
+las estructuras de datos

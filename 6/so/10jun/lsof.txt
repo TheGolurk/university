@@ -1,0 +1,5 @@
+lsof muetra los puertos y redes que el sistema usa
+
+evolution   3180   3197 pool-evol           golurk  mem       REG               0,33              3474056 /usr/lib64/libkeyutils.so.1.9 (path dev=0,35)
+evolution   3180   3197 pool-evol           golurk  mem       REG               0,33              5795315 /usr/lib64/libkrb5support.so.0.1 (path dev=0,35)
+evolution   3180   3197 pool-evol           golurk  mem       REG               0,33              3473757 /usr/lib64/l^C

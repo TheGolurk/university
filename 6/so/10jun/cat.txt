@@ -1,0 +1,5 @@
+articulo.txt
+fg.txt
+lsof.txt
+ls.txt
+unrar.txt

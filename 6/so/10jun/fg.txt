@@ -1,0 +1,5 @@
+fg permite acceder a los procesor que estan corriendo en foreground
+
+fg: no current job
+
+

@@ -1,0 +1,3 @@
+el objetivo de sistemas operativos es de poder entender como funcionan los sistemas operativos asi
+como entender los procesos que estos ejecutan
+
