@@ -3,18 +3,19 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/labstack/echo/v4"
 	"log"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 const (
-	username = "admin"
-	password = "abc123ABC_?"
-	hostname = "basededatos.cbsucnuipnps.us-west-1.rds.amazonaws.com:3306"
-	dbname   = "EI"
+	username = "root"
+	password = "root"
+	hostname = "172.23.23.116:3306"
+	dbname   = "EIDB"
 )
 
 func dsn() string {
