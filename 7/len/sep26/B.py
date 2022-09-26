@@ -4,7 +4,9 @@ a,b,c = map(int,sys.stdin.readline().split())
 
 sum = a+b
 res = a-b
-div = a/b
+div = -1
+if b != 0:
+    div = a/b
 mul = a*b
 
 finalRes = "D:"
