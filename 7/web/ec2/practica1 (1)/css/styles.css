@@ -1,0 +1,68 @@
+
+
+body {
+    border-style: dashed;
+    border-color: green;
+    border-width: 5px;
+}
+
+
+header {
+    background-color: #cbcbd4;
+    border-bottom-style: dashed;
+    border-bottom-color: #3F75F9;
+    border-width: 5px;
+    text-align: center;
+    font-family: "Calibri";
+    margin: 15px;
+    color: #3F75F9;
+    font-size: 55px;
+}
+
+main {
+    margin: 15px;
+    font-size: 24px;
+    font-family: "Georgia";
+    font-style: bold;
+    text-align: justify;
+    color: #777776;
+}
+
+main mark {
+    background: #F3D583;
+    color: #777776;
+}
+
+main h1 {
+    font-size: 38px;
+    color: #454545;
+    font-family: "Trebuchet MS";
+}
+
+.img-left img {
+    width: 95%;
+    height: 450px;
+    align-self: left;
+}
+
+
+.img-left {
+    width: 65%;
+    float: left;
+    position: relative;
+}
+
+.text-right {
+    width: 35%;
+    float: right;
+    position: relative;
+}
+
+footer {
+    margin: 15px;
+    font-size: 24px;
+    color: #777776;
+    text-align: justify;
+    font-family: "Georgia";
+    font-style: bold;
+}
