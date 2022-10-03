@@ -19,6 +19,7 @@ int main()
     int toSearch = 0;
     int posArray = 0;
     int sizeArr = 0;
+    int indexIterative = -1;
 
     textfile = fopen("Matriz.txt", "r");
     if (textfile == NULL)
@@ -56,42 +57,17 @@ int main()
 
     fclose(textfile);
 
-    for (size_t i = 0; i < sizeArr; ++i)
+    for (size_t i = 0; i < sizeArr; i++)
     {
-        for (size_t j = i + 1; j < sizeArr; ++j)
-        {
-            if (arr[i] > arr[j])
-            {
-                int a = arr[i];
-                arr[i] = arr[j];
-                arr[j] = a;
-            }
+        if (arr[i] == toSearch) {
+            indexIterative = i;
         }
     }
 
-    for (size_t i = 0; i < sizeArr; i++)
-    {
-        printf("%d \n", arr[i]);
-    }
-
-    printf("Posicion indice: [%d] \n", iterativeBinarySearch(arr, 0, sizeArr, toSearch));
+    printf("Posicion indice: [%d] \n", indexIterative);
 
     return 0;
 }
-
-int iterativeBinarySearch(int array[], int start_index, int end_index, int element){
-   while (start_index <= end_index){
-      int middle = start_index + (end_index- start_index )/2;
-      if (array[middle] == element)
-         return middle;
-      if (array[middle] < element)
-         start_index = middle + 1;
-      else
-         end_index = middle - 1;
-   }
-   return -1;
-}
-
 
 int char2int(char *array, size_t n)
 {

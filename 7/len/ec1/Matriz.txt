@@ -10,4 +10,4 @@ Arreglo[]
 78
 84
 buscar:
-6
+2
