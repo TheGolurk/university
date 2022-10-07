@@ -91,3 +91,88 @@ h4{
     color: white;
     text-decoration: none;
 }
+
+nav {
+    width: 160px;
+    height: 500px;
+    background: white;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.menu{
+    width: 180px;
+    height: 480px;
+
+}
+
+.menu li{
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    list-style: none;
+    padding: 10px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: all 600 ms;
+}
+
+.menu li a {
+    text-decoration: none;
+}
+
+.menu li:hover {
+    background: #fcba03;
+    border-radius: 1rem;
+}
+
+main{
+    width: 580px;
+    height: 500px;
+    background-color: white;
+    margin-left: 10px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+#scroll{
+    width: 560px;
+    height: 480px;
+    background-color: white;
+    margin: 10px;
+    overflow-y: scroll;
+}
+
+.barra::-webkit-scrollbar{
+    width: 7px;
+    background: white;
+}
+
+aside{
+    width: 180px;
+    height: 500px;
+    background-color: white;
+    float: right;
+    margin-right: 10px;
+}
+
+#datos{
+    float: left;
+    width: 960px;
+    height: 70px;
+    background-color: #07042b;
+    margin-top: 5px;
+    margin-left: 10px;
+    color: white;
+    padding: 0.5rem;
+
+}
+
+h4{
+    margin-left: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+    color: white;
+    padding-bottom: 10px;
+}
