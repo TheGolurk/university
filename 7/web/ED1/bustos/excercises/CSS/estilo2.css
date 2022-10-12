@@ -1,0 +1,80 @@
+header{
+    background-color: rgb(8, 8, 148);
+    color: white;
+    font-family: Arial;
+    text-align: right;
+    margin: 0%;
+}
+
+.fecha{
+    margin: 0%;
+}
+
+main{
+    position: relative;
+    float: right;
+    width: 85%;
+    margin: 0%;
+    margin-top: 0%;
+}
+
+.bloque1{
+    background-color: #030543;
+    position: relative;
+    float: left;
+    width: 15%;
+    height: 557px;
+}
+
+.bloque2{
+    background-color: orange;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.titulo1{
+    background-image: url(../../imagenes/rayadoformulario.png);
+    color: blue;
+    font-family: Arial;
+    font-size: 24px;
+    margin: 0%;
+    height: 50px;
+    text-align: justify;
+}
+
+.bienvenido{
+    color: blue;
+    font-size: 24px;
+    font-family: Arial;
+    text-align: center;
+    margin: 0%;
+}
+
+.form{
+    color: blue;
+    margin-left: 40%;
+    text-align: left;
+    font-size: 20px;
+}
+
+select{
+    color: black;
+    width: 200px;
+    
+}
+
+input{
+    margin-left: 70px;
+}
+
+.nombre{
+    text-align: center;
+}
+
+h2{
+    color: blue;
+}
