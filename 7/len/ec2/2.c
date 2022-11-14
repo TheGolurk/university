@@ -17,18 +17,18 @@ int main(int argc, char const *argv[])
 
 void q0(char word[10], int index) {
     if (index == 9) {
-        printf("El automata termina cadena valida \n");
+        printf("El automata termina cadena invalida \n");
         return;
     }
     if (word[index] != 'a' && word[index] != 'b') {
-        printf("El automata termina cadena valida \n");
+        printf("El automata termina cadena invalida \n");
         return;
     }
 
     if (word[index] == 'b') {
-        q0(word, index+1);
-    } else if (word[index] == 'a') {
         q1(word, index+1);
+    } else if (word[index] == 'a') {
+        q0(word, index+1);
     } else {
         printf("cadena con caracter %c invalida \n", word[index]);
         return;
@@ -37,11 +37,11 @@ void q0(char word[10], int index) {
 
 void q1(char word[10], int index) {
     if(index == 9) {
-        printf("El automata no debe terminar en q1 y la cadena es invalida \n");
+        printf("El automata no debe terminar en q1 y la cadena es valida \n");
         return;
     }
     if (word[index] != 'a' && word[index] != 'b') {
-        printf("El automata termina pero la cadena es invalida \n");
+        printf("El automata termina pero la cadena es valida \n");
         return;
     }
 
