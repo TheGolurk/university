@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">  
+    <script type="text/javascript" src="js/valida.js"></script> 
+    <title>Validaciones</title>
+</head>
+<body>
+    <header class="header">
+          <div class="container">
+              <h1>Formulario de Registro</h1>
+          </div>
+    </header>
+   <main class="main">
+    <form action="datos.php" method="post" class="formulario" action="datos.php" name="frm">
+     <div>
+        <div class="form_container">
+           <label for="nombre" class="formulario_label"> Nombre(s):</label>   
+           <input type="text" name="nombre" id="nombre" class="formulario_input_Letra">        
+        </div>
+        <div class="form_container">
+            <label for="apellidos" class="formulario_label"> Apellidos:</label>   
+            <input type="text" name="apellidos" id="apellidos" class="formulario_input_Letra">   
+        </div>
+        <div class="form_container">
+            <label for="Direccion" class="formulario_label"> Direccion:</label>   
+            <input type="text" name="Direccion" id="Direccion" class="formulario_input_Letra">
+        </div>
+        <div class="form_container">
+            <label for="Telefono" class="formulario_label"> Telefono:</label>   
+            <input type="text" name="Telefono" id="Telefono" class="formulario_input_Letra">
+        </div>
+        <div class="form_container">
+            <label for="Movil" class="formulario_label"> Móvil:</label>   
+            <input type="text" name="Movil" id="Movil" class="formulario_input_Letra">
+        </div>
+        <br><br>
+        <div class="form_container">
+            <input type="button" class="formulario_btn" value="Enviar Datos" onclick="validacion()">
+         </div>
+    </div>
+    </form>
+   </main>
+     <footer class="footer">
+        <div class="container">
+            <h6>Derechos reservados @Eduardo Bustos Moran</h6>
+        </div>
+     </footer>
+</body>
+</html>

@@ -1,0 +1,128 @@
+:root{
+  --blanco: #ffffff;
+  --Obscuro: #212121;
+  --primario: #ffc107;
+  --secundario: #28acbb;
+  --gris: #757575;
+  --grisClaro:#dfe9f3;
+}
+ 
+html{
+   font-size:62.5%;
+   box-sizing: border-box;  /*Calcular el tamano de la caja*/
+   /*width: 250px;
+   border: 10px;
+   padding: 10px;*/
+  }
+ *, *:before, *:after {
+  box-sizing: inherit; /*para que funcione en cualquier pantalla*/
+}
+ 
+body{
+  font-size:16px; /*1rem = 10px*/
+  font-family:sans-serif;
+  /*background-color:rgb(166, 169, 170);*/
+  background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100%);
+}
+
+.titulo{
+  text-align: center;
+  font-weight: 500;
+  font-size: 3rem;
+}
+    
+.titulo span{
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Sans-serif' ;
+  color: brown;
+}
+ 
+.nav-bg{
+  background-color: var(--secundario);
+  color: var(--blanco);      
+}
+ 
+.navegacion-principal{
+  display: flex;   /*distribuccion de los elementos del menu*/
+  justify-content: space-evenly; /*space-evenly space-around space-between separacion de los elementos*/
+}
+
+.contenedor{
+  width: 120rem;
+  margin:0 auto;   
+}
+
+.navegacion-principal a{
+  text-decoration: none;
+  padding:1rem;
+  border-radius: 5px;
+  /*transition: all 0.4s linear;*/
+}
+
+.navegacion-principal a:hover{
+  color: var(--blanco);
+  background-color: var(--primario);
+}
+
+/* .navegacion-principal a:visited{
+  background-color: var(--primario);
+  color: var(--Obscuro);
+ }*/
+
+.iman{
+  background-image: url(../img/frontend_banner.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 450px;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.contenido_iman{
+  position: absolute;
+  background-color: rgb(0,0,0, .7);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenido_iman h2, .contenido_iman p{
+ color: var(--blanco);
+}
+
+.sombra{
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  background-color:  var(--grisClaro);
+}
+
+ h1{
+  font-size: 3.8rem;
+ }
+ h2{
+  font-size: 2.8rem;
+ }
+ h3{
+  font-size: 1.8rem;
+}
+
+h1,h2,h3{
+  text-align: center;
+}
+
+.boton{
+ background-color: var(--secundario);
+ color: var(--blanco);
+ padding: 1rem 3rem;
+ margin-top: 1rem;
+ font-size: 2rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 5px;
+}

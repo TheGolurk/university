@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script language="javaScript">
+        function validacion(){
+            if(document.getElementById("txtnombre").value.length==0){
+                alert("Favor de escribir su Nombre");
+                document.frm.txtnombre.focus();
+                return false;
+            }
+            if(document.getElementById("txtapp").value.length==0){
+                alert("Favor de escribir su Apellido Paterno");
+                document.frm.txtapp.focus();
+                return false;
+            }
+            if(document.getElementById("txtapm").value.length==0){
+                alert("Favor de escribir su Apellido Materno");
+                document.frm.txtapm.focus();
+                return false;
+            }
+            if(document.getElementById("txtEdad").value.length==0){
+                alert("Favor de escribir su Edad");
+                document.frm.txtEdad.focus();
+                return false;
+            }
+        }
+    </script>
+    <title>Validaciones</title>
+</head>
+<body>
+    <form method="post" action="datos.php" name="frm">
+    <h1>Registrame!!</h1>
+    <table>
+        <tr>
+            <td>Nombre</td>
+            <td><input type="text" name="txtnombre"  id="txtnombre" maxlength="20"></td>
+        </tr>
+        <tr>
+            <td>Apellido Paterno</td>
+            <td><input type="text" name="txtapp"  id="txtapp" maxlength="20"></td>
+        </tr>
+        <tr>
+            <td>Apellido Materno</td>
+            <td><input type="text" name="txtapm" id="txtapm" maxlength="20"></td>
+        </tr>
+        <tr>
+            <td>Edad</td>
+            <td><input type="text" name="txtEdad" id="txtEdad" maxlength="2"
+                
+                Onkeypress=" if( event.keyCode < 48 || event.keyCode > 57)
+                event.returnValue=false;"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="button" value="Inserta Registro" onclick="validacion()"></td>
+        </tr>
+
+    </table>
+    </form>
+</body>
+</html>

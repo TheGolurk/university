@@ -1,0 +1,97 @@
+body{
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+background: #e5e5e5;
+margin: auto 0;
+}
+
+h1{
+text-align: center;
+}
+
+h6{
+    text-align: center;
+}
+
+.main{
+ max-width: 800px;
+ width: 100%;
+ margin: auto;
+ padding: 40px;
+}
+
+.formulario{
+width: 80%;
+max-width: 850px;
+margin: 0 auto;
+}
+
+.formulario_label{
+display:block;
+font-weight: bold;
+padding: 10px;
+cursor:pointer;
+}
+
+.formulario_input{
+width: 100%;
+background: rgb(245,240,240);
+border:3px solid transparent;
+border-radius: 6px;
+height: 45px;
+}
+
+.formulario_input:focus{
+border: 3px solid #fd0808;
+outline:none;
+box-shadow: 3px 0px 30px rgba(22,22,22,0.7);
+}
+
+.formulario_comentarios{
+    width: 100%;
+    background: rgb(245,240,240);
+    border:3px solid transparent;
+    border-radius: 6px;
+    height: 120px;
+}
+
+.formulario_comentarios:focus{
+    border: 3px solid #fd0808;
+    outline:none;
+    box-shadow: 3px 0px 30px rgba(22,22,22,0.7);
+    }
+
+.Formulario_btn{
+height: 45px;
+width: 100%;
+background: #070707;
+color:#e5e5e5;
+font-weight: bold;
+border-radius: 6px;
+cursor: pointer;
+}
+
+.Formulario_btn:hover{
+ box-shadow: 3px 0px 30px rgba(22,22,22,0.7);
+font-size: 24px;
+}
+
+  
+.header{
+background: rgb(9, 5, 66);
+color: #e5e5e5;
+padding: 3rem;
+}
+
+
+.main{
+
+}
+
+.footer{
+
+    background: rgb(48, 162, 214);
+    padding: 2rem 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

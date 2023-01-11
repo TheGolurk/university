@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Programaremos eventos</title>
+</head>
+<body>
+    <form method="post" action="datos.php">
+
+        Telefono <input type="text" name="txttelefono"
+        
+        Onkeypress=" if( event.keyCode < 48 || event.keyCode > 57)
+                        event.returnValue=false;">
+                        <br><br><br>
+        Edad <input type="text" name="txtEdad"
+        
+        Onkeypress=" if( event.keyCode < 48 || event.keyCode > 57)
+                        event.returnValue=false;">
+                        <br><br><br>
+        CP <input type="text" name="txtCP"
+        
+        Onkeypress=" if( event.keyCode < 48 || event.keyCode > 57)
+                        event.returnValue=false;">
+    </form>
+</body>
+</html>

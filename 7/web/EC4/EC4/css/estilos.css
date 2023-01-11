@@ -1,0 +1,53 @@
+body{
+	background-image: url(../img/flores-bonitas.jpg);
+	background-color: #FFFFFF; 
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover; 
+	margin: 0;
+    padding: 110px 0 0 0;
+    height: 700px;
+}
+
+p{
+	text-align: center;
+}
+#page {
+    margin: auto;
+    width: auto;
+	background-color: rgba(53, 45, 45, 0.5);
+}
+ 
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 25px 20px;
+    background-color: rgb(0,0,0);
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+H1 { 
+	text-align: center; 
+	color: white; 
+	font:  "Arial"; 
+}
+
+  th, td {
+	width: 25%;
+	text-align: center;
+	color: seashell;
+	vertical-align: top;
+	border: 2px solid rgb(145, 174, 50);
+ }
+ 
+ .a{
+	 color: #FFFFFF;
+ }
+
+.amedio{
+    color: rgba(58, 52, 52, 0.462);
+}
+
+

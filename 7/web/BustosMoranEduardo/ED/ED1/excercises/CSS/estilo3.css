@@ -1,0 +1,93 @@
+strong {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    }
+
+b{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+header{
+    color: #ff9d00;
+    
+    border-width: 5px;
+    text-align: center;
+    font-family: 'Arial', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 5px;
+
+    font-size: 25px;
+}
+
+main{
+margin: 15px;
+font-size: 20px;
+font-family: Arial, Helvetica, sans-serif;
+font-style: bold;
+text-align: justify;
+color:black
+}
+main h1{
+    font-size: 41px;
+    color: #454545;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+main mark{
+       background: #f3d583;
+       Color:#777776
+}
+.img-right{
+    width: 25%;
+    float: right;
+    position: relative;
+}
+
+.img-right img{
+  width: 90%;
+  height: 250px;
+  align-self: right;
+}
+ .text-left{
+   width: 75%;
+   float: left;
+   position: relative;
+}
+strong.text-left{
+    background-color: green;
+    color: black;
+}
+.SubrayadoVerde{
+    background-color: green;
+    color: black;
+}
+
+.text-center{
+    width: 100%;
+    clear: both;
+    float: left;
+    text-align: center;
+    position: relative;
+ }
+ .text-right{
+    width: 100%;
+    clear: both;
+    float: right;
+    position: relative;
+ }
+ .text-center{
+    width: 100%;
+    float: left;
+    position: relative;
+ }
+
+ footer{
+    padding: 5px;
+    margin: 15px;
+    font-size: 20px;
+    width: auto;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: bold;
+    text-align: justify;
+    color:#777776;
+    clear: both;
+}

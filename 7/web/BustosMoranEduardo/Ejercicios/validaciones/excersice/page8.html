@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Programaremos Eventos</title>
+</head>
+<body>
+    <form method="post" action="datos.php" name="frm">
+        Nombre  <input type="text" name="txtnombre" 
+        onchange="frm.txtnombre.value = frm.txtnombre.value.toUpperCase()">
+        
+        Apellidos  <input type="text" name="txtapps" 
+        onchange="frm.txtapps.value = frm.txtapps.value.toUpperCase()"><br>
+
+        Queja: <textarea cols="20" rows="10" name="txtarea"
+        onchange="frm.txtarea.value = frm.txtarea.value.toUpperCase()"></textarea>
+        <br>
+        Edad <input type="text" name="txtEdad"
+        
+        Onkeypress=" if( event.keyCode < 48 || event.keyCode > 57)
+                        event.returnValue=false;">
+                        <br>
+        Telefono <input type="text" name="txttelefono"
+        
+        Onkeypress=" if( event.keyCode < 48 || event.keyCode > 57)
+                        event.returnValue=false;">
+    </form>
+</body>
+</html>

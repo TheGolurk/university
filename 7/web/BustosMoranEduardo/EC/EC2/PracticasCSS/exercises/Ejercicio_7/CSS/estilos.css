@@ -1,0 +1,68 @@
+body {
+	margin:0;
+	font-family:"Verdana", Arial, Tahoma;
+	font-size:12;
+	color:#FFFFFF;
+	background-color:#00FFFF;
+	
+}
+
+
+.Layer1 {
+	right:40px;
+	top:5px;
+	width:954px;
+	height:80px;
+	z-index:1;
+	background-color: #006699;
+	color: #FFFFFF;
+}
+
+
+.Layer2 {
+	
+	left:20px;
+	top:5px;
+	width:113px;
+	height:381px;
+	z-index:1;
+	background-color: #0000FF;
+	color: #FFFFFF
+}
+
+.diviA{
+	left:20px;
+	top:5px;
+	width:20px;
+	height:20px;
+	z-index:3;
+	background-color: red;
+}
+.diviB{
+	left:20px;
+	top:5px;
+	width:20px;
+	height:20px;
+	z-index:1;
+	background-color: blue;
+}
+.diviC{
+	left:20px;
+	top:5px;
+	width:20px;
+	height:20px;
+	z-index:3;
+	background-color: yellow;
+}
+.diviD{
+	left:20px;
+	top:5px;
+	width:20px;
+	height:20px;
+	z-index:3;
+	background-color: green;
+}
+
+
+
+
