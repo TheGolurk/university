@@ -1,0 +1,17 @@
+version: '3'
+ 
+services:
+  db:
+    image: mysql
+    container_name: db_test
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: thegolurk
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+volumes:
+  dbdata:
