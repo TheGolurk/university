@@ -16,8 +16,7 @@ def torneo(poblacion,fitness):
     for i in range(8):
         ind1,ind2 = 0,0
         while(ind1==ind2):
-            ind1 = 
-
+            ind1 = rnd.randint()
     
     return []
 
@@ -25,7 +24,7 @@ def torneo(poblacion,fitness):
 def cruza_puntos(poblacion):
     random.randint()
     
-    return cruza
+    return pobcruza[]
 
 
 def muta_aleatorio(poblacion):
