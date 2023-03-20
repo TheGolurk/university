@@ -1,4 +1,4 @@
-import random
+import random as rnd
 
 
 def generarPoblacion():
@@ -15,16 +15,17 @@ def torneo(poblacion,fitness):
     
     for i in range(8):
         ind1,ind2 = 0,0
-        
+        while(ind1==ind2):
+            ind1 = 
 
     
     return []
 
 
 def cruza_puntos(poblacion):
-    random.randint)
-
-    return []
+    random.randint()
+    
+    return cruza
 
 
 def muta_aleatorio(poblacion):
