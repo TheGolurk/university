@@ -48,7 +48,7 @@ def elitismo(poblacion, fitness, maximizar):
 
 def cruza_puntos(poblacion):
     pobcruza = []
-    x, x1 = 0, 0
+    x, x1, ind = 0, 0, 0
 
     x = random.randint(0, 7)
     padre1 = poblacion[x]
@@ -57,7 +57,7 @@ def cruza_puntos(poblacion):
     x = random.randint(0, 7)
     padre3 = poblacion[x]
 
-    for i in range(8):
+    for i in range(3):
         for j in range(6):
             # Punto inicial
             x = random.randint(0, 3)
@@ -66,6 +66,10 @@ def cruza_puntos(poblacion):
             while x1 < x:
                 x1 = random.randint(0, 7)
             # una vez teniendo los dos puntos realizamos la cruza
+            if j <= x:
+                pobcruza[ind][j]=
+                pobcruza[ind+1][j]=
+                pobcruza[ind+2][j]=
 
     return pobcruza
 
@@ -99,20 +103,3 @@ if __name__ == '__main__':
         poblacion = cruza_puntos(poblacion)
         poblacion = muta_aleatorio(poblacion)
         n_gen += 1
-def seleccion_por_torneo(poblacion, fitness, maximizar):
-    # Crear una matriz vacía para la nueva población
-    nueva_poblacion = np.empty_like(poblacion)
-    # Seleccionar dos individuos aleatorios y elegir el mejor
-    for i in range(poblacion.shape[0]):
-        ind1, ind2 = np.random.choice(poblacion.shape[0], 2, replace=False)
-        if maximizar:
-            if fitness[ind1] > fitness[ind2]:
-                nueva_poblacion[i, :] = poblacion[ind1, :]
-            else:
-                nueva_poblacion[i, :] = poblacion[ind2, :]
-        else:
-            if fitness[ind1] < fitness[ind2]:
-                nueva_poblacion[i, :] = poblacion[ind1, :]
-            else:
-                nueva_poblacion[i, :] = poblacion[ind2, :]
-    return nueva_poblacion
