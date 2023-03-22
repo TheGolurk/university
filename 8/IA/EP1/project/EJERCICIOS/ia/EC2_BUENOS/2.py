@@ -128,10 +128,12 @@ def probFitness(poblacion):
 if __name__ == '__main__':
     generaciones = 200
     fitlim = 0.5
-    n_gen = 1
     probfitness = 0
 
-    while generaciones < n_gen or probfitness < fitlim:
+    for i in range(200):
+        if probfitness > fitlim:
+            break
+
         poblacion = generarPoblacion()
         probfitness = probFitness(poblacion)
         fitness = obtener_fitness(poblacion)
@@ -144,6 +146,5 @@ if __name__ == '__main__':
         poblacion = cruza_puntos(poblacion)
         poblacion = muta_aleatorio(poblacion)
 
-        print("generacion n=", n_gen)
+        print("generacion n=", i)
         print("fitness f=", fitness)
-        n_gen += 1
