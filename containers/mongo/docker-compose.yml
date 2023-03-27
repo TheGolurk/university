@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 
 services:
   mongo:
@@ -11,5 +11,5 @@ services:
         hard: 16384
     environment:
       MONGO_INITDB_DATABASE: 'admin'
-      MONGO_INITDB_ROOT_USERNAME: 'admin'
-      MONGO_INITDB_ROOT_PASSWORD: 'admin'
+      MONGO_INITDB_ROOT_USERNAME: 'root'
+      MONGO_INITDB_ROOT_PASSWORD: 'root'
